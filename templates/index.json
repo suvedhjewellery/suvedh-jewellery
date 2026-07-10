@@ -1,0 +1,174 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "slideshow_3tTQiJ": {
+      "type": "slideshow",
+      "blocks": {
+        "slide_J3KebN": {
+          "type": "slide",
+          "settings": {
+            "image_overlay_opacity": 0,
+            "heading": "Image slide",
+            "heading_size": "h1",
+            "subheading": "Tell your brand's story through images",
+            "button_label": "Button label",
+            "link": "",
+            "button_style_secondary": false,
+            "show_text_box": true,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "scheme-1"
+          }
+        },
+        "slide_YrXwjF": {
+          "type": "slide",
+          "settings": {
+            "image_overlay_opacity": 0,
+            "heading": "Image slide",
+            "heading_size": "h1",
+            "subheading": "Tell your brand's story through images",
+            "button_label": "Button label",
+            "link": "",
+            "button_style_secondary": false,
+            "show_text_box": true,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_J3KebN",
+        "slide_YrXwjF"
+      ],
+      "name": "t:sections.slideshow.presets.name",
+      "settings": {
+        "layout": "full_bleed",
+        "slide_height": "medium",
+        "slider_visual": "counter",
+        "auto_rotate": true,
+        "change_slides_speed": 5,
+        "image_behavior": "none",
+        "show_text_below": true,
+        "accessibility_info": "Slideshow about our brand"
+      }
+    },
+    "round_collection_xxLERC": {
+      "type": "round-collection",
+      "blocks": {
+        "collection_weqUpt": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "custom_title": ""
+          }
+        },
+        "collection_mATDxi": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "custom_title": ""
+          }
+        },
+        "collection_h6igmM": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "custom_title": ""
+          }
+        },
+        "collection_rfagBp": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "custom_title": ""
+          }
+        },
+        "collection_XAdpkf": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "custom_title": ""
+          }
+        },
+        "collection_dayPaE": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "custom_title": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_weqUpt",
+        "collection_mATDxi",
+        "collection_h6igmM",
+        "collection_rfagBp",
+        "collection_XAdpkf",
+        "collection_dayPaE"
+      ],
+      "name": "Collections Circle",
+      "settings": {
+        "heading": "Shop by Category",
+        "subheading": "Browse our collections",
+        "heading_alignment": "center",
+        "heading_size": 32,
+        "subheading_size": 16,
+        "heading_color": "",
+        "heading_spacing": 24,
+        "layout": "slider",
+        "grid_alignment": "center",
+        "max_width": 1200,
+        "gap": 28,
+        "mobile_gap": 16,
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "bg_color": "",
+        "circle_size": 140,
+        "mobile_circle_size": 90,
+        "show_border": true,
+        "border_width": 3,
+        "border_style": "solid",
+        "border_color": "#333333",
+        "border_hover_color": "#000000",
+        "show_glow": false,
+        "glow_color": "#6366f1",
+        "glow_spread": 10,
+        "glow_blur": 14,
+        "glow_on_hover": true,
+        "glow_hover_color": "#818cf8",
+        "hover_lift": "-3",
+        "hover_scale": "1.05",
+        "image_zoom_hover": true,
+        "show_shadow": false,
+        "shadow_opacity": 15,
+        "show_title": true,
+        "title_size": 14,
+        "title_weight": "500",
+        "title_color": "",
+        "title_hover_color": "",
+        "title_spacing": 10,
+        "show_count": false,
+        "show_arrows": true,
+        "arrow_size": 40,
+        "arrow_bg": "#ffffff",
+        "arrow_color": "#111111",
+        "show_credit": true
+      }
+    }
+  },
+  "order": [
+    "slideshow_3tTQiJ",
+    "round_collection_xxLERC"
+  ]
+}

@@ -1,0 +1,909 @@
+{% comment %}
+  ============================================================
+  Circular Collection Slider — by EcomRanks
+  https://www.youtube.com/@EcomRanks
+  Fiverr: https://fvrr.co/3BsbtyA
+  ============================================================
+  HOW TO USE:
+  1. Go to Online Store > Themes > Customize
+  2. Add this section to any page
+  3. Add collection blocks and customize the look
+  ============================================================
+{% endcomment %}
+
+
+{%- style -%}
+  /* ===== SECTION WRAPPER ===== */
+  .ecr-circles-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    {% if section.settings.bg_color != blank and section.settings.bg_color != 'rgba(0,0,0,0)' %}
+      background-color: {{ section.settings.bg_color }};
+    {% endif %}
+    overflow: hidden;
+  }
+
+
+  .ecr-circles-{{ section.id }} .ecr-circles__container {
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+
+  /* ===== HEADING ===== */
+  .ecr-circles-{{ section.id }} .ecr-circles__heading {
+    text-align: {{ section.settings.heading_alignment }};
+    font-size: {{ section.settings.heading_size }}px;
+    margin: 0 0 {{ section.settings.heading_spacing }}px;
+    line-height: 1.2;
+    {% if section.settings.heading_color != blank %}
+      color: {{ section.settings.heading_color }};
+    {% endif %}
+  }
+
+
+  .ecr-circles-{{ section.id }} .ecr-circles__subheading {
+    text-align: {{ section.settings.heading_alignment }};
+    font-size: {{ section.settings.subheading_size }}px;
+    margin: -{{ section.settings.heading_spacing | minus: 8 }}px 0 {{ section.settings.heading_spacing }}px;
+    opacity: 0.7;
+    line-height: 1.5;
+    {% if section.settings.heading_color != blank %}
+      color: {{ section.settings.heading_color }};
+    {% endif %}
+  }
+
+
+  /* ===== TRACK / SLIDER ===== */
+  .ecr-circles-{{ section.id }} .ecr-circles__track-wrapper {
+    position: relative;
+  }
+
+
+  .ecr-circles-{{ section.id }} .ecr-circles__track {
+    display: flex;
+    gap: {{ section.settings.gap }}px;
+    {% if section.settings.layout == 'slider' %}
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      padding: 10px 0 20px;
+    {% else %}
+      flex-wrap: wrap;
+      justify-content: {{ section.settings.grid_alignment }};
+      padding: 10px 0;
+    {% endif %}
+  }
+
+
+  .ecr-circles-{{ section.id }} .ecr-circles__track::-webkit-scrollbar {
+    display: none;
+  }
+
+
+  /* ===== INDIVIDUAL ITEM ===== */
+  .ecr-circles-{{ section.id }} .ecr-circles__item {
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: {{ section.settings.circle_size }}px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+
+
+  .ecr-circles-{{ section.id }} .ecr-circles__item:hover {
+    transform: translateY({{ section.settings.hover_lift }}px);
+  }
+
+
+  /* ===== CIRCLE IMAGE ===== */
+  .ecr-circles-{{ section.id }} .ecr-circles__image-wrap {
+    position: relative;
+    width: {{ section.settings.circle_size }}px;
+    height: {{ section.settings.circle_size }}px;
+    border-radius: 50%;
+    overflow: hidden;
+    {% if section.settings.show_border %}
+      border: {{ section.settings.border_width }}px {{ section.settings.border_style }} {{ section.settings.border_color }};
+    {% endif %}
+    {% if section.settings.show_shadow %}
+      box-shadow: 0 4px 15px rgba(0, 0, 0, {{ section.settings.shadow_opacity | divided_by: 100.0 }});
+    {% endif %}
+    {% if section.settings.show_glow %}
+      box-shadow:
+        {% if section.settings.show_shadow %}0 4px 15px rgba(0, 0, 0, {{ section.settings.shadow_opacity | divided_by: 100.0 }}),{% endif %}
+        0 0 {{ section.settings.glow_spread }}px {{ section.settings.glow_blur }}px {{ section.settings.glow_color }};
+    {% endif %}
+    transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+  }
+
+
+  .ecr-circles-{{ section.id }} .ecr-circles__item:hover .ecr-circles__image-wrap {
+    {% if section.settings.show_border and section.settings.border_hover_color != blank %}
+      border-color: {{ section.settings.border_hover_color }};
+    {% endif %}
+    {% if section.settings.glow_on_hover %}
+      box-shadow:
+        {% if section.settings.show_shadow %}0 4px 15px rgba(0, 0, 0, {{ section.settings.shadow_opacity | divided_by: 100.0 }}),{% endif %}
+        0 0 {{ section.settings.glow_spread | plus: 8 }}px {{ section.settings.glow_blur | plus: 5 }}px {{ section.settings.glow_hover_color }};
+    {% endif %}
+    transform: scale({{ section.settings.hover_scale }});
+  }
+
+
+  .ecr-circles-{{ section.id }} .ecr-circles__image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+
+  {% if section.settings.image_zoom_hover %}
+    .ecr-circles-{{ section.id }} .ecr-circles__item:hover .ecr-circles__image-wrap img {
+      transform: scale(1.1);
+    }
+  {% endif %}
+
+
+  /* Placeholder */
+  .ecr-circles-{{ section.id }} .ecr-circles__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e8e8e8;
+    color: #999;
+    font-size: 14px;
+  }
+
+
+  /* ===== TITLE BELOW CIRCLE ===== */
+  .ecr-circles-{{ section.id }} .ecr-circles__title {
+    margin-top: {{ section.settings.title_spacing }}px;
+    font-size: {{ section.settings.title_size }}px;
+    font-weight: {{ section.settings.title_weight }};
+    line-height: 1.3;
+    max-width: {{ section.settings.circle_size | plus: 20 }}px;
+    word-wrap: break-word;
+    {% if section.settings.title_color != blank %}
+      color: {{ section.settings.title_color }};
+    {% endif %}
+    transition: color 0.3s ease;
+  }
+
+
+  .ecr-circles-{{ section.id }} .ecr-circles__item:hover .ecr-circles__title {
+    {% if section.settings.title_hover_color != blank %}
+      color: {{ section.settings.title_hover_color }};
+    {% endif %}
+  }
+
+
+  /* ===== PRODUCT COUNT ===== */
+  {% if section.settings.show_count %}
+    .ecr-circles-{{ section.id }} .ecr-circles__count {
+      font-size: {{ section.settings.title_size | minus: 2 }}px;
+      opacity: 0.55;
+      margin-top: 2px;
+      {% if section.settings.title_color != blank %}
+        color: {{ section.settings.title_color }};
+      {% endif %}
+    }
+  {% endif %}
+
+
+  /* ===== NAVIGATION ARROWS ===== */
+  {% if section.settings.layout == 'slider' and section.settings.show_arrows %}
+    .ecr-circles-{{ section.id }} .ecr-circles__arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-70%);
+      z-index: 5;
+      width: {{ section.settings.arrow_size }}px;
+      height: {{ section.settings.arrow_size }}px;
+      border-radius: 50%;
+      background: {{ section.settings.arrow_bg }};
+      color: {{ section.settings.arrow_color }};
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      opacity: 0.85;
+    }
+
+
+    .ecr-circles-{{ section.id }} .ecr-circles__arrow:hover {
+      opacity: 1;
+      transform: translateY(-70%) scale(1.08);
+    }
+
+
+    .ecr-circles-{{ section.id }} .ecr-circles__arrow--prev {
+      left: -{{ section.settings.arrow_size | divided_by: 2 | plus: 2 }}px;
+    }
+
+
+    .ecr-circles-{{ section.id }} .ecr-circles__arrow--next {
+      right: -{{ section.settings.arrow_size | divided_by: 2 | plus: 2 }}px;
+    }
+
+
+    .ecr-circles-{{ section.id }} .ecr-circles__arrow svg {
+      width: {{ section.settings.arrow_size | divided_by: 2.5 | ceil }}px;
+      height: {{ section.settings.arrow_size | divided_by: 2.5 | ceil }}px;
+      stroke: currentColor;
+      stroke-width: 2.5;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+  {% endif %}
+
+
+  /* ===== MOBILE ===== */
+  @media screen and (max-width: 749px) {
+    .ecr-circles-{{ section.id }} .ecr-circles__item {
+      width: {{ section.settings.mobile_circle_size }}px;
+    }
+
+
+    .ecr-circles-{{ section.id }} .ecr-circles__image-wrap {
+      width: {{ section.settings.mobile_circle_size }}px;
+      height: {{ section.settings.mobile_circle_size }}px;
+    }
+
+
+    .ecr-circles-{{ section.id }} .ecr-circles__heading {
+      font-size: {{ section.settings.heading_size | times: 0.7 | ceil }}px;
+    }
+
+
+    .ecr-circles-{{ section.id }} .ecr-circles__subheading {
+      font-size: {{ section.settings.subheading_size | times: 0.85 | ceil }}px;
+    }
+
+
+    .ecr-circles-{{ section.id }} .ecr-circles__title {
+      font-size: {{ section.settings.title_size | minus: 2 }}px;
+      max-width: {{ section.settings.mobile_circle_size | plus: 10 }}px;
+    }
+
+
+    .ecr-circles-{{ section.id }} .ecr-circles__track {
+      gap: {{ section.settings.mobile_gap }}px;
+      {% if section.settings.layout == 'grid' %}
+        justify-content: center;
+      {% endif %}
+    }
+
+
+    {% if section.settings.layout == 'slider' and section.settings.show_arrows %}
+      .ecr-circles-{{ section.id }} .ecr-circles__arrow {
+        display: none;
+      }
+    {% endif %}
+  }
+
+
+  /* ===== CREDIT ===== */
+  .ecr-circles-{{ section.id }} .ecr-circles__credit {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 12px;
+    opacity: 0.5;
+  }
+
+
+  .ecr-circles-{{ section.id }} .ecr-circles__credit a {
+    color: inherit;
+    text-decoration: underline;
+  }
+{%- endstyle -%}
+
+
+<div class="ecr-circles-{{ section.id }}">
+  <div class="ecr-circles__container">
+
+
+    {% if section.settings.heading != blank %}
+      <h2 class="ecr-circles__heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+
+
+    {% if section.settings.subheading != blank %}
+      <p class="ecr-circles__subheading">{{ section.settings.subheading }}</p>
+    {% endif %}
+
+
+    <div class="ecr-circles__track-wrapper">
+
+
+      {% comment %} Left Arrow {% endcomment %}
+      {% if section.settings.layout == 'slider' and section.settings.show_arrows %}
+        <button class="ecr-circles__arrow ecr-circles__arrow--prev" aria-label="Scroll left" onclick="document.querySelector('.ecr-circles-{{ section.id }} .ecr-circles__track').scrollBy({left: -({{ section.settings.circle_size }} + {{ section.settings.gap }}), behavior: 'smooth'})">
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+      {% endif %}
+
+
+      <div class="ecr-circles__track">
+        {% for block in section.blocks %}
+          {%- assign collection = collections[block.settings.collection] -%}
+
+
+          <a
+            href="{{ collection.url | default: '#' }}"
+            class="ecr-circles__item"
+            {{ block.shopify_attributes }}
+          >
+            <div class="ecr-circles__image-wrap">
+              {% if block.settings.custom_image != blank %}
+                <img
+                  src="{{ block.settings.custom_image | image_url: width: 500 }}"
+                  alt="{{ block.settings.custom_title | default: collection.title | default: 'Collection' }}"
+                  loading="lazy"
+                  width="250"
+                  height="250"
+                >
+              {% elsif collection.image != blank %}
+                <img
+                  src="{{ collection.image | image_url: width: 500 }}"
+                  alt="{{ collection.title }}"
+                  loading="lazy"
+                  width="250"
+                  height="250"
+                >
+              {% elsif collection.products.first.featured_image != blank %}
+                <img
+                  src="{{ collection.products.first.featured_image | image_url: width: 500 }}"
+                  alt="{{ collection.title }}"
+                  loading="lazy"
+                  width="250"
+                  height="250"
+                >
+              {% else %}
+                <div class="ecr-circles__placeholder">
+                  {{ 'collection-1' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+            </div>
+
+
+            {% if section.settings.show_title %}
+              <span class="ecr-circles__title">
+                {{ block.settings.custom_title | default: collection.title | default: 'Collection' }}
+              </span>
+            {% endif %}
+
+
+            {% if section.settings.show_count and collection != blank %}
+              <span class="ecr-circles__count">
+                {{ collection.products_count }} {{ collection.products_count | pluralize: 'product', 'products' }}
+              </span>
+            {% endif %}
+          </a>
+        {% endfor %}
+      </div>
+
+
+      {% comment %} Right Arrow {% endcomment %}
+      {% if section.settings.layout == 'slider' and section.settings.show_arrows %}
+        <button class="ecr-circles__arrow ecr-circles__arrow--next" aria-label="Scroll right" onclick="document.querySelector('.ecr-circles-{{ section.id }} .ecr-circles__track').scrollBy({left: ({{ section.settings.circle_size }} + {{ section.settings.gap }}), behavior: 'smooth'})">
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      {% endif %}
+
+
+    </div>
+
+
+    {% if section.settings.show_credit %}
+      <div class="ecr-circles__credit">
+        Built by <a href="https://fvrr.co/3BsbtyA" target="_blank" rel="noopener">Ecom Ranks</a>
+      </div>
+    {% endif %}
+
+
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Collections Circle",
+  "tag": "section",
+  "class": "ecr-collection-circles",
+  "max_blocks": 20,
+  "settings": [
+    {
+      "type": "header",
+      "content": "━━━ HEADING ━━━"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop by Category"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Browse our collections"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading font size",
+      "min": 18,
+      "max": 56,
+      "step": 2,
+      "default": 32,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "label": "Subheading font size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading / Subheading color"
+    },
+    {
+      "type": "range",
+      "id": "heading_spacing",
+      "label": "Heading bottom spacing",
+      "min": 8,
+      "max": 60,
+      "step": 4,
+      "default": 24,
+      "unit": "px"
+    },
+
+
+    {
+      "type": "header",
+      "content": "━━━ LAYOUT ━━━"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout mode",
+      "options": [
+        { "value": "slider", "label": "Horizontal slider (swipeable)" },
+        { "value": "grid", "label": "Wrap grid" }
+      ],
+      "default": "slider"
+    },
+    {
+      "type": "select",
+      "id": "grid_alignment",
+      "label": "Grid alignment (grid mode only)",
+      "options": [
+        { "value": "flex-start", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "space-between", "label": "Space between" },
+        { "value": "space-evenly", "label": "Space evenly" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Section max width",
+      "min": 600,
+      "max": 1400,
+      "step": 50,
+      "default": 1200,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Gap between circles",
+      "min": 8,
+      "max": 60,
+      "step": 4,
+      "default": 28,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "mobile_gap",
+      "label": "Mobile gap between circles",
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Section padding top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Section padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section background color"
+    },
+
+
+    {
+      "type": "header",
+      "content": "━━━ CIRCLES ━━━"
+    },
+    {
+      "type": "range",
+      "id": "circle_size",
+      "label": "Circle size (desktop)",
+      "min": 80,
+      "max": 250,
+      "step": 10,
+      "default": 140,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "mobile_circle_size",
+      "label": "Circle size (mobile)",
+      "min": 60,
+      "max": 160,
+      "step": 10,
+      "default": 90,
+      "unit": "px"
+    },
+
+
+    {
+      "type": "header",
+      "content": "━━━ BORDER ━━━"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_border",
+      "label": "Show border around circles",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Border width",
+      "min": 1,
+      "max": 8,
+      "step": 1,
+      "default": 3,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "border_style",
+      "label": "Border style",
+      "options": [
+        { "value": "solid", "label": "Solid" },
+        { "value": "dashed", "label": "Dashed" },
+        { "value": "dotted", "label": "Dotted" },
+        { "value": "double", "label": "Double" }
+      ],
+      "default": "solid"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "border_hover_color",
+      "label": "Border hover color",
+      "default": "#000000"
+    },
+
+
+    {
+      "type": "header",
+      "content": "━━━ GLOW ━━━"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_glow",
+      "label": "Show glow around circles",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "glow_color",
+      "label": "Glow color",
+      "default": "#6366f1"
+    },
+    {
+      "type": "range",
+      "id": "glow_spread",
+      "label": "Glow size",
+      "min": 2,
+      "max": 30,
+      "step": 2,
+      "default": 10,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "glow_blur",
+      "label": "Glow blur / softness",
+      "min": 2,
+      "max": 40,
+      "step": 2,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "id": "glow_on_hover",
+      "label": "Intensify glow on hover",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "glow_hover_color",
+      "label": "Glow hover color",
+      "default": "#818cf8"
+    },
+
+
+    {
+      "type": "header",
+      "content": "━━━ HOVER EFFECTS ━━━"
+    },
+    {
+      "type": "select",
+      "id": "hover_lift",
+      "label": "Lift on hover",
+      "info": "Moves the entire item up on hover",
+      "options": [
+        { "value": "0", "label": "None" },
+        { "value": "-3", "label": "Subtle (-3px)" },
+        { "value": "-6", "label": "Medium (-6px)" },
+        { "value": "-10", "label": "Strong (-10px)" }
+      ],
+      "default": "-3"
+    },
+    {
+      "type": "select",
+      "id": "hover_scale",
+      "label": "Circle scale on hover",
+      "options": [
+        { "value": "1", "label": "None" },
+        { "value": "1.05", "label": "Subtle (1.05x)" },
+        { "value": "1.1", "label": "Medium (1.1x)" },
+        { "value": "1.15", "label": "Strong (1.15x)" }
+      ],
+      "default": "1.05"
+    },
+    {
+      "type": "checkbox",
+      "id": "image_zoom_hover",
+      "label": "Zoom image inside circle on hover",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_shadow",
+      "label": "Show drop shadow",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "shadow_opacity",
+      "label": "Shadow opacity",
+      "min": 5,
+      "max": 50,
+      "step": 5,
+      "default": 15,
+      "unit": "%"
+    },
+
+
+    {
+      "type": "header",
+      "content": "━━━ TITLE ━━━"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_title",
+      "label": "Show collection title",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title font size",
+      "min": 10,
+      "max": 22,
+      "step": 1,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "title_weight",
+      "label": "Title weight",
+      "options": [
+        { "value": "400", "label": "Regular" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi Bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color"
+    },
+    {
+      "type": "color",
+      "id": "title_hover_color",
+      "label": "Title hover color"
+    },
+    {
+      "type": "range",
+      "id": "title_spacing",
+      "label": "Space between circle and title",
+      "min": 4,
+      "max": 24,
+      "step": 2,
+      "default": 10,
+      "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_count",
+      "label": "Show product count",
+      "default": false,
+      "info": "Displays number of products below the title"
+    },
+
+
+    {
+      "type": "header",
+      "content": "━━━ ARROWS (Slider) ━━━"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Show navigation arrows",
+      "default": true,
+      "info": "Only visible in slider mode on desktop"
+    },
+    {
+      "type": "range",
+      "id": "arrow_size",
+      "label": "Arrow button size",
+      "min": 28,
+      "max": 56,
+      "step": 4,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "arrow_bg",
+      "label": "Arrow background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "arrow_color",
+      "label": "Arrow icon color",
+      "default": "#111111"
+    },
+
+
+    {
+      "type": "header",
+      "content": "━━━ ECOMRANKS CREDIT ━━━"
+    },
+    {
+      "type": "paragraph",
+      "content": "This section was built by Ecom Ranks. Need custom Shopify development, theme customization, or a full store build? [Hire me on Fiverr →](https:\/\/fvrr.co\/3BsbtyA)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_credit",
+      "label": "Show 'Built by Ecom Ranks' credit",
+      "default": true,
+      "info": "A small credit link below the section."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Custom image (optional)",
+          "info": "Overrides the collection image. Use a square image for best results."
+        },
+        {
+          "type": "text",
+          "id": "custom_title",
+          "label": "Custom title (optional)",
+          "info": "Overrides the collection title."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collections Circle",
+      "blocks": [
+        { "type": "collection" },
+        { "type": "collection" },
+        { "type": "collection" },
+        { "type": "collection" },
+        { "type": "collection" },
+        { "type": "collection" }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+
+
