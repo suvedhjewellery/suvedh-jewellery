@@ -1,0 +1,283 @@
+{%- style -%}
+  #SuvedhHero-{{ section.id }} {
+    --hero-height-mobile: {{ section.settings.mobile_height }}px;
+    --hero-height-desktop: {{ section.settings.desktop_height }}px;
+    --hero-control-background: {{ section.settings.control_background }};
+    --hero-control-color: {{ section.settings.control_color }};
+    position: relative;
+    display: block;
+    overflow: hidden;
+  }
+
+  #SuvedhHero-{{ section.id }} .suvedh-hero__viewport { overflow: hidden; }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__track {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    transition: transform 500ms ease;
+    touch-action: pan-y;
+  }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__slide {
+    position: relative;
+    flex: 0 0 100%;
+    min-width: 0;
+    height: var(--hero-height-mobile);
+  }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__media,
+  #SuvedhHero-{{ section.id }} .suvedh-hero__media picture,
+  #SuvedhHero-{{ section.id }} .suvedh-hero__image,
+  #SuvedhHero-{{ section.id }} .suvedh-hero__placeholder {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__image { object-fit: cover; }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__placeholder { background: rgb(var(--color-background)); }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: #000;
+    pointer-events: none;
+  }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__content {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    padding: 3rem 2rem 6rem;
+    color: var(--slide-text-color);
+  }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__content--top-left { align-items: flex-start; justify-content: flex-start; }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__content--top-center { align-items: flex-start; justify-content: center; }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__content--top-right { align-items: flex-start; justify-content: flex-end; }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__content--middle-left { align-items: center; justify-content: flex-start; }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__content--middle-center { align-items: center; justify-content: center; }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__content--middle-right { align-items: center; justify-content: flex-end; }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__content--bottom-left { align-items: flex-end; justify-content: flex-start; }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__content--bottom-center { align-items: flex-end; justify-content: center; }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__content--bottom-right { align-items: flex-end; justify-content: flex-end; }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__box { width: min(100%, 60rem); }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__box--left { text-align: left; }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__box--center { text-align: center; }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__box--right { text-align: right; }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__heading { margin: 0 0 1rem; color: inherit; }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__subheading { margin: 0 0 2rem; font-size: 1.6rem; }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__controls {
+    position: absolute;
+    z-index: 2;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    pointer-events: none;
+  }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__arrow,
+  #SuvedhHero-{{ section.id }} .suvedh-hero__dot {
+    border: 0;
+    background: var(--hero-control-background);
+    color: var(--hero-control-color);
+    cursor: pointer;
+    pointer-events: auto;
+  }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 4.4rem;
+    height: 4.4rem;
+    border-radius: 50%;
+    font-size: 2rem;
+  }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__dots { display: flex; gap: .8rem; }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__dot {
+    width: 1rem;
+    height: 1rem;
+    padding: 0;
+    border-radius: 50%;
+    opacity: .55;
+  }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__dot[aria-current='true'] { opacity: 1; transform: scale(1.25); }
+  #SuvedhHero-{{ section.id }} button:focus-visible,
+  #SuvedhHero-{{ section.id }} a:focus-visible { outline: .2rem solid currentColor; outline-offset: .3rem; }
+
+  @media screen and (min-width: 750px) {
+    #SuvedhHero-{{ section.id }} .suvedh-hero__slide { height: var(--hero-height-desktop); }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__content { padding: 5rem 7rem 7rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #SuvedhHero-{{ section.id }} .suvedh-hero__track { transition: none; }
+  }
+{%- endstyle -%}
+
+<suvedh-hero-slider
+  id="SuvedhHero-{{ section.id }}"
+  role="region"
+  aria-roledescription="carousel"
+  aria-label="{{ section.settings.accessibility_label | escape }}"
+  data-autoplay="{{ section.settings.auto_rotate }}"
+  data-speed="{{ section.settings.rotation_speed | times: 1000 }}"
+>
+  <div class="suvedh-hero__viewport">
+    <div class="suvedh-hero__track" id="SuvedhHeroTrack-{{ section.id }}" aria-live="polite">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign desktop_image = block.settings.desktop_image
+          assign mobile_image = block.settings.mobile_image | default: desktop_image
+          assign image_loading = 'lazy'
+          assign image_priority = 'auto'
+          if forloop.first
+            assign image_loading = 'eager'
+            assign image_priority = 'high'
+          endif
+        -%}
+        <article
+          class="suvedh-hero__slide"
+          id="SuvedhHeroSlide-{{ section.id }}-{{ forloop.index }}"
+          role="group"
+          aria-roledescription="slide"
+          aria-label="{{ forloop.index }} of {{ forloop.length }}"
+          aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"
+          {{ block.shopify_attributes }}
+        >
+          <div class="suvedh-hero__media">
+            {%- if desktop_image != blank -%}
+              <picture>
+                {%- if mobile_image != blank -%}
+                  <source
+                    media="(max-width: 749px)"
+                    srcset="{{ mobile_image | image_url: width: 375 }} 375w, {{ mobile_image | image_url: width: 550 }} 550w, {{ mobile_image | image_url: width: 750 }} 750w, {{ mobile_image | image_url: width: 1100 }} 1100w"
+                    sizes="100vw"
+                  >
+                {%- endif -%}
+                {{ desktop_image | image_url: width: 2400 | image_tag: class: 'suvedh-hero__image', widths: '750, 1100, 1500, 1780, 2000, 2400', sizes: '100vw', loading: image_loading, fetchpriority: image_priority }}
+              </picture>
+            {%- else -%}
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'suvedh-hero__placeholder placeholder-svg' }}
+            {%- endif -%}
+          </div>
+          <div class="suvedh-hero__overlay" style="opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};"></div>
+          <div class="suvedh-hero__content suvedh-hero__content--{{ block.settings.text_position }}" style="--slide-text-color: {{ block.settings.text_color }};">
+            <div class="suvedh-hero__box suvedh-hero__box--{{ block.settings.text_alignment }}">
+              {%- if block.settings.heading != blank -%}<h2 class="suvedh-hero__heading {{ block.settings.heading_size }}">{{ block.settings.heading }}</h2>{%- endif -%}
+              {%- if block.settings.subheading != blank -%}<div class="suvedh-hero__subheading rte">{{ block.settings.subheading }}</div>{%- endif -%}
+              {%- if block.settings.button_label != blank -%}
+                <a class="button button--{{ block.settings.button_style }}" {% if block.settings.button_link != blank %}href="{{ block.settings.button_link }}"{% else %}role="link" aria-disabled="true"{% endif %}>{{ block.settings.button_label | escape }}</a>
+              {%- endif -%}
+            </div>
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  {%- if section.blocks.size > 1 -%}
+    <div class="suvedh-hero__controls">
+      <button class="suvedh-hero__arrow" type="button" data-previous aria-label="Previous slide" aria-controls="SuvedhHeroTrack-{{ section.id }}">&#8249;</button>
+      <div class="suvedh-hero__dots" role="group" aria-label="Choose slide">
+        {%- for block in section.blocks -%}
+          <button class="suvedh-hero__dot" type="button" data-slide="{{ forloop.index0 }}" aria-label="Show slide {{ forloop.index }} of {{ forloop.length }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}"></button>
+        {%- endfor -%}
+      </div>
+      <button class="suvedh-hero__arrow" type="button" data-next aria-label="Next slide" aria-controls="SuvedhHeroTrack-{{ section.id }}">&#8250;</button>
+    </div>
+  {%- endif -%}
+</suvedh-hero-slider>
+
+<script>
+  if (!customElements.get('suvedh-hero-slider')) {
+    customElements.define('suvedh-hero-slider', class extends HTMLElement {
+      connectedCallback() {
+        this.track = this.querySelector('.suvedh-hero__track');
+        this.slides = [...this.querySelectorAll('.suvedh-hero__slide')];
+        this.dots = [...this.querySelectorAll('.suvedh-hero__dot')];
+        if (this.slides.length < 2) return;
+        this.index = 0;
+        this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        this.autoplay = this.dataset.autoplay === 'true';
+        this.speed = Number(this.dataset.speed) || 5000;
+        this.querySelector('[data-previous]').addEventListener('click', () => this.show(this.index - 1, true));
+        this.querySelector('[data-next]').addEventListener('click', () => this.show(this.index + 1, true));
+        this.dots.forEach((dot) => dot.addEventListener('click', () => this.show(Number(dot.dataset.slide), true)));
+        this.addEventListener('mouseenter', () => this.pause());
+        this.addEventListener('mouseleave', () => this.play());
+        this.addEventListener('focusin', () => this.pause());
+        this.addEventListener('focusout', (event) => { if (!this.contains(event.relatedTarget)) this.play(); });
+        this.addEventListener('pointerdown', (event) => { if (event.pointerType === 'touch') this.touchStart = event.clientX; });
+        this.addEventListener('pointerup', (event) => {
+          if (this.touchStart == null || event.pointerType !== 'touch') return;
+          const distance = event.clientX - this.touchStart;
+          if (Math.abs(distance) > 50) this.show(this.index + (distance < 0 ? 1 : -1), true);
+          this.touchStart = null;
+        });
+        this.reducedMotion.addEventListener('change', () => this.play());
+        this.play();
+      }
+      show(index, userInitiated = false) {
+        this.index = (index + this.slides.length) % this.slides.length;
+        this.track.style.transform = `translateX(-${this.index * 100}%)`;
+        this.slides.forEach((slide, i) => {
+          const active = i === this.index;
+          slide.setAttribute('aria-hidden', String(!active));
+          slide.querySelectorAll('a, button').forEach((element) => element.toggleAttribute('tabindex', !active));
+        });
+        this.dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === this.index)));
+        if (userInitiated) { this.pause(); this.play(); }
+      }
+      play() {
+        this.pause();
+        if (!this.autoplay || this.reducedMotion.matches || this.matches(':hover') || this.contains(document.activeElement)) return;
+        this.track.setAttribute('aria-live', 'off');
+        this.timer = setInterval(() => this.show(this.index + 1), this.speed);
+      }
+      pause() {
+        clearInterval(this.timer);
+        if (this.track) this.track.setAttribute('aria-live', 'polite');
+      }
+      disconnectedCallback() { this.pause(); }
+    });
+  }
+</script>
+
+{% schema %}
+{
+  "name": "SUVEDH hero slider",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 5,
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "text", "id": "accessibility_label", "label": "Accessibility label", "default": "Featured promotions" },
+    { "type": "checkbox", "id": "auto_rotate", "label": "Auto-rotate slides", "default": true },
+    { "type": "range", "id": "rotation_speed", "min": 3, "max": 10, "step": 1, "unit": "s", "label": "Rotation speed", "default": 5 },
+    { "type": "range", "id": "desktop_height", "min": 400, "max": 900, "step": 20, "unit": "px", "label": "Desktop height", "default": 660 },
+    { "type": "range", "id": "mobile_height", "min": 360, "max": 760, "step": 20, "unit": "px", "label": "Mobile height", "default": 560 },
+    { "type": "color", "id": "control_background", "label": "Control background", "default": "#ffffff" },
+    { "type": "color", "id": "control_color", "label": "Control color", "default": "#1a1a1a" }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        { "type": "image_picker", "id": "desktop_image", "label": "Desktop image" },
+        { "type": "image_picker", "id": "mobile_image", "label": "Mobile image" },
+        { "type": "range", "id": "overlay_opacity", "min": 0, "max": 80, "step": 5, "unit": "%", "label": "Overlay opacity", "default": 20 },
+        { "type": "color", "id": "text_color", "label": "Text color", "default": "#ffffff" },
+        { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Timeless silver, thoughtfully made" },
+        { "type": "select", "id": "heading_size", "label": "Heading size", "options": [{ "value": "h2", "label": "Small" }, { "value": "h1", "label": "Medium" }, { "value": "h0", "label": "Large" }], "default": "h0" },
+        { "type": "richtext", "id": "subheading", "label": "Subheading", "default": "<p>Discover authentic 92.5 sterling silver jewellery.</p>" },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop now" },
+        { "type": "url", "id": "button_link", "label": "Button link" },
+        { "type": "select", "id": "button_style", "label": "Button style", "options": [{ "value": "primary", "label": "Primary" }, { "value": "secondary", "label": "Secondary" }], "default": "primary" },
+        { "type": "select", "id": "text_alignment", "label": "Text alignment", "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" }], "default": "center" },
+        { "type": "select", "id": "text_position", "label": "Text position", "options": [{ "value": "top-left", "label": "Top left" }, { "value": "top-center", "label": "Top center" }, { "value": "top-right", "label": "Top right" }, { "value": "middle-left", "label": "Middle left" }, { "value": "middle-center", "label": "Middle center" }, { "value": "middle-right", "label": "Middle right" }, { "value": "bottom-left", "label": "Bottom left" }, { "value": "bottom-center", "label": "Bottom center" }, { "value": "bottom-right", "label": "Bottom right" }], "default": "middle-center" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "SUVEDH hero slider", "blocks": [{ "type": "slide" }, { "type": "slide" }] }]
+}
+{% endschema %}

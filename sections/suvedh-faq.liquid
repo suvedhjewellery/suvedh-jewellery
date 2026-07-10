@@ -1,0 +1,235 @@
+{%- style -%}
+  #SuvedhFaq-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  #SuvedhFaq-{{ section.id }} .suvedh-faq__inner { max-width: {{ section.settings.content_width }}rem; }
+
+  #SuvedhFaq-{{ section.id }} .suvedh-faq__header {
+    margin-bottom: 3rem;
+    text-align: {{ section.settings.heading_alignment }};
+  }
+
+  #SuvedhFaq-{{ section.id }} .suvedh-faq__category {
+    margin: 0 0 0.8rem;
+    color: rgba(var(--color-foreground), 0.65);
+    font-size: 1.2rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  #SuvedhFaq-{{ section.id }} .suvedh-faq__heading { margin: 0; }
+
+  #SuvedhFaq-{{ section.id }} .suvedh-faq__intro {
+    margin-top: 1rem;
+    color: rgba(var(--color-foreground), 0.7);
+  }
+
+  #SuvedhFaq-{{ section.id }} .suvedh-faq__intro > * { margin: 0; }
+
+  #SuvedhFaq-{{ section.id }} .suvedh-faq__item {
+    border-top: 0.1rem solid rgba(var(--color-foreground), 0.14);
+  }
+
+  #SuvedhFaq-{{ section.id }} .suvedh-faq__item:last-child {
+    border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.14);
+  }
+
+  #SuvedhFaq-{{ section.id }} .suvedh-faq__question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    min-height: 4.4rem;
+    padding: 1.8rem 0;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--font-heading-family);
+    font-size: calc(var(--font-heading-scale) * 1.7rem);
+    line-height: 1.35;
+  }
+
+  #SuvedhFaq-{{ section.id }} .suvedh-faq__question::-webkit-details-marker { display: none; }
+
+  #SuvedhFaq-{{ section.id }} .suvedh-faq__question:focus-visible {
+    outline: 0.2rem solid rgb(var(--color-foreground));
+    outline-offset: 0.4rem;
+  }
+
+  #SuvedhFaq-{{ section.id }} .suvedh-faq__icon {
+    position: relative;
+    width: 1.8rem;
+    height: 1.8rem;
+    flex: 0 0 1.8rem;
+  }
+
+  #SuvedhFaq-{{ section.id }} .suvedh-faq__icon::before,
+  #SuvedhFaq-{{ section.id }} .suvedh-faq__icon::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1.4rem;
+    height: 0.1rem;
+    background: currentColor;
+    content: '';
+    transform: translate(-50%, -50%);
+    transition: transform 200ms ease;
+  }
+
+  #SuvedhFaq-{{ section.id }} .suvedh-faq__icon::after { transform: translate(-50%, -50%) rotate(90deg); }
+  #SuvedhFaq-{{ section.id }} details[open] .suvedh-faq__icon::after { transform: translate(-50%, -50%) rotate(0); }
+
+  #SuvedhFaq-{{ section.id }} .suvedh-faq__answer {
+    max-width: 72rem;
+    padding: 0 0 2rem;
+    color: rgba(var(--color-foreground), 0.75);
+    animation: suvedhFaqReveal-{{ section.id }} 220ms ease both;
+  }
+
+  #SuvedhFaq-{{ section.id }} .suvedh-faq__answer > :first-child { margin-top: 0; }
+  #SuvedhFaq-{{ section.id }} .suvedh-faq__answer > :last-child { margin-bottom: 0; }
+
+  @keyframes suvedhFaqReveal-{{ section.id }} {
+    from { opacity: 0; transform: translateY(-0.5rem); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media screen and (min-width: 750px) {
+    #SuvedhFaq-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+
+    #SuvedhFaq-{{ section.id }} .suvedh-faq__header { margin-bottom: 4rem; }
+    #SuvedhFaq-{{ section.id }} .suvedh-faq__question { padding: 2.2rem 0; font-size: calc(var(--font-heading-scale) * 1.9rem); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #SuvedhFaq-{{ section.id }} .suvedh-faq__answer { animation: none; }
+    #SuvedhFaq-{{ section.id }} .suvedh-faq__icon::after { transition: none; }
+  }
+{%- endstyle -%}
+
+<section
+  id="SuvedhFaq-{{ section.id }}"
+  class="suvedh-faq color-{{ section.settings.color_scheme }} gradient"
+  {% if section.settings.heading != blank %}aria-labelledby="SuvedhFaqHeading-{{ section.id }}"{% else %}aria-label="Frequently asked questions"{% endif %}
+>
+  <div class="suvedh-faq__inner page-width">
+    {%- if section.settings.category_heading != blank or section.settings.heading != blank or section.settings.intro != blank -%}
+      <header class="suvedh-faq__header">
+        {%- if section.settings.category_heading != blank -%}
+          <p class="suvedh-faq__category">{{ section.settings.category_heading | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 id="SuvedhFaqHeading-{{ section.id }}" class="suvedh-faq__heading {{ section.settings.heading_size }} inline-richtext">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.intro != blank -%}
+          <div class="suvedh-faq__intro rte">{{ section.settings.intro }}</div>
+        {%- endif -%}
+      </header>
+    {%- endif -%}
+
+    <suvedh-faq data-single-open="{{ section.settings.single_open }}">
+      {%- for block in section.blocks -%}
+        {%- if block.settings.question != blank and block.settings.answer != blank -%}
+          <details class="suvedh-faq__item" {{ block.shopify_attributes }}{% if block.settings.open_by_default %} open{% endif %}>
+            <summary class="suvedh-faq__question">
+              <span>{{ block.settings.question | escape }}</span>
+              <span class="suvedh-faq__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="suvedh-faq__answer rte">{{ block.settings.answer }}</div>
+          </details>
+        {%- endif -%}
+      {%- endfor -%}
+    </suvedh-faq>
+  </div>
+</section>
+
+<script>
+  if (!customElements.get('suvedh-faq')) {
+    customElements.define('suvedh-faq', class extends HTMLElement {
+      connectedCallback() {
+        if (this.dataset.singleOpen !== 'true') return;
+        this.addEventListener('toggle', (event) => {
+          const openedItem = event.target;
+          if (!(openedItem instanceof HTMLDetailsElement) || !openedItem.open) return;
+          this.querySelectorAll('details[open]').forEach((item) => {
+            if (item !== openedItem) item.open = false;
+          });
+        }, true);
+      }
+    });
+  }
+</script>
+
+{%- capture faq_entities -%}
+  {%- assign has_faq_entity = false -%}
+  {%- for block in section.blocks -%}
+    {%- if block.settings.question != blank and block.settings.answer != blank -%}
+      {%- if has_faq_entity -%},{%- endif -%}
+      {
+        "@type": "Question",
+        "name": {{ block.settings.question | strip_html | json }},
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": {{ block.settings.answer | strip_html | json }}
+        }
+      }
+      {%- assign has_faq_entity = true -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- if has_faq_entity -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{{ faq_entities | strip }}]
+    }
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "SUVEDH FAQ",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 20,
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "text", "id": "category_heading", "label": "Category heading" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Frequently Asked Questions" },
+    { "type": "richtext", "id": "intro", "label": "Introduction" },
+    {
+      "type": "select", "id": "heading_size", "label": "Heading size",
+      "options": [{ "value": "h2", "label": "Small" }, { "value": "h1", "label": "Medium" }, { "value": "h0", "label": "Large" }],
+      "default": "h1"
+    },
+    {
+      "type": "select", "id": "heading_alignment", "label": "Heading alignment",
+      "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }],
+      "default": "center"
+    },
+    { "type": "checkbox", "id": "single_open", "label": "Allow only one open answer", "default": true },
+    { "type": "range", "id": "content_width", "min": 60, "max": 120, "step": 5, "unit": "rem", "label": "Content width", "default": 90 },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Top padding", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Bottom padding", "default": 64 }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question" },
+        { "type": "richtext", "id": "answer", "label": "Answer" },
+        { "type": "checkbox", "id": "open_by_default", "label": "Open by default", "default": false }
+      ]
+    }
+  ],
+  "presets": [{ "name": "SUVEDH FAQ" }]
+}
+{% endschema %}

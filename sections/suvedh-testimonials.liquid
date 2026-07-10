@@ -1,0 +1,295 @@
+{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #SuvedhTestimonials-{{ section.id }} {
+    --testimonial-columns: {{ section.settings.columns_desktop }};
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  #SuvedhTestimonials-{{ section.id }} .suvedh-testimonials__header {
+    max-width: 68rem;
+    margin: 0 auto 3rem;
+    text-align: center;
+  }
+
+  #SuvedhTestimonials-{{ section.id }} .suvedh-testimonials__heading { margin: 0; }
+
+  #SuvedhTestimonials-{{ section.id }} .suvedh-testimonials__intro {
+    margin-top: 1rem;
+    color: rgba(var(--color-foreground), 0.7);
+  }
+
+  #SuvedhTestimonials-{{ section.id }} .suvedh-testimonials__intro > * { margin: 0; }
+
+  #SuvedhTestimonials-{{ section.id }} .suvedh-testimonials__list {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  #SuvedhTestimonials-{{ section.id }} .suvedh-testimonial {
+    height: auto;
+    padding: 0;
+  }
+
+  #SuvedhTestimonials-{{ section.id }} .suvedh-testimonial__card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 2.4rem;
+    border: 0.1rem solid rgba(var(--color-foreground), 0.1);
+    background: rgb(var(--color-background));
+  }
+
+  #SuvedhTestimonials-{{ section.id }} .suvedh-testimonial__rating {
+    display: flex;
+    gap: 0.3rem;
+    margin-bottom: 1.8rem;
+    color: rgb(var(--color-foreground));
+  }
+
+  #SuvedhTestimonials-{{ section.id }} .suvedh-testimonial__star {
+    width: 1.7rem;
+    height: 1.7rem;
+  }
+
+  #SuvedhTestimonials-{{ section.id }} .suvedh-testimonial__star--empty { opacity: 0.22; }
+
+  #SuvedhTestimonials-{{ section.id }} .suvedh-testimonial__review {
+    flex-grow: 1;
+    margin: 0;
+    font-family: var(--font-heading-family);
+    font-size: calc(var(--font-heading-scale) * 1.7rem);
+    line-height: 1.55;
+  }
+
+  #SuvedhTestimonials-{{ section.id }} .suvedh-testimonial__product {
+    margin: 1.6rem 0 0;
+    color: rgba(var(--color-foreground), 0.65);
+    font-size: 1.2rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  #SuvedhTestimonials-{{ section.id }} .suvedh-testimonial__customer {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-top: 2.2rem;
+    padding-top: 1.8rem;
+    border-top: 0.1rem solid rgba(var(--color-foreground), 0.1);
+  }
+
+  #SuvedhTestimonials-{{ section.id }} .suvedh-testimonial__image {
+    width: 4.8rem;
+    height: 4.8rem;
+    flex: 0 0 4.8rem;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  #SuvedhTestimonials-{{ section.id }} .suvedh-testimonial__name {
+    margin: 0;
+    font-weight: 600;
+  }
+
+  #SuvedhTestimonials-{{ section.id }} .suvedh-testimonial__verified {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.3rem;
+    color: rgba(var(--color-foreground), 0.65);
+    font-size: 1.2rem;
+  }
+
+  #SuvedhTestimonials-{{ section.id }} .suvedh-testimonial__verified .svg-wrapper {
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+
+  #SuvedhTestimonials-{{ section.id }} .slider-buttons { margin-top: 1.5rem; }
+
+  @media screen and (max-width: 749px) {
+    #SuvedhTestimonials-{{ section.id }} .suvedh-testimonials__list.slider {
+      scroll-padding-left: 1.5rem;
+    }
+
+    #SuvedhTestimonials-{{ section.id }} .suvedh-testimonial.slider__slide {
+      width: calc(88% - var(--grid-mobile-horizontal-spacing));
+      max-width: calc(88% - var(--grid-mobile-horizontal-spacing));
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    #SuvedhTestimonials-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+
+    #SuvedhTestimonials-{{ section.id }} .suvedh-testimonials__header { margin-bottom: 4rem; }
+
+    #SuvedhTestimonials-{{ section.id }} .suvedh-testimonials__list {
+      grid-template-columns: repeat(var(--testimonial-columns), minmax(0, 1fr));
+    }
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign show_mobile_slider = false
+  if section.blocks.size > 1
+    assign show_mobile_slider = true
+  endif
+-%}
+
+<section
+  id="SuvedhTestimonials-{{ section.id }}"
+  class="suvedh-testimonials color-{{ section.settings.color_scheme }} gradient"
+  {% if section.settings.heading != blank %}aria-labelledby="SuvedhTestimonialsHeading-{{ section.id }}"{% else %}aria-label="Customer testimonials"{% endif %}
+>
+  <div class="page-width">
+    {%- if section.settings.heading != blank or section.settings.intro != blank -%}
+      <header class="suvedh-testimonials__header">
+        {%- if section.settings.heading != blank -%}
+          <h2 id="SuvedhTestimonialsHeading-{{ section.id }}" class="suvedh-testimonials__heading {{ section.settings.heading_size }} inline-richtext">
+            {{ section.settings.heading }}
+          </h2>
+        {%- endif -%}
+        {%- if section.settings.intro != blank -%}
+          <div class="suvedh-testimonials__intro rte">{{ section.settings.intro }}</div>
+        {%- endif -%}
+      </header>
+    {%- endif -%}
+
+    <slider-component class="slider-mobile-gutter">
+      <ul
+        id="Slider-{{ section.id }}"
+        class="suvedh-testimonials__list grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--1-col-tablet-down{% if show_mobile_slider %} slider slider--mobile grid--peek{% endif %}"
+        role="list"
+        aria-label="Customer reviews"
+      >
+        {%- for block in section.blocks -%}
+          <li
+            id="Slide-{{ section.id }}-{{ forloop.index }}"
+            class="suvedh-testimonial grid__item{% if show_mobile_slider %} slider__slide{% endif %}"
+            {{ block.shopify_attributes }}
+          >
+            <article class="suvedh-testimonial__card">
+              <div class="suvedh-testimonial__rating" role="img" aria-label="{{ block.settings.rating }} out of 5 stars">
+                {%- for star in (1..5) -%}
+                  <span class="suvedh-testimonial__star{% if star > block.settings.rating %} suvedh-testimonial__star--empty{% endif %}" aria-hidden="true">
+                    {{- 'icon-star.svg' | inline_asset_content -}}
+                  </span>
+                {%- endfor -%}
+              </div>
+
+              {%- if block.settings.review != blank -%}
+                <blockquote class="suvedh-testimonial__review">{{ block.settings.review }}</blockquote>
+              {%- endif -%}
+
+              {%- if block.settings.product_name != blank -%}
+                <p class="suvedh-testimonial__product">{{ block.settings.product_name | escape }}</p>
+              {%- endif -%}
+
+              <footer class="suvedh-testimonial__customer">
+                {%- if block.settings.customer_image != blank -%}
+                  {{
+                    block.settings.customer_image
+                    | image_url: width: 160
+                    | image_tag:
+                      class: 'suvedh-testimonial__image',
+                      loading: 'lazy',
+                      widths: '48, 96, 128, 160',
+                      sizes: '48px',
+                      alt: block.settings.customer_name
+                  }}
+                {%- endif -%}
+                <div>
+                  {%- if block.settings.customer_name != blank -%}
+                    <p class="suvedh-testimonial__name">{{ block.settings.customer_name | escape }}</p>
+                  {%- endif -%}
+                  {%- if block.settings.show_verified and section.settings.verified_label != blank -%}
+                    <span class="suvedh-testimonial__verified">
+                      <span class="svg-wrapper" aria-hidden="true">{{- 'icon-checkmark.svg' | inline_asset_content -}}</span>
+                      {{ section.settings.verified_label | escape }}
+                    </span>
+                  {%- endif -%}
+                </div>
+              </footer>
+            </article>
+          </li>
+        {%- endfor -%}
+      </ul>
+
+      {%- if show_mobile_slider -%}
+        <div class="slider-buttons small-hide medium-hide">
+          <button type="button" class="slider-button slider-button--prev" name="previous" aria-label="{{ 'general.slider.previous_slide' | t }}" aria-controls="Slider-{{ section.id }}">
+            <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
+          </button>
+          <div class="slider-counter caption">
+            <span class="slider-counter--current">1</span>
+            <span aria-hidden="true"> / </span>
+            <span class="visually-hidden">{{ 'general.slider.of' | t }}</span>
+            <span class="slider-counter--total">{{ section.blocks.size }}</span>
+          </div>
+          <button type="button" class="slider-button slider-button--next" name="next" aria-label="{{ 'general.slider.next_slide' | t }}" aria-controls="Slider-{{ section.id }}">
+            <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
+          </button>
+        </div>
+      {%- endif -%}
+    </slider-component>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SUVEDH testimonials",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 12,
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Loved by You" },
+    { "type": "richtext", "id": "intro", "label": "Introduction" },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "h2", "label": "Small" },
+        { "value": "h1", "label": "Medium" },
+        { "value": "h0", "label": "Large" }
+      ],
+      "default": "h1"
+    },
+    { "type": "range", "id": "columns_desktop", "min": 2, "max": 4, "step": 1, "label": "Desktop columns", "default": 3 },
+    { "type": "text", "id": "verified_label", "label": "Verified-buyer label", "default": "Verified buyer" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Top padding", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Bottom padding", "default": 64 }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        { "type": "text", "id": "customer_name", "label": "Customer name", "default": "Customer name" },
+        { "type": "richtext", "id": "review", "label": "Review", "default": "<p>Add a genuine customer review here.</p>" },
+        { "type": "range", "id": "rating", "min": 1, "max": 5, "step": 1, "label": "Rating", "default": 5 },
+        { "type": "image_picker", "id": "customer_image", "label": "Customer image" },
+        { "type": "text", "id": "product_name", "label": "Purchased product" },
+        { "type": "checkbox", "id": "show_verified", "label": "Show verified-buyer label", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SUVEDH testimonials",
+      "blocks": [
+        { "type": "testimonial" },
+        { "type": "testimonial" },
+        { "type": "testimonial" }
+      ]
+    }
+  ]
+}
+{% endschema %}

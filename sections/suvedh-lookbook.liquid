@@ -1,0 +1,282 @@
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #SuvedhLookbook-{{ section.id }} {
+    --lookbook-columns: {{ section.settings.columns_desktop }};
+    --lookbook-mobile-width: {{ section.settings.mobile_card_width }}%;
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  #SuvedhLookbook-{{ section.id }} .suvedh-lookbook__header {
+    max-width: 68rem;
+    margin: 0 auto 3rem;
+    text-align: center;
+  }
+
+  #SuvedhLookbook-{{ section.id }} .suvedh-lookbook__heading { margin: 0; }
+
+  #SuvedhLookbook-{{ section.id }} .suvedh-lookbook__intro {
+    margin-top: 1rem;
+    color: rgba(var(--color-foreground), 0.7);
+  }
+
+  #SuvedhLookbook-{{ section.id }} .suvedh-lookbook__intro > * { margin: 0; }
+
+  #SuvedhLookbook-{{ section.id }} .suvedh-lookbook__list {
+    display: flex;
+    gap: 1.6rem;
+    margin: 0;
+    padding: 0 1.5rem 1.5rem;
+    overflow-x: auto;
+    scroll-padding-left: 1.5rem;
+    scroll-snap-type: x mandatory;
+    list-style: none;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #SuvedhLookbook-{{ section.id }} .suvedh-lookbook__item {
+    flex: 0 0 var(--lookbook-mobile-width);
+    min-width: 0;
+    scroll-snap-align: start;
+  }
+
+  #SuvedhLookbook-{{ section.id }} .suvedh-lookbook__media-link,
+  #SuvedhLookbook-{{ section.id }} .suvedh-lookbook__media-wrap {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    background: rgba(var(--color-foreground), 0.04);
+    color: #fff;
+    text-decoration: none;
+  }
+
+  #SuvedhLookbook-{{ section.id }} .suvedh-lookbook__media--square { aspect-ratio: 1 / 1; }
+  #SuvedhLookbook-{{ section.id }} .suvedh-lookbook__media--portrait { aspect-ratio: 4 / 5; }
+  #SuvedhLookbook-{{ section.id }} .suvedh-lookbook__media--landscape { aspect-ratio: 4 / 3; }
+
+  #SuvedhLookbook-{{ section.id }} .suvedh-lookbook__image,
+  #SuvedhLookbook-{{ section.id }} .suvedh-lookbook__placeholder {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  #SuvedhLookbook-{{ section.id }} .suvedh-lookbook__media-link::after,
+  #SuvedhLookbook-{{ section.id }} .suvedh-lookbook__media-wrap::after {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.48), transparent 45%);
+    content: '';
+    pointer-events: none;
+  }
+
+  #SuvedhLookbook-{{ section.id }} .suvedh-lookbook__caption {
+    position: absolute;
+    z-index: 1;
+    right: 1.8rem;
+    bottom: 1.8rem;
+    left: 1.8rem;
+    margin: 0;
+    color: #fff;
+    font-family: var(--font-heading-family);
+    font-size: calc(var(--font-heading-scale) * 1.6rem);
+    letter-spacing: 0.04em;
+  }
+
+  #SuvedhLookbook-{{ section.id }} .suvedh-lookbook__product {
+    padding: 1.6rem 0.2rem 0;
+    text-align: center;
+  }
+
+  #SuvedhLookbook-{{ section.id }} .suvedh-lookbook__product-title {
+    display: inline-block;
+    margin-bottom: 0.6rem;
+    color: rgb(var(--color-foreground));
+    font-family: var(--font-heading-family);
+    font-size: calc(var(--font-heading-scale) * 1.5rem);
+    text-decoration: none;
+  }
+
+  #SuvedhLookbook-{{ section.id }} .suvedh-lookbook__product .price { justify-content: center; }
+
+  #SuvedhLookbook-{{ section.id }} a:focus-visible {
+    outline: 0.2rem solid rgb(var(--color-foreground));
+    outline-offset: 0.4rem;
+  }
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    #SuvedhLookbook-{{ section.id }} .suvedh-lookbook__media-link:hover .suvedh-lookbook__image {
+      transform: scale(1.045);
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    #SuvedhLookbook-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+
+    #SuvedhLookbook-{{ section.id }} .suvedh-lookbook__header { margin-bottom: 4rem; }
+
+    #SuvedhLookbook-{{ section.id }} .suvedh-lookbook__list {
+      display: grid;
+      grid-template-columns: repeat(var(--lookbook-columns), minmax(0, 1fr));
+      gap: 3rem 2rem;
+      padding: 0;
+      overflow: visible;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #SuvedhLookbook-{{ section.id }} .suvedh-lookbook__image { transition: none; }
+  }
+{%- endstyle -%}
+
+<section
+  id="SuvedhLookbook-{{ section.id }}"
+  class="suvedh-lookbook color-{{ section.settings.color_scheme }} gradient"
+  {% if section.settings.heading != blank %}aria-labelledby="SuvedhLookbookHeading-{{ section.id }}"{% else %}aria-label="Shoppable lookbook"{% endif %}
+>
+  <div class="page-width">
+    {%- if section.settings.heading != blank or section.settings.intro != blank -%}
+      <header class="suvedh-lookbook__header">
+        {%- if section.settings.heading != blank -%}
+          <h2 id="SuvedhLookbookHeading-{{ section.id }}" class="suvedh-lookbook__heading {{ section.settings.heading_size }} inline-richtext">
+            {{ section.settings.heading }}
+          </h2>
+        {%- endif -%}
+        {%- if section.settings.intro != blank -%}
+          <div class="suvedh-lookbook__intro rte">{{ section.settings.intro }}</div>
+        {%- endif -%}
+      </header>
+    {%- endif -%}
+
+    <ul class="suvedh-lookbook__list" role="list">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign selected_product = block.settings.product
+          assign destination = block.settings.link
+          if destination == blank and selected_product != blank
+            assign destination = selected_product.url
+          endif
+          assign image_alt = block.settings.image.alt | default: block.settings.caption
+          capture image_sizes
+            echo '(min-width: 1200px) calc((1200px - 100px) / '
+            echo section.settings.columns_desktop
+            echo '), (min-width: 750px) calc((100vw - 80px) / '
+            echo section.settings.columns_desktop
+            echo '), '
+            echo section.settings.mobile_card_width
+            echo 'vw'
+          endcapture
+        -%}
+        <li class="suvedh-lookbook__item" {{ block.shopify_attributes }}>
+          {%- if destination != blank -%}
+            <a class="suvedh-lookbook__media-link suvedh-lookbook__media--{{ block.settings.image_ratio }}" href="{{ destination }}">
+          {%- else -%}
+            <div class="suvedh-lookbook__media-wrap suvedh-lookbook__media--{{ block.settings.image_ratio }}">
+          {%- endif -%}
+
+            {%- if block.settings.image != blank -%}
+              {{
+                block.settings.image
+                | image_url: width: 1600
+                | image_tag:
+                  class: 'suvedh-lookbook__image',
+                  loading: 'lazy',
+                  widths: '320, 480, 640, 800, 1000, 1200, 1600',
+                  sizes: image_sizes,
+                  alt: image_alt
+              }}
+            {%- else -%}
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'suvedh-lookbook__placeholder placeholder-svg' }}
+            {%- endif -%}
+
+            {%- if block.settings.caption != blank -%}
+              <p class="suvedh-lookbook__caption">{{ block.settings.caption | escape }}</p>
+            {%- endif -%}
+
+          {%- if destination != blank -%}
+            </a>
+          {%- else -%}
+            </div>
+          {%- endif -%}
+
+          {%- if selected_product != blank -%}
+            <div class="suvedh-lookbook__product">
+              <a class="suvedh-lookbook__product-title" href="{{ selected_product.url }}">{{ selected_product.title | escape }}</a>
+              {% render 'price', product: selected_product, price_class: 'suvedh-lookbook__price' %}
+            </div>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SUVEDH shoppable lookbook",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 8,
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "The SUVEDH Lookbook" },
+    { "type": "richtext", "id": "intro", "label": "Introduction" },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "h2", "label": "Small" },
+        { "value": "h1", "label": "Medium" },
+        { "value": "h0", "label": "Large" }
+      ],
+      "default": "h1"
+    },
+    { "type": "range", "id": "columns_desktop", "min": 2, "max": 4, "step": 1, "label": "Desktop columns", "default": 3 },
+    { "type": "range", "id": "mobile_card_width", "min": 65, "max": 90, "step": 5, "unit": "%", "label": "Mobile card width", "default": 80 },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Top padding", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Bottom padding", "default": 64 }
+  ],
+  "blocks": [
+    {
+      "type": "look",
+      "name": "Look",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "caption", "label": "Caption" },
+        { "type": "product", "id": "product", "label": "Product" },
+        { "type": "url", "id": "link", "label": "Optional custom link", "info": "Overrides the product link on the image." },
+        {
+          "type": "select",
+          "id": "image_ratio",
+          "label": "Image ratio",
+          "options": [
+            { "value": "square", "label": "Square" },
+            { "value": "portrait", "label": "Portrait" },
+            { "value": "landscape", "label": "Landscape" }
+          ],
+          "default": "portrait"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SUVEDH shoppable lookbook",
+      "blocks": [
+        { "type": "look" },
+        { "type": "look" },
+        { "type": "look" }
+      ]
+    }
+  ]
+}
+{% endschema %}
