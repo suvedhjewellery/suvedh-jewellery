@@ -1,174 +1,367 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
-  "sections": {
-    "slideshow_3tTQiJ": {
-      "type": "slideshow",
-      "blocks": {
-        "slide_J3KebN": {
-          "type": "slide",
-          "settings": {
-            "image_overlay_opacity": 0,
-            "heading": "Image slide",
-            "heading_size": "h1",
-            "subheading": "Tell your brand's story through images",
-            "button_label": "Button label",
-            "link": "",
-            "button_style_secondary": false,
-            "show_text_box": true,
-            "box_align": "middle-center",
-            "text_alignment": "center",
-            "text_alignment_mobile": "center",
-            "color_scheme": "scheme-1"
-          }
-        },
-        "slide_YrXwjF": {
-          "type": "slide",
-          "settings": {
-            "image_overlay_opacity": 0,
-            "heading": "Image slide",
-            "heading_size": "h1",
-            "subheading": "Tell your brand's story through images",
-            "button_label": "Button label",
-            "link": "",
-            "button_style_secondary": false,
-            "show_text_box": true,
-            "box_align": "middle-center",
-            "text_alignment": "center",
-            "text_alignment_mobile": "center",
-            "color_scheme": ""
-          }
-        }
-      },
-      "block_order": [
-        "slide_J3KebN",
-        "slide_YrXwjF"
-      ],
-      "name": "t:sections.slideshow.presets.name",
-      "settings": {
-        "layout": "full_bleed",
-        "slide_height": "medium",
-        "slider_visual": "counter",
-        "auto_rotate": true,
-        "change_slides_speed": 5,
-        "image_behavior": "none",
-        "show_text_below": true,
-        "accessibility_info": "Slideshow about our brand"
-      }
-    },
-    "round_collection_xxLERC": {
-      "type": "round-collection",
-      "blocks": {
-        "collection_weqUpt": {
-          "type": "collection",
-          "settings": {
-            "collection": "",
-            "custom_title": ""
-          }
-        },
-        "collection_mATDxi": {
-          "type": "collection",
-          "settings": {
-            "collection": "",
-            "custom_title": ""
-          }
-        },
-        "collection_h6igmM": {
-          "type": "collection",
-          "settings": {
-            "collection": "",
-            "custom_title": ""
-          }
-        },
-        "collection_rfagBp": {
-          "type": "collection",
-          "settings": {
-            "collection": "",
-            "custom_title": ""
-          }
-        },
-        "collection_XAdpkf": {
-          "type": "collection",
-          "settings": {
-            "collection": "",
-            "custom_title": ""
-          }
-        },
-        "collection_dayPaE": {
-          "type": "collection",
-          "settings": {
-            "collection": "",
-            "custom_title": ""
-          }
-        }
-      },
-      "block_order": [
-        "collection_weqUpt",
-        "collection_mATDxi",
-        "collection_h6igmM",
-        "collection_rfagBp",
-        "collection_XAdpkf",
-        "collection_dayPaE"
-      ],
-      "name": "Collections Circle",
-      "settings": {
-        "heading": "Shop by Category",
-        "subheading": "Browse our collections",
-        "heading_alignment": "center",
-        "heading_size": 32,
-        "subheading_size": 16,
-        "heading_color": "",
-        "heading_spacing": 24,
-        "layout": "slider",
-        "grid_alignment": "center",
-        "max_width": 1200,
-        "gap": 28,
-        "mobile_gap": 16,
-        "padding_top": 40,
-        "padding_bottom": 40,
-        "bg_color": "",
-        "circle_size": 140,
-        "mobile_circle_size": 90,
-        "show_border": true,
-        "border_width": 3,
-        "border_style": "solid",
-        "border_color": "#333333",
-        "border_hover_color": "#000000",
-        "show_glow": false,
-        "glow_color": "#6366f1",
-        "glow_spread": 10,
-        "glow_blur": 14,
-        "glow_on_hover": true,
-        "glow_hover_color": "#818cf8",
-        "hover_lift": "-3",
-        "hover_scale": "1.05",
-        "image_zoom_hover": true,
-        "show_shadow": false,
-        "shadow_opacity": 15,
-        "show_title": true,
-        "title_size": 14,
-        "title_weight": "500",
-        "title_color": "",
-        "title_hover_color": "",
-        "title_spacing": 10,
-        "show_count": false,
-        "show_arrows": true,
-        "arrow_size": 40,
-        "arrow_bg": "#ffffff",
-        "arrow_color": "#111111",
-        "show_credit": true
-      }
-    }
-  },
-  "order": [
-    "slideshow_3tTQiJ",
-    "round_collection_xxLERC"
-  ]
+    "sections":  {
+                     "suvedh_hero_slider":  {
+                                                "type":  "suvedh-hero-slider",
+                                                "blocks":  {
+                                                               "slide_1":  {
+                                                                               "type":  "slide",
+                                                                               "settings":  {
+                                                                                                "overlay_opacity":  20,
+                                                                                                "text_color":  "#ffffff",
+                                                                                                "heading":  "Timeless silver, thoughtfully made",
+                                                                                                "heading_size":  "h0",
+                                                                                                "subheading":  "\u003cp\u003eDiscover authentic 92.5 sterling silver jewellery.\u003c/p\u003e",
+                                                                                                "button_label":  "Shop now",
+                                                                                                "button_link":  "shopify://collections/all",
+                                                                                                "button_style":  "primary",
+                                                                                                "text_alignment":  "center",
+                                                                                                "text_position":  "middle-center"
+                                                                                            }
+                                                                           },
+                                                               "slide_2":  {
+                                                                               "type":  "slide",
+                                                                               "settings":  {
+                                                                                                "overlay_opacity":  20,
+                                                                                                "text_color":  "#ffffff",
+                                                                                                "heading":  "Everyday elegance in sterling silver",
+                                                                                                "heading_size":  "h0",
+                                                                                                "subheading":  "\u003cp\u003eThoughtful pieces designed to be worn and loved every day.\u003c/p\u003e",
+                                                                                                "button_label":  "Explore the collection",
+                                                                                                "button_link":  "shopify://collections/all",
+                                                                                                "button_style":  "secondary",
+                                                                                                "text_alignment":  "center",
+                                                                                                "text_position":  "middle-center"
+                                                                                            }
+                                                                           }
+                                                           },
+                                                "block_order":  [
+                                                                    "slide_1",
+                                                                    "slide_2"
+                                                                ],
+                                                "settings":  {
+                                                                 "accessibility_label":  "Featured promotions",
+                                                                 "auto_rotate":  true,
+                                                                 "rotation_speed":  5,
+                                                                 "desktop_height":  660,
+                                                                 "mobile_height":  560,
+                                                                 "control_background":  "#ffffff",
+                                                                 "control_color":  "#1a1a1a"
+                                                             }
+                                            },
+                     "suvedh_shop_by_category":  {
+                                                     "type":  "suvedh-shop-by-category",
+                                                     "blocks":  {
+                                                                    "category_1":  {
+                                                                                       "type":  "category",
+                                                                                       "settings":  {
+                                                                                                        "heading":  "Rings",
+                                                                                                        "subtitle":  "",
+                                                                                                        "image_ratio":  "portrait",
+                                                                                                        "hover_animation":  "zoom"
+                                                                                                    }
+                                                                                   },
+                                                                    "category_2":  {
+                                                                                       "type":  "category",
+                                                                                       "settings":  {
+                                                                                                        "heading":  "Earrings",
+                                                                                                        "subtitle":  "",
+                                                                                                        "image_ratio":  "portrait",
+                                                                                                        "hover_animation":  "zoom"
+                                                                                                    }
+                                                                                   },
+                                                                    "category_3":  {
+                                                                                       "type":  "category",
+                                                                                       "settings":  {
+                                                                                                        "heading":  "Studs",
+                                                                                                        "subtitle":  "",
+                                                                                                        "image_ratio":  "portrait",
+                                                                                                        "hover_animation":  "zoom"
+                                                                                                    }
+                                                                                   },
+                                                                    "category_4":  {
+                                                                                       "type":  "category",
+                                                                                       "settings":  {
+                                                                                                        "heading":  "Necklaces",
+                                                                                                        "subtitle":  "",
+                                                                                                        "image_ratio":  "portrait",
+                                                                                                        "hover_animation":  "zoom"
+                                                                                                    }
+                                                                                   },
+                                                                    "category_5":  {
+                                                                                       "type":  "category",
+                                                                                       "settings":  {
+                                                                                                        "heading":  "Pendants",
+                                                                                                        "subtitle":  "",
+                                                                                                        "image_ratio":  "portrait",
+                                                                                                        "hover_animation":  "zoom"
+                                                                                                    }
+                                                                                   },
+                                                                    "category_6":  {
+                                                                                       "type":  "category",
+                                                                                       "settings":  {
+                                                                                                        "heading":  "Bracelets",
+                                                                                                        "subtitle":  "",
+                                                                                                        "image_ratio":  "portrait",
+                                                                                                        "hover_animation":  "zoom"
+                                                                                                    }
+                                                                                   },
+                                                                    "category_7":  {
+                                                                                       "type":  "category",
+                                                                                       "settings":  {
+                                                                                                        "heading":  "Gifts",
+                                                                                                        "subtitle":  "",
+                                                                                                        "image_ratio":  "portrait",
+                                                                                                        "hover_animation":  "zoom"
+                                                                                                    }
+                                                                                   }
+                                                                },
+                                                     "block_order":  [
+                                                                         "category_1",
+                                                                         "category_2",
+                                                                         "category_3",
+                                                                         "category_4",
+                                                                         "category_5",
+                                                                         "category_6",
+                                                                         "category_7"
+                                                                     ],
+                                                     "settings":  {
+                                                                      "heading":  "Shop by Category",
+                                                                      "intro":  "",
+                                                                      "heading_size":  "h1",
+                                                                      "columns_desktop":  4,
+                                                                      "mobile_card_width":  75,
+                                                                      "color_scheme":  "scheme-1",
+                                                                      "padding_top":  64,
+                                                                      "padding_bottom":  64
+                                                                  }
+                                                 },
+                     "suvedh_best_sellers":  {
+                                                 "type":  "suvedh-best-sellers",
+                                                 "settings":  {
+                                                                  "collection":  "",
+                                                                  "heading":  "SUVEDH Best Sellers",
+                                                                  "subtitle":  "\u003cp\u003eOur most-loved sterling silver pieces, chosen by you.\u003c/p\u003e",
+                                                                  "heading_size":  "h1",
+                                                                  "products_to_show":  8,
+                                                                  "columns_desktop":  4,
+                                                                  "image_ratio":  "square",
+                                                                  "show_secondary_image":  true,
+                                                                  "show_rating":  true,
+                                                                  "quick_add":  "standard",
+                                                                  "show_view_all":  true,
+                                                                  "view_all_label":  "View all best sellers",
+                                                                  "view_all_style":  "outline",
+                                                                  "color_scheme":  "scheme-1",
+                                                                  "padding_top":  64,
+                                                                  "padding_bottom":  64
+                                                              }
+                                             },
+                     "suvedh_benefits":  {
+                                             "type":  "suvedh-benefits",
+                                             "blocks":  {
+                                                            "benefit_1":  {
+                                                                              "type":  "benefit",
+                                                                              "settings":  {
+                                                                                               "icon":  "checkmark",
+                                                                                               "heading":  "Authentic 92.5 Silver",
+                                                                                               "text":  ""
+                                                                                           }
+                                                                          },
+                                                            "benefit_2":  {
+                                                                              "type":  "benefit",
+                                                                              "settings":  {
+                                                                                               "icon":  "lock",
+                                                                                               "heading":  "Secure Payments",
+                                                                                               "text":  ""
+                                                                                           }
+                                                                          },
+                                                            "benefit_3":  {
+                                                                              "type":  "benefit",
+                                                                              "settings":  {
+                                                                                               "icon":  "return",
+                                                                                               "heading":  "Easy Returns",
+                                                                                               "text":  ""
+                                                                                           }
+                                                                          },
+                                                            "benefit_4":  {
+                                                                              "type":  "benefit",
+                                                                              "settings":  {
+                                                                                               "icon":  "truck",
+                                                                                               "heading":  "Pan-India Delivery",
+                                                                                               "text":  ""
+                                                                                           }
+                                                                          }
+                                                        },
+                                             "block_order":  [
+                                                                 "benefit_1",
+                                                                 "benefit_2",
+                                                                 "benefit_3",
+                                                                 "benefit_4"
+                                                             ],
+                                             "settings":  {
+                                                              "heading":  "Why choose SUVEDH",
+                                                              "intro":  "",
+                                                              "heading_size":  "h1",
+                                                              "columns_desktop":  4,
+                                                              "text_alignment":  "center",
+                                                              "icon_size":  40,
+                                                              "show_separators":  true,
+                                                              "color_scheme":  "scheme-1",
+                                                              "padding_top":  40,
+                                                              "padding_bottom":  40
+                                                          }
+                                         },
+                     "suvedh_lookbook":  {
+                                             "type":  "suvedh-lookbook",
+                                             "blocks":  {
+                                                            "look_1":  {
+                                                                           "type":  "look",
+                                                                           "settings":  {
+                                                                                            "caption":  "Everyday silver",
+                                                                                            "product":  "",
+                                                                                            "link":  "",
+                                                                                            "image_ratio":  "portrait"
+                                                                                        }
+                                                                       },
+                                                            "look_2":  {
+                                                                           "type":  "look",
+                                                                           "settings":  {
+                                                                                            "caption":  "Made for moments",
+                                                                                            "product":  "",
+                                                                                            "link":  "",
+                                                                                            "image_ratio":  "portrait"
+                                                                                        }
+                                                                       },
+                                                            "look_3":  {
+                                                                           "type":  "look",
+                                                                           "settings":  {
+                                                                                            "caption":  "Modern heirlooms",
+                                                                                            "product":  "",
+                                                                                            "link":  "",
+                                                                                            "image_ratio":  "portrait"
+                                                                                        }
+                                                                       }
+                                                        },
+                                             "block_order":  [
+                                                                 "look_1",
+                                                                 "look_2",
+                                                                 "look_3"
+                                                             ],
+                                             "settings":  {
+                                                              "heading":  "The SUVEDH Lookbook",
+                                                              "intro":  "",
+                                                              "heading_size":  "h1",
+                                                              "columns_desktop":  3,
+                                                              "mobile_card_width":  80,
+                                                              "color_scheme":  "scheme-1",
+                                                              "padding_top":  64,
+                                                              "padding_bottom":  64
+                                                          }
+                                         },
+                     "suvedh_testimonials":  {
+                                                 "type":  "suvedh-testimonials",
+                                                 "blocks":  {
+                                                                "testimonial_1":  {
+                                                                                      "type":  "testimonial",
+                                                                                      "settings":  {
+                                                                                                       "customer_name":  "Customer name",
+                                                                                                       "review":  "\u003cp\u003eAdd a genuine customer review here.\u003c/p\u003e",
+                                                                                                       "rating":  5,
+                                                                                                       "product_name":  "",
+                                                                                                       "show_verified":  false
+                                                                                                   }
+                                                                                  },
+                                                                "testimonial_2":  {
+                                                                                      "type":  "testimonial",
+                                                                                      "settings":  {
+                                                                                                       "customer_name":  "Customer name",
+                                                                                                       "review":  "\u003cp\u003eAdd a genuine customer review here.\u003c/p\u003e",
+                                                                                                       "rating":  5,
+                                                                                                       "product_name":  "",
+                                                                                                       "show_verified":  false
+                                                                                                   }
+                                                                                  },
+                                                                "testimonial_3":  {
+                                                                                      "type":  "testimonial",
+                                                                                      "settings":  {
+                                                                                                       "customer_name":  "Customer name",
+                                                                                                       "review":  "\u003cp\u003eAdd a genuine customer review here.\u003c/p\u003e",
+                                                                                                       "rating":  5,
+                                                                                                       "product_name":  "",
+                                                                                                       "show_verified":  false
+                                                                                                   }
+                                                                                  }
+                                                            },
+                                                 "block_order":  [
+                                                                     "testimonial_1",
+                                                                     "testimonial_2",
+                                                                     "testimonial_3"
+                                                                 ],
+                                                 "settings":  {
+                                                                  "heading":  "Loved by You",
+                                                                  "intro":  "",
+                                                                  "heading_size":  "h1",
+                                                                  "columns_desktop":  3,
+                                                                  "verified_label":  "Verified buyer",
+                                                                  "color_scheme":  "scheme-1",
+                                                                  "padding_top":  64,
+                                                                  "padding_bottom":  64
+                                                              }
+                                             },
+                     "suvedh_faq":  {
+                                        "type":  "suvedh-faq",
+                                        "blocks":  {
+                                                       "question_1":  {
+                                                                          "type":  "question",
+                                                                          "settings":  {
+                                                                                           "question":  "Is SUVEDH jewellery made with genuine silver?",
+                                                                                           "answer":  "\u003cp\u003eOur silver jewellery is crafted in authentic 92.5 sterling silver.\u003c/p\u003e",
+                                                                                           "open_by_default":  true
+                                                                                       }
+                                                                      },
+                                                       "question_2":  {
+                                                                          "type":  "question",
+                                                                          "settings":  {
+                                                                                           "question":  "How should I care for my silver jewellery?",
+                                                                                           "answer":  "\u003cp\u003eStore each piece in a dry place and gently polish it with a soft cloth after wearing.\u003c/p\u003e",
+                                                                                           "open_by_default":  false
+                                                                                       }
+                                                                      },
+                                                       "question_3":  {
+                                                                          "type":  "question",
+                                                                          "settings":  {
+                                                                                           "question":  "Do you deliver across India?",
+                                                                                           "answer":  "\u003cp\u003eYes, SUVEDH offers delivery across India.\u003c/p\u003e",
+                                                                                           "open_by_default":  false
+                                                                                       }
+                                                                      }
+                                                   },
+                                        "block_order":  [
+                                                            "question_1",
+                                                            "question_2",
+                                                            "question_3"
+                                                        ],
+                                        "settings":  {
+                                                         "category_heading":  "",
+                                                         "heading":  "Frequently Asked Questions",
+                                                         "intro":  "",
+                                                         "heading_size":  "h1",
+                                                         "heading_alignment":  "center",
+                                                         "single_open":  true,
+                                                         "content_width":  90,
+                                                         "color_scheme":  "scheme-1",
+                                                         "padding_top":  64,
+                                                         "padding_bottom":  64
+                                                     }
+                                    }
+                 },
+    "order":  [
+                  "suvedh_hero_slider",
+                  "suvedh_shop_by_category",
+                  "suvedh_best_sellers",
+                  "suvedh_benefits",
+                  "suvedh_lookbook",
+                  "suvedh_testimonials",
+                  "suvedh_faq"
+              ]
 }
