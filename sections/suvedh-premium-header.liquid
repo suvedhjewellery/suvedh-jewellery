@@ -1,0 +1,67 @@
+{{ 'suvedh-premium-header.css' | asset_url | stylesheet_tag }}
+
+<header class="suvedh-header{% if request.page_type == 'index' %} suvedh-header--overlay{% endif %}" data-suvedh-header>
+  <div class="suvedh-header__inner page-width">
+    <button class="suvedh-header__mobile-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-menu-toggle>
+      <span></span><span></span>
+    </button>
+
+    <nav class="suvedh-header__nav" aria-label="Primary navigation">
+      <details class="suvedh-nav-item suvedh-nav-item--mega">
+        <summary>Women</summary>
+        <div class="suvedh-mega">
+          <div class="suvedh-mega__links">
+            <p>Shop Women</p>
+            <a href="{{ routes.collections_url }}/rings">Rings</a><a href="{{ routes.collections_url }}/studs">Studs</a><a href="{{ routes.collections_url }}/earrings">Earrings</a>
+            <a href="{{ routes.collections_url }}/necklaces">Necklaces</a><a href="{{ routes.collections_url }}/pendants">Pendants</a><a href="{{ routes.collections_url }}/bracelets">Bracelets</a>
+            <a href="{{ routes.collections_url }}/bangles">Bangles</a><a href="{{ routes.collections_url }}/anklets">Anklets</a><a href="{{ routes.collections_url }}/toe-rings">Toe Rings</a>
+            <a class="suvedh-mega__all" href="{{ routes.collections_url }}/women">View All</a>
+          </div>
+          <a class="suvedh-mega__feature" href="{{ routes.collections_url }}/women"><img src="{{ 'suvedh-hero-desktop.jpg' | asset_url }}" alt="SUVEDH fine silver jewellery for women" width="640" height="360" loading="lazy"><span>Fine silver, made for you</span></a>
+        </div>
+      </details>
+      <details class="suvedh-nav-item suvedh-nav-item--mega">
+        <summary>Kids</summary>
+        <div class="suvedh-mega">
+          <div class="suvedh-mega__links"><p>Shop Kids</p><a href="{{ routes.collections_url }}/kids-bracelets">Bracelets</a><a href="{{ routes.collections_url }}/kids-chains">Chains</a><a href="{{ routes.collections_url }}/kids-earrings">Earrings</a><a href="{{ routes.collections_url }}/kids-pendants">Pendants</a><a class="suvedh-mega__all" href="{{ routes.collections_url }}/kids-jewellery">View All</a></div>
+          <a class="suvedh-mega__feature" href="{{ routes.collections_url }}/kids-jewellery"><img src="{{ 'suvedh-hero-mobile.jpg' | asset_url }}" alt="SUVEDH kids silver jewellery" width="360" height="420" loading="lazy"><span>Little keepsakes</span></a>
+        </div>
+      </details>
+      <details class="suvedh-nav-item suvedh-nav-item--mega">
+        <summary>Collections</summary>
+        <div class="suvedh-mega">
+          <div class="suvedh-mega__links"><p>Curated Edits</p><a href="{{ routes.collections_url }}/everyday-silver">Everyday Silver</a><a href="{{ routes.collections_url }}/minimal">Minimal</a><a href="{{ routes.collections_url }}/office-wear">Office Wear</a><a href="{{ routes.collections_url }}/wedding">Wedding</a><a href="{{ routes.collections_url }}/trending">Trending</a><a class="suvedh-mega__all" href="{{ routes.collections_url }}/all">View All</a></div>
+          <a class="suvedh-mega__feature" href="{{ routes.collections_url }}/everyday-silver"><img src="{{ 'suvedh-hero-desktop.jpg' | asset_url }}" alt="SUVEDH everyday silver collection" width="640" height="360" loading="lazy"><span>The everyday edit</span></a>
+        </div>
+      </details>
+      <a href="{{ routes.collections_url }}/new-arrivals">New Arrivals</a><a href="{{ routes.collections_url }}/best-sellers">Best Sellers</a>
+      <details class="suvedh-nav-item suvedh-nav-item--mega">
+        <summary>Gifts</summary>
+        <div class="suvedh-mega"><div class="suvedh-mega__links"><p>Silver Gifts</p><a href="{{ routes.collections_url }}/gifts-under-999">Gifts under Rs. 999</a><a href="{{ routes.collections_url }}/gifts-under-1999">Gifts under Rs. 1999</a><a href="{{ routes.collections_url }}/anniversary-gifts">Anniversary</a><a href="{{ routes.collections_url }}/birthday-gifts">Birthday</a><a class="suvedh-mega__all" href="{{ routes.collections_url }}/silver-gifts">View All</a></div><a class="suvedh-mega__feature" href="{{ routes.collections_url }}/silver-gifts"><img src="{{ 'suvedh-hero-mobile.jpg' | asset_url }}" alt="SUVEDH silver gifts" width="360" height="420" loading="lazy"><span>Gifts with meaning</span></a></div>
+      </details>
+      <a href="/pages/about-us">About Us</a>
+    </nav>
+
+    <a class="suvedh-header__logo" href="{{ routes.root_url }}" aria-label="{{ shop.name }} home">
+      {% if settings.logo != blank %}{{ settings.logo | image_url: width: 600 | image_tag: widths: '180, 300, 450, 600', width: settings.logo_width, alt: shop.name, preload: true }}{% else %}<span>SUVEDH<small>FINE SILVER</small></span>{% endif %}
+    </a>
+
+    <div class="suvedh-header__actions">
+      <a href="{{ routes.search_url }}" aria-label="Search">{{ 'icon-search.svg' | inline_asset_content }}<span>Search</span></a>
+      {% if shop.customer_accounts_enabled %}<a href="{{ routes.account_url }}" aria-label="Account">{{ 'icon-account.svg' | inline_asset_content }}<span>Account</span></a>{% endif %}
+      <a href="/pages/wishlist" aria-label="Wishlist"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.4 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Wishlist</span></a>
+      <a href="{{ routes.cart_url }}" aria-label="Cart">{{ 'icon-cart-empty.svg' | inline_asset_content }}<span>Cart</span>{% if cart.item_count > 0 %}<b>{{ cart.item_count }}</b>{% endif %}</a>
+    </div>
+  </div>
+  <div class="suvedh-mobile-nav" data-mobile-nav>
+    <details><summary>Women</summary><div><a href="{{ routes.collections_url }}/rings">Rings</a><a href="{{ routes.collections_url }}/studs">Studs</a><a href="{{ routes.collections_url }}/earrings">Earrings</a><a href="{{ routes.collections_url }}/necklaces">Necklaces</a><a href="{{ routes.collections_url }}/pendants">Pendants</a><a href="{{ routes.collections_url }}/bracelets">Bracelets</a><a href="{{ routes.collections_url }}/bangles">Bangles</a><a href="{{ routes.collections_url }}/anklets">Anklets</a><a href="{{ routes.collections_url }}/toe-rings">Toe Rings</a><a href="{{ routes.collections_url }}/women">View All</a></div></details>
+    <details><summary>Kids</summary><div><a href="{{ routes.collections_url }}/kids-bracelets">Bracelets</a><a href="{{ routes.collections_url }}/kids-chains">Chains</a><a href="{{ routes.collections_url }}/kids-earrings">Earrings</a><a href="{{ routes.collections_url }}/kids-pendants">Pendants</a></div></details>
+    <details><summary>Collections</summary><div><a href="{{ routes.collections_url }}/everyday-silver">Everyday Silver</a><a href="{{ routes.collections_url }}/minimal">Minimal</a><a href="{{ routes.collections_url }}/office-wear">Office Wear</a><a href="{{ routes.collections_url }}/wedding">Wedding</a><a href="{{ routes.collections_url }}/trending">Trending</a></div></details>
+    <a href="{{ routes.collections_url }}/new-arrivals">New Arrivals</a><a href="{{ routes.collections_url }}/best-sellers">Best Sellers</a>
+    <details><summary>Gifts</summary><div><a href="{{ routes.collections_url }}/gifts-under-999">Under Rs. 999</a><a href="{{ routes.collections_url }}/gifts-under-1999">Under Rs. 1999</a><a href="{{ routes.collections_url }}/anniversary-gifts">Anniversary</a><a href="{{ routes.collections_url }}/birthday-gifts">Birthday</a></div></details><a href="/pages/about-us">About Us</a>
+  </div>
+</header>
+<script>
+(() => { const header=document.querySelector('[data-suvedh-header]'); if(!header)return; const toggle=header.querySelector('[data-menu-toggle]'); const setScrolled=()=>header.classList.toggle('is-scrolled',scrollY>24); setScrolled(); addEventListener('scroll',setScrolled,{passive:true}); toggle?.addEventListener('click',()=>{const open=header.classList.toggle('menu-open');toggle.setAttribute('aria-expanded',open);document.body.classList.toggle('overflow-hidden',open)}); header.querySelectorAll('.suvedh-nav-item').forEach(item=>{item.addEventListener('mouseenter',()=>item.open=true);item.addEventListener('mouseleave',()=>item.open=false)}); })();
+</script>
+{% schema %}{"name":"SUVEDH premium header","tag":"section","class":"suvedh-header-section","settings":[],"presets":[{"name":"SUVEDH premium header"}]}{% endschema %}

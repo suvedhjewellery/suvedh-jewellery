@@ -1,0 +1,33 @@
+<section id="RecentlyViewed-{{ section.id }}" class="suvedh-recently-viewed page-width" data-recently-viewed data-product-handle="{{ product.handle }}" data-section-id="{{ section.id }}" data-limit="{{ section.settings.products_to_show }}" style="--rv-top:{{ section.settings.padding_top }}px;--rv-bottom:{{ section.settings.padding_bottom }}px">
+  <h2 class="h1">{{ section.settings.heading }}</h2>
+  <ul class="grid product-grid grid--2-col-tablet-down grid--4-col-desktop" role="list" data-recently-list aria-live="polite"></ul>
+  <div class="recently-viewed__source" hidden>{% if product != blank %}<li class="grid__item">{% render 'card-product', card_product: product, media_aspect_ratio: 'square', show_secondary_image: true, show_rating: true, quick_add: 'standard', section_id: section.id %}</li>{% endif %}</div>
+</section>
+<style>.suvedh-recently-viewed{padding-top:var(--rv-top);padding-bottom:var(--rv-bottom)}.suvedh-recently-viewed>h2{margin:0 0 3rem;text-align:center;font-weight:300}.suvedh-recently-viewed:has([data-recently-list]:empty){display:none}</style>
+<script>
+(() => {
+  const root = document.getElementById('RecentlyViewed-{{ section.id }}');
+  if (!root || Shopify.designMode) return;
+  const key = 'suvedh-recently-viewed';
+  let handles = [];
+  try { handles = JSON.parse(localStorage.getItem(key) || '[]'); } catch (_) {}
+  const current = root.dataset.productHandle;
+  const previous = handles.filter((handle) => handle && handle !== current).slice(0, Number(root.dataset.limit));
+  localStorage.setItem(key, JSON.stringify([current, ...previous].slice(0, 8)));
+  if (!previous.length) return;
+  const load = async () => {
+    const list = root.querySelector('[data-recently-list]');
+    const cards = await Promise.all(previous.map(async (handle) => {
+      try {
+        const response = await fetch(`/products/${encodeURIComponent(handle)}?section_id=${root.dataset.sectionId}`);
+        if (!response.ok) return null;
+        const documentFragment = new DOMParser().parseFromString(await response.text(), 'text/html');
+        return documentFragment.querySelector('.recently-viewed__source > li');
+      } catch (_) { return null; }
+    }));
+    cards.filter(Boolean).forEach((card) => list.append(card));
+  };
+  if ('IntersectionObserver' in window) { const observer = new IntersectionObserver((entries) => { if (entries[0].isIntersecting) { observer.disconnect(); load(); } }, { rootMargin: '300px' }); observer.observe(root); } else { load(); }
+})();
+</script>
+{% schema %}{"name":"SUVEDH recently viewed","tag":"section","class":"section","settings":[{"type":"inline_richtext","id":"heading","label":"Heading","default":"Recently Viewed"},{"type":"range","id":"products_to_show","min":2,"max":6,"step":1,"label":"Products to show","default":4},{"type":"range","id":"padding_top","min":0,"max":100,"step":4,"unit":"px","label":"Top padding","default":48},{"type":"range","id":"padding_bottom","min":0,"max":100,"step":4,"unit":"px","label":"Bottom padding","default":64}],"presets":[{"name":"SUVEDH recently viewed"}]}{% endschema %}

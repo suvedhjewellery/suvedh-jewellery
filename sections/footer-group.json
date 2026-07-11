@@ -12,11 +12,11 @@
   "type": "footer",
   "sections": {
     "footer": {
-      "type": "footer",
+      "type": "suvedh-premium-footer",
       "settings": {
         "color_scheme": "scheme-1",
         "newsletter_enable": true,
-        "newsletter_heading": "Subscribe to our emails",
+        "newsletter_heading": "The Silver Edit - stories, styling and private previews",
         "enable_follow_on_shop": true,
         "show_social": true,
         "enable_country_selector": true,

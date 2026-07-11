@@ -97,3 +97,6 @@
 .collection__view-all a:not(.link) {
   margin-top: 1rem;
 }
+
+/* SUVEDH premium collection merchandising */
+.collection .facets-wrapper{margin-bottom:2.5rem;border-block:1px solid rgba(17,17,17,.1)}.facets__form{margin-bottom:0;padding-block:1.5rem}.facets__heading,.facet-filters__label,.product-count__text{color:#555;font-size:1.1rem;letter-spacing:.08em;text-transform:uppercase}.facet-filters__sort{font-size:1.25rem}.collection .product-grid{row-gap:4rem}.collection .card-wrapper{transition:transform .35s cubic-bezier(.22,1,.36,1)}.collection .card__media{overflow:hidden;border-radius:1.2rem}.collection .card__heading{font-weight:400}.collection .price{letter-spacing:.01em}@media(hover:hover){.collection .card-wrapper:hover{transform:translateY(-.4rem)}}@media(max-width:749px){.collection .facets-container{padding-top:1rem}.collection .product-grid{row-gap:3rem}.mobile-facets__open{font-size:1.2rem;letter-spacing:.08em;text-transform:uppercase}}

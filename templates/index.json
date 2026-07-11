@@ -8,11 +8,14 @@
                                                                                "settings":  {
                                                                                                 "overlay_opacity":  20,
                                                                                                 "text_color":  "#ffffff",
-                                                                                                "heading":  "Timeless silver, thoughtfully made",
+                                                                                                "eyebrow":  "SUVEDH",
+                                                                                                "heading":  "Crafted for Every Moment",
                                                                                                 "heading_size":  "h0",
-                                                                                                "subheading":  "\u003cp\u003eDiscover authentic 92.5 sterling silver jewellery.\u003c/p\u003e",
-                                                                                                "button_label":  "Shop now",
-                                                                                                "button_link":  "shopify://collections/all",
+                                                                                                "subheading":  "\u003cp\u003ePremium Fine Silver Jewellery\u003c/p\u003e",
+                                                                                                "button_label":  "Shop Women",
+                                                                                                "button_link":  "shopify://collections/women",
+                                                                                                "second_button_label":  "Explore Collection",
+                                                                                                "second_button_link":  "shopify://collections/all",
                                                                                                 "button_style":  "primary",
                                                                                                 "text_alignment":  "center",
                                                                                                 "text_position":  "middle-center"
@@ -56,7 +59,7 @@
                                                                                        "settings":  {
                                                                                                         "heading":  "Rings",
                                                                                                         "subtitle":  "",
-                                                                                                        "image_ratio":  "portrait",
+                                                                                                        "image_ratio":  "square",
                                                                                                         "hover_animation":  "zoom"
                                                                                                     }
                                                                                    },
@@ -65,7 +68,7 @@
                                                                                        "settings":  {
                                                                                                         "heading":  "Earrings",
                                                                                                         "subtitle":  "",
-                                                                                                        "image_ratio":  "portrait",
+                                                                                                        "image_ratio":  "square",
                                                                                                         "hover_animation":  "zoom"
                                                                                                     }
                                                                                    },
@@ -74,7 +77,7 @@
                                                                                        "settings":  {
                                                                                                         "heading":  "Studs",
                                                                                                         "subtitle":  "",
-                                                                                                        "image_ratio":  "portrait",
+                                                                                                        "image_ratio":  "square",
                                                                                                         "hover_animation":  "zoom"
                                                                                                     }
                                                                                    },
@@ -83,7 +86,7 @@
                                                                                        "settings":  {
                                                                                                         "heading":  "Necklaces",
                                                                                                         "subtitle":  "",
-                                                                                                        "image_ratio":  "portrait",
+                                                                                                        "image_ratio":  "square",
                                                                                                         "hover_animation":  "zoom"
                                                                                                     }
                                                                                    },
@@ -92,7 +95,7 @@
                                                                                        "settings":  {
                                                                                                         "heading":  "Pendants",
                                                                                                         "subtitle":  "",
-                                                                                                        "image_ratio":  "portrait",
+                                                                                                        "image_ratio":  "square",
                                                                                                         "hover_animation":  "zoom"
                                                                                                     }
                                                                                    },
@@ -101,19 +104,46 @@
                                                                                        "settings":  {
                                                                                                         "heading":  "Bracelets",
                                                                                                         "subtitle":  "",
-                                                                                                        "image_ratio":  "portrait",
+                                                                                                        "image_ratio":  "square",
                                                                                                         "hover_animation":  "zoom"
                                                                                                     }
                                                                                    },
                                                                     "category_7":  {
                                                                                        "type":  "category",
                                                                                        "settings":  {
-                                                                                                        "heading":  "Gifts",
+                                                                                                        "heading":  "Anklets",
                                                                                                         "subtitle":  "",
-                                                                                                        "image_ratio":  "portrait",
+                                                                                                        "image_ratio":  "square",
                                                                                                         "hover_animation":  "zoom"
                                                                                                     }
-                                                                                   }
+                                                                                   },
+                                                                    "category_8":  {
+                                                                                       "type":  "category",
+                                                                                       "settings":  {
+                                                                                                        "heading":  "Toe Rings",
+                                                                                                        "subtitle":  "",
+                                                                                                        "image_ratio":  "square",
+                                                                                                        "hover_animation":  "zoom"
+                                                                                                    }
+                                                                                   },
+                                                                    "category_9":  {
+                                                                                       "type":  "category",
+                                                                                       "settings":  {
+                                                                                                        "heading":  "Kids",
+                                                                                                        "subtitle":  "",
+                                                                                                        "image_ratio":  "square",
+                                                                                                        "hover_animation":  "zoom"
+                                                                                                    }
+                                                                                   },
+                                                                    "category_10":  {
+                                                                                        "type":  "category",
+                                                                                        "settings":  {
+                                                                                                         "heading":  "Gifts",
+                                                                                                         "subtitle":  "",
+                                                                                                         "image_ratio":  "square",
+                                                                                                         "hover_animation":  "zoom"
+                                                                                                     }
+                                                                                    }
                                                                 },
                                                      "block_order":  [
                                                                          "category_1",
@@ -122,13 +152,16 @@
                                                                          "category_4",
                                                                          "category_5",
                                                                          "category_6",
-                                                                         "category_7"
+                                                                         "category_7",
+                                                                         "category_8",
+                                                                         "category_9",
+                                                                         "category_10"
                                                                      ],
                                                      "settings":  {
                                                                       "heading":  "Shop by Category",
                                                                       "intro":  "",
                                                                       "heading_size":  "h1",
-                                                                      "columns_desktop":  4,
+                                                                      "columns_desktop":  6,
                                                                       "mobile_card_width":  75,
                                                                       "color_scheme":  "scheme-1",
                                                                       "padding_top":  64,
@@ -163,11 +196,19 @@
                                                                               "type":  "benefit",
                                                                               "settings":  {
                                                                                                "icon":  "checkmark",
-                                                                                               "heading":  "Authentic 92.5 Silver",
+                                                                                               "heading":  "Authentic Fine Silver",
                                                                                                "text":  ""
                                                                                            }
                                                                           },
                                                             "benefit_2":  {
+                                                                              "type":  "benefit",
+                                                                              "settings":  {
+                                                                                               "icon":  "heart",
+                                                                                               "heading":  "Hypoallergenic",
+                                                                                               "text":  ""
+                                                                                           }
+                                                                          },
+                                                            "benefit_3":  {
                                                                               "type":  "benefit",
                                                                               "settings":  {
                                                                                                "icon":  "lock",
@@ -175,7 +216,7 @@
                                                                                                "text":  ""
                                                                                            }
                                                                           },
-                                                            "benefit_3":  {
+                                                            "benefit_4":  {
                                                                               "type":  "benefit",
                                                                               "settings":  {
                                                                                                "icon":  "return",
@@ -183,11 +224,19 @@
                                                                                                "text":  ""
                                                                                            }
                                                                           },
-                                                            "benefit_4":  {
+                                                            "benefit_5":  {
                                                                               "type":  "benefit",
                                                                               "settings":  {
                                                                                                "icon":  "truck",
-                                                                                               "heading":  "Pan-India Delivery",
+                                                                                               "heading":  "Pan India Delivery",
+                                                                                               "text":  ""
+                                                                                           }
+                                                                          },
+                                                            "benefit_6":  {
+                                                                              "type":  "benefit",
+                                                                              "settings":  {
+                                                                                               "icon":  "checkmark",
+                                                                                               "heading":  "Hallmarked Jewellery",
                                                                                                "text":  ""
                                                                                            }
                                                                           }
@@ -196,13 +245,15 @@
                                                                  "benefit_1",
                                                                  "benefit_2",
                                                                  "benefit_3",
-                                                                 "benefit_4"
+                                                                 "benefit_4",
+                                                                 "benefit_5",
+                                                                 "benefit_6"
                                                              ],
                                              "settings":  {
-                                                              "heading":  "Why choose SUVEDH",
+                                                              "heading":  "Why Choose SUVEDH",
                                                               "intro":  "",
                                                               "heading_size":  "h1",
-                                                              "columns_desktop":  4,
+                                                              "columns_desktop":  3,
                                                               "text_alignment":  "center",
                                                               "icon_size":  40,
                                                               "show_separators":  true,
@@ -217,7 +268,7 @@
                                                             "look_1":  {
                                                                            "type":  "look",
                                                                            "settings":  {
-                                                                                            "caption":  "Everyday silver",
+                                                                                            "caption":  "Everyday Luminescence",
                                                                                             "product":  "",
                                                                                             "link":  "",
                                                                                             "image_ratio":  "portrait"
@@ -226,7 +277,7 @@
                                                             "look_2":  {
                                                                            "type":  "look",
                                                                            "settings":  {
-                                                                                            "caption":  "Made for moments",
+                                                                                            "caption":  "Modern Heirlooms",
                                                                                             "product":  "",
                                                                                             "link":  "",
                                                                                             "image_ratio":  "portrait"
@@ -235,7 +286,7 @@
                                                             "look_3":  {
                                                                            "type":  "look",
                                                                            "settings":  {
-                                                                                            "caption":  "Modern heirlooms",
+                                                                                            "caption":  "Silver After Dark",
                                                                                             "product":  "",
                                                                                             "link":  "",
                                                                                             "image_ratio":  "portrait"
@@ -353,15 +404,230 @@
                                                          "padding_top":  64,
                                                          "padding_bottom":  64
                                                      }
-                                    }
+                                    },
+                     "suvedh_new_arrivals":  {
+                                                 "type":  "suvedh-best-sellers",
+                                                 "settings":  {
+                                                                  "collection":  "new-arrivals",
+                                                                  "heading":  "New Arrivals",
+                                                                  "subtitle":  "\u003cp\u003eFreshly crafted fine silver, just for you.\u003c/p\u003e",
+                                                                  "heading_size":  "h1",
+                                                                  "products_to_show":  8,
+                                                                  "columns_desktop":  4,
+                                                                  "image_ratio":  "square",
+                                                                  "show_secondary_image":  true,
+                                                                  "show_rating":  true,
+                                                                  "quick_add":  "standard",
+                                                                  "show_view_all":  true,
+                                                                  "view_all_label":  "View all best sellers",
+                                                                  "view_all_style":  "outline",
+                                                                  "color_scheme":  "scheme-1",
+                                                                  "padding_top":  64,
+                                                                  "padding_bottom":  64
+                                                              }
+                                             },
+                     "suvedh_trending":  {
+                                             "type":  "suvedh-best-sellers",
+                                             "settings":  {
+                                                              "collection":  "trending",
+                                                              "heading":  "Trending Collection",
+                                                              "subtitle":  "\u003cp\u003eThe silver pieces everyone is loving right now.\u003c/p\u003e",
+                                                              "heading_size":  "h1",
+                                                              "products_to_show":  10,
+                                                              "columns_desktop":  4,
+                                                              "image_ratio":  "square",
+                                                              "show_secondary_image":  true,
+                                                              "show_rating":  true,
+                                                              "quick_add":  "standard",
+                                                              "show_view_all":  true,
+                                                              "view_all_label":  "View all best sellers",
+                                                              "view_all_style":  "outline",
+                                                              "color_scheme":  "scheme-1",
+                                                              "padding_top":  64,
+                                                              "padding_bottom":  64
+                                                          }
+                                         },
+                     "suvedh_occasions":  {
+                                              "type":  "suvedh-editorial-grid",
+                                              "blocks":  {
+                                                             "card_1":  {
+                                                                            "type":  "card",
+                                                                            "settings":  {
+                                                                                             "title":  "Office Wear",
+                                                                                             "link_label":  "Shop now",
+                                                                                             "link":  ""
+                                                                                         }
+                                                                        },
+                                                             "card_2":  {
+                                                                            "type":  "card",
+                                                                            "settings":  {
+                                                                                             "title":  "Wedding",
+                                                                                             "link_label":  "Shop now",
+                                                                                             "link":  ""
+                                                                                         }
+                                                                        },
+                                                             "card_3":  {
+                                                                            "type":  "card",
+                                                                            "settings":  {
+                                                                                             "title":  "Daily Wear",
+                                                                                             "link_label":  "Shop now",
+                                                                                             "link":  ""
+                                                                                         }
+                                                                        },
+                                                             "card_4":  {
+                                                                            "type":  "card",
+                                                                            "settings":  {
+                                                                                             "title":  "Festive",
+                                                                                             "link_label":  "Shop now",
+                                                                                             "link":  ""
+                                                                                         }
+                                                                        },
+                                                             "card_5":  {
+                                                                            "type":  "card",
+                                                                            "settings":  {
+                                                                                             "title":  "Party Wear",
+                                                                                             "link_label":  "Shop now",
+                                                                                             "link":  ""
+                                                                                         }
+                                                                        },
+                                                             "card_6":  {
+                                                                            "type":  "card",
+                                                                            "settings":  {
+                                                                                             "title":  "Gifting",
+                                                                                             "link_label":  "Shop now",
+                                                                                             "link":  ""
+                                                                                         }
+                                                                        }
+                                                         },
+                                              "block_order":  [
+                                                                  "card_1",
+                                                                  "card_2",
+                                                                  "card_3",
+                                                                  "card_4",
+                                                                  "card_5",
+                                                                  "card_6"
+                                                              ],
+                                              "settings":  {
+                                                               "heading":  "Shop by Occasion",
+                                                               "intro":  "",
+                                                               "heading_size":  "h1",
+                                                               "columns_desktop":  3,
+                                                               "color_scheme":  "scheme-1",
+                                                               "padding_top":  64,
+                                                               "padding_bottom":  64
+                                                           }
+                                          },
+                     "suvedh_instagram":  {
+                                              "type":  "suvedh-editorial-grid",
+                                              "blocks":  {
+                                                             "card_1":  {
+                                                                            "type":  "card",
+                                                                            "settings":  {
+                                                                                             "title":  "Silver Stories",
+                                                                                             "link_label":  "View on Instagram",
+                                                                                             "link":  ""
+                                                                                         }
+                                                                        },
+                                                             "card_2":  {
+                                                                            "type":  "card",
+                                                                            "settings":  {
+                                                                                             "title":  "Everyday Details",
+                                                                                             "link_label":  "View on Instagram",
+                                                                                             "link":  ""
+                                                                                         }
+                                                                        },
+                                                             "card_3":  {
+                                                                            "type":  "card",
+                                                                            "settings":  {
+                                                                                             "title":  "Made to Shine",
+                                                                                             "link_label":  "View on Instagram",
+                                                                                             "link":  ""
+                                                                                         }
+                                                                        },
+                                                             "card_4":  {
+                                                                            "type":  "card",
+                                                                            "settings":  {
+                                                                                             "title":  "Styled by You",
+                                                                                             "link_label":  "View on Instagram",
+                                                                                             "link":  ""
+                                                                                         }
+                                                                        },
+                                                             "card_5":  {
+                                                                            "type":  "card",
+                                                                            "settings":  {
+                                                                                             "title":  "Behind the Craft",
+                                                                                             "link_label":  "View on Instagram",
+                                                                                             "link":  ""
+                                                                                         }
+                                                                        },
+                                                             "card_6":  {
+                                                                            "type":  "card",
+                                                                            "settings":  {
+                                                                                             "title":  "The SUVEDH Edit",
+                                                                                             "link_label":  "View on Instagram",
+                                                                                             "link":  ""
+                                                                                         }
+                                                                        }
+                                                         },
+                                              "block_order":  [
+                                                                  "card_1",
+                                                                  "card_2",
+                                                                  "card_3",
+                                                                  "card_4",
+                                                                  "card_5",
+                                                                  "card_6"
+                                                              ],
+                                              "settings":  {
+                                                               "heading":  "Follow @SUVEDH",
+                                                               "intro":  "",
+                                                               "heading_size":  "h1",
+                                                               "columns_desktop":  6,
+                                                               "color_scheme":  "scheme-1",
+                                                               "padding_top":  64,
+                                                               "padding_bottom":  64
+                                                           }
+                                          },
+                     "suvedh_newsletter":  {
+                                               "type":  "newsletter",
+                                               "blocks":  {
+                                                              "heading":  {
+                                                                              "type":  "heading",
+                                                                              "settings":  {
+                                                                                               "heading":  "Become a part of SUVEDH.",
+                                                                                               "heading_size":  "h1"
+                                                                                           }
+                                                                          },
+                                                              "email":  {
+                                                                            "type":  "email_form",
+                                                                            "settings":  {
+
+                                                                                         }
+                                                                        }
+                                                          },
+                                               "block_order":  [
+                                                                   "heading",
+                                                                   "email"
+                                                               ],
+                                               "settings":  {
+                                                                "color_scheme":  "scheme-2",
+                                                                "full_width":  true,
+                                                                "padding_top":  64,
+                                                                "padding_bottom":  64
+                                                            }
+                                           }
                  },
     "order":  [
                   "suvedh_hero_slider",
                   "suvedh_shop_by_category",
+                  "suvedh_new_arrivals",
                   "suvedh_best_sellers",
+                  "suvedh_occasions",
                   "suvedh_benefits",
                   "suvedh_lookbook",
+                  "suvedh_trending",
                   "suvedh_testimonials",
+                  "suvedh_instagram",
+                  "suvedh_newsletter",
                   "suvedh_faq"
               ]
 }

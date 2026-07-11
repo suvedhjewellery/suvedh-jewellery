@@ -96,3 +96,6 @@
     min-height: 20rem;
   }
 }
+
+/* SUVEDH premium collection banner */
+.collection-hero{background:#fff}.collection-hero__inner{gap:clamp(3rem,6vw,8rem);padding-block:clamp(4rem,7vw,9rem)}.collection-hero__text-wrapper{display:flex;flex-direction:column;justify-content:center}.collection-hero__eyebrow{margin:0 0 1.3rem;color:#8e6b3d;font-size:1rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase}.collection-hero__title{margin:0;font-size:clamp(3.8rem,6vw,7rem);font-weight:300;letter-spacing:-.035em;line-height:1.05}.collection-hero__description{max-width:55rem;margin-top:2rem;color:#5e5e5e;font-size:1.5rem;line-height:1.75}.collection-hero__image-container{overflow:hidden;min-height:32rem;border:0;border-radius:1.6rem;background:#f7f7f7}.collection-hero__image-container img{transition:transform .8s cubic-bezier(.22,1,.36,1)}@media(hover:hover){.collection-hero__inner:hover .collection-hero__image-container img{transform:scale(1.018)}}@media(max-width:749px){.collection-hero__inner{padding-block:3.5rem}.collection-hero--with-image .collection-hero__inner{display:grid}.collection-hero__image-container{min-height:24rem;order:-1}.collection-hero__title{font-size:4rem}}
