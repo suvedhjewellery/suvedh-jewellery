@@ -12,7 +12,7 @@
     "logo": "shopify://shop_images/ChatGPT_Image_Jun_23_2026_05_45_03_PM_6fdbeb5c-743e-4a4f-90e5-21989b843705.png",
     "logo_width": 300,
     "type_header_font": "assistant_n4",
-    "heading_scale": 112,
+    "heading_scale": 110,
     "type_body_font": "assistant_n4",
     "body_scale": 100,
     "page_width": 1400,
@@ -261,7 +261,7 @@
         }
       },
       "type_header_font": "assistant_n4",
-      "heading_scale": 112,
+      "heading_scale": 110,
       "type_body_font": "assistant_n4",
       "body_scale": 100,
       "page_width": 1400,
