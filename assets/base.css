@@ -2582,6 +2582,24 @@ input[type='checkbox'] {
   --shop-avatar-size: 2.8rem;
 }
 
+.header__icon--account {
+  --shopify-account-avatar-size: 4.4rem;
+  --shopify-account-signed-in-avatar-size: 2.8rem;
+}
+
+.header__account-button {
+  display: flex;
+  width: 4.4rem;
+  height: 4.4rem;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
 details .header__icon-close {
   display: none;
 }

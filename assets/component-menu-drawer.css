@@ -201,6 +201,16 @@ details[open].menu-opening > .menu-drawer__submenu {
   margin-bottom: 0;
 }
 
+.menu-drawer__account-button {
+  display: flex;
+  padding: 0;
+  align-items: center;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
 .menu-drawer__utility-links:has(.menu-drawer__localization) .menu-drawer__account {
   margin: 0;
 }
