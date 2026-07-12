@@ -3643,11 +3643,6 @@ details-disclosure > details {
 }
 
 
-/* Move logo slightly left */
-.header__heading {
-    margin-left: -200px;
-}
-
 /* Premium Search Bar */
 
 .search__input.field__input {
