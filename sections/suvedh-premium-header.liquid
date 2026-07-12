@@ -48,7 +48,16 @@
 
     <div class="suvedh-header__actions">
       <a href="{{ routes.search_url }}" aria-label="Search">{{ 'icon-search.svg' | inline_asset_content }}<span>Search</span></a>
-      {% if shop.customer_accounts_enabled %}<a href="{{ routes.account_url }}" aria-label="Account">{{ 'icon-account.svg' | inline_asset_content }}<span>Account</span></a>{% endif %}
+      {% if shop.customer_accounts_enabled %}
+        <a
+          href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}"
+          aria-label="{% if customer %}My account{% else %}Sign in{% endif %}"
+          rel="nofollow"
+        >
+          {{ 'icon-account.svg' | inline_asset_content }}
+          <span>{% if customer %}{{ customer.first_name | default: 'My account' | escape }}{% else %}Sign in{% endif %}</span>
+        </a>
+      {% endif %}
       <a href="/pages/wishlist" aria-label="Wishlist"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.4 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Wishlist</span></a>
       <a href="{{ routes.cart_url }}" aria-label="Cart">{{ 'icon-cart-empty.svg' | inline_asset_content }}<span>Cart</span>{% if cart.item_count > 0 %}<b>{{ cart.item_count }}</b>{% endif %}</a>
     </div>

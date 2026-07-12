@@ -1,3 +1,45 @@
-<footer class="suvedh-premium-footer"><div class="page-width"><div class="suvedh-premium-footer__grid"><div><h2>SHOP</h2><a href="{{ routes.collections_url }}/women">Women</a><a href="{{ routes.collections_url }}/kids-jewellery">Kids</a><a href="{{ routes.collections_url }}">Collections</a><a href="{{ routes.collections_url }}/new-arrivals">New Arrivals</a><a href="{{ routes.collections_url }}/best-sellers">Best Sellers</a></div><div><h2>ABOUT</h2><a href="/pages/our-story">Our Story</a><a href="/pages/about-us">About SUVEDH</a><a href="/pages/contact">Contact</a></div><div><h2>CUSTOMER CARE</h2><a href="/policies/shipping-policy">Shipping Policy</a><a href="/policies/refund-policy">Return Policy</a><a href="/pages/jewellery-care">Jewellery Care</a><a href="/pages/size-guide">Size Guide</a><a href="/pages/faq">FAQ</a></div><div><h2>FOLLOW US</h2><a href="{{ settings.social_instagram_link | default: '#' }}">Instagram</a><a href="{{ settings.social_facebook_link | default: '#' }}">Facebook</a><a href="{{ settings.social_pinterest_link | default: '#' }}">Pinterest</a><a href="{{ settings.social_youtube_link | default: '#' }}">YouTube</a><div class="suvedh-premium-footer__newsletter"><p>Become a part of SUVEDH.</p>{% form 'customer', id: 'FooterNewsletter' %}<input type="hidden" name="contact[tags]" value="newsletter"><label class="visually-hidden" for="FooterEmail">Email</label><input id="FooterEmail" type="email" name="contact[email]" placeholder="Email address" required><button type="submit">Subscribe</button>{% endform %}</div></div></div><div class="suvedh-premium-footer__bottom"><span>© {{ 'now' | date: '%Y' }} SUVEDH Fine Silver</span><span>Authentic 92.5 sterling silver</span></div></div></footer>
-{% stylesheet %}.suvedh-premium-footer{padding:7rem 0 2.5rem;background:#111;color:#fff}.suvedh-premium-footer__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:4rem 2rem}.suvedh-premium-footer h2{margin:0 0 2rem;color:#b08d57;font-size:1.1rem;letter-spacing:.16em}.suvedh-premium-footer a{display:block;margin:.9rem 0;color:rgba(255,255,255,.76);font-size:1.35rem;text-decoration:none}.suvedh-premium-footer a:hover{color:#fff}.suvedh-premium-footer__newsletter{margin-top:2.5rem}.suvedh-premium-footer__newsletter p{font-size:1.7rem}.suvedh-premium-footer form{display:flex;border-bottom:1px solid rgba(255,255,255,.45)}.suvedh-premium-footer input{min-width:0;flex:1;padding:1.2rem 0;border:0;background:transparent;color:#fff}.suvedh-premium-footer button{border:0;background:transparent;color:#b08d57;font-size:1rem;letter-spacing:.12em;text-transform:uppercase}.suvedh-premium-footer__bottom{display:flex;justify-content:space-between;gap:2rem;margin-top:6rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.14);font-size:1.1rem;color:rgba(255,255,255,.55)}@media(min-width:750px){.suvedh-premium-footer__grid{grid-template-columns:repeat(4,1fr);gap:5rem}}{% endstylesheet %}
-{% schema %}{"name":"SUVEDH premium footer","tag":"section","class":"section-footer","settings":[],"presets":[{"name":"SUVEDH premium footer"}]}{% endschema %}
+<footer
+  class="suvedh-premium-footer"
+  style="--footer-background: {{ section.settings.footer_background }}; --footer-text: {{ section.settings.footer_text }}; --footer-link: {{ section.settings.footer_link }}; --footer-link-hover: {{ section.settings.footer_link_hover }}; --footer-border: {{ section.settings.footer_border }};"
+>
+  <div class="page-width">
+    <div class="suvedh-premium-footer__grid">
+      <div><h2>SHOP</h2><a href="{{ routes.collections_url }}/women">Women</a><a href="{{ routes.collections_url }}/kids-jewellery">Kids</a><a href="{{ routes.collections_url }}">Collections</a><a href="{{ routes.collections_url }}/new-arrivals">New Arrivals</a><a href="{{ routes.collections_url }}/best-sellers">Best Sellers</a></div>
+      <div><h2>ABOUT</h2><a href="/pages/our-story">Our Story</a><a href="/pages/about-us">About SUVEDH</a><a href="/pages/contact">Contact</a></div>
+      <div><h2>CUSTOMER CARE</h2><a href="/policies/shipping-policy">Shipping Policy</a><a href="/policies/refund-policy">Return Policy</a><a href="/pages/jewellery-care">Jewellery Care</a><a href="/pages/size-guide">Size Guide</a><a href="/pages/faq">FAQ</a></div>
+      <div><h2>FOLLOW US</h2><a href="{{ settings.social_instagram_link | default: '#' }}">Instagram</a><a href="{{ settings.social_facebook_link | default: '#' }}">Facebook</a><a href="{{ settings.social_pinterest_link | default: '#' }}">Pinterest</a><a href="{{ settings.social_youtube_link | default: '#' }}">YouTube</a><div class="suvedh-premium-footer__newsletter"><p>Become a part of SUVEDH.</p>{% form 'customer', id: 'FooterNewsletter' %}<input type="hidden" name="contact[tags]" value="newsletter"><label class="visually-hidden" for="FooterEmail">Email</label><input id="FooterEmail" type="email" name="contact[email]" placeholder="Email address" required><button type="submit">Subscribe</button>{% endform %}</div></div>
+    </div>
+    <div class="suvedh-premium-footer__bottom"><span>&copy; {{ 'now' | date: '%Y' }} SUVEDH Fine Silver</span><span>Authentic 92.5 sterling silver</span></div>
+  </div>
+</footer>
+{% stylesheet %}
+  .suvedh-premium-footer{padding:7rem 0 2.5rem;border-top:1px solid var(--footer-border);background:var(--footer-background);color:var(--footer-text)}
+  .suvedh-premium-footer__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4rem 2rem}
+  .suvedh-premium-footer h2{margin:0 0 2rem;color:var(--footer-text);font-size:1.1rem;letter-spacing:.16em}
+  .suvedh-premium-footer a{display:block;margin:.9rem 0;color:var(--footer-link);font-size:1.35rem;text-decoration:none;transition:color .2s ease}
+  .suvedh-premium-footer a:hover,.suvedh-premium-footer a:focus-visible{color:var(--footer-link-hover)}
+  .suvedh-premium-footer__newsletter{margin-top:2.5rem}
+  .suvedh-premium-footer__newsletter p{font-size:1.7rem}
+  .suvedh-premium-footer form{display:flex;border-bottom:1px solid var(--footer-border)}
+  .suvedh-premium-footer input{min-width:0;flex:1;padding:1.2rem 0;border:0;background:transparent;color:var(--footer-text)}
+  .suvedh-premium-footer input::placeholder{color:var(--footer-text);opacity:.7}
+  .suvedh-premium-footer button{border:0;background:transparent;color:var(--footer-link-hover);font-size:1rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+  .suvedh-premium-footer__bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem 2rem;margin-top:6rem;padding-top:2rem;border-top:1px solid var(--footer-border);font-size:1.1rem;color:var(--footer-text)}
+  @media(min-width:750px){.suvedh-premium-footer__grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:5rem}}
+  @media(max-width:749px){.suvedh-premium-footer{padding-top:5rem}.suvedh-premium-footer__bottom{margin-top:4rem}}
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "SUVEDH premium footer",
+  "tag": "section",
+  "class": "section-footer",
+  "settings": [
+    { "type": "color", "id": "footer_background", "label": "Background", "default": "#F8E8EC" },
+    { "type": "color", "id": "footer_text", "label": "Text", "default": "#3A2A2E" },
+    { "type": "color", "id": "footer_link", "label": "Links", "default": "#3A2A2E" },
+    { "type": "color", "id": "footer_link_hover", "label": "Link hover", "default": "#B08D57" },
+    { "type": "color", "id": "footer_border", "label": "Borders", "default": "#E8CDD5" }
+  ],
+  "presets": [{ "name": "SUVEDH premium footer" }]
+}
+{% endschema %}

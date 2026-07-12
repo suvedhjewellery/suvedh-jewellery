@@ -262,103 +262,6 @@
                                                               "padding_bottom":  40
                                                           }
                                          },
-                     "suvedh_lookbook":  {
-                                             "type":  "suvedh-lookbook",
-                                             "blocks":  {
-                                                            "look_1":  {
-                                                                           "type":  "look",
-                                                                           "settings":  {
-                                                                                            "caption":  "Everyday Luminescence",
-                                                                                            "product":  "",
-                                                                                            "link":  "",
-                                                                                            "image_ratio":  "portrait"
-                                                                                        }
-                                                                       },
-                                                            "look_2":  {
-                                                                           "type":  "look",
-                                                                           "settings":  {
-                                                                                            "caption":  "Modern Heirlooms",
-                                                                                            "product":  "",
-                                                                                            "link":  "",
-                                                                                            "image_ratio":  "portrait"
-                                                                                        }
-                                                                       },
-                                                            "look_3":  {
-                                                                           "type":  "look",
-                                                                           "settings":  {
-                                                                                            "caption":  "Silver After Dark",
-                                                                                            "product":  "",
-                                                                                            "link":  "",
-                                                                                            "image_ratio":  "portrait"
-                                                                                        }
-                                                                       }
-                                                        },
-                                             "block_order":  [
-                                                                 "look_1",
-                                                                 "look_2",
-                                                                 "look_3"
-                                                             ],
-                                             "settings":  {
-                                                              "heading":  "The SUVEDH Lookbook",
-                                                              "intro":  "",
-                                                              "heading_size":  "h1",
-                                                              "columns_desktop":  3,
-                                                              "mobile_card_width":  80,
-                                                              "color_scheme":  "scheme-1",
-                                                              "padding_top":  64,
-                                                              "padding_bottom":  64
-                                                          }
-                                         },
-                     "suvedh_testimonials":  {
-                                                 "type":  "suvedh-testimonials",
-                                                 "blocks":  {
-                                                                "testimonial_1":  {
-                                                                                      "type":  "testimonial",
-                                                                                      "settings":  {
-                                                                                                       "customer_name":  "Customer name",
-                                                                                                       "review":  "\u003cp\u003eAdd a genuine customer review here.\u003c/p\u003e",
-                                                                                                       "rating":  5,
-                                                                                                       "product_name":  "",
-                                                                                                       "show_verified":  false
-                                                                                                   }
-                                                                                  },
-                                                                "testimonial_2":  {
-                                                                                      "type":  "testimonial",
-                                                                                      "settings":  {
-                                                                                                       "customer_name":  "Customer name",
-                                                                                                       "review":  "\u003cp\u003eAdd a genuine customer review here.\u003c/p\u003e",
-                                                                                                       "rating":  5,
-                                                                                                       "product_name":  "",
-                                                                                                       "show_verified":  false
-                                                                                                   }
-                                                                                  },
-                                                                "testimonial_3":  {
-                                                                                      "type":  "testimonial",
-                                                                                      "settings":  {
-                                                                                                       "customer_name":  "Customer name",
-                                                                                                       "review":  "\u003cp\u003eAdd a genuine customer review here.\u003c/p\u003e",
-                                                                                                       "rating":  5,
-                                                                                                       "product_name":  "",
-                                                                                                       "show_verified":  false
-                                                                                                   }
-                                                                                  }
-                                                            },
-                                                 "block_order":  [
-                                                                     "testimonial_1",
-                                                                     "testimonial_2",
-                                                                     "testimonial_3"
-                                                                 ],
-                                                 "settings":  {
-                                                                  "heading":  "Loved by You",
-                                                                  "intro":  "",
-                                                                  "heading_size":  "h1",
-                                                                  "columns_desktop":  3,
-                                                                  "verified_label":  "Verified buyer",
-                                                                  "color_scheme":  "scheme-1",
-                                                                  "padding_top":  64,
-                                                                  "padding_bottom":  64
-                                                              }
-                                             },
                      "suvedh_faq":  {
                                         "type":  "suvedh-faq",
                                         "blocks":  {
@@ -405,27 +308,6 @@
                                                          "padding_bottom":  64
                                                      }
                                     },
-                     "suvedh_new_arrivals":  {
-                                                 "type":  "suvedh-best-sellers",
-                                                 "settings":  {
-                                                                  "collection":  "new-arrivals",
-                                                                  "heading":  "New Arrivals",
-                                                                  "subtitle":  "\u003cp\u003eFreshly crafted fine silver, just for you.\u003c/p\u003e",
-                                                                  "heading_size":  "h1",
-                                                                  "products_to_show":  8,
-                                                                  "columns_desktop":  4,
-                                                                  "image_ratio":  "square",
-                                                                  "show_secondary_image":  true,
-                                                                  "show_rating":  true,
-                                                                  "quick_add":  "standard",
-                                                                  "show_view_all":  true,
-                                                                  "view_all_label":  "View all best sellers",
-                                                                  "view_all_style":  "outline",
-                                                                  "color_scheme":  "scheme-1",
-                                                                  "padding_top":  64,
-                                                                  "padding_bottom":  64
-                                                              }
-                                             },
                      "suvedh_trending":  {
                                              "type":  "suvedh-best-sellers",
                                              "settings":  {
@@ -447,76 +329,6 @@
                                                               "padding_bottom":  64
                                                           }
                                          },
-                     "suvedh_occasions":  {
-                                              "type":  "suvedh-editorial-grid",
-                                              "blocks":  {
-                                                             "card_1":  {
-                                                                            "type":  "card",
-                                                                            "settings":  {
-                                                                                             "title":  "Office Wear",
-                                                                                             "link_label":  "Shop now",
-                                                                                             "link":  ""
-                                                                                         }
-                                                                        },
-                                                             "card_2":  {
-                                                                            "type":  "card",
-                                                                            "settings":  {
-                                                                                             "title":  "Wedding",
-                                                                                             "link_label":  "Shop now",
-                                                                                             "link":  ""
-                                                                                         }
-                                                                        },
-                                                             "card_3":  {
-                                                                            "type":  "card",
-                                                                            "settings":  {
-                                                                                             "title":  "Daily Wear",
-                                                                                             "link_label":  "Shop now",
-                                                                                             "link":  ""
-                                                                                         }
-                                                                        },
-                                                             "card_4":  {
-                                                                            "type":  "card",
-                                                                            "settings":  {
-                                                                                             "title":  "Festive",
-                                                                                             "link_label":  "Shop now",
-                                                                                             "link":  ""
-                                                                                         }
-                                                                        },
-                                                             "card_5":  {
-                                                                            "type":  "card",
-                                                                            "settings":  {
-                                                                                             "title":  "Party Wear",
-                                                                                             "link_label":  "Shop now",
-                                                                                             "link":  ""
-                                                                                         }
-                                                                        },
-                                                             "card_6":  {
-                                                                            "type":  "card",
-                                                                            "settings":  {
-                                                                                             "title":  "Gifting",
-                                                                                             "link_label":  "Shop now",
-                                                                                             "link":  ""
-                                                                                         }
-                                                                        }
-                                                         },
-                                              "block_order":  [
-                                                                  "card_1",
-                                                                  "card_2",
-                                                                  "card_3",
-                                                                  "card_4",
-                                                                  "card_5",
-                                                                  "card_6"
-                                                              ],
-                                              "settings":  {
-                                                               "heading":  "Shop by Occasion",
-                                                               "intro":  "",
-                                                               "heading_size":  "h1",
-                                                               "columns_desktop":  3,
-                                                               "color_scheme":  "scheme-1",
-                                                               "padding_top":  64,
-                                                               "padding_bottom":  64
-                                                           }
-                                          },
                      "suvedh_instagram":  {
                                               "type":  "suvedh-editorial-grid",
                                               "blocks":  {
@@ -619,15 +431,11 @@
     "order":  [
                   "suvedh_hero_slider",
                   "suvedh_shop_by_category",
-                  "suvedh_new_arrivals",
                   "suvedh_best_sellers",
-                  "suvedh_occasions",
                   "suvedh_benefits",
-                  "suvedh_lookbook",
                   "suvedh_trending",
-                  "suvedh_testimonials",
                   "suvedh_instagram",
-                  "suvedh_newsletter",
-                  "suvedh_faq"
+                  "suvedh_faq",
+                  "suvedh_newsletter"
               ]
 }
