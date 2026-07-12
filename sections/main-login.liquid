@@ -72,6 +72,10 @@
     {{ 'customer.login_page.title' | t }}
   </h1>
   <div>
+    <p class="login__register-prompt">
+      Don't have an account?
+      <a href="{{ routes.account_register_url }}">Sign up here.</a>
+    </p>
     {%- if recover_success == true -%}
       <h3 class="form__message" tabindex="-1" autofocus>
         <span class="svg-wrapper">
@@ -140,18 +144,20 @@
           </label>
         </div>
 
-        <a href="#recover">
-          {{ 'customer.login_page.forgot_password' | t }}
-        </a>
       {%- endif -%}
 
-      <button>
-        {{ 'customer.login_page.sign_in' | t }}
-      </button>
+      <div class="login__actions">
+        <button>
+          {{ 'customer.login_page.sign_in' | t }}
+        </button>
+        {%- if form.password_needed -%}
+          <a href="#recover">
+            {{ 'customer.login_page.forgot_password' | t }}
+          </a>
+        {%- endif -%}
+      </div>
 
-      <a href="{{ routes.account_register_url }}">
-        {{ 'customer.login_page.create_account' | t }}
-      </a>
+      <a class="login__return" href="{{ routes.root_url }}">Return to Store</a>
     {%- endform -%}
   </div>
 
