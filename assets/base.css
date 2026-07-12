@@ -2094,6 +2094,9 @@ input[type='checkbox'] {
   height: 100%;
 }
 
+.announcement-bar-section .utility-bar{min-height:3.4rem;background:var(--announcement-background,#f8e8ec);color:var(--announcement-text,#3a2a2e);border-color:var(--announcement-divider,#b08d57)}
+.announcement-bar-section .announcement-bar,.announcement-bar-section .announcement-bar__announcement,.announcement-bar-section .announcement-bar__link,.announcement-bar-section .announcement-bar__message,.announcement-bar-section .slider-button{color:var(--announcement-text,#3a2a2e)}
+
 .utility-bar--bottom-border {
   border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
 }
@@ -2246,10 +2249,10 @@ input[type='checkbox'] {
 
 .announcement-bar__message {
   text-align: center;
-  padding: 1rem 0;
+  padding: 0.7rem 0;
   margin: 0;
   letter-spacing: 0.1rem;
-  min-height: 3.8rem;
+  min-height: 3.4rem;
 }
 
 .announcement-bar-slider--fade-in-next .announcement-bar__message,
