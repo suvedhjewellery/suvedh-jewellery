@@ -22,7 +22,10 @@
     position: relative;
     flex: 0 0 100%;
     min-width: 0;
-    height: var(--hero-height-mobile);
+    height: clamp(520px, 145vw, var(--hero-height-mobile));
+    max-height: 680px;
+    overflow: hidden;
+    background: rgb(var(--color-background));
   }
   #SuvedhHero-{{ section.id }} .suvedh-hero__media,
   #SuvedhHero-{{ section.id }} .suvedh-hero__media picture,
@@ -32,7 +35,10 @@
     width: 100%;
     height: 100%;
   }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__image { object-fit: cover; }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__image {
+    object-fit: cover;
+    object-position: var(--hero-mobile-position, 50% 50%);
+  }
   #SuvedhHero-{{ section.id }} .suvedh-hero__placeholder { background: rgb(var(--color-background)); }
   #SuvedhHero-{{ section.id }} .suvedh-hero__overlay {
     position: absolute;
@@ -47,6 +53,8 @@
     display: flex;
     padding: 3rem 2rem 6rem;
     color: var(--slide-text-color);
+    overflow: hidden;
+    overflow-wrap: anywhere;
   }
   #SuvedhHero-{{ section.id }} .suvedh-hero__content--top-left { align-items: flex-start; justify-content: flex-start; }
   #SuvedhHero-{{ section.id }} .suvedh-hero__content--top-center { align-items: flex-start; justify-content: center; }
@@ -61,8 +69,21 @@
   #SuvedhHero-{{ section.id }} .suvedh-hero__box--left { text-align: left; }
   #SuvedhHero-{{ section.id }} .suvedh-hero__box--center { text-align: center; }
   #SuvedhHero-{{ section.id }} .suvedh-hero__box--right { text-align: right; }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__heading { margin: 0 0 1rem; color: inherit; }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__heading {
+    max-width: 90%;
+    margin: 0 0 1rem;
+    color: inherit;
+  }
   #SuvedhHero-{{ section.id }} .suvedh-hero__subheading { margin: 0 0 2rem; font-size: 1.6rem; }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__logo {
+    position: absolute;
+    z-index: 2;
+    top: 2rem;
+    left: 50%;
+    width: min(38vw, 18rem);
+    height: auto;
+    transform: translateX(-50%);
+  }
   #SuvedhHero-{{ section.id }} .suvedh-hero__controls {
     position: absolute;
     z-index: 2;
@@ -104,9 +125,38 @@
   #SuvedhHero-{{ section.id }} button:focus-visible,
   #SuvedhHero-{{ section.id }} a:focus-visible { outline: .2rem solid currentColor; outline-offset: .3rem; }
 
+  @media screen and (min-width: 750px) and (max-width: 989px) {
+    #SuvedhHero-{{ section.id }} .suvedh-hero__slide { height: 520px; max-height: none; }
+  }
   @media screen and (min-width: 750px) {
-    #SuvedhHero-{{ section.id }} .suvedh-hero__slide { height: var(--hero-height-desktop); }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__image {
+      object-position: var(--hero-desktop-position, 50% 50%);
+    }
     #SuvedhHero-{{ section.id }} .suvedh-hero__content { padding: 5rem 7rem 7rem; }
+  }
+  @media screen and (min-width: 990px) {
+    #SuvedhHero-{{ section.id }} .suvedh-hero__slide {
+      min-height: 620px;
+      height: var(--hero-height-desktop);
+      max-height: none;
+    }
+  }
+  @media screen and (max-width: 749px) {
+    #SuvedhHero-{{ section.id }} .suvedh-hero__content { padding: 3.2rem 2rem 4.8rem; }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__heading { font-size: clamp(28px, 8vw, 44px) !important; }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__subheading { font-size: clamp(14px, 3.8vw, 17px) !important; }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__box--mobile-left { text-align: left; }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__box--mobile-center { text-align: center; }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__box--mobile-right { text-align: right; }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__box--mobile-left .suvedh-hero__buttons { align-items: flex-start; }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__box--mobile-center .suvedh-hero__buttons { align-items: center; }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__box--mobile-right .suvedh-hero__buttons { align-items: flex-end; }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__box--mobile-center .suvedh-hero__heading { margin-inline: auto; }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__box--mobile-right .suvedh-hero__heading { margin-left: auto; }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__buttons { flex-direction: column; align-items: inherit; gap: 12px; }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__buttons .button { width: auto; max-width: 90%; min-width: 0; }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__controls { position: static; min-height: 6.8rem; padding: 1.2rem 1.5rem; }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__arrow { display: inline-flex !important; }
   }
   @media (prefers-reduced-motion: reduce) {
     #SuvedhHero-{{ section.id }} .suvedh-hero__track { transition: none; }
@@ -127,6 +177,8 @@
         {%- liquid
           assign desktop_image = block.settings.desktop_image
           assign mobile_image = block.settings.mobile_image | default: desktop_image
+          assign desktop_image = desktop_image | default: mobile_image
+          assign image_alt = mobile_image.alt | default: desktop_image.alt | default: section.settings.accessibility_label
           assign image_loading = 'lazy'
           assign image_priority = 'auto'
           if forloop.first
@@ -141,39 +193,45 @@
           aria-roledescription="slide"
           aria-label="{{ forloop.index }} of {{ forloop.length }}"
           aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"
+          style="--hero-desktop-position: {{ block.settings.desktop_position_x }}% {{ block.settings.desktop_position_y }}%; --hero-mobile-position: {{ block.settings.mobile_position_x }}% {{ block.settings.mobile_position_y }}%;"
           {{ block.shopify_attributes }}
         >
           <div class="suvedh-hero__media">
             {%- if desktop_image != blank -%}
               <picture>
-                {%- if mobile_image != blank -%}
-                  <source
-                    media="(max-width: 749px)"
-                    srcset="{{ mobile_image | image_url: width: 375 }} 375w, {{ mobile_image | image_url: width: 550 }} 550w, {{ mobile_image | image_url: width: 750 }} 750w, {{ mobile_image | image_url: width: 1100 }} 1100w"
-                    sizes="100vw"
-                  >
-                {%- endif -%}
-                {{ desktop_image | image_url: width: 2400 | image_tag: class: 'suvedh-hero__image', widths: '750, 1100, 1500, 1780, 2000, 2400', sizes: '100vw', loading: image_loading, fetchpriority: image_priority }}
+                <source media="(min-width: 750px)" srcset="{{ desktop_image | image_url: width: 750 }} 750w, {{ desktop_image | image_url: width: 1100 }} 1100w, {{ desktop_image | image_url: width: 1500 }} 1500w, {{ desktop_image | image_url: width: 2000 }} 2000w, {{ desktop_image | image_url: width: 2400 }} 2400w" sizes="100vw">
+                <source media="(max-width: 749px)" srcset="{{ mobile_image | image_url: width: 375 }} 375w, {{ mobile_image | image_url: width: 550 }} 550w, {{ mobile_image | image_url: width: 750 }} 750w, {{ mobile_image | image_url: width: 1100 }} 1100w" sizes="100vw">
+                <img
+                  class="suvedh-hero__image"
+                  src="{{ mobile_image | image_url: width: 750 }}"
+                  alt="{{ image_alt | escape }}"
+                  width="{{ mobile_image.width }}"
+                  height="{{ mobile_image.height }}"
+                  loading="{{ image_loading }}"
+                  fetchpriority="{{ image_priority }}"
+                >
               </picture>
             {%- else -%}
-              <picture>
-                <source media="(max-width: 749px)" srcset="{{ 'suvedh-hero-mobile.jpg' | asset_url }}">
-                <img class="suvedh-hero__image" src="{{ 'suvedh-hero-desktop.jpg' | asset_url }}" alt="Woman wearing SUVEDH fine silver jewellery" width="1920" height="820" loading="{{ image_loading }}" fetchpriority="{{ image_priority }}">
-              </picture>
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'suvedh-hero__placeholder' }}
             {%- endif -%}
           </div>
-          <div class="suvedh-hero__overlay" style="opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};"></div>
-          <div class="suvedh-hero__content suvedh-hero__content--{{ block.settings.text_position }}" style="--slide-text-color: {{ block.settings.text_color }};">
-            <div class="suvedh-hero__box suvedh-hero__box--{{ block.settings.text_alignment }}">
+          {%- if block.settings.show_overlay_logo and block.settings.overlay_logo != blank -%}
+            {{ block.settings.overlay_logo | image_url: width: 360 | image_tag: class: 'suvedh-hero__logo', loading: image_loading, widths: '120, 180, 240, 360', alt: block.settings.overlay_logo.alt }}
+          {%- endif -%}
+          {%- if block.settings.content_mode == 'overlay' -%}
+            <div class="suvedh-hero__overlay" style="opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};"></div>
+            <div class="suvedh-hero__content suvedh-hero__content--{{ block.settings.text_position }}" style="--slide-text-color: {{ block.settings.text_color }};">
+              <div class="suvedh-hero__box suvedh-hero__box--{{ block.settings.text_alignment }} suvedh-hero__box--mobile-{{ block.settings.mobile_text_alignment }}">
               {%- if block.settings.eyebrow != blank -%}<p class="suvedh-hero__eyebrow">{{ block.settings.eyebrow | escape }}</p>{%- endif -%}
               {%- if block.settings.heading != blank -%}<h2 class="suvedh-hero__heading {{ block.settings.heading_size }}">{{ block.settings.heading }}</h2>{%- endif -%}
               {%- if block.settings.subheading != blank -%}<div class="suvedh-hero__subheading rte">{{ block.settings.subheading }}</div>{%- endif -%}
               <div class="suvedh-hero__buttons">
                 {%- if block.settings.button_label != blank -%}<a class="button button--{{ block.settings.button_style }}" {% if block.settings.button_link != blank %}href="{{ block.settings.button_link }}"{% else %}role="link" aria-disabled="true"{% endif %}>{{ block.settings.button_label | escape }}</a>{%- endif -%}
                 {%- if block.settings.second_button_label != blank -%}<a class="button button--secondary" {% if block.settings.second_button_link != blank %}href="{{ block.settings.second_button_link }}"{% else %}role="link" aria-disabled="true"{% endif %}>{{ block.settings.second_button_label | escape }}</a>{%- endif -%}
+                </div>
               </div>
             </div>
-          </div>
+          {%- endif -%}
         </article>
       {%- endfor -%}
     </div>
@@ -227,7 +285,13 @@
         this.slides.forEach((slide, i) => {
           const active = i === this.index;
           slide.setAttribute('aria-hidden', String(!active));
-          slide.querySelectorAll('a, button').forEach((element) => element.toggleAttribute('tabindex', !active));
+          slide.querySelectorAll('a, button').forEach((element) => {
+            if (active) {
+              element.removeAttribute('tabindex');
+            } else {
+              element.setAttribute('tabindex', '-1');
+            }
+          });
         });
         this.dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === this.index)));
         if (userInitiated) { this.pause(); this.play(); }
@@ -258,8 +322,8 @@
     { "type": "text", "id": "accessibility_label", "label": "Accessibility label", "default": "Featured promotions" },
     { "type": "checkbox", "id": "auto_rotate", "label": "Auto-rotate slides", "default": true },
     { "type": "range", "id": "rotation_speed", "min": 3, "max": 10, "step": 1, "unit": "s", "label": "Rotation speed", "default": 5 },
-    { "type": "range", "id": "desktop_height", "min": 400, "max": 900, "step": 20, "unit": "px", "label": "Desktop height", "default": 660 },
-    { "type": "range", "id": "mobile_height", "min": 360, "max": 760, "step": 20, "unit": "px", "label": "Mobile height", "default": 560 },
+    { "type": "range", "id": "desktop_height", "min": 620, "max": 900, "step": 20, "unit": "px", "label": "Desktop height", "default": 660 },
+    { "type": "range", "id": "mobile_height", "min": 520, "max": 680, "step": 20, "unit": "px", "label": "Mobile height", "default": 620 },
     { "type": "color", "id": "control_background", "label": "Control background", "default": "#ffffff" },
     { "type": "color", "id": "control_color", "label": "Control color", "default": "#1a1a1a" }
   ],
@@ -270,6 +334,13 @@
       "settings": [
         { "type": "image_picker", "id": "desktop_image", "label": "Desktop image" },
         { "type": "image_picker", "id": "mobile_image", "label": "Mobile image" },
+        { "type": "range", "id": "desktop_position_x", "min": 0, "max": 100, "step": 5, "unit": "%", "label": "Desktop horizontal position", "default": 50 },
+        { "type": "range", "id": "desktop_position_y", "min": 0, "max": 100, "step": 5, "unit": "%", "label": "Desktop vertical position", "default": 50 },
+        { "type": "range", "id": "mobile_position_x", "min": 0, "max": 100, "step": 5, "unit": "%", "label": "Mobile horizontal position", "default": 50 },
+        { "type": "range", "id": "mobile_position_y", "min": 0, "max": 100, "step": 5, "unit": "%", "label": "Mobile vertical position", "default": 50 },
+        { "type": "select", "id": "content_mode", "label": "Content mode", "options": [{ "value": "image_only", "label": "Image only" }, { "value": "overlay", "label": "Image with overlay text" }], "default": "image_only" },
+        { "type": "checkbox", "id": "show_overlay_logo", "label": "Show overlay logo", "default": false },
+        { "type": "image_picker", "id": "overlay_logo", "label": "Overlay logo image" },
         { "type": "range", "id": "overlay_opacity", "min": 0, "max": 80, "step": 5, "unit": "%", "label": "Overlay opacity", "default": 20 },
         { "type": "color", "id": "text_color", "label": "Text color", "default": "#ffffff" },
         { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "SUVEDH" },
@@ -282,6 +353,7 @@
         { "type": "url", "id": "second_button_link", "label": "Second button link" },
         { "type": "select", "id": "button_style", "label": "Button style", "options": [{ "value": "primary", "label": "Primary" }, { "value": "secondary", "label": "Secondary" }], "default": "primary" },
         { "type": "select", "id": "text_alignment", "label": "Text alignment", "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" }], "default": "center" },
+        { "type": "select", "id": "mobile_text_alignment", "label": "Mobile text alignment", "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" }], "default": "center" },
         { "type": "select", "id": "text_position", "label": "Text position", "options": [{ "value": "top-left", "label": "Top left" }, { "value": "top-center", "label": "Top center" }, { "value": "top-right", "label": "Top right" }, { "value": "middle-left", "label": "Middle left" }, { "value": "middle-center", "label": "Middle center" }, { "value": "middle-right", "label": "Middle right" }, { "value": "bottom-left", "label": "Bottom left" }, { "value": "bottom-center", "label": "Bottom center" }, { "value": "bottom-right", "label": "Bottom right" }], "default": "middle-center" }
       ]
     }

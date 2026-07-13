@@ -6,6 +6,7 @@
                                                                "slide_1":  {
                                                                                "type":  "slide",
                                                                                "settings":  {
+                                                                                                "content_mode":  "image_only",
                                                                                                 "overlay_opacity":  20,
                                                                                                 "text_color":  "#ffffff",
                                                                                                 "eyebrow":  "SUVEDH",
@@ -24,6 +25,7 @@
                                                                "slide_2":  {
                                                                                "type":  "slide",
                                                                                "settings":  {
+                                                                                                "content_mode":  "image_only",
                                                                                                 "overlay_opacity":  20,
                                                                                                 "text_color":  "#ffffff",
                                                                                                 "heading":  "Everyday elegance in sterling silver",
@@ -46,7 +48,7 @@
                                                                  "auto_rotate":  true,
                                                                  "rotation_speed":  5,
                                                                  "desktop_height":  660,
-                                                                 "mobile_height":  560,
+                                                                 "mobile_height":  620,
                                                                  "control_background":  "#ffffff",
                                                                  "control_color":  "#1a1a1a"
                                                              }
