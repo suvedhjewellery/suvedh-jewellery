@@ -169,11 +169,27 @@
       width: 100%;
       height: var(--hero-height-mobile);
     }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__viewport,
+    #SuvedhHero-{{ section.id }} .suvedh-hero__track {
+      height: var(--hero-height-mobile);
+      overflow: hidden;
+    }
     #SuvedhHero-{{ section.id }} .suvedh-hero__image {
       object-fit: cover;
-      object-position: var(--hero-mobile-position);
+      object-position: center center;
     }
-    #SuvedhHero-{{ section.id }} .suvedh-hero__content { padding: 3.2rem 2rem 4.8rem; }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__content {
+      box-sizing: border-box;
+      max-height: 100%;
+      min-height: 0;
+      padding: 3.2rem 2rem 4.8rem;
+      overflow: hidden;
+    }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__box {
+      max-height: 100%;
+      min-height: 0;
+      overflow-y: auto;
+    }
     #SuvedhHero-{{ section.id }} .suvedh-hero__heading { font-size: clamp(28px, 8vw, 44px) !important; }
     #SuvedhHero-{{ section.id }} .suvedh-hero__subheading { font-size: clamp(14px, 3.8vw, 17px) !important; }
     #SuvedhHero-{{ section.id }} .suvedh-hero__box--mobile-left { text-align: left; }
@@ -354,7 +370,7 @@
     { "type": "checkbox", "id": "auto_rotate", "label": "Auto-rotate slides", "default": true },
     { "type": "range", "id": "rotation_speed", "min": 3, "max": 10, "step": 1, "unit": "s", "label": "Rotation speed", "default": 5 },
     { "type": "range", "id": "desktop_height", "min": 400, "max": 900, "step": 10, "unit": "px", "label": "Desktop hero height", "default": 650 },
-    { "type": "range", "id": "mobile_height", "label": "Mobile hero height", "min": 320, "max": 700, "step": 10, "default": 520, "unit": "px" },
+    { "type": "range", "id": "mobile_height", "label": "Mobile Hero Height", "min": 250, "max": 700, "step": 10, "default": 420, "unit": "px" },
     { "type": "select", "id": "desktop_image_position", "label": "Desktop image position", "options": [{ "value": "left center", "label": "Left" }, { "value": "center center", "label": "Center" }, { "value": "right center", "label": "Right" }, { "value": "center top", "label": "Top" }, { "value": "center bottom", "label": "Bottom" }], "default": "center center" },
     { "type": "select", "id": "mobile_image_position", "label": "Mobile image position", "options": [{ "value": "left center", "label": "Left" }, { "value": "center center", "label": "Center" }, { "value": "right center", "label": "Right" }, { "value": "center top", "label": "Top" }, { "value": "center bottom", "label": "Bottom" }], "default": "center center" },
     { "type": "color", "id": "control_background", "label": "Control background", "default": "#ffffff" },
