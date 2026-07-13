@@ -2,14 +2,33 @@
   #SuvedhHero-{{ section.id }} {
     --hero-height-mobile: {{ section.settings.mobile_height }}px;
     --hero-height-desktop: {{ section.settings.desktop_height }}px;
+    --hero-mobile-position: {{ section.settings.mobile_image_position }};
+    --hero-desktop-position: {{ section.settings.desktop_image_position }};
     --hero-control-background: {{ section.settings.control_background }};
     --hero-control-color: {{ section.settings.control_color }};
     position: relative;
     display: block;
+    width: 100%;
+    max-width: 100%;
     overflow: hidden;
   }
 
-  #SuvedhHero-{{ section.id }} .suvedh-hero__viewport { overflow: hidden; }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__viewport,
+  #SuvedhHero-{{ section.id }} .suvedh-hero__track,
+  #SuvedhHero-{{ section.id }} .suvedh-hero__slide,
+  #SuvedhHero-{{ section.id }} .suvedh-hero__media,
+  #SuvedhHero-{{ section.id }} .suvedh-hero__media picture,
+  #SuvedhHero-{{ section.id }} .suvedh-hero__image,
+  #SuvedhHero-{{ section.id }} .suvedh-hero__placeholder {
+    width: 100%;
+    max-width: 100%;
+  }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__viewport,
+  #SuvedhHero-{{ section.id }} .suvedh-hero__slide,
+  #SuvedhHero-{{ section.id }} .suvedh-hero__media,
+  #SuvedhHero-{{ section.id }} .suvedh-hero__media picture {
+    overflow: hidden;
+  }
   #SuvedhHero-{{ section.id }} .suvedh-hero__track {
     display: flex;
     margin: 0;
@@ -22,8 +41,7 @@
     position: relative;
     flex: 0 0 100%;
     min-width: 0;
-    height: clamp(520px, 145vw, var(--hero-height-mobile));
-    max-height: 680px;
+    height: var(--hero-height-mobile);
     overflow: hidden;
     background: rgb(var(--color-background));
   }
@@ -37,7 +55,7 @@
   }
   #SuvedhHero-{{ section.id }} .suvedh-hero__image {
     object-fit: cover;
-    object-position: var(--hero-mobile-position, 50% 50%);
+    object-position: var(--hero-mobile-position);
   }
   #SuvedhHero-{{ section.id }} .suvedh-hero__placeholder { background: rgb(var(--color-background)); }
   #SuvedhHero-{{ section.id }} .suvedh-hero__overlay {
@@ -125,23 +143,36 @@
   #SuvedhHero-{{ section.id }} button:focus-visible,
   #SuvedhHero-{{ section.id }} a:focus-visible { outline: .2rem solid currentColor; outline-offset: .3rem; }
 
-  @media screen and (min-width: 750px) and (max-width: 989px) {
-    #SuvedhHero-{{ section.id }} .suvedh-hero__slide { height: 520px; max-height: none; }
-  }
   @media screen and (min-width: 750px) {
+    #SuvedhHero-{{ section.id }} .suvedh-hero__slide {
+      height: var(--hero-height-desktop);
+    }
     #SuvedhHero-{{ section.id }} .suvedh-hero__image {
-      object-position: var(--hero-desktop-position, 50% 50%);
+      object-position: var(--hero-desktop-position);
     }
     #SuvedhHero-{{ section.id }} .suvedh-hero__content { padding: 5rem 7rem 7rem; }
   }
-  @media screen and (min-width: 990px) {
-    #SuvedhHero-{{ section.id }} .suvedh-hero__slide {
-      min-height: 620px;
-      height: var(--hero-height-desktop);
-      max-height: none;
-    }
-  }
   @media screen and (max-width: 749px) {
+    #SuvedhHero-{{ section.id }},
+    #SuvedhHero-{{ section.id }} .suvedh-hero__viewport,
+    #SuvedhHero-{{ section.id }} .suvedh-hero__track,
+    #SuvedhHero-{{ section.id }} .suvedh-hero__slide,
+    #SuvedhHero-{{ section.id }} .suvedh-hero__media,
+    #SuvedhHero-{{ section.id }} .suvedh-hero__media picture,
+    #SuvedhHero-{{ section.id }} .suvedh-hero__image {
+      max-width: 100%;
+    }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__slide,
+    #SuvedhHero-{{ section.id }} .suvedh-hero__media,
+    #SuvedhHero-{{ section.id }} .suvedh-hero__media picture,
+    #SuvedhHero-{{ section.id }} .suvedh-hero__image {
+      width: 100%;
+      height: var(--hero-height-mobile);
+    }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__image {
+      object-fit: cover;
+      object-position: var(--hero-mobile-position);
+    }
     #SuvedhHero-{{ section.id }} .suvedh-hero__content { padding: 3.2rem 2rem 4.8rem; }
     #SuvedhHero-{{ section.id }} .suvedh-hero__heading { font-size: clamp(28px, 8vw, 44px) !important; }
     #SuvedhHero-{{ section.id }} .suvedh-hero__subheading { font-size: clamp(14px, 3.8vw, 17px) !important; }
@@ -193,7 +224,7 @@
           aria-roledescription="slide"
           aria-label="{{ forloop.index }} of {{ forloop.length }}"
           aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"
-          style="--hero-desktop-position: {{ block.settings.desktop_position_x }}% {{ block.settings.desktop_position_y }}%; --hero-mobile-position: {{ block.settings.mobile_position_x }}% {{ block.settings.mobile_position_y }}%;"
+
           {{ block.shopify_attributes }}
         >
           <div class="suvedh-hero__media">
@@ -322,8 +353,10 @@
     { "type": "text", "id": "accessibility_label", "label": "Accessibility label", "default": "Featured promotions" },
     { "type": "checkbox", "id": "auto_rotate", "label": "Auto-rotate slides", "default": true },
     { "type": "range", "id": "rotation_speed", "min": 3, "max": 10, "step": 1, "unit": "s", "label": "Rotation speed", "default": 5 },
-    { "type": "range", "id": "desktop_height", "min": 620, "max": 900, "step": 20, "unit": "px", "label": "Desktop height", "default": 660 },
-    { "type": "range", "id": "mobile_height", "min": 520, "max": 680, "step": 20, "unit": "px", "label": "Mobile height", "default": 620 },
+    { "type": "range", "id": "desktop_height", "min": 400, "max": 900, "step": 10, "unit": "px", "label": "Desktop hero height", "default": 650 },
+    { "type": "range", "id": "mobile_height", "min": 320, "max": 750, "step": 10, "unit": "px", "label": "Mobile hero height", "default": 520 },
+    { "type": "select", "id": "desktop_image_position", "label": "Desktop image position", "options": [{ "value": "left center", "label": "Left" }, { "value": "center center", "label": "Center" }, { "value": "right center", "label": "Right" }, { "value": "center top", "label": "Top" }, { "value": "center bottom", "label": "Bottom" }], "default": "center center" },
+    { "type": "select", "id": "mobile_image_position", "label": "Mobile image position", "options": [{ "value": "left center", "label": "Left" }, { "value": "center center", "label": "Center" }, { "value": "right center", "label": "Right" }, { "value": "center top", "label": "Top" }, { "value": "center bottom", "label": "Bottom" }], "default": "center center" },
     { "type": "color", "id": "control_background", "label": "Control background", "default": "#ffffff" },
     { "type": "color", "id": "control_color", "label": "Control color", "default": "#1a1a1a" }
   ],
@@ -334,10 +367,7 @@
       "settings": [
         { "type": "image_picker", "id": "desktop_image", "label": "Desktop image" },
         { "type": "image_picker", "id": "mobile_image", "label": "Mobile image" },
-        { "type": "range", "id": "desktop_position_x", "min": 0, "max": 100, "step": 5, "unit": "%", "label": "Desktop horizontal position", "default": 50 },
-        { "type": "range", "id": "desktop_position_y", "min": 0, "max": 100, "step": 5, "unit": "%", "label": "Desktop vertical position", "default": 50 },
-        { "type": "range", "id": "mobile_position_x", "min": 0, "max": 100, "step": 5, "unit": "%", "label": "Mobile horizontal position", "default": 50 },
-        { "type": "range", "id": "mobile_position_y", "min": 0, "max": 100, "step": 5, "unit": "%", "label": "Mobile vertical position", "default": 50 },
+
         { "type": "select", "id": "content_mode", "label": "Content mode", "options": [{ "value": "image_only", "label": "Image only" }, { "value": "overlay", "label": "Image with overlay text" }], "default": "image_only" },
         { "type": "checkbox", "id": "show_overlay_logo", "label": "Show overlay logo", "default": false },
         { "type": "image_picker", "id": "overlay_logo", "label": "Overlay logo image" },
