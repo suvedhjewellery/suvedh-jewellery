@@ -1,4 +1,8 @@
 {%- style -%}
+  #shopify-section-{{ section.id }} .suvedh-hero-slider {
+    height: {{ section.settings.desktop_height }}px;
+  }
+
   #SuvedhHero-{{ section.id }} {
     --hero-height-mobile: {{ section.settings.mobile_height }}px;
     --hero-height-desktop: {{ section.settings.desktop_height }}px;
@@ -153,6 +157,10 @@
     #SuvedhHero-{{ section.id }} .suvedh-hero__content { padding: 5rem 7rem 7rem; }
   }
   @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .suvedh-hero-slider {
+      height: {{ section.settings.mobile_height }}px;
+    }
+
     #SuvedhHero-{{ section.id }},
     #SuvedhHero-{{ section.id }} .suvedh-hero__viewport,
     #SuvedhHero-{{ section.id }} .suvedh-hero__track,
@@ -218,7 +226,7 @@
   data-autoplay="{{ section.settings.auto_rotate }}"
   data-speed="{{ section.settings.rotation_speed | times: 1000 }}"
 >
-  <div class="suvedh-hero__viewport">
+  <div class="suvedh-hero-slider suvedh-hero__viewport">
     <div class="suvedh-hero__track" id="SuvedhHeroTrack-{{ section.id }}" aria-live="polite">
       {%- for block in section.blocks -%}
         {%- liquid
@@ -369,8 +377,8 @@
     { "type": "text", "id": "accessibility_label", "label": "Accessibility label", "default": "Featured promotions" },
     { "type": "checkbox", "id": "auto_rotate", "label": "Auto-rotate slides", "default": true },
     { "type": "range", "id": "rotation_speed", "min": 3, "max": 10, "step": 1, "unit": "s", "label": "Rotation speed", "default": 5 },
-    { "type": "range", "id": "desktop_height", "min": 400, "max": 900, "step": 10, "unit": "px", "label": "Desktop hero height", "default": 650 },
-    { "type": "range", "id": "mobile_height", "label": "Mobile Hero Height", "min": 250, "max": 700, "step": 10, "default": 420, "unit": "px" },
+    { "type": "range", "id": "desktop_height", "label": "Desktop hero height", "min": 400, "max": 900, "step": 10, "default": 650, "unit": "px" },
+    { "type": "range", "id": "mobile_height", "label": "Mobile hero height", "min": 280, "max": 700, "step": 10, "default": 480, "unit": "px" },
     { "type": "select", "id": "desktop_image_position", "label": "Desktop image position", "options": [{ "value": "left center", "label": "Left" }, { "value": "center center", "label": "Center" }, { "value": "right center", "label": "Right" }, { "value": "center top", "label": "Top" }, { "value": "center bottom", "label": "Bottom" }], "default": "center center" },
     { "type": "select", "id": "mobile_image_position", "label": "Mobile image position", "options": [{ "value": "left center", "label": "Left" }, { "value": "center center", "label": "Center" }, { "value": "right center", "label": "Right" }, { "value": "center top", "label": "Top" }, { "value": "center bottom", "label": "Bottom" }], "default": "center center" },
     { "type": "color", "id": "control_background", "label": "Control background", "default": "#ffffff" },
