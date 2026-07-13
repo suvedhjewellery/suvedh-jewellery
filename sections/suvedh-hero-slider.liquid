@@ -344,7 +344,7 @@
 
 {% schema %}
 {
-  "name": "SUVEDH hero slider",
+  "name": "SUVEDH Hero Slider",
   "tag": "section",
   "class": "section",
   "max_blocks": 5,
@@ -354,7 +354,7 @@
     { "type": "checkbox", "id": "auto_rotate", "label": "Auto-rotate slides", "default": true },
     { "type": "range", "id": "rotation_speed", "min": 3, "max": 10, "step": 1, "unit": "s", "label": "Rotation speed", "default": 5 },
     { "type": "range", "id": "desktop_height", "min": 400, "max": 900, "step": 10, "unit": "px", "label": "Desktop hero height", "default": 650 },
-    { "type": "range", "id": "mobile_height", "min": 320, "max": 750, "step": 10, "unit": "px", "label": "Mobile hero height", "default": 520 },
+    { "type": "range", "id": "mobile_height", "label": "Mobile hero height", "min": 320, "max": 700, "step": 10, "default": 520, "unit": "px" },
     { "type": "select", "id": "desktop_image_position", "label": "Desktop image position", "options": [{ "value": "left center", "label": "Left" }, { "value": "center center", "label": "Center" }, { "value": "right center", "label": "Right" }, { "value": "center top", "label": "Top" }, { "value": "center bottom", "label": "Bottom" }], "default": "center center" },
     { "type": "select", "id": "mobile_image_position", "label": "Mobile image position", "options": [{ "value": "left center", "label": "Left" }, { "value": "center center", "label": "Center" }, { "value": "right center", "label": "Right" }, { "value": "center top", "label": "Top" }, { "value": "center bottom", "label": "Bottom" }], "default": "center center" },
     { "type": "color", "id": "control_background", "label": "Control background", "default": "#ffffff" },
@@ -388,6 +388,6 @@
       ]
     }
   ],
-  "presets": [{ "name": "SUVEDH hero slider", "blocks": [{ "type": "slide" }, { "type": "slide" }] }]
+  "presets": [{ "name": "SUVEDH Hero Slider", "blocks": [{ "type": "slide" }, { "type": "slide" }] }]
 }
 {% endschema %}
