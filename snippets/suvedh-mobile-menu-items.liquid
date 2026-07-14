@@ -1,0 +1,76 @@
+{%- comment -%}
+  Mobile-only rendering of the custom navigation source used by
+  sections/suvedh-premium-header.liquid. Titles and URLs match its desktop nav.
+{%- endcomment -%}
+{%- capture women_links -%}
+Rings|{{ routes.collections_url }}/rings
+Studs|{{ routes.collections_url }}/studs
+Earrings|{{ routes.collections_url }}/earrings
+Necklaces|{{ routes.collections_url }}/necklaces
+Pendants|{{ routes.collections_url }}/pendants
+Bracelets|{{ routes.collections_url }}/bracelets
+Bangles|{{ routes.collections_url }}/bangles
+Anklets|{{ routes.collections_url }}/anklets
+Toe Rings|{{ routes.collections_url }}/toe-rings
+View All|{{ routes.collections_url }}/women
+{%- endcapture -%}
+{%- capture kids_links -%}
+Bracelets|{{ routes.collections_url }}/kids-bracelets
+Chains|{{ routes.collections_url }}/kids-chains
+Earrings|{{ routes.collections_url }}/kids-earrings
+Pendants|{{ routes.collections_url }}/kids-pendants
+View All|{{ routes.collections_url }}/kids-jewellery
+{%- endcapture -%}
+{%- capture collection_links -%}
+Everyday Silver|{{ routes.collections_url }}/everyday-silver
+Minimal|{{ routes.collections_url }}/minimal
+Office Wear|{{ routes.collections_url }}/office-wear
+Wedding|{{ routes.collections_url }}/wedding
+Trending|{{ routes.collections_url }}/trending
+View All|{{ routes.collections_url }}/all
+{%- endcapture -%}
+{%- capture gift_links -%}
+Gifts under Rs. 999|{{ routes.collections_url }}/gifts-under-999
+Gifts under Rs. 1999|{{ routes.collections_url }}/gifts-under-1999
+Anniversary|{{ routes.collections_url }}/anniversary-gifts
+Birthday|{{ routes.collections_url }}/birthday-gifts
+View All|{{ routes.collections_url }}/silver-gifts
+{%- endcapture -%}
+
+{%- assign parent_titles = 'Women|Kids|Collections|Gifts' | split: '|' -%}
+{%- for parent_title in parent_titles -%}
+  {%- case parent_title -%}
+    {%- when 'Women' -%}{%- assign child_rows = women_links | strip | newline_to_br | split: '<br />' -%}
+    {%- when 'Kids' -%}{%- assign child_rows = kids_links | strip | newline_to_br | split: '<br />' -%}
+    {%- when 'Collections' -%}{%- assign child_rows = collection_links | strip | newline_to_br | split: '<br />' -%}
+    {%- when 'Gifts' -%}{%- assign child_rows = gift_links | strip | newline_to_br | split: '<br />' -%}
+  {%- endcase -%}
+  <li>
+    <details id="Details-menu-drawer-suvedh-{{ parent_title | handleize }}">
+      <summary class="menu-drawer__menu-item list-menu__item link link--text focus-inset">
+        {{ parent_title | escape }}
+        <span class="svg-wrapper">{{- 'icon-arrow.svg' | inline_asset_content -}}</span>
+        <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
+      </summary>
+      <div class="menu-drawer__submenu has-submenu gradient motion-reduce" tabindex="-1">
+        <div class="menu-drawer__inner-submenu">
+          <button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
+            <span class="svg-wrapper">{{- 'icon-arrow.svg' | inline_asset_content -}}</span>
+            {{ parent_title | escape }}
+          </button>
+          <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+            {%- for child_row in child_rows -%}
+              {%- assign child_parts = child_row | strip | split: '|' -%}
+              <li><a href="{{ child_parts[1] }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset">{{ child_parts[0] | escape }}</a></li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      </div>
+    </details>
+  </li>
+  {%- if parent_title == 'Collections' -%}
+    <li><a href="{{ routes.collections_url }}/new-arrivals" class="menu-drawer__menu-item list-menu__item link link--text focus-inset">New Arrivals</a></li>
+    <li><a href="{{ routes.collections_url }}/best-sellers" class="menu-drawer__menu-item list-menu__item link link--text focus-inset">Best Sellers</a></li>
+  {%- endif -%}
+{%- endfor -%}
+<li><a href="/pages/about-us" class="menu-drawer__menu-item list-menu__item link link--text focus-inset">About Us</a></li>

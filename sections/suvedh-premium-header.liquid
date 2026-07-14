@@ -3,9 +3,7 @@
 
 <header class="suvedh-header header-wrapper color-{{ section.settings.color_scheme }} gradient" data-suvedh-header>
   <div class="suvedh-header__inner page-width">
-    {%- if section.settings.menu != blank -%}
-      {% render 'header-drawer' %}
-    {%- endif -%}
+    {% render 'header-drawer', suvedh_custom_navigation: true %}
 
     <nav class="suvedh-header__nav" aria-label="Primary navigation">
       <details class="suvedh-nav-item suvedh-nav-item--mega">
