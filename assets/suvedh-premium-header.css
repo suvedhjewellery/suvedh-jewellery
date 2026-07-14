@@ -1,5 +1,5 @@
 .suvedh-header-section{position:sticky;top:0;z-index:40;background:#fff}
-.suvedh-header{width:100%;background:#fff;color:#111;border-bottom:1px solid #ececec;transition:box-shadow .25s ease}
+.suvedh-header{position:relative;width:100%;max-width:100%;background:#fff;color:#111;border-bottom:1px solid #ececec;transition:box-shadow .25s ease;box-sizing:border-box}
 .suvedh-header.is-scrolled{box-shadow:0 2px 10px rgba(0,0,0,.05)}
 .suvedh-header__inner{display:grid;grid-template-columns:clamp(22rem,16vw,24rem) minmax(0,1fr) auto;grid-template-areas:'logo navigation actions';align-items:center;min-height:8rem;column-gap:clamp(3rem,2.5vw,4rem)}
 .suvedh-header__logo{grid-area:logo;display:flex;align-items:center;justify-content:flex-start;width:100%;color:#111;text-decoration:none}
@@ -14,3 +14,13 @@
 @media(max-width:1199px){.suvedh-header__inner{grid-template-columns:18rem 1fr auto}.suvedh-header__logo img{width:18rem}.suvedh-header__nav{gap:1.4rem}.suvedh-header__nav>a,.suvedh-nav-item>summary{font-size:1.15rem}}
 @media(max-width:989px){.suvedh-header__inner{grid-template-columns:18rem 1fr auto;grid-template-areas:'logo . actions';min-height:6.8rem}.suvedh-header__nav{display:none}.suvedh-header__logo img{width:18rem}.suvedh-header__actions{gap:1.8rem}.suvedh-header__actions a[aria-label="Wishlist"],.suvedh-header__actions a[aria-label="Account"]{display:none}}
 @media(max-width:749px){.suvedh-header__inner{grid-template-columns:minmax(14rem,15rem) 1fr auto;min-height:6.4rem;column-gap:1.5rem}.suvedh-header__logo img{width:clamp(14rem,38vw,15rem)}.suvedh-header__actions{gap:1.8rem}}
+
+/* Dawn menu drawer integration for the custom header. */
+.suvedh-header header-drawer{display:none}
+.suvedh-header .menu-drawer-container{display:flex}
+.suvedh-header .list-menu{margin:0;padding:0;list-style:none}
+.suvedh-header .menu-drawer__menu-item{box-sizing:border-box}
+.suvedh-header .header__icon--menu{width:4.4rem;height:4.4rem;margin:0}
+.suvedh-header .header__icon--menu .icon{display:block;width:2rem;height:2rem}
+@media(max-width:989px){.suvedh-header__inner{grid-template-columns:4.4rem minmax(0,1fr) auto;grid-template-areas:'toggle logo actions';width:100%;max-width:100%;min-height:6.8rem;column-gap:.8rem;box-sizing:border-box}.suvedh-header header-drawer{display:block;grid-area:toggle;justify-self:start}.suvedh-header__nav{display:none}.suvedh-header__logo{justify-self:center;justify-content:center;width:auto;max-width:clamp(13rem,38vw,19rem);min-width:0}.suvedh-header__logo img{width:auto;max-width:100%;max-height:5.2rem}.suvedh-header__actions{gap:0;min-width:0}.suvedh-header__actions>a,.suvedh-header__account-button{justify-content:center;width:4.4rem;min-width:4.4rem;height:4.4rem}.suvedh-header__actions a[aria-label="Wishlist"]{display:none}.suvedh-header__actions svg,.suvedh-header__account-button svg{width:2rem;height:2rem}.suvedh-header .menu-drawer{max-width:100vw}.suvedh-header .menu-drawer__navigation-container{box-sizing:border-box}}
+@media(max-width:749px){.suvedh-header__inner{grid-template-columns:4.4rem minmax(0,1fr) auto;min-height:6.4rem;padding-right:1rem;padding-left:1rem;column-gap:.2rem}.suvedh-header__logo{max-width:clamp(11rem,34vw,15rem)}.suvedh-header__actions>a,.suvedh-header__account-button{width:4.2rem;min-width:4.2rem;height:4.4rem}}

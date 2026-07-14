@@ -15,6 +15,7 @@
     width: 100%;
     max-width: 100%;
     overflow: hidden;
+    box-sizing: border-box;
   }
 
   #SuvedhHero-{{ section.id }} .suvedh-hero__viewport,
@@ -26,6 +27,7 @@
   #SuvedhHero-{{ section.id }} .suvedh-hero__placeholder {
     width: 100%;
     max-width: 100%;
+    box-sizing: border-box;
   }
   #SuvedhHero-{{ section.id }} .suvedh-hero__viewport,
   #SuvedhHero-{{ section.id }} .suvedh-hero__slide,
@@ -183,8 +185,11 @@
       overflow: hidden;
     }
     #SuvedhHero-{{ section.id }} .suvedh-hero__image {
-      object-fit: cover;
-      object-position: center center;
+      object-fit: var(--hero-mobile-fit);
+      object-position: var(--hero-mobile-object-position);
+    }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__media {
+      background-color: var(--hero-mobile-background);
     }
     #SuvedhHero-{{ section.id }} .suvedh-hero__content {
       box-sizing: border-box;
@@ -233,6 +238,8 @@
           assign desktop_image = block.settings.desktop_image
           assign mobile_image = block.settings.mobile_image | default: desktop_image
           assign desktop_image = desktop_image | default: mobile_image
+          assign mobile_image_fit = block.settings.mobile_image_fit | default: 'contain'
+          assign mobile_background = block.settings.mobile_background | default: '#F9E9EC'
           assign image_alt = mobile_image.alt | default: desktop_image.alt | default: section.settings.accessibility_label
           assign image_loading = 'lazy'
           assign image_priority = 'auto'
@@ -242,26 +249,27 @@
           endif
         -%}
         <article
-          class="suvedh-hero__slide"
+          class="suvedh-hero__slide suvedh-hero__slide--mobile-{{ mobile_image_fit }}"
           id="SuvedhHeroSlide-{{ section.id }}-{{ forloop.index }}"
           role="group"
           aria-roledescription="slide"
           aria-label="{{ forloop.index }} of {{ forloop.length }}"
           aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"
-
+          style="--hero-mobile-fit: {{ mobile_image_fit }}; --hero-mobile-background: {{ mobile_background }}; --hero-mobile-object-position: {% if mobile_image_fit == 'cover' %}{{ block.settings.mobile_horizontal_position | default: 'center' }} {{ block.settings.mobile_vertical_position | default: 'center' }}{% else %}center center{% endif %};"
           {{ block.shopify_attributes }}
         >
           <div class="suvedh-hero__media">
             {%- if desktop_image != blank -%}
               <picture>
-                <source media="(min-width: 750px)" srcset="{{ desktop_image | image_url: width: 750 }} 750w, {{ desktop_image | image_url: width: 1100 }} 1100w, {{ desktop_image | image_url: width: 1500 }} 1500w, {{ desktop_image | image_url: width: 2000 }} 2000w, {{ desktop_image | image_url: width: 2400 }} 2400w" sizes="100vw">
                 <source media="(max-width: 749px)" srcset="{{ mobile_image | image_url: width: 375 }} 375w, {{ mobile_image | image_url: width: 550 }} 550w, {{ mobile_image | image_url: width: 750 }} 750w, {{ mobile_image | image_url: width: 1100 }} 1100w" sizes="100vw">
                 <img
                   class="suvedh-hero__image"
-                  src="{{ mobile_image | image_url: width: 750 }}"
+                  src="{{ desktop_image | image_url: width: 1500 }}"
+                  srcset="{{ desktop_image | image_url: width: 750 }} 750w, {{ desktop_image | image_url: width: 1100 }} 1100w, {{ desktop_image | image_url: width: 1500 }} 1500w, {{ desktop_image | image_url: width: 2000 }} 2000w, {{ desktop_image | image_url: width: 2400 }} 2400w"
+                  sizes="100vw"
                   alt="{{ image_alt | escape }}"
-                  width="{{ mobile_image.width }}"
-                  height="{{ mobile_image.height }}"
+                  width="{{ desktop_image.width }}"
+                  height="{{ desktop_image.height }}"
                   loading="{{ image_loading }}"
                   fetchpriority="{{ image_priority }}"
                 >
@@ -270,10 +278,10 @@
               {{ 'lifestyle-1' | placeholder_svg_tag: 'suvedh-hero__placeholder' }}
             {%- endif -%}
           </div>
-          {%- if block.settings.show_overlay_logo and block.settings.overlay_logo != blank -%}
-            {{ block.settings.overlay_logo | image_url: width: 360 | image_tag: class: 'suvedh-hero__logo', loading: image_loading, widths: '120, 180, 240, 360', alt: block.settings.overlay_logo.alt }}
-          {%- endif -%}
           {%- if block.settings.content_mode == 'overlay' -%}
+            {%- if block.settings.show_overlay_logo and block.settings.overlay_logo != blank -%}
+              {{ block.settings.overlay_logo | image_url: width: 360 | image_tag: class: 'suvedh-hero__logo', loading: image_loading, widths: '120, 180, 240, 360', alt: block.settings.overlay_logo.alt }}
+            {%- endif -%}
             <div class="suvedh-hero__overlay" style="opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};"></div>
             <div class="suvedh-hero__content suvedh-hero__content--{{ block.settings.text_position }}" style="--slide-text-color: {{ block.settings.text_color }};">
               <div class="suvedh-hero__box suvedh-hero__box--{{ block.settings.text_alignment }} suvedh-hero__box--mobile-{{ block.settings.mobile_text_alignment }}">
@@ -377,8 +385,8 @@
     { "type": "text", "id": "accessibility_label", "label": "Accessibility label", "default": "Featured promotions" },
     { "type": "checkbox", "id": "auto_rotate", "label": "Auto-rotate slides", "default": true },
     { "type": "range", "id": "rotation_speed", "min": 3, "max": 10, "step": 1, "unit": "s", "label": "Rotation speed", "default": 5 },
-    { "type": "range", "id": "desktop_height", "label": "Desktop hero height", "min": 400, "max": 900, "step": 10, "default": 650, "unit": "px" },
-    { "type": "range", "id": "mobile_height", "label": "Mobile hero height", "min": 280, "max": 700, "step": 10, "default": 480, "unit": "px" },
+    { "type": "range", "id": "desktop_height", "label": "Desktop hero height", "min": 400, "max": 900, "step": 10, "default": 620, "unit": "px" },
+    { "type": "range", "id": "mobile_height", "label": "Mobile hero height", "min": 300, "max": 900, "step": 10, "default": 620, "unit": "px" },
     { "type": "select", "id": "desktop_image_position", "label": "Desktop image position", "options": [{ "value": "left center", "label": "Left" }, { "value": "center center", "label": "Center" }, { "value": "right center", "label": "Right" }, { "value": "center top", "label": "Top" }, { "value": "center bottom", "label": "Bottom" }], "default": "center center" },
     { "type": "select", "id": "mobile_image_position", "label": "Mobile image position", "options": [{ "value": "left center", "label": "Left" }, { "value": "center center", "label": "Center" }, { "value": "right center", "label": "Right" }, { "value": "center top", "label": "Top" }, { "value": "center bottom", "label": "Bottom" }], "default": "center center" },
     { "type": "color", "id": "control_background", "label": "Control background", "default": "#ffffff" },
@@ -391,6 +399,10 @@
       "settings": [
         { "type": "image_picker", "id": "desktop_image", "label": "Desktop image" },
         { "type": "image_picker", "id": "mobile_image", "label": "Mobile image" },
+        { "type": "select", "id": "mobile_image_fit", "label": "Mobile image fit", "options": [{ "value": "contain", "label": "Contain - show complete image" }, { "value": "cover", "label": "Cover - fill banner and allow cropping" }], "default": "contain" },
+        { "type": "color", "id": "mobile_background", "label": "Mobile banner background", "default": "#F9E9EC" },
+        { "type": "select", "id": "mobile_horizontal_position", "label": "Mobile horizontal position", "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" }], "default": "center" },
+        { "type": "select", "id": "mobile_vertical_position", "label": "Mobile vertical position", "options": [{ "value": "top", "label": "Top" }, { "value": "center", "label": "Center" }, { "value": "bottom", "label": "Bottom" }], "default": "center" },
 
         { "type": "select", "id": "content_mode", "label": "Content mode", "options": [{ "value": "image_only", "label": "Image only" }, { "value": "overlay", "label": "Image with overlay text" }], "default": "image_only" },
         { "type": "checkbox", "id": "show_overlay_logo", "label": "Show overlay logo", "default": false },

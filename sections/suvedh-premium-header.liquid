@@ -1,10 +1,11 @@
 {{ 'suvedh-premium-header.css' | asset_url | stylesheet_tag }}
+{{ 'component-menu-drawer.css' | asset_url | stylesheet_tag }}
 
-<header class="suvedh-header" data-suvedh-header>
+<header class="suvedh-header header-wrapper color-{{ section.settings.color_scheme }} gradient" data-suvedh-header>
   <div class="suvedh-header__inner page-width">
-    <button class="suvedh-header__mobile-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-menu-toggle>
-      <span></span><span></span>
-    </button>
+    {%- if section.settings.menu != blank -%}
+      {% render 'header-drawer' %}
+    {%- endif -%}
 
     <nav class="suvedh-header__nav" aria-label="Primary navigation">
       <details class="suvedh-nav-item suvedh-nav-item--mega">
@@ -43,7 +44,8 @@
     </nav>
 
     <a class="suvedh-header__logo" href="{{ routes.root_url }}" aria-label="{{ shop.name }} home">
-      {% if settings.logo != blank %}{{ settings.logo | image_url: width: 600 | image_tag: widths: '180, 300, 450, 600', width: settings.logo_width, alt: shop.name, preload: true }}{% else %}<span>SUVEDH<small>FINE SILVER</small></span>{% endif %}
+      {%- assign header_logo = section.settings.logo | default: settings.logo -%}
+      {% if header_logo != blank %}{{ header_logo | image_url: width: 600 | image_tag: widths: '180, 300, 450, 600', alt: shop.name, preload: true }}{% else %}<span>SUVEDH<small>FINE SILVER</small></span>{% endif %}
     </a>
 
     <div class="suvedh-header__actions">
@@ -60,15 +62,21 @@
       <a href="{{ routes.cart_url }}" aria-label="Cart">{{ 'icon-cart-empty.svg' | inline_asset_content }}<span>Cart</span>{% if cart.item_count > 0 %}<b>{{ cart.item_count }}</b>{% endif %}</a>
     </div>
   </div>
-  <div class="suvedh-mobile-nav" data-mobile-nav>
-    <details><summary>Women</summary><div><a href="{{ routes.collections_url }}/rings">Rings</a><a href="{{ routes.collections_url }}/studs">Studs</a><a href="{{ routes.collections_url }}/earrings">Earrings</a><a href="{{ routes.collections_url }}/necklaces">Necklaces</a><a href="{{ routes.collections_url }}/pendants">Pendants</a><a href="{{ routes.collections_url }}/bracelets">Bracelets</a><a href="{{ routes.collections_url }}/bangles">Bangles</a><a href="{{ routes.collections_url }}/anklets">Anklets</a><a href="{{ routes.collections_url }}/toe-rings">Toe Rings</a><a href="{{ routes.collections_url }}/women">View All</a></div></details>
-    <details><summary>Kids</summary><div><a href="{{ routes.collections_url }}/kids-bracelets">Bracelets</a><a href="{{ routes.collections_url }}/kids-chains">Chains</a><a href="{{ routes.collections_url }}/kids-earrings">Earrings</a><a href="{{ routes.collections_url }}/kids-pendants">Pendants</a></div></details>
-    <details><summary>Collections</summary><div><a href="{{ routes.collections_url }}/everyday-silver">Everyday Silver</a><a href="{{ routes.collections_url }}/minimal">Minimal</a><a href="{{ routes.collections_url }}/office-wear">Office Wear</a><a href="{{ routes.collections_url }}/wedding">Wedding</a><a href="{{ routes.collections_url }}/trending">Trending</a></div></details>
-    <a href="{{ routes.collections_url }}/new-arrivals">New Arrivals</a><a href="{{ routes.collections_url }}/best-sellers">Best Sellers</a>
-    <details><summary>Gifts</summary><div><a href="{{ routes.collections_url }}/gifts-under-999">Under Rs. 999</a><a href="{{ routes.collections_url }}/gifts-under-1999">Under Rs. 1999</a><a href="{{ routes.collections_url }}/anniversary-gifts">Anniversary</a><a href="{{ routes.collections_url }}/birthday-gifts">Birthday</a></div></details><a href="/pages/about-us">About Us</a>
-  </div>
 </header>
 <script>
-(() => { const header=document.querySelector('[data-suvedh-header]'); if(!header)return; const toggle=header.querySelector('[data-menu-toggle]'); const setScrolled=()=>header.classList.toggle('is-scrolled',scrollY>24); setScrolled(); addEventListener('scroll',setScrolled,{passive:true}); toggle?.addEventListener('click',()=>{const open=header.classList.toggle('menu-open');toggle.setAttribute('aria-expanded',open);document.body.classList.toggle('overflow-hidden',open)}); header.querySelectorAll('.suvedh-nav-item').forEach(item=>{item.addEventListener('mouseenter',()=>item.open=true);item.addEventListener('mouseleave',()=>item.open=false)}); })();
+(() => { const header=document.querySelector('[data-suvedh-header]'); if(!header)return; const setScrolled=()=>header.classList.toggle('is-scrolled',scrollY>24); setScrolled(); addEventListener('scroll',setScrolled,{passive:true}); header.querySelectorAll('.suvedh-nav-item').forEach(item=>{item.addEventListener('mouseenter',()=>item.open=true);item.addEventListener('mouseleave',()=>item.open=false)}); })();
 </script>
-{% schema %}{"name":"SUVEDH premium header","tag":"section","class":"suvedh-header-section","settings":[],"presets":[{"name":"SUVEDH premium header"}]}{% endschema %}
+{% schema %}
+{
+  "name": "SUVEDH premium header",
+  "tag": "section",
+  "class": "section-header suvedh-header-section",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo" },
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "color_scheme", "id": "menu_color_scheme", "label": "Menu color scheme", "default": "scheme-1" }
+  ],
+  "presets": [{ "name": "SUVEDH premium header" }]
+}
+{% endschema %}
