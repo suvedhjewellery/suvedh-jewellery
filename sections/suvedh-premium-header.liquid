@@ -43,7 +43,7 @@
 
     <a class="suvedh-header__logo" href="{{ routes.root_url }}" aria-label="{{ shop.name }} home">
       {%- assign header_logo = section.settings.logo | default: settings.logo -%}
-      {% if header_logo != blank %}{{ header_logo | image_url: width: 600 | image_tag: widths: '180, 300, 450, 600', alt: shop.name, preload: true }}{% else %}<span>SUVEDH<small>FINE SILVER</small></span>{% endif %}
+      {% if header_logo != blank %}{{ header_logo | image_url: width: 600 | image_tag: widths: '180, 300, 450, 600', alt: shop.name, preload: true }}{% else %}<img src="{{ 'suvedh-logo.png' | asset_url }}" alt="{{ shop.name | escape }}" width="1254" height="1254" fetchpriority="high">{% endif %}
     </a>
 
     <div class="suvedh-header__actions">

@@ -236,8 +236,7 @@
       {%- for block in section.blocks -%}
         {%- liquid
           assign desktop_image = block.settings.desktop_image
-          assign mobile_image = block.settings.mobile_image | default: desktop_image
-          assign desktop_image = desktop_image | default: mobile_image
+          assign mobile_image = block.settings.mobile_image
           assign mobile_image_fit = block.settings.mobile_image_fit | default: 'contain'
           assign mobile_background = block.settings.mobile_background | default: '#F9E9EC'
           assign image_alt = mobile_image.alt | default: desktop_image.alt | default: section.settings.accessibility_label
@@ -259,9 +258,13 @@
           {{ block.shopify_attributes }}
         >
           <div class="suvedh-hero__media">
-            {%- if desktop_image != blank -%}
-              <picture>
+            <picture>
+              {%- if mobile_image != blank -%}
                 <source media="(max-width: 749px)" srcset="{{ mobile_image | image_url: width: 375 }} 375w, {{ mobile_image | image_url: width: 550 }} 550w, {{ mobile_image | image_url: width: 750 }} 750w, {{ mobile_image | image_url: width: 1100 }} 1100w" sizes="100vw">
+              {%- else -%}
+                <source media="(max-width: 749px)" srcset="{{ 'suvedh-hero-mobile.png' | asset_url }}" sizes="100vw">
+              {%- endif -%}
+              {%- if desktop_image != blank -%}
                 <img
                   class="suvedh-hero__image"
                   src="{{ desktop_image | image_url: width: 1500 }}"
@@ -273,10 +276,19 @@
                   loading="{{ image_loading }}"
                   fetchpriority="{{ image_priority }}"
                 >
-              </picture>
-            {%- else -%}
-              {{ 'lifestyle-1' | placeholder_svg_tag: 'suvedh-hero__placeholder' }}
-            {%- endif -%}
+              {%- else -%}
+                <img
+                  class="suvedh-hero__image"
+                  src="{{ 'suvedh-hero-desktop.png' | asset_url }}"
+                  sizes="100vw"
+                  alt="{{ image_alt | escape }}"
+                  width="1536"
+                  height="1024"
+                  loading="{{ image_loading }}"
+                  fetchpriority="{{ image_priority }}"
+                >
+              {%- endif -%}
+            </picture>
           </div>
           {%- if block.settings.content_mode == 'overlay' -%}
             {%- if block.settings.show_overlay_logo and block.settings.overlay_logo != blank -%}
