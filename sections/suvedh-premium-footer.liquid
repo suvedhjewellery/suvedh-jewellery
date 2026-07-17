@@ -4,10 +4,38 @@
 >
   <div class="page-width">
     <div class="suvedh-premium-footer__grid">
-      <div><h2>SHOP</h2><a href="{{ routes.collections_url }}/women">Women</a><a href="{{ routes.collections_url }}/kids-jewellery">Kids</a><a href="{{ routes.collections_url }}">Collections</a><a href="{{ routes.collections_url }}/new-arrivals">New Arrivals</a><a href="{{ routes.collections_url }}/best-sellers">Best Sellers</a></div>
-      <div><h2>ABOUT</h2><a href="/pages/our-story">Our Story</a><a href="/pages/about-us">About SUVEDH</a><a href="/pages/contact">Contact</a></div>
-      <div><h2>CUSTOMER CARE</h2><a href="/policies/shipping-policy">Shipping Policy</a><a href="/policies/refund-policy">Return Policy</a><a href="/pages/jewellery-care">Jewellery Care</a><a href="/pages/size-guide">Size Guide</a><a href="/pages/faq">FAQ</a></div>
-      <div><h2>FOLLOW US</h2><a href="{{ settings.social_instagram_link | default: '#' }}">Instagram</a><a href="{{ settings.social_facebook_link | default: '#' }}">Facebook</a><a href="{{ settings.social_pinterest_link | default: '#' }}">Pinterest</a><a href="{{ settings.social_youtube_link | default: '#' }}">YouTube</a><div class="suvedh-premium-footer__newsletter"><p>Become a part of SUVEDH.</p>{% form 'customer', id: 'FooterNewsletter' %}<input type="hidden" name="contact[tags]" value="newsletter"><label class="visually-hidden" for="FooterEmail">Email</label><input id="FooterEmail" type="email" name="contact[email]" placeholder="Email address" required><button type="submit">Subscribe</button>{% endform %}</div></div>
+      <div class="suvedh-premium-footer__column">
+        <h2>Quick Links</h2>
+        <ul class="list-unstyled" role="list">
+          <li><a href="/pages/about-us">About Us</a></li>
+          <li><a href="{% if shop.privacy_policy != blank %}{{ shop.privacy_policy.url }}{% else %}/pages/privacy-policy{% endif %}">Privacy Policy</a></li>
+          <li><a href="/pages/track-your-order">Track Your Order</a></li>
+        </ul>
+      </div>
+      <div class="suvedh-premium-footer__column">
+        <h2>Customer Service</h2>
+        <ul class="list-unstyled" role="list">
+          <li><a href="{% if shop.shipping_policy != blank %}{{ shop.shipping_policy.url }}{% else %}/pages/shipping-policy{% endif %}">Shipping Policy</a></li>
+          <li><a href="{% if shop.refund_policy != blank %}{{ shop.refund_policy.url }}{% else %}/pages/return-policy{% endif %}">Return Policy</a></li>
+          <li><a href="{% if shop.terms_of_service != blank %}{{ shop.terms_of_service.url }}{% else %}/pages/terms-of-service{% endif %}">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div class="suvedh-premium-footer__column suvedh-premium-footer__contact">
+        <h2>Contact Us</h2>
+        <dl>
+          <div><dt>WhatsApp</dt><dd><a href="https://wa.me/919606862840">WhatsApp</a><a href="tel:+919606862840">+91 9606862840</a></dd></div>
+          <div><dt>Email</dt><dd><a href="mailto:suvedhjewelery@gmail.com">suvedhjewelery@gmail.com</a></dd></div>
+          <div><dt>Address</dt><dd>Gopi Nilayam,<br>8th Cross, Chaluvaiah Layout,<br>Ramamurthy Nagar,<br>Bengaluru, Karnataka, India</dd></div>
+        </dl>
+      </div>
+      <div class="suvedh-premium-footer__column">
+        <h2>Follow Us</h2>
+        <ul class="list-unstyled" role="list">
+          {%- if settings.social_instagram_link != blank -%}<li><a href="{{ settings.social_instagram_link }}">Instagram</a></li>{%- endif -%}
+          {%- if settings.social_facebook_link != blank -%}<li><a href="{{ settings.social_facebook_link }}">Facebook</a></li>{%- endif -%}
+          {%- if settings.social_pinterest_link != blank -%}<li><a href="{{ settings.social_pinterest_link }}">Pinterest</a></li>{%- endif -%}
+        </ul>
+      </div>
     </div>
     <div class="suvedh-premium-footer__bottom"><span>&copy; {{ 'now' | date: '%Y' }} SUVEDH Fine Silver</span><span>Authentic 92.5 sterling silver</span></div>
   </div>
@@ -15,18 +43,18 @@
 {% stylesheet %}
   .suvedh-premium-footer{padding:7rem 0 2.5rem;border-top:1px solid var(--footer-border);background:var(--footer-background);color:var(--footer-text)}
   .suvedh-premium-footer__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4rem 2rem}
-  .suvedh-premium-footer h2{margin:0 0 2rem;color:var(--footer-text);font-size:1.1rem;letter-spacing:.16em}
-  .suvedh-premium-footer a{display:block;margin:.9rem 0;color:var(--footer-link);font-size:1.35rem;text-decoration:none;transition:color .2s ease}
-  .suvedh-premium-footer a:hover,.suvedh-premium-footer a:focus-visible{color:var(--footer-link-hover)}
-  .suvedh-premium-footer__newsletter{margin-top:2.5rem}
-  .suvedh-premium-footer__newsletter p{font-size:1.7rem}
-  .suvedh-premium-footer form{display:flex;border-bottom:1px solid var(--footer-border)}
-  .suvedh-premium-footer input{min-width:0;flex:1;padding:1.2rem 0;border:0;background:transparent;color:var(--footer-text)}
-  .suvedh-premium-footer input::placeholder{color:var(--footer-text);opacity:.7}
-  .suvedh-premium-footer button{border:0;background:transparent;color:var(--footer-link-hover);font-size:1rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+  .suvedh-premium-footer h2{margin:0 0 2rem;color:var(--footer-text);font-size:1.1rem;letter-spacing:.16em;text-transform:uppercase}
+  .suvedh-premium-footer ul,.suvedh-premium-footer dl,.suvedh-premium-footer dd{margin:0;padding:0}
+  .suvedh-premium-footer li{margin:.9rem 0}
+  .suvedh-premium-footer a{color:var(--footer-link);font-size:1.35rem;text-decoration:none;transition:color .2s ease}
+  .suvedh-premium-footer a:hover,.suvedh-premium-footer a:focus-visible{color:var(--footer-link-hover);text-decoration:underline;text-underline-offset:.3rem}
+  .suvedh-premium-footer__contact dl{display:grid;gap:1.5rem}
+  .suvedh-premium-footer__contact dt{margin-bottom:.4rem;font-size:1.05rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+  .suvedh-premium-footer__contact dd{font-size:1.3rem;line-height:1.6}
+  .suvedh-premium-footer__contact dd a{display:block;width:fit-content}
   .suvedh-premium-footer__bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem 2rem;margin-top:6rem;padding-top:2rem;border-top:1px solid var(--footer-border);font-size:1.1rem;color:var(--footer-text)}
   @media(min-width:750px){.suvedh-premium-footer__grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:5rem}}
-  @media(max-width:749px){.suvedh-premium-footer{padding-top:5rem}.suvedh-premium-footer__bottom{margin-top:4rem}}
+  @media(max-width:749px){.suvedh-premium-footer{padding-top:5rem}.suvedh-premium-footer__grid{grid-template-columns:1fr}.suvedh-premium-footer__bottom{margin-top:4rem}}
 {% endstylesheet %}
 {% schema %}
 {
