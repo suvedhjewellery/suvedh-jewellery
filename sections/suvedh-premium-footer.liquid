@@ -14,9 +14,9 @@
       <details class="suvedh-premium-footer__column" open>
         <summary><h2>Customer Service</h2><span aria-hidden="true"></span></summary>
         <ul class="list-unstyled" role="list">
-          {% if shop.shipping_policy != blank %}<li><a href="{{ shop.shipping_policy.url }}">Shipping Policy</a></li>{% endif %}
-          {% if shop.refund_policy != blank %}<li><a href="{{ shop.refund_policy.url }}">Return and Refund Policy</a></li>{% endif %}
-          {% if shop.terms_of_service != blank %}<li><a href="{{ shop.terms_of_service.url }}">Terms of Service</a></li>{% endif %}
+          <li><a href="{% if shop.shipping_policy != blank %}{{ shop.shipping_policy.url }}{% else %}/policies/shipping-policy{% endif %}">Shipping Policy</a></li>
+          <li><a href="{% if shop.refund_policy != blank %}{{ shop.refund_policy.url }}{% else %}/policies/refund-policy{% endif %}">Return Policy</a></li>
+          <li><a href="{% if shop.terms_of_service != blank %}{{ shop.terms_of_service.url }}{% else %}/policies/terms-of-service{% endif %}">Terms of Service</a></li>
         </ul>
       </details>
       <details class="suvedh-premium-footer__column suvedh-premium-footer__contact" open>
@@ -30,9 +30,9 @@
       <details class="suvedh-premium-footer__column" open>
         <summary><h2>Follow Us</h2><span aria-hidden="true"></span></summary>
         <ul class="list-unstyled suvedh-premium-footer__social" role="list">
-          {% if settings.social_facebook_link != blank %}<li><a href="{{ settings.social_facebook_link }}" target="_blank" rel="noopener" aria-label="Follow SUVEDH on Facebook"><span class="svg-wrapper">{{ 'icon-facebook.svg' | inline_asset_content }}</span><span>Facebook</span></a></li>{% endif %}
-          {% if settings.social_instagram_link != blank %}<li><a href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener" aria-label="Follow SUVEDH on Instagram"><span class="svg-wrapper">{{ 'icon-instagram.svg' | inline_asset_content }}</span><span>Instagram</span></a></li>{% endif %}
-          {% if settings.social_youtube_link != blank %}<li><a href="{{ settings.social_youtube_link }}" target="_blank" rel="noopener" aria-label="Follow SUVEDH on YouTube"><span class="svg-wrapper">{{ 'icon-youtube.svg' | inline_asset_content }}</span><span>YouTube</span></a></li>{% endif %}
+          <li>{% if settings.social_facebook_link != blank %}<a href="{{ settings.social_facebook_link }}" target="_blank" rel="noopener" aria-label="Follow SUVEDH on Facebook">{% else %}<span class="footer__link footer__link--disabled">{% endif %}<span class="svg-wrapper">{{ 'icon-facebook.svg' | inline_asset_content }}</span><span>Facebook</span>{% if settings.social_facebook_link != blank %}</a>{% else %}</span>{% endif %}</li>
+          <li>{% if settings.social_instagram_link != blank %}<a href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener" aria-label="Follow SUVEDH on Instagram">{% else %}<span class="footer__link footer__link--disabled">{% endif %}<span class="svg-wrapper">{{ 'icon-instagram.svg' | inline_asset_content }}</span><span>Instagram</span>{% if settings.social_instagram_link != blank %}</a>{% else %}</span>{% endif %}</li>
+          <li>{% if settings.social_youtube_link != blank %}<a href="{{ settings.social_youtube_link }}" target="_blank" rel="noopener" aria-label="Follow SUVEDH on YouTube">{% else %}<span class="footer__link footer__link--disabled">{% endif %}<span class="svg-wrapper">{{ 'icon-youtube.svg' | inline_asset_content }}</span><span>YouTube</span>{% if settings.social_youtube_link != blank %}</a>{% else %}</span>{% endif %}</li>
         </ul>
       </details>
     </div>
@@ -43,15 +43,15 @@
 .suvedh-premium-footer{padding:7rem 0 2.5rem;border-top:1px solid var(--footer-border);background:var(--footer-background);color:var(--footer-text)}
 .suvedh-premium-footer__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4rem 2rem}.suvedh-premium-footer__column{min-width:0}
 .suvedh-premium-footer summary{display:flex;align-items:center;justify-content:space-between;list-style:none;cursor:default}.suvedh-premium-footer summary::-webkit-details-marker{display:none}
-.suvedh-premium-footer h2{margin:0 0 2rem;color:var(--footer-text);font-size:1.5rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase}
+.suvedh-premium-footer h2{margin:0 0 2rem;color:var(--footer-text);font-size:1.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
 .suvedh-premium-footer ul,.suvedh-premium-footer dl,.suvedh-premium-footer dd{margin:0;padding:0}.suvedh-premium-footer li{margin:.4rem 0}
 .suvedh-premium-footer a,.suvedh-premium-footer .footer__link{display:flex;align-items:center;min-height:4.4rem;color:var(--footer-link);font-size:1.35rem;text-decoration:none;transition:color .2s ease}
 .suvedh-premium-footer a:hover,.suvedh-premium-footer a:focus-visible{color:var(--footer-link-hover);text-decoration:underline;text-underline-offset:.3rem}.suvedh-premium-footer .footer__link--disabled{opacity:.65;cursor:not-allowed}
 .suvedh-premium-footer__contact dl{display:grid;gap:1.5rem}.suvedh-premium-footer__contact dt{margin-bottom:.4rem;font-size:1.05rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase}.suvedh-premium-footer__contact dd{font-size:1.3rem;line-height:1.6}.suvedh-premium-footer__contact dd a{width:fit-content}
-.suvedh-premium-footer__social a{gap:1rem;width:fit-content}.suvedh-premium-footer__social .svg-wrapper{width:2rem;height:2rem}
+.suvedh-premium-footer__social a,.suvedh-premium-footer__social .footer__link{gap:1rem;width:fit-content}.suvedh-premium-footer__social .svg-wrapper{width:2rem;height:2rem}
 .suvedh-premium-footer__bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem 2rem;margin-top:6rem;padding-top:2rem;border-top:1px solid var(--footer-border);font-size:1.1rem;color:var(--footer-text)}
 @media(min-width:750px){.suvedh-premium-footer__grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:5rem}}
-@media(max-width:749px){.suvedh-premium-footer{padding-top:2.5rem}.suvedh-premium-footer__grid{grid-template-columns:1fr;gap:0}.suvedh-premium-footer__column{border-bottom:1px solid var(--footer-border)}.suvedh-premium-footer summary{min-height:5.6rem;cursor:pointer}.suvedh-premium-footer summary h2{margin:0;font-size:1.6rem}.suvedh-premium-footer summary>span{position:relative;width:1.6rem;height:1.6rem}.suvedh-premium-footer summary>span::before,.suvedh-premium-footer summary>span::after{content:'';position:absolute;top:50%;left:0;width:100%;height:1px;background:currentColor}.suvedh-premium-footer summary>span::after{transform:rotate(90deg);transition:transform .2s ease}.suvedh-premium-footer details[open] summary>span::after{transform:rotate(0)}.suvedh-premium-footer details>ul,.suvedh-premium-footer details>dl{padding-bottom:1.5rem}.suvedh-premium-footer__bottom{margin-top:3rem}}
+@media(max-width:749px){.suvedh-premium-footer{padding-top:2.5rem}.suvedh-premium-footer__grid{grid-template-columns:1fr;gap:0}.suvedh-premium-footer__column{border-bottom:1px solid var(--footer-border)}.suvedh-premium-footer summary{min-height:5.6rem;cursor:pointer}.suvedh-premium-footer summary h2{margin:0;font-size:1.6rem;font-weight:700}.suvedh-premium-footer summary>span{position:relative;width:1.6rem;height:1.6rem}.suvedh-premium-footer summary>span::before,.suvedh-premium-footer summary>span::after{content:'';position:absolute;top:50%;left:0;width:100%;height:1px;background:currentColor}.suvedh-premium-footer summary>span::after{transform:rotate(90deg);transition:transform .2s ease}.suvedh-premium-footer details[open] summary>span::after{transform:rotate(0)}.suvedh-premium-footer details>ul,.suvedh-premium-footer details>dl{padding-bottom:1.5rem}.suvedh-premium-footer__bottom{margin-top:3rem}}
 {% endstylesheet %}
 {% schema %}
 {"name":"SUVEDH premium footer","tag":"section","class":"section-footer","settings":[{"type":"color","id":"footer_background","label":"Background","default":"#F8E8EC"},{"type":"color","id":"footer_text","label":"Text","default":"#3A2A2E"},{"type":"color","id":"footer_link","label":"Links","default":"#3A2A2E"},{"type":"color","id":"footer_link_hover","label":"Link hover","default":"#B08D57"},{"type":"color","id":"footer_border","label":"Borders","default":"#E8CDD5"}],"presets":[{"name":"SUVEDH premium footer"}]}
