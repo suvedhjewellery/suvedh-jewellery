@@ -48,20 +48,38 @@ View All|{{ routes.collections_url }}/silver-gifts
 {%- endcapture -%}
 
 {%- assign pendants_menu_link = blank -%}
+{%- assign rakhi_menu_link = blank -%}
 {%- for menu_link in section.settings.menu.links -%}
-  {%- if menu_link.title | handleize == 'pendants' -%}
+  {%- assign menu_handle = menu_link.title | handleize -%}
+  {%- if menu_handle == 'pendants' -%}
     {%- assign pendants_menu_link = menu_link -%}
-    {%- break -%}
+  {%- elsif menu_handle == 'rakhi' -%}
+    {%- assign rakhi_menu_link = menu_link -%}
   {%- endif -%}
 {%- endfor -%}
+{%- assign rakhi_collection = collections['rakhi'] -%}
+{%- assign rakhi_link = blank -%}
+{%- if rakhi_menu_link != blank and rakhi_menu_link.links != blank -%}
+  {%- for child_link in rakhi_menu_link.links -%}
+    {%- assign child_handle = child_link.title | handleize -%}
+    {%- if child_handle == 'rakhi' -%}
+      {%- assign rakhi_link = child_link -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+{%- capture rakhi_links -%}
+Rakhi|{% if rakhi_collection != blank %}{{ rakhi_collection.url }}{% elsif rakhi_link != blank %}{{ rakhi_link.url }}{% elsif rakhi_menu_link != blank %}{{ rakhi_menu_link.url }}{% else %}{{ routes.collections_url }}/rakhi{% endif %}
+{%- endcapture -%}
 
-{%- assign parent_titles = 'Women|Men|Kids|Pendants|Collections|Gifts' | split: '|' -%}
+{%- assign parent_titles = 'Women|Men|Kids|Pendants|Rakhi|Collections|Gifts' | split: '|' -%}
 {%- for parent_title in parent_titles -%}
   {%- case parent_title -%}
     {%- when 'Women' -%}{%- assign child_rows = women_links | strip | newline_to_br | split: '<br />' -%}
     {%- when 'Men' -%}{%- assign child_rows = men_links | strip | newline_to_br | split: '<br />' -%}
     {%- when 'Kids' -%}{%- assign child_rows = kids_links | strip | newline_to_br | split: '<br />' -%}
     {%- when 'Pendants' -%}{%- assign child_rows = pendant_fallback_links | strip | newline_to_br | split: '<br />' -%}
+    {%- when 'Rakhi' -%}{%- assign child_rows = rakhi_links | strip | newline_to_br | split: '<br />' -%}
     {%- when 'Collections' -%}{%- assign child_rows = collection_links | strip | newline_to_br | split: '<br />' -%}
     {%- when 'Gifts' -%}{%- assign child_rows = gift_links | strip | newline_to_br | split: '<br />' -%}
   {%- endcase -%}

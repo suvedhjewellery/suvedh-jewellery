@@ -159,10 +159,8 @@
     #SuvedhHero-{{ section.id }} .suvedh-hero__content { padding: 5rem 7rem 7rem; }
   }
   @media screen and (max-width: 749px) {
-    #shopify-section-{{ section.id }} .suvedh-hero-slider {
-      height: {{ section.settings.mobile_height }}px;
-    }
-
+    #shopify-section-{{ section.id }},
+    #shopify-section-{{ section.id }} .suvedh-hero-slider,
     #SuvedhHero-{{ section.id }},
     #SuvedhHero-{{ section.id }} .suvedh-hero__viewport,
     #SuvedhHero-{{ section.id }} .suvedh-hero__track,
@@ -170,18 +168,20 @@
     #SuvedhHero-{{ section.id }} .suvedh-hero__media,
     #SuvedhHero-{{ section.id }} .suvedh-hero__media picture,
     #SuvedhHero-{{ section.id }} .suvedh-hero__image {
-      max-width: 100%;
-    }
-    #SuvedhHero-{{ section.id }} .suvedh-hero__slide,
-    #SuvedhHero-{{ section.id }} .suvedh-hero__media,
-    #SuvedhHero-{{ section.id }} .suvedh-hero__media picture,
-    #SuvedhHero-{{ section.id }} .suvedh-hero__image {
       width: 100%;
-      height: var(--hero-height-mobile);
+      max-width: 100%;
+      height: auto;
+      min-height: 0;
+      margin-top: 0;
+      margin-bottom: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    #shopify-section-{{ section.id }} + .section {
+      margin-top: 0;
     }
     #SuvedhHero-{{ section.id }} .suvedh-hero__viewport,
     #SuvedhHero-{{ section.id }} .suvedh-hero__track {
-      height: var(--hero-height-mobile);
       overflow: hidden;
     }
     #SuvedhHero-{{ section.id }} .suvedh-hero__image {
@@ -215,7 +215,7 @@
     #SuvedhHero-{{ section.id }} .suvedh-hero__box--mobile-right .suvedh-hero__heading { margin-left: auto; }
     #SuvedhHero-{{ section.id }} .suvedh-hero__buttons { flex-direction: column; align-items: inherit; gap: 12px; }
     #SuvedhHero-{{ section.id }} .suvedh-hero__buttons .button { width: auto; max-width: 90%; min-width: 0; }
-    #SuvedhHero-{{ section.id }} .suvedh-hero__controls { position: static; min-height: 6.8rem; padding: 1.2rem 1.5rem; }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__controls { position: absolute; min-height: 0; padding: 0; }
     #SuvedhHero-{{ section.id }} .suvedh-hero__arrow { display: inline-flex !important; }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -262,7 +262,7 @@
               {%- if mobile_image != blank -%}
                 <source media="(max-width: 749px)" srcset="{{ mobile_image | image_url: width: 375 }} 375w, {{ mobile_image | image_url: width: 550 }} 550w, {{ mobile_image | image_url: width: 750 }} 750w, {{ mobile_image | image_url: width: 1100 }} 1100w" sizes="100vw">
               {%- else -%}
-                <source media="(max-width: 749px)" srcset="{{ 'suvedh-hero-mobile.png' | asset_url }}" sizes="100vw">
+                <source media="(max-width: 749px)" srcset="{{ 'suvedh-hero-mobile.jpg' | asset_url }}" sizes="100vw">
               {%- endif -%}
               {%- if desktop_image != blank -%}
                 <img

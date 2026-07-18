@@ -68,12 +68,38 @@
           </div>
         </div>
       </details>
+      {%- assign rakhi_menu_link = blank -%}
+      {%- for menu_link in section.settings.menu.links -%}
+        {%- if menu_link.title | handleize == 'rakhi' -%}
+          {%- assign rakhi_menu_link = menu_link -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- assign rakhi_collection = collections['rakhi'] -%}
+      {%- assign rakhi_link = blank -%}
+      {%- if rakhi_menu_link != blank and rakhi_menu_link.links != blank -%}
+        {%- for child_link in rakhi_menu_link.links -%}
+          {%- if child_link.title | handleize == 'rakhi' -%}
+            {%- assign rakhi_link = child_link -%}
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+      <details class="suvedh-nav-item suvedh-nav-item--mega">
+        <summary>Rakhi</summary>
+        <div class="suvedh-mega">
+          <div class="suvedh-mega__links">
+            <p>Shop Rakhi</p>
+            <a href="{% if rakhi_collection != blank %}{{ rakhi_collection.url }}{% elsif rakhi_link != blank %}{{ rakhi_link.url }}{% elsif rakhi_menu_link != blank %}{{ rakhi_menu_link.url }}{% else %}{{ routes.collections_url }}/rakhi{% endif %}">Rakhi</a>
+          </div>
+        </div>
+      </details>
       <a href="{{ routes.collections_url }}/new-arrivals">New Arrivals</a>
     </nav>
 
     <a class="suvedh-header__logo" href="{{ routes.root_url }}" aria-label="{{ shop.name }} home">
-      {%- assign header_logo = section.settings.logo | default: settings.logo -%}
-      {% if header_logo != blank %}{{ header_logo | image_url: width: 600 | image_tag: widths: '180, 300, 450, 600', alt: shop.name, preload: true }}{% else %}<img src="{{ 'suvedh-logo.png' | asset_url }}" alt="{{ shop.name | escape }}" width="1254" height="1254" fetchpriority="high">{% endif %}
+      {%- assign header_logo = section.settings.logo -%}
+      {% if header_logo != blank %}{{ header_logo | image_url: width: 600 | image_tag: widths: '180, 300, 450, 600', alt: shop.name, preload: true }}{% else %}<img src="{{ 'suvedh-logo-clean.png' | asset_url }}" alt="{{ shop.name | escape }}" width="1254" height="1254" fetchpriority="high" decoding="async">{% endif %}
     </a>
 
     <div class="suvedh-header__actions">
