@@ -28,7 +28,8 @@
       </details>
       {%- assign pendants_menu_link = blank -%}
       {%- for menu_link in section.settings.menu.links -%}
-        {%- if menu_link.title | handleize == 'pendants' -%}
+        {%- assign menu_handle = menu_link.title | handleize -%}
+        {%- if menu_handle == 'pendants' -%}
           {%- assign pendants_menu_link = menu_link -%}
           {%- break -%}
         {%- endif -%}
