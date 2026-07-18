@@ -21,6 +21,11 @@ Earrings|{{ routes.collections_url }}/kids-earrings
 Pendants|{{ routes.collections_url }}/kids-pendants
 View All|{{ routes.collections_url }}/kids-jewellery
 {%- endcapture -%}
+{%- capture pendant_fallback_links -%}
+Women Pendants|{% if collections['women-pendants'] != blank %}{{ collections['women-pendants'].url }}{% else %}{{ routes.collections_url }}{% endif %}
+Divine Pendants|{% if collections['divine-pendants'] != blank %}{{ collections['divine-pendants'].url }}{% else %}{{ routes.collections_url }}{% endif %}
+Kids Pendants|{% if collections['kids-pendants'] != blank %}{{ collections['kids-pendants'].url }}{% else %}{{ routes.collections_url }}{% endif %}
+{%- endcapture -%}
 {%- capture collection_links -%}
 Everyday Silver|{{ routes.collections_url }}/everyday-silver
 Minimal|{{ routes.collections_url }}/minimal
@@ -37,11 +42,20 @@ Birthday|{{ routes.collections_url }}/birthday-gifts
 View All|{{ routes.collections_url }}/silver-gifts
 {%- endcapture -%}
 
-{%- assign parent_titles = 'Women|Kids|Collections|Gifts' | split: '|' -%}
+{%- assign pendants_menu_link = blank -%}
+{%- for menu_link in section.settings.menu.links -%}
+  {%- if menu_link.title | handleize == 'pendants' -%}
+    {%- assign pendants_menu_link = menu_link -%}
+    {%- break -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- assign parent_titles = 'Women|Kids|Pendants|Collections|Gifts' | split: '|' -%}
 {%- for parent_title in parent_titles -%}
   {%- case parent_title -%}
     {%- when 'Women' -%}{%- assign child_rows = women_links | strip | newline_to_br | split: '<br />' -%}
     {%- when 'Kids' -%}{%- assign child_rows = kids_links | strip | newline_to_br | split: '<br />' -%}
+    {%- when 'Pendants' -%}{%- assign child_rows = pendant_fallback_links | strip | newline_to_br | split: '<br />' -%}
     {%- when 'Collections' -%}{%- assign child_rows = collection_links | strip | newline_to_br | split: '<br />' -%}
     {%- when 'Gifts' -%}{%- assign child_rows = gift_links | strip | newline_to_br | split: '<br />' -%}
   {%- endcase -%}
@@ -59,10 +73,16 @@ View All|{{ routes.collections_url }}/silver-gifts
             {{ parent_title | escape }}
           </button>
           <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
-            {%- for child_row in child_rows -%}
-              {%- assign child_parts = child_row | strip | split: '|' -%}
-              <li><a href="{{ child_parts[1] }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset">{{ child_parts[0] | escape }}</a></li>
-            {%- endfor -%}
+            {%- if parent_title == 'Pendants' and pendants_menu_link != blank and pendants_menu_link.links != blank -%}
+              {%- for child_link in pendants_menu_link.links -%}
+                <li><a href="{{ child_link.url }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset">{{ child_link.title | escape }}</a></li>
+              {%- endfor -%}
+            {%- else -%}
+              {%- for child_row in child_rows -%}
+                {%- assign child_parts = child_row | strip | split: '|' -%}
+                <li><a href="{{ child_parts[1] }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset">{{ child_parts[0] | escape }}</a></li>
+              {%- endfor -%}
+            {%- endif -%}
           </ul>
         </div>
       </div>

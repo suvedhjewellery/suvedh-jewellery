@@ -26,6 +26,33 @@
           <a class="suvedh-mega__feature" href="{{ routes.collections_url }}/kids-jewellery"><img src="{{ 'suvedh-hero-mobile.jpg' | asset_url }}" alt="SUVEDH kids silver jewellery" width="360" height="420" loading="lazy"><span>Little keepsakes</span></a>
         </div>
       </details>
+      {%- assign pendants_menu_link = blank -%}
+      {%- for menu_link in section.settings.menu.links -%}
+        {%- if menu_link.title | handleize == 'pendants' -%}
+          {%- assign pendants_menu_link = menu_link -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+      <details class="suvedh-nav-item suvedh-nav-item--mega">
+        <summary>Pendants</summary>
+        <div class="suvedh-mega">
+          <div class="suvedh-mega__links">
+            <p>Shop Pendants</p>
+            {%- if pendants_menu_link != blank and pendants_menu_link.links != blank -%}
+              {%- for child_link in pendants_menu_link.links -%}
+                <a href="{{ child_link.url }}">{{ child_link.title | escape }}</a>
+              {%- endfor -%}
+            {%- else -%}
+              {%- assign women_pendants = collections['women-pendants'] -%}
+              {%- assign divine_pendants = collections['divine-pendants'] -%}
+              {%- assign kids_pendants = collections['kids-pendants'] -%}
+              <a href="{% if women_pendants != blank %}{{ women_pendants.url }}{% else %}{{ routes.collections_url }}{% endif %}">Women Pendants</a>
+              <a href="{% if divine_pendants != blank %}{{ divine_pendants.url }}{% else %}{{ routes.collections_url }}{% endif %}">Divine Pendants</a>
+              <a href="{% if kids_pendants != blank %}{{ kids_pendants.url }}{% else %}{{ routes.collections_url }}{% endif %}">Kids Pendants</a>
+            {%- endif -%}
+          </div>
+        </div>
+      </details>
       <a href="{{ routes.collections_url }}/new-arrivals">New Arrivals</a>
     </nav>
 

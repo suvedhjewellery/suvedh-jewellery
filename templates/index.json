@@ -330,105 +330,7 @@
                                                               "padding_top":  64,
                                                               "padding_bottom":  64
                                                           }
-                                         },
-                     "suvedh_instagram":  {
-                                              "type":  "suvedh-editorial-grid",
-                                              "blocks":  {
-                                                             "card_1":  {
-                                                                            "type":  "card",
-                                                                            "settings":  {
-                                                                                             "title":  "Silver Stories",
-                                                                                             "link_label":  "View on Instagram",
-                                                                                             "link":  ""
-                                                                                         }
-                                                                        },
-                                                             "card_2":  {
-                                                                            "type":  "card",
-                                                                            "settings":  {
-                                                                                             "title":  "Everyday Details",
-                                                                                             "link_label":  "View on Instagram",
-                                                                                             "link":  ""
-                                                                                         }
-                                                                        },
-                                                             "card_3":  {
-                                                                            "type":  "card",
-                                                                            "settings":  {
-                                                                                             "title":  "Made to Shine",
-                                                                                             "link_label":  "View on Instagram",
-                                                                                             "link":  ""
-                                                                                         }
-                                                                        },
-                                                             "card_4":  {
-                                                                            "type":  "card",
-                                                                            "settings":  {
-                                                                                             "title":  "Styled by You",
-                                                                                             "link_label":  "View on Instagram",
-                                                                                             "link":  ""
-                                                                                         }
-                                                                        },
-                                                             "card_5":  {
-                                                                            "type":  "card",
-                                                                            "settings":  {
-                                                                                             "title":  "Behind the Craft",
-                                                                                             "link_label":  "View on Instagram",
-                                                                                             "link":  ""
-                                                                                         }
-                                                                        },
-                                                             "card_6":  {
-                                                                            "type":  "card",
-                                                                            "settings":  {
-                                                                                             "title":  "The SUVEDH Edit",
-                                                                                             "link_label":  "View on Instagram",
-                                                                                             "link":  ""
-                                                                                         }
-                                                                        }
-                                                         },
-                                              "block_order":  [
-                                                                  "card_1",
-                                                                  "card_2",
-                                                                  "card_3",
-                                                                  "card_4",
-                                                                  "card_5",
-                                                                  "card_6"
-                                                              ],
-                                              "settings":  {
-                                                               "heading":  "Follow @SUVEDH",
-                                                               "intro":  "",
-                                                               "heading_size":  "h1",
-                                                               "columns_desktop":  6,
-                                                               "color_scheme":  "scheme-1",
-                                                               "padding_top":  64,
-                                                               "padding_bottom":  64
-                                                           }
-                                          },
-                     "suvedh_newsletter":  {
-                                               "type":  "newsletter",
-                                               "blocks":  {
-                                                              "heading":  {
-                                                                              "type":  "heading",
-                                                                              "settings":  {
-                                                                                               "heading":  "Become a part of SUVEDH.",
-                                                                                               "heading_size":  "h1"
-                                                                                           }
-                                                                          },
-                                                              "email":  {
-                                                                            "type":  "email_form",
-                                                                            "settings":  {
-
-                                                                                         }
-                                                                        }
-                                                          },
-                                               "block_order":  [
-                                                                   "heading",
-                                                                   "email"
-                                                               ],
-                                               "settings":  {
-                                                                "color_scheme":  "scheme-2",
-                                                                "full_width":  true,
-                                                                "padding_top":  64,
-                                                                "padding_bottom":  64
-                                                            }
-                                           }
+                                         }
                  },
     "order":  [
                   "suvedh_hero_slider",
@@ -436,8 +338,6 @@
                   "suvedh_best_sellers",
                   "suvedh_benefits",
                   "suvedh_trending",
-                  "suvedh_instagram",
-                  "suvedh_faq",
-                  "suvedh_newsletter"
+                  "suvedh_faq"
               ]
 }
