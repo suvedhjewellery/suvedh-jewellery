@@ -21,6 +21,11 @@ Earrings|{{ routes.collections_url }}/kids-earrings
 Pendants|{{ routes.collections_url }}/kids-pendants
 View All|{{ routes.collections_url }}/kids-jewellery
 {%- endcapture -%}
+{%- capture men_links -%}
+{% if collections['mens-rings'] != blank %}Rings|{{ collections['mens-rings'].url }}
+{% endif %}{% if collections['mens-chains'] != blank %}Chains|{{ collections['mens-chains'].url }}
+{% endif %}{% if collections['mens-bracelets'] != blank %}Bracelets|{{ collections['mens-bracelets'].url }}
+{% endif %}{%- endcapture -%}
 {%- capture pendant_fallback_links -%}
 Women Pendants|{% if collections['women-pendants'] != blank %}{{ collections['women-pendants'].url }}{% else %}{{ routes.collections_url }}{% endif %}
 Divine Pendants|{% if collections['divine-pendants'] != blank %}{{ collections['divine-pendants'].url }}{% else %}{{ routes.collections_url }}{% endif %}
@@ -50,10 +55,11 @@ View All|{{ routes.collections_url }}/silver-gifts
   {%- endif -%}
 {%- endfor -%}
 
-{%- assign parent_titles = 'Women|Kids|Pendants|Collections|Gifts' | split: '|' -%}
+{%- assign parent_titles = 'Women|Men|Kids|Pendants|Collections|Gifts' | split: '|' -%}
 {%- for parent_title in parent_titles -%}
   {%- case parent_title -%}
     {%- when 'Women' -%}{%- assign child_rows = women_links | strip | newline_to_br | split: '<br />' -%}
+    {%- when 'Men' -%}{%- assign child_rows = men_links | strip | newline_to_br | split: '<br />' -%}
     {%- when 'Kids' -%}{%- assign child_rows = kids_links | strip | newline_to_br | split: '<br />' -%}
     {%- when 'Pendants' -%}{%- assign child_rows = pendant_fallback_links | strip | newline_to_br | split: '<br />' -%}
     {%- when 'Collections' -%}{%- assign child_rows = collection_links | strip | newline_to_br | split: '<br />' -%}

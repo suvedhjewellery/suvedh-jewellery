@@ -20,6 +20,20 @@
         </div>
       </details>
       <details class="suvedh-nav-item suvedh-nav-item--mega">
+        <summary>Men</summary>
+        <div class="suvedh-mega">
+          <div class="suvedh-mega__links">
+            <p>Shop Men</p>
+            {%- assign mens_rings = collections['mens-rings'] -%}
+            {%- assign mens_chains = collections['mens-chains'] -%}
+            {%- assign mens_bracelets = collections['mens-bracelets'] -%}
+            {%- if mens_rings != blank -%}<a href="{{ mens_rings.url }}">Rings</a>{%- endif -%}
+            {%- if mens_chains != blank -%}<a href="{{ mens_chains.url }}">Chains</a>{%- endif -%}
+            {%- if mens_bracelets != blank -%}<a href="{{ mens_bracelets.url }}">Bracelets</a>{%- endif -%}
+          </div>
+        </div>
+      </details>
+      <details class="suvedh-nav-item suvedh-nav-item--mega">
         <summary>Kids</summary>
         <div class="suvedh-mega">
           <div class="suvedh-mega__links"><p>Shop Kids</p><a href="{{ routes.collections_url }}/kids-bracelets">Bracelets</a><a href="{{ routes.collections_url }}/kids-chains">Chains</a><a href="{{ routes.collections_url }}/kids-earrings">Earrings</a><a href="{{ routes.collections_url }}/kids-pendants">Pendants</a><a class="suvedh-mega__all" href="{{ routes.collections_url }}/kids-jewellery">View All</a></div>
