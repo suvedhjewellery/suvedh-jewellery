@@ -69,7 +69,7 @@ View All|{{ routes.collections_url }}/silver-gifts
   {%- endfor -%}
 {%- endif -%}
 {%- capture rakhi_links -%}
-Rakhi|{% if rakhi_collection != blank %}{{ rakhi_collection.url }}{% elsif rakhi_link != blank %}{{ rakhi_link.url }}{% elsif rakhi_menu_link != blank %}{{ rakhi_menu_link.url }}{% else %}{{ routes.collections_url }}/rakhi{% endif %}
+Rakhi|{% if rakhi_link != blank %}{{ rakhi_link.url }}{% elsif rakhi_collection != blank %}{{ rakhi_collection.url }}{% elsif rakhi_menu_link != blank %}{{ rakhi_menu_link.url }}{% else %}{{ routes.collections_url }}/rakhi{% endif %}
 {%- endcapture -%}
 
 {%- assign parent_titles = 'Women|Men|Kids|Pendants|Rakhi|Collections|Gifts' | split: '|' -%}

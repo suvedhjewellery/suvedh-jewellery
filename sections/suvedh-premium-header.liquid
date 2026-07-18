@@ -90,7 +90,7 @@
         <div class="suvedh-mega">
           <div class="suvedh-mega__links">
             <p>Shop Rakhi</p>
-            <a href="{% if rakhi_collection != blank %}{{ rakhi_collection.url }}{% elsif rakhi_link != blank %}{{ rakhi_link.url }}{% elsif rakhi_menu_link != blank %}{{ rakhi_menu_link.url }}{% else %}{{ routes.collections_url }}/rakhi{% endif %}">Rakhi</a>
+            <a href="{% if rakhi_link != blank %}{{ rakhi_link.url }}{% elsif rakhi_collection != blank %}{{ rakhi_collection.url }}{% elsif rakhi_menu_link != blank %}{{ rakhi_menu_link.url }}{% else %}{{ routes.collections_url }}/rakhi{% endif %}">Rakhi</a>
           </div>
         </div>
       </details>
