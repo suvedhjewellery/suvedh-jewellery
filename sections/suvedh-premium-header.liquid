@@ -122,32 +122,6 @@
   setScrolled();
   addEventListener('scroll', setScrolled, { passive: true });
 
-  if (!matchMedia('(min-width: 990px)').matches) return;
-
-  header.querySelectorAll('.suvedh-nav-item').forEach((item) => {
-    const submenu = item.querySelector('.suvedh-mega');
-    let closeTimer;
-
-    const keepOpen = () => {
-      clearTimeout(closeTimer);
-      item.open = true;
-    };
-
-    const scheduleClose = (event) => {
-      if (event.relatedTarget && item.contains(event.relatedTarget)) return;
-
-      clearTimeout(closeTimer);
-      closeTimer = setTimeout(() => {
-        if (item.matches(':hover') || item.contains(document.activeElement)) return;
-        item.open = false;
-      }, 180);
-    };
-
-    item.addEventListener('mouseenter', keepOpen);
-    item.addEventListener('mouseleave', scheduleClose);
-    submenu?.addEventListener('mouseenter', keepOpen);
-    submenu?.addEventListener('mouseleave', scheduleClose);
-  });
 })();
 </script>
 {% schema %}
