@@ -1,0 +1,21 @@
+{% comment %}Temporary navigation used only while both Shopify menus contain no links.{% endcomment %}
+{%- capture fallback_menu -%}
+Women|women|Rings:rings,Earrings:earrings,Toe Rings:toe-rings,Kadas:kadas,Anklets:anklets;
+Kids|kids|Rings:kids-rings,Hoops:hoops,Kadas:kids-kadas,Nazaria:nazaria,Anklets:kids-anklets;
+Men|men|Rings:mens-rings,Chains:mens-chains,Bracelets:mens-bracelets;
+Pendants|pendants|Women Pendants:women-pendants,Divine Pendants:divine-pendants,Kids Pendants:kids-pendants;
+Rakhi|rakhi|Rakhi:rakhi;
+New Arrivals|new-arrivals|
+{%- endcapture -%}
+{%- assign fallback_items = fallback_menu | strip | split: ';' -%}
+{%- for fallback_item in fallback_items -%}
+  {%- assign parts = fallback_item | strip | split: '|' -%}
+  {%- assign title = parts[0] | strip -%}{%- assign handle = parts[1] | strip -%}{%- assign children = parts[2] | strip -%}
+  {%- if title != blank -%}
+    {%- if context == 'desktop' -%}
+      {%- if children != blank -%}<details class="suvedh-nav-item suvedh-nav-item--mega"><summary>{{ title | escape }}</summary><div class="suvedh-mega"><div class="suvedh-mega__links"><p>Shop {{ title | escape }}</p>{%- assign items = children | split: ',' -%}{%- for item in items -%}{%- assign child = item | split: ':' -%}<a href="{{ routes.collections_url }}/{{ child[1] | strip }}">{{ child[0] | strip | escape }}</a>{%- endfor -%}</div></div></details>{%- else -%}<a href="{{ routes.collections_url }}/{{ handle }}">{{ title | escape }}</a>{%- endif -%}
+    {%- else -%}
+      <li>{%- if children != blank -%}<details id="Details-menu-drawer-menu-item-fallback-{{ forloop.index }}"><summary id="HeaderDrawer-fallback-{{ handle }}" class="menu-drawer__menu-item list-menu__item link link--text focus-inset">{{ title | escape }}<span class="svg-wrapper">{{- 'icon-arrow.svg' | inline_asset_content -}}</span><span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span></summary><div id="link-fallback-{{ handle }}" class="menu-drawer__submenu has-submenu gradient motion-reduce" tabindex="-1"><div class="menu-drawer__inner-submenu"><button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true"><span class="svg-wrapper">{{- 'icon-arrow.svg' | inline_asset_content -}}</span>{{ title | escape }}</button><ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">{%- assign items = children | split: ',' -%}{%- for item in items -%}{%- assign child = item | split: ':' -%}{%- assign child_handle = child[1] | strip -%}<li><a id="HeaderDrawer-fallback-{{ handle }}-{{ child_handle }}" href="{{ routes.collections_url }}/{{ child_handle }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset">{{ child[0] | strip | escape }}</a></li>{%- endfor -%}</ul></div></div></details>{%- else -%}<a id="HeaderDrawer-fallback-{{ handle }}" href="{{ routes.collections_url }}/{{ handle }}" class="menu-drawer__menu-item list-menu__item link link--text focus-inset">{{ title | escape }}</a>{%- endif -%}</li>
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}

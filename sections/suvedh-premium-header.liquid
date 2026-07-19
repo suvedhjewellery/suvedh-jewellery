@@ -1,12 +1,23 @@
 {{ 'suvedh-premium-header.css' | asset_url | stylesheet_tag }}
 {{ 'component-menu-drawer.css' | asset_url | stylesheet_tag }}
 
+{%- liquid
+  assign resolved_menu = section.settings.menu
+  assign use_suvedh_fallback_menu = false
+  if resolved_menu == blank or resolved_menu.links == blank
+    assign resolved_menu = linklists['main-menu']
+  endif
+  if resolved_menu == blank or resolved_menu.links == blank
+    assign use_suvedh_fallback_menu = true
+  endif
+-%}
 <header class="suvedh-header header-wrapper color-{{ section.settings.color_scheme }} gradient" data-suvedh-header>
   <div class="suvedh-header__inner page-width">
-    {% render 'header-drawer' %}
+    {% render 'header-drawer', menu: resolved_menu, use_suvedh_fallback_menu: use_suvedh_fallback_menu %}
 
     <nav class="suvedh-header__nav" aria-label="Primary navigation">
-      {%- for link in section.settings.menu.links -%}
+      {%- unless use_suvedh_fallback_menu -%}
+      {%- for link in resolved_menu.links -%}
         {%- if link.links != blank -%}
           <details class="suvedh-nav-item suvedh-nav-item--mega">
             <summary>{{ link.title | escape }}</summary>
@@ -23,6 +34,9 @@
           <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
         {%- endif -%}
       {%- endfor -%}
+      {%- else -%}
+        {% render 'suvedh-navigation-fallback', context: 'desktop' %}
+      {%- endunless -%}
     </nav>
 
     <a class="suvedh-header__logo" href="{{ routes.root_url }}" aria-label="{{ shop.name }} home">
