@@ -41,7 +41,7 @@
 
     <a class="suvedh-header__logo" href="{{ routes.root_url }}" aria-label="{{ shop.name }} home">
       {%- assign header_logo = section.settings.logo -%}
-      {% if header_logo != blank %}{{ header_logo | image_url: width: 600 | image_tag: widths: '180, 300, 450, 600', alt: shop.name, preload: true }}{% else %}<img src="{{ 'suvedh-logo-clean.png' | asset_url }}" alt="{{ shop.name | escape }}" width="1254" height="1254" fetchpriority="high" decoding="async">{% endif %}
+      {% if header_logo != blank %}{{ header_logo | image_url: width: 600 | image_tag: widths: '180, 300, 450, 600', alt: shop.name, preload: true }}{% else %}<picture><source media="(max-width: 749px)" srcset="{{ 'suvedh-logo-clean-mobile.png' | asset_url }}"><img src="{{ 'suvedh-logo-clean.png' | asset_url }}" alt="{{ shop.name | escape }}" width="1254" height="1254" fetchpriority="high" decoding="async"></picture>{% endif %}
     </a>
 
     <div class="suvedh-header__actions">
@@ -67,6 +67,40 @@
   const setScrolled = () => header.classList.toggle('is-scrolled', scrollY > 24);
   setScrolled();
   addEventListener('scroll', setScrolled, { passive: true });
+
+  const navigation = header.querySelector('.suvedh-header__nav');
+  if (!navigation) return;
+
+  const dropdowns = [...navigation.querySelectorAll('.suvedh-nav-item--mega')];
+  const closeDropdowns = (except) => {
+    dropdowns.forEach((dropdown) => {
+      if (dropdown !== except) dropdown.removeAttribute('open');
+    });
+  };
+
+  dropdowns.forEach((dropdown) => {
+    dropdown.addEventListener('pointerenter', () => {
+      if (!matchMedia('(min-width: 990px)').matches) return;
+      closeDropdowns(dropdown);
+      dropdown.setAttribute('open', '');
+    });
+
+    dropdown.addEventListener('focusin', () => {
+      if (!matchMedia('(min-width: 990px)').matches) return;
+      closeDropdowns(dropdown);
+      dropdown.setAttribute('open', '');
+    });
+  });
+
+  navigation.querySelectorAll(':scope > a').forEach((link) => {
+    link.addEventListener('pointerenter', () => closeDropdowns());
+    link.addEventListener('focus', () => closeDropdowns());
+  });
+
+  navigation.addEventListener('pointerleave', () => closeDropdowns());
+  navigation.addEventListener('focusout', (event) => {
+    if (!navigation.contains(event.relatedTarget)) closeDropdowns();
+  });
 
 })();
 </script>
