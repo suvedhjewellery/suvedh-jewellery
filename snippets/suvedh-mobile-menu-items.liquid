@@ -22,31 +22,15 @@ Pendants|{{ routes.collections_url }}/kids-pendants
 View All|{{ routes.collections_url }}/kids-jewellery
 {%- endcapture -%}
 {%- capture men_links -%}
-{% if collections['mens-rings'] != blank %}Rings|{{ collections['mens-rings'].url }}
-{% endif %}{% if collections['mens-chains'] != blank %}Chains|{{ collections['mens-chains'].url }}
-{% endif %}{% if collections['mens-bracelets'] != blank %}Bracelets|{{ collections['mens-bracelets'].url }}
-{% endif %}{%- endcapture -%}
+Rings|{% if collections['mens-rings'] != blank %}{{ collections['mens-rings'].url }}{% else %}{{ routes.collections_url }}/mens-rings{% endif %}
+Chains|{% if collections['mens-chains'] != blank %}{{ collections['mens-chains'].url }}{% else %}{{ routes.collections_url }}/mens-chains{% endif %}
+Bracelets|{% if collections['mens-bracelets'] != blank %}{{ collections['mens-bracelets'].url }}{% else %}{{ routes.collections_url }}/mens-bracelets{% endif %}
+{%- endcapture -%}
 {%- capture pendant_fallback_links -%}
-Women Pendants|{% if collections['women-pendants'] != blank %}{{ collections['women-pendants'].url }}{% else %}{{ routes.collections_url }}{% endif %}
-Divine Pendants|{% if collections['divine-pendants'] != blank %}{{ collections['divine-pendants'].url }}{% else %}{{ routes.collections_url }}{% endif %}
-Kids Pendants|{% if collections['kids-pendants'] != blank %}{{ collections['kids-pendants'].url }}{% else %}{{ routes.collections_url }}{% endif %}
+Women Pendants|{% if collections['women-pendants'] != blank %}{{ collections['women-pendants'].url }}{% else %}{{ routes.collections_url }}/women-pendants{% endif %}
+Divine Pendants|{% if collections['divine-pendants'] != blank %}{{ collections['divine-pendants'].url }}{% else %}{{ routes.collections_url }}/divine-pendants{% endif %}
+Kids Pendants|{% if collections['kids-pendants'] != blank %}{{ collections['kids-pendants'].url }}{% else %}{{ routes.collections_url }}/kids-pendants{% endif %}
 {%- endcapture -%}
-{%- capture collection_links -%}
-Everyday Silver|{{ routes.collections_url }}/everyday-silver
-Minimal|{{ routes.collections_url }}/minimal
-Office Wear|{{ routes.collections_url }}/office-wear
-Wedding|{{ routes.collections_url }}/wedding
-Trending|{{ routes.collections_url }}/trending
-View All|{{ routes.collections_url }}/all
-{%- endcapture -%}
-{%- capture gift_links -%}
-Gifts under Rs. 999|{{ routes.collections_url }}/gifts-under-999
-Gifts under Rs. 1999|{{ routes.collections_url }}/gifts-under-1999
-Anniversary|{{ routes.collections_url }}/anniversary-gifts
-Birthday|{{ routes.collections_url }}/birthday-gifts
-View All|{{ routes.collections_url }}/silver-gifts
-{%- endcapture -%}
-
 {%- assign pendants_menu_link = blank -%}
 {%- assign rakhi_menu_link = blank -%}
 {%- for menu_link in section.settings.menu.links -%}
@@ -72,7 +56,7 @@ View All|{{ routes.collections_url }}/silver-gifts
 Rakhi|{% if rakhi_link != blank %}{{ rakhi_link.url }}{% elsif rakhi_collection != blank %}{{ rakhi_collection.url }}{% elsif rakhi_menu_link != blank %}{{ rakhi_menu_link.url }}{% else %}{{ routes.collections_url }}/rakhi{% endif %}
 {%- endcapture -%}
 
-{%- assign parent_titles = 'Women|Men|Kids|Pendants|Rakhi|Collections|Gifts' | split: '|' -%}
+{%- assign parent_titles = 'Women|Men|Kids|Pendants|Rakhi' | split: '|' -%}
 {%- for parent_title in parent_titles -%}
   {%- case parent_title -%}
     {%- when 'Women' -%}{%- assign child_rows = women_links | strip | newline_to_br | split: '<br />' -%}
@@ -80,8 +64,6 @@ Rakhi|{% if rakhi_link != blank %}{{ rakhi_link.url }}{% elsif rakhi_collection 
     {%- when 'Kids' -%}{%- assign child_rows = kids_links | strip | newline_to_br | split: '<br />' -%}
     {%- when 'Pendants' -%}{%- assign child_rows = pendant_fallback_links | strip | newline_to_br | split: '<br />' -%}
     {%- when 'Rakhi' -%}{%- assign child_rows = rakhi_links | strip | newline_to_br | split: '<br />' -%}
-    {%- when 'Collections' -%}{%- assign child_rows = collection_links | strip | newline_to_br | split: '<br />' -%}
-    {%- when 'Gifts' -%}{%- assign child_rows = gift_links | strip | newline_to_br | split: '<br />' -%}
   {%- endcase -%}
   <li>
     <details id="Details-menu-drawer-suvedh-{{ parent_title | handleize }}">
@@ -112,9 +94,5 @@ Rakhi|{% if rakhi_link != blank %}{{ rakhi_link.url }}{% elsif rakhi_collection 
       </div>
     </details>
   </li>
-  {%- if parent_title == 'Collections' -%}
-    <li><a href="{{ routes.collections_url }}/new-arrivals" class="menu-drawer__menu-item list-menu__item link link--text focus-inset">New Arrivals</a></li>
-    <li><a href="{{ routes.collections_url }}/best-sellers" class="menu-drawer__menu-item list-menu__item link link--text focus-inset">Best Sellers</a></li>
-  {%- endif -%}
 {%- endfor -%}
-<li><a href="/pages/about-us" class="menu-drawer__menu-item list-menu__item link link--text focus-inset">About Us</a></li>
+<li><a href="{{ routes.collections_url }}/new-arrivals" class="menu-drawer__menu-item list-menu__item link link--text focus-inset">New Arrivals</a></li>

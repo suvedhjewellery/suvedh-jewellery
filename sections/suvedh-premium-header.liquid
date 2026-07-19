@@ -27,9 +27,9 @@
             {%- assign mens_rings = collections['mens-rings'] -%}
             {%- assign mens_chains = collections['mens-chains'] -%}
             {%- assign mens_bracelets = collections['mens-bracelets'] -%}
-            {%- if mens_rings != blank -%}<a href="{{ mens_rings.url }}">Rings</a>{%- endif -%}
-            {%- if mens_chains != blank -%}<a href="{{ mens_chains.url }}">Chains</a>{%- endif -%}
-            {%- if mens_bracelets != blank -%}<a href="{{ mens_bracelets.url }}">Bracelets</a>{%- endif -%}
+            <a href="{% if mens_rings != blank %}{{ mens_rings.url }}{% else %}{{ routes.collections_url }}/mens-rings{% endif %}">Rings</a>
+            <a href="{% if mens_chains != blank %}{{ mens_chains.url }}{% else %}{{ routes.collections_url }}/mens-chains{% endif %}">Chains</a>
+            <a href="{% if mens_bracelets != blank %}{{ mens_bracelets.url }}{% else %}{{ routes.collections_url }}/mens-bracelets{% endif %}">Bracelets</a>
           </div>
         </div>
       </details>
@@ -41,11 +41,13 @@
         </div>
       </details>
       {%- assign pendants_menu_link = blank -%}
+      {%- assign rakhi_menu_link = blank -%}
       {%- for menu_link in section.settings.menu.links -%}
         {%- assign menu_handle = menu_link.title | handleize -%}
         {%- if menu_handle == 'pendants' -%}
           {%- assign pendants_menu_link = menu_link -%}
-          {%- break -%}
+        {%- elsif menu_handle == 'rakhi' -%}
+          {%- assign rakhi_menu_link = menu_link -%}
         {%- endif -%}
       {%- endfor -%}
       <details class="suvedh-nav-item suvedh-nav-item--mega">
@@ -61,25 +63,19 @@
               {%- assign women_pendants = collections['women-pendants'] -%}
               {%- assign divine_pendants = collections['divine-pendants'] -%}
               {%- assign kids_pendants = collections['kids-pendants'] -%}
-              <a href="{% if women_pendants != blank %}{{ women_pendants.url }}{% else %}{{ routes.collections_url }}{% endif %}">Women Pendants</a>
-              <a href="{% if divine_pendants != blank %}{{ divine_pendants.url }}{% else %}{{ routes.collections_url }}{% endif %}">Divine Pendants</a>
-              <a href="{% if kids_pendants != blank %}{{ kids_pendants.url }}{% else %}{{ routes.collections_url }}{% endif %}">Kids Pendants</a>
+              <a href="{% if women_pendants != blank %}{{ women_pendants.url }}{% else %}{{ routes.collections_url }}/women-pendants{% endif %}">Women Pendants</a>
+              <a href="{% if divine_pendants != blank %}{{ divine_pendants.url }}{% else %}{{ routes.collections_url }}/divine-pendants{% endif %}">Divine Pendants</a>
+              <a href="{% if kids_pendants != blank %}{{ kids_pendants.url }}{% else %}{{ routes.collections_url }}/kids-pendants{% endif %}">Kids Pendants</a>
             {%- endif -%}
           </div>
         </div>
       </details>
-      {%- assign rakhi_menu_link = blank -%}
-      {%- for menu_link in section.settings.menu.links -%}
-        {%- if menu_link.title | handleize == 'rakhi' -%}
-          {%- assign rakhi_menu_link = menu_link -%}
-          {%- break -%}
-        {%- endif -%}
-      {%- endfor -%}
       {%- assign rakhi_collection = collections['rakhi'] -%}
       {%- assign rakhi_link = blank -%}
       {%- if rakhi_menu_link != blank and rakhi_menu_link.links != blank -%}
         {%- for child_link in rakhi_menu_link.links -%}
-          {%- if child_link.title | handleize == 'rakhi' -%}
+          {%- assign child_handle = child_link.title | handleize -%}
+          {%- if child_handle == 'rakhi' -%}
             {%- assign rakhi_link = child_link -%}
             {%- break -%}
           {%- endif -%}
