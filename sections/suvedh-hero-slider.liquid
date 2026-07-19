@@ -236,10 +236,9 @@
       {%- for block in section.blocks -%}
         {%- liquid
           assign desktop_image = block.settings.desktop_image
-          assign mobile_image = block.settings.mobile_image | default: desktop_image
           assign mobile_image_fit = block.settings.mobile_image_fit | default: 'contain'
           assign mobile_background = block.settings.mobile_background | default: '#F9E9EC'
-          assign image_alt = mobile_image.alt | default: desktop_image.alt | default: section.settings.accessibility_label
+          assign image_alt = desktop_image.alt | default: section.settings.accessibility_label
           assign image_loading = 'lazy'
           assign image_priority = 'auto'
           if forloop.first
@@ -259,8 +258,8 @@
         >
           <div class="suvedh-hero__media">
             <picture>
-              {%- if mobile_image != blank -%}
-                <source media="(max-width: 749px)" srcset="{{ mobile_image | image_url: width: 375 }} 375w, {{ mobile_image | image_url: width: 550 }} 550w, {{ mobile_image | image_url: width: 750 }} 750w, {{ mobile_image | image_url: width: 1100 }} 1100w" sizes="100vw">
+              {%- if desktop_image != blank -%}
+                <source media="(max-width: 749px)" srcset="{{ desktop_image | image_url: width: 375 }} 375w, {{ desktop_image | image_url: width: 550 }} 550w, {{ desktop_image | image_url: width: 750 }} 750w, {{ desktop_image | image_url: width: 1100 }} 1100w" sizes="100vw">
               {%- endif -%}
               {%- if desktop_image != blank -%}
                 <img
@@ -408,7 +407,6 @@
       "name": "Slide",
       "settings": [
         { "type": "image_picker", "id": "desktop_image", "label": "Desktop image" },
-        { "type": "image_picker", "id": "mobile_image", "label": "Mobile image (optional - falls back to desktop)" },
         { "type": "select", "id": "mobile_image_fit", "label": "Mobile image fit", "options": [{ "value": "contain", "label": "Contain - show complete image" }, { "value": "cover", "label": "Cover - fill banner and allow cropping" }], "default": "contain" },
         { "type": "color", "id": "mobile_background", "label": "Mobile banner background", "default": "#F9E9EC" },
         { "type": "select", "id": "mobile_horizontal_position", "label": "Mobile horizontal position", "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" }], "default": "center" },
