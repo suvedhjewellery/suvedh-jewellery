@@ -18,6 +18,10 @@
       {%- liquid
         assign swatch_count = option.values | map: 'swatch' | compact | size
         assign picker_type = block.settings.picker_type
+        assign option_name = option.name | downcase
+        if enable_color_swatches and option_name == 'color' or enable_color_swatches and option_name == 'colour'
+          assign picker_type = 'suvedh_color'
+        endif
 
         if swatch_count > 0 and block.settings.swatch_shape != 'none'
           if block.settings.picker_type == 'dropdown'
@@ -27,7 +31,12 @@
           endif
         endif
       -%}
-      {%- if picker_type == 'swatch' -%}
+      {%- if picker_type == 'suvedh_color' -%}
+        <fieldset class="js product-form__input product-form__input--suvedh-color" style="--swatch-size:{{ section.settings.swatch_size }}px;--swatch-border:{{ section.settings.swatch_border_color }};--selected-swatch-border:{{ section.settings.selected_swatch_border_color }}">
+          <legend class="form__label">{{ option.name }}: <span data-selected-value>{{ option.selected_value }}</span></legend>
+          {% render 'product-variant-options', product: product, option: option, block: block, picker_type: picker_type %}
+        </fieldset>
+      {%- elsif picker_type == 'swatch' -%}
         <fieldset class="js product-form__input product-form__input--swatch">
           <legend class="form__label">
             {{ option.name }}:

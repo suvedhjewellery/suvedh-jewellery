@@ -3,13 +3,6 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "vendor": {
-          "type": "text",
-          "settings": {
-            "text": "{{ product.vendor }}",
-            "text_style": "uppercase"
-          }
-        },
         "title": {
           "type": "title",
           "settings": {}
@@ -75,7 +68,8 @@
             "title": "Welcome offer",
             "code": "SUVEDH10",
             "description": "<p>Get 10% off your first order.</p>",
-            "minimum": ""
+            "minimum_quantity": 1,
+            "minimum_cart_amount": ""
           }
         },
         "benefit_1": {
@@ -112,7 +106,6 @@
         }
       },
       "block_order": [
-        "vendor",
         "title",
         "price",
         "variant_picker",

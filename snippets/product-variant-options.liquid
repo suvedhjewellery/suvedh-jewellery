@@ -60,7 +60,39 @@
 
   {% assign escaped_value = value | escape %}
 
-  {%- if picker_type == 'swatch' -%}
+  {%- if picker_type == 'suvedh_color' -%}
+    {%- liquid
+      assign color_key = escaped_value | downcase | strip
+      assign fallback_color = '#d8d3cd'
+      case color_key
+        when 'gold'
+          assign fallback_color = '#d4af37'
+        when 'silver'
+          assign fallback_color = '#c0c0c0'
+        when 'rose gold'
+          assign fallback_color = '#b76e79'
+        when 'black'
+          assign fallback_color = '#111111'
+        when 'white'
+          assign fallback_color = '#ffffff'
+        when 'blue'
+          assign fallback_color = '#2563eb'
+        when 'green'
+          assign fallback_color = '#25804b'
+        when 'red'
+          assign fallback_color = '#c62828'
+        when 'pink'
+          assign fallback_color = '#e98aa8'
+        when 'purple'
+          assign fallback_color = '#7e57c2'
+      endcase
+      if swatch_value == null
+        assign swatch_value = fallback_color
+      endif
+    -%}
+    <input type="radio" id="{{ input_id }}" name="{{ input_name | escape }}" value="{{ escaped_value }}" form="{{ product_form_id }}" {% if value.selected %}checked{% endif %} {% if option_disabled %}class="disabled"{% endif %} {{ input_dataset }}>
+    <label for="{{ input_id }}"><span class="suvedh-product-page__swatch" style="--swatch-color:{{ swatch_value }}{% if swatch_focal_point %};background-position:{{ swatch_focal_point }}{% endif %}" aria-hidden="true"></span><span>{{ value }}</span>{{ label_unavailable }}</label>
+  {%- elsif picker_type == 'swatch' -%}
     {%- capture help_text -%}
       <span class="visually-hidden">{{ escaped_value }}</span>
       {{ label_unavailable }}

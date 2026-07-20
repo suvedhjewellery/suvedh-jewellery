@@ -88,8 +88,6 @@
           {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
           <nav class="suvedh-product-page__breadcrumb" aria-label="Breadcrumb"><a href="{{ routes.root_url }}">Home</a>{%- if collection != blank -%}<span aria-hidden="true">/</span><a href="{{ collection.url }}">{{ collection.title | escape }}</a>{%- endif -%}<span aria-hidden="true">/</span><span aria-current="page">{{ product.title | escape }}</span></nav>
-          {%- if product.selected_or_first_available_variant.sku != blank -%}<p class="suvedh-product-page__sku" id="SuvedhSku-{{ section.id }}">SKU: <span>{{ product.selected_or_first_available_variant.sku | escape }}</span></p>{%- endif -%}
-          {%- if section.settings.enable_viewer_message -%}{%- assign viewer_range = section.settings.viewer_max | minus: section.settings.viewer_min | plus: 1 -%}{%- assign viewer_seed = product.id | modulo: viewer_range | plus: section.settings.viewer_min -%}<p class="suvedh-product-page__viewer">{{ section.settings.viewer_message | replace: '[count]', viewer_seed | escape }}</p>{%- endif -%}
           {%- for block in section.blocks -%}
             {%- case block.type -%}
               {%- when '@app' -%}
@@ -110,6 +108,8 @@
                     </h2>
                   </a>
                 </div>
+                <p class="suvedh-product-page__sku{% if product.selected_or_first_available_variant.sku == blank %} hidden{% endif %}" id="Sku-{{ section.id }}" role="status">SKU: <span>{{ product.selected_or_first_available_variant.sku | escape }}</span></p>
+                {%- if section.settings.enable_viewer_message -%}{%- assign viewer_range = section.settings.viewer_max | minus: section.settings.viewer_min | plus: 1 -%}{%- assign viewer_seed = product.id | modulo: viewer_range | plus: section.settings.viewer_min -%}<p class="suvedh-product-page__viewer">{{ section.settings.viewer_message | replace: '[count]', viewer_seed | escape }}</p>{%- endif -%}
               {%- when 'price' -%}
                 <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                   {%- render 'price',
@@ -119,6 +119,7 @@
                     price_class: 'price--large'
                   -%}
                 </div>
+                {%- if section.settings.inclusive_tax_text != blank -%}<p class="product__tax caption">{{ section.settings.inclusive_tax_text | escape }}</p>{%- endif -%}
                 {%- if product.quantity_price_breaks_configured? -%}
                   <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">
                     <span>{{ 'products.product.volume_pricing.note' | t }}</span>
@@ -145,6 +146,32 @@
                     {{ form | payment_terms }}
                   {%- endform -%}
                 </div>
+                {%- if section.settings.show_short_description and section.settings.description_mode != 'hidden' -%}
+                  {%- liquid
+                    assign short_description = product.description
+                    if section.settings.description_mode == 'custom'
+                      assign short_description = section.settings.custom_short_description
+                    elsif section.settings.description_mode == 'first_paragraph'
+                      assign cleaned_description = product.description | replace: '<p></p>', '' | replace: '<p>&nbsp;</p>', '' | strip
+                      assign first_paragraph = cleaned_description | split: '</p>' | first
+                      if first_paragraph contains '<p'
+                        assign short_description = first_paragraph | append: '</p>'
+                      else
+                        assign short_description = first_paragraph
+                      endif
+                    endif
+                  -%}
+                  {%- if short_description != blank -%}<div class="suvedh-product-page__short-description rte">{{ short_description }}</div>{%- endif -%}
+                {%- endif -%}
+                {%- if section.settings.enable_discount_message and section.settings.discount_percentage > 0 -%}
+                  {%- assign discount_multiplier = 100 | minus: section.settings.discount_percentage -%}
+                  {%- assign discounted_price = product.selected_or_first_available_variant.price | times: discount_multiplier | divided_by: 100 -%}
+                  <div class="suvedh-product-page__discount" data-discount-message data-discount-percentage="{{ section.settings.discount_percentage }}" style="--discount-bg:{{ section.settings.discount_background }};--discount-color:{{ section.settings.discount_text_color }}">
+                    <p>{% if section.settings.discount_text != blank %}{{ section.settings.discount_text | escape }} {% endif %}<strong data-discounted-price>{{ discounted_price | money }}</strong> with {{ section.settings.discount_percentage }}% discount</p>
+                    {% if section.settings.discount_minimum_quantity > 1 %}<small>Minimum quantity: {{ section.settings.discount_minimum_quantity }}</small>{% endif %}
+                    {% if section.settings.discount_coupon_code != blank %}<small>Use code <code>{{ section.settings.discount_coupon_code | escape }}</code></small>{% endif %}
+                  </div>
+                {%- endif -%}
               {%- when 'inventory' -%}
                 <p
                   class="product__inventory{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.inventory_management != 'shopify' %} visibility-hidden{% endif %}"
@@ -203,15 +230,7 @@
                   </div>
                 {%- endif -%}
               {%- when 'sku' -%}
-                <p
-                  class="product__sku{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.sku.size == 0 %} visibility-hidden{% endif %}"
-                  id="Sku-{{ section.id }}"
-                  role="status"
-                  {{ block.shopify_attributes }}
-                >
-                  <span class="visually-hidden">{{ 'products.product.sku' | t }}:</span>
-                  {{- product.selected_or_first_available_variant.sku -}}
-                </p>
+                {% comment %}Rendered below title above.{% endcomment %}
               {%- when 'custom_liquid' -%}
                 {{ block.settings.custom_liquid }}
               {%- when 'collapsible_tab' -%}
@@ -233,6 +252,7 @@
                   </details>
                 </div>
               {%- when 'quantity_selector' -%}
+                {%- if section.settings.show_quantity_selector -%}
                 <div
                   id="Quantity-Form-{{ section.id }}"
                   class="product-form__input product-form__quantity{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}"
@@ -459,6 +479,7 @@
                     </volume-pricing>
                   {%- endif -%}
                 </div>
+                {%- endif -%}
               {%- when 'popup' -%}
                 <modal-opener
                   class="product-popup-modal__opener quick-add-hidden"
@@ -481,7 +502,7 @@
                 %}
 
               {%- when 'variant_picker' -%}
-                {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
+                {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id, enable_color_swatches: section.settings.enable_color_swatches %}
               {%- when 'buy_buttons' -%}
                 {%- render 'buy-buttons',
                   block: block,
@@ -681,7 +702,8 @@
                 {% render 'icon-with-text', block: block %}
             {%- endcase -%}
           {%- endfor -%}
-          {%- assign offer_blocks = section.blocks | where: 'type', 'offer' -%}{%- if section.settings.enable_offers and offer_blocks.size > 0 -%}<section class="suvedh-product-page__offers" aria-labelledby="Offers-{{ section.id }}"><h2 id="Offers-{{ section.id }}">Available offers</h2><div class="suvedh-product-page__offer-grid">{%- for block in offer_blocks limit: 4 -%}<article class="suvedh-product-page__offer" {{ block.shopify_attributes }}><h3>{{ block.settings.title | escape }}</h3>{%- if block.settings.code != blank -%}<p><code>{{ block.settings.code | escape }}</code><button type="button" data-copy-code="{{ block.settings.code | escape }}">Copy</button></p>{%- endif -%}{{ block.settings.description }}{%- if block.settings.minimum != blank -%}<small>{{ block.settings.minimum | escape }}</small>{%- endif -%}<small>Subject to applicable conditions.</small></article>{%- endfor -%}</div></section>{%- endif -%}
+          {%- if pages.wishlist != blank -%}<div class="suvedh-product-page__wishlist"><a class="button button--secondary button--full-width" href="{{ pages.wishlist.url }}?product={{ product.handle }}">♡ Add to Wishlist</a></div>{%- endif -%}
+          {%- assign offer_blocks = section.blocks | where: 'type', 'offer' -%}{%- if section.settings.enable_offers and offer_blocks.size > 0 -%}<section class="suvedh-product-page__offers" aria-labelledby="Offers-{{ section.id }}"><h2 id="Offers-{{ section.id }}">Available offers</h2><div class="suvedh-product-page__offer-grid">{%- for block in offer_blocks limit: 4 -%}<article class="suvedh-product-page__offer" {{ block.shopify_attributes }}>{% if block.settings.icon %}{{ block.settings.icon | image_url: width: 48 | image_tag: loading: 'lazy' }}{% endif %}<h3>{{ block.settings.title | escape }}</h3>{%- if block.settings.code != blank -%}<p><code>{{ block.settings.code | escape }}</code><button type="button" data-copy-code="{{ block.settings.code | escape }}">Copy</button></p>{%- endif -%}{{ block.settings.description }}{% if block.settings.minimum_quantity > 1 %}<small>Minimum quantity: {{ block.settings.minimum_quantity }}</small>{% endif %}{% if block.settings.minimum_cart_amount != blank %}<small>Minimum cart amount: {{ block.settings.minimum_cart_amount | escape }}</small>{% endif %}<small>Subject to applicable conditions.</small></article>{%- endfor -%}</div></section>{%- endif -%}
           <section class="suvedh-product-page__information" data-product-information>{%- assign info_labels = 'Description,Shipping & Returns,Jewellery Care,Product Details' | split: ',' -%}<div class="suvedh-product-page__tablist" role="tablist" aria-label="Product information">{%- for label in info_labels -%}<button type="button" role="tab" id="Tab-{{ section.id }}-{{ forloop.index }}" aria-controls="Panel-{{ section.id }}-{{ forloop.index }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" tabindex="{% if forloop.first %}0{% else %}-1{% endif %}">{{ label }}</button>{%- endfor -%}</div>{%- for label in info_labels -%}<div class="suvedh-product-page__panel{% unless forloop.first %} is-hidden{% endunless %}" id="Panel-{{ section.id }}-{{ forloop.index }}" role="tabpanel" aria-labelledby="Tab-{{ section.id }}-{{ forloop.index }}"><button class="suvedh-product-page__accordion-trigger" type="button" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="PanelContent-{{ section.id }}-{{ forloop.index }}">{{ label }}<span aria-hidden="true">+</span></button><div class="suvedh-product-page__panel-content rte" id="PanelContent-{{ section.id }}-{{ forloop.index }}"{% unless forloop.first %} hidden{% endunless %}>{%- case forloop.index -%}{%- when 1 -%}{{ product.description }}{%- when 2 -%}{{ section.settings.shipping_returns }}{%- when 3 -%}{{ section.settings.jewellery_care }}{%- when 4 -%}<dl class="suvedh-product-page__details">{%- if product.type != blank -%}<div><dt>Product type</dt><dd>{{ product.type | escape }}</dd></div>{%- endif -%}{%- if product.vendor != blank -%}<div><dt>Vendor</dt><dd>{{ product.vendor | escape }}</dd></div>{%- endif -%}{%- if product.selected_or_first_available_variant.sku != blank -%}<div><dt>SKU</dt><dd>{{ product.selected_or_first_available_variant.sku | escape }}</dd></div>{%- endif -%}</dl>{%- endcase -%}</div></div>{%- endfor -%}</section>
           {%- assign benefit_blocks = section.blocks | where: 'type', 'trust_benefit' -%}{%- if section.settings.enable_trust_benefits and benefit_blocks.size > 0 -%}<section class="suvedh-product-page__benefits" aria-label="Shopping benefits">{%- for block in benefit_blocks limit: 4 -%}<div {{ block.shopify_attributes }}><span aria-hidden="true">{{ block.settings.icon | escape }}</span><p><strong>{{ block.settings.title | escape }}</strong><small>{{ block.settings.subtitle | escape }}</small></p></div>{%- endfor -%}</section>{%- endif -%}
           <section class="suvedh-product-page__payments"><h2>{{ section.settings.secure_heading | escape }}</h2><div>{%- for type in shop.enabled_payment_types -%}{{ type | payment_type_svg_tag }}{%- endfor -%}</div></section>
@@ -758,7 +780,7 @@
   "class": "section",
   "blocks": [
     { "type": "@app" },
-    { "type": "offer", "name": "Offer", "limit": 4, "settings": [{"type":"text","id":"title","label":"Title","default":"Welcome offer"},{"type":"text","id":"code","label":"Offer code","default":"SUVEDH10"},{"type":"richtext","id":"description","label":"Description","default":"<p>Get 10% off your first order.</p>"},{"type":"text","id":"minimum","label":"Minimum purchase note"}] },
+    { "type": "offer", "name": "Offer", "limit": 4, "settings": [{"type":"image_picker","id":"icon","label":"Optional icon"},{"type":"text","id":"title","label":"Heading","default":"Welcome offer"},{"type":"text","id":"code","label":"Code","default":"SUVEDH10"},{"type":"richtext","id":"description","label":"Description","default":"<p>Get 10% off your first order.</p>"},{"type":"range","id":"minimum_quantity","label":"Minimum quantity","min":1,"max":20,"step":1,"default":1},{"type":"text","id":"minimum_cart_amount","label":"Minimum cart amount"}] },
     { "type": "trust_benefit", "name": "Trust benefit", "limit": 4, "settings": [{"type":"text","id":"icon","label":"Simple icon","default":"?"},{"type":"text","id":"title","label":"Title","default":"Secure Payments"},{"type":"text","id":"subtitle","label":"Subtitle"}] },
     {
       "type": "text",
@@ -2113,6 +2135,35 @@
     }
   ],
   "settings": [
+    { "type":"header","content":"Product information panel" },
+    { "type":"text","id":"inclusive_tax_text","label":"Inclusive-of-tax text","default":"Inclusive of all taxes" },
+    { "type":"checkbox","id":"show_short_description","label":"Show short description","default":true },
+    { "type":"select","id":"description_mode","label":"Description display mode","default":"first_paragraph","options":[{"value":"full","label":"Full description"},{"value":"first_paragraph","label":"First paragraph only"},{"value":"custom","label":"Custom short description"},{"value":"hidden","label":"Hidden"}] },
+    { "type":"richtext","id":"custom_short_description","label":"Custom short description" },
+    { "type":"checkbox","id":"enable_discount_message","label":"Enable discount message","default":false },
+    { "type":"text","id":"discount_text","label":"Discount text","default":"Get it for" },
+    { "type":"range","id":"discount_percentage","label":"Discount percentage","min":0,"max":90,"step":1,"unit":"%","default":20 },
+    { "type":"range","id":"discount_minimum_quantity","label":"Minimum quantity","min":1,"max":20,"step":1,"default":1 },
+    { "type":"text","id":"discount_coupon_code","label":"Coupon code" },
+    { "type":"color","id":"discount_background","label":"Discount background","default":"#fbf5f3" },
+    { "type":"color","id":"discount_text_color","label":"Discount text color","default":"#241f1a" },
+    { "type":"checkbox","id":"enable_color_swatches","label":"Enable color swatches","default":true },
+    { "type":"range","id":"swatch_size","label":"Swatch size","min":28,"max":56,"step":2,"unit":"px","default":38 },
+    { "type":"color","id":"swatch_border_color","label":"Swatch border color","default":"#c9c3bc" },
+    { "type":"color","id":"selected_swatch_border_color","label":"Selected swatch border color","default":"#9a7441" },
+    { "type":"checkbox","id":"show_quantity_selector","label":"Show quantity selector","default":true },
+    { "type":"checkbox","id":"show_dynamic_checkout","label":"Show dynamic checkout button","default":true },
+    { "type":"checkbox","id":"enable_viewer_message","label":"Enable viewer badge","info":"Simulated decorative value; disabled by default and not live analytics.","default":false },
+    { "type":"range","id":"viewer_min","label":"Minimum viewer count","min":1,"max":50,"step":1,"default":8 },
+    { "type":"range","id":"viewer_max","label":"Maximum viewer count","min":2,"max":100,"step":1,"default":24 },
+    { "type":"text","id":"viewer_message","label":"Viewer message","info":"Use [count] for the simulated number.","default":"[count] people are viewing this right now" },
+    { "type":"checkbox","id":"enable_offers","label":"Enable offer cards","default":true },
+    { "type":"checkbox","id":"enable_trust_benefits","label":"Enable trust benefits","default":true },
+    { "type":"checkbox","id":"enable_sticky_atc","label":"Enable sticky Add to Cart","default":true },
+    { "type":"richtext","id":"shipping_returns","label":"Shipping & returns","default":"<p>Dispatch and delivery times depend on the destination and shipping provider. Returns are subject to the SUVEDH return policy and applicable return conditions.</p>" },
+    { "type":"richtext","id":"jewellery_care","label":"Jewellery care","default":"<p>Keep jewellery away from perfume and harsh chemicals. Avoid prolonged contact with water. Clean gently with a soft jewellery cloth and store separately.</p>" },
+    { "type":"text","id":"secure_heading","label":"Secure checkout heading","default":"Secure Checkout" },
+    { "type":"color","id":"image_background","label":"Product image background","default":"#faf9f7" },
     { "type": "text", "id": "silver_badge_text", "label": "Fine silver badge", "default": "92.5 Fine Silver" },
     { "type": "text", "id": "hallmark_heading", "label": "Hallmark heading", "default": "Hallmarked Jewellery" },
     { "type": "text", "id": "hallmark_text", "label": "Hallmark information", "default": "Certified for purity and authenticity." },
