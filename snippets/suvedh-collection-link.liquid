@@ -1,0 +1,49 @@
+{%- assign destination = fallback -%}
+{%- case parent | strip -%}
+  {%- when 'Women' -%}
+    {%- case label | strip -%}
+      {%- when 'Rings' -%}{%- assign destination = routes.collections_url | append: '/women-rings' -%}
+      {%- when 'Toe Rings' -%}{%- assign destination = routes.collections_url | append: '/women-toe-rings' -%}
+      {%- when 'Earrings' -%}{%- assign destination = routes.collections_url | append: '/women-earrings' -%}
+      {%- when 'Studs' -%}{%- assign destination = routes.collections_url | append: '/women-studs' -%}
+      {%- when 'Hoops' -%}{%- assign destination = routes.collections_url | append: '/women-hoops' -%}
+      {%- when 'Bracelets' -%}{%- assign destination = routes.collections_url | append: '/women-bracelets' -%}
+      {%- when 'Kadas' -%}{%- assign destination = routes.collections_url | append: '/women-kadas' -%}
+      {%- when 'Necklace', 'Necklaces' -%}{%- assign destination = routes.collections_url | append: '/women-necklaces' -%}
+      {%- when 'Charms' -%}{%- assign destination = routes.collections_url | append: '/women-charms' -%}
+      {%- when 'Anklets' -%}{%- assign destination = routes.collections_url | append: '/women-anklets' -%}
+    {%- endcase -%}
+  {%- when 'Men' -%}
+    {%- case label | strip -%}
+      {%- when 'Rings' -%}{%- assign destination = routes.collections_url | append: '/men-rings' -%}
+      {%- when 'Chains' -%}{%- assign destination = routes.collections_url | append: '/men-chains' -%}
+      {%- when 'Bracelets' -%}{%- assign destination = routes.collections_url | append: '/men-bracelets' -%}
+    {%- endcase -%}
+  {%- when 'Kids' -%}
+    {%- case label | strip -%}
+      {%- when 'Nazaria' -%}{%- assign destination = routes.collections_url | append: '/kids-nazaria' -%}
+      {%- when 'Anklets' -%}{%- assign destination = routes.collections_url | append: '/kids-anklets' -%}
+      {%- when 'Rings' -%}{%- assign destination = routes.collections_url | append: '/kids-rings' -%}
+      {%- when 'Earrings' -%}{%- assign destination = routes.collections_url | append: '/kids-earrings' -%}
+      {%- when 'Charms' -%}{%- assign destination = routes.collections_url | append: '/kids-charms' -%}
+      {%- when 'Hoops' -%}{%- assign destination = routes.collections_url | append: '/kids-hoops' -%}
+      {%- when 'Kadas' -%}{%- assign destination = routes.collections_url | append: '/kids-kadas' -%}
+    {%- endcase -%}
+  {%- when 'Pendants' -%}
+    {%- case label | strip -%}
+      {%- when 'Women Pendants' -%}{%- assign destination = routes.collections_url | append: '/women-pendants' -%}
+      {%- when 'Divine Pendants' -%}{%- assign destination = routes.collections_url | append: '/divine-pendants' -%}
+      {%- when 'Kids Pendants' -%}{%- assign destination = routes.collections_url | append: '/kids-pendants' -%}
+    {%- endcase -%}
+  {%- else -%}
+    {%- case label | strip -%}
+      {%- when 'Women' -%}{%- assign destination = routes.collections_url | append: '/women' -%}
+      {%- when 'Men' -%}{%- assign destination = routes.collections_url | append: '/men' -%}
+      {%- when 'Kids' -%}{%- assign destination = routes.collections_url | append: '/kids' -%}
+      {%- when 'Pendants' -%}{%- assign destination = routes.collections_url | append: '/pendants' -%}
+      {%- when 'Rakhi' -%}{%- assign destination = routes.collections_url | append: '/rakhi' -%}
+      {%- when 'New Arrivals' -%}{%- assign destination = routes.collections_url | append: '/new-arrivals' -%}
+      {%- when 'Best Sellers' -%}{%- assign destination = routes.collections_url | append: '/best-sellers' -%}
+    {%- endcase -%}
+{%- endcase -%}
+{{- destination -}}
