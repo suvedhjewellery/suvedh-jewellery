@@ -41,7 +41,7 @@
 
     <a class="suvedh-header__logo" href="{{ routes.root_url }}" aria-label="{{ shop.name }} home">
       {%- assign header_logo = section.settings.logo -%}
-      {% if header_logo != blank %}{{ header_logo | image_url: width: 600 | image_tag: widths: '180, 300, 450, 600', alt: shop.name, preload: true }}{% else %}<picture><source media="(max-width: 749px)" srcset="{{ 'suvedh-logo-clean-mobile.png' | asset_url }}"><img src="{{ 'suvedh-logo-clean.png' | asset_url }}" alt="{{ shop.name | escape }}" width="1254" height="1254" fetchpriority="high" decoding="async"></picture>{% endif %}
+      {% if header_logo != blank %}{{ header_logo | image_url: width: 600 | image_tag: widths: '180, 300, 450, 600', alt: shop.name, preload: true }}{% else %}<img src="{{ 'suvedh-logo-cropped.png' | asset_url }}" alt="{{ shop.name | escape }}" width="978" height="679" fetchpriority="high" decoding="async">{% endif %}
     </a>
 
     <div class="suvedh-header__actions">
