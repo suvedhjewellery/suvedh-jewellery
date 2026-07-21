@@ -1,173 +1,137 @@
 {
-  "sections": {
-    "main": {
-      "type": "main-product",
-      "blocks": {
-        "title": {
-          "type": "title",
-          "settings": {}
-        },
-        "price": {
-          "type": "price",
-          "settings": {}
-        },
-        "variant_picker": {
-          "type": "variant_picker",
-          "settings": {
-            "picker_type": "button",
-            "swatch_shape": "circle"
-          }
-        },
-        "quantity_selector": {
-          "type": "quantity_selector",
-          "settings": {}
-        },
-        "buy_buttons": {
-          "type": "buy_buttons",
-          "settings": {
-            "show_dynamic_checkout": true,
-            "show_gift_card_recipient": true
-          }
-        },
-        "share": {
-          "type": "share",
-          "settings": {
-            "share_label": "Share"
-          }
-        },
-        "jewellery_care": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Jewellery Care",
-            "icon": "washing",
-            "content": "<p>Keep your silver jewellery dry and store it separately in a soft pouch. Gently clean with a silver polishing cloth.</p>",
-            "page": ""
-          }
-        },
-        "specifications": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Specifications",
-            "icon": "clipboard",
-            "content": "<p>Product specifications, dimensions and materials can be maintained here from the Theme Editor.</p>",
-            "page": ""
-          }
-        },
-        "product_faq": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Frequently Asked Questions",
-            "icon": "chat_bubble",
-            "content": "<p>Add product-specific answers or connect a dedicated FAQ page from the Theme Editor.</p>",
-            "page": ""
-          }
-        },
-        "offer_1": {
-          "type": "offer",
-          "settings": {
-            "title": "Welcome offer",
-            "code": "SUVEDH10",
-            "description": "<p>Get 10% off your first order.</p>",
-            "minimum_quantity": 1,
-            "minimum_cart_amount": ""
-          }
-        },
-        "benefit_1": {
-          "type": "trust_benefit",
-          "settings": {
-            "icon": "?",
-            "title": "925 Sterling Silver",
-            "subtitle": "See product details"
-          }
-        },
-        "benefit_2": {
-          "type": "trust_benefit",
-          "settings": {
-            "icon": "?",
-            "title": "Secure Payments",
-            "subtitle": ""
-          }
-        },
-        "benefit_3": {
-          "type": "trust_benefit",
-          "settings": {
-            "icon": "?",
-            "title": "Insured Shipping",
-            "subtitle": ""
-          }
-        },
-        "benefit_4": {
-          "type": "trust_benefit",
-          "settings": {
-            "icon": "?",
-            "title": "Easy Returns",
-            "subtitle": "Conditions apply"
-          }
-        }
-      },
-      "block_order": [
-        "title",
-        "price",
-        "variant_picker",
-        "quantity_selector",
-        "buy_buttons",
-        "jewellery_care",
-        "specifications",
-        "product_faq",
-        "share",
-        "offer_1",
-        "benefit_1",
-        "benefit_2",
-        "benefit_3",
-        "benefit_4"
-      ],
-      "settings": {
-        "enable_sticky_info": true,
-        "color_scheme": "scheme-1",
-        "media_size": "large",
-        "constrain_to_viewport": true,
-        "media_fit": "contain",
-        "gallery_layout": "stacked",
-        "mobile_thumbnails": "hide",
-        "media_position": "left",
-        "image_zoom": "lightbox",
-        "hide_variants": true,
-        "enable_video_looping": false,
-        "padding_top": 36,
-        "padding_bottom": 12
-      }
-    },
-    "related-products": {
-      "type": "related-products",
-      "settings": {
-        "heading": "You may also like",
-        "heading_size": "h2",
-        "products_to_show": 4,
-        "columns_desktop": 4,
-        "columns_mobile": "2",
-        "color_scheme": "scheme-1",
-        "image_ratio": "square",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "padding_top": 36,
-        "padding_bottom": 28
-      }
-    },
-    "recently_viewed": {
-      "type": "suvedh-recently-viewed",
-      "settings": {
-        "heading": "Recently Viewed",
-        "products_to_show": 4,
-        "padding_top": 48,
-        "padding_bottom": 64
-      }
-    }
-  },
-  "order": [
-    "main",
-    "related-products",
-    "recently_viewed"
-  ]
+    "sections":  {
+                     "main":  {
+                                  "type":  "main-product",
+                                  "blocks":  {
+                                                 "title":  {
+                                                               "type":  "title",
+                                                               "settings":  {
+
+                                                                            }
+                                                           },
+                                                 "price":  {
+                                                               "type":  "price",
+                                                               "settings":  {
+
+                                                                            }
+                                                           },
+                                                 "variant_picker":  {
+                                                                        "type":  "variant_picker",
+                                                                        "settings":  {
+                                                                                         "picker_type":  "button",
+                                                                                         "swatch_shape":  "circle"
+                                                                                     }
+                                                                    },
+                                                 "quantity_selector":  {
+                                                                           "type":  "quantity_selector",
+                                                                           "settings":  {
+
+                                                                                        }
+                                                                       },
+                                                 "buy_buttons":  {
+                                                                     "type":  "buy_buttons",
+                                                                     "settings":  {
+                                                                                      "show_dynamic_checkout":  true,
+                                                                                      "show_gift_card_recipient":  true
+                                                                                  }
+                                                                 },
+                                                 "share":  {
+                                                               "type":  "share",
+                                                               "settings":  {
+                                                                                "share_label":  "Share"
+                                                                            }
+                                                           },
+                                                 "jewellery_care":  {
+                                                                        "type":  "collapsible_tab",
+                                                                        "settings":  {
+                                                                                         "heading":  "Jewellery Care",
+                                                                                         "icon":  "washing",
+                                                                                         "content":  "\u003cp\u003eKeep your silver jewellery dry and store it separately in a soft pouch. Gently clean with a silver polishing cloth.\u003c/p\u003e",
+                                                                                         "page":  ""
+                                                                                     }
+                                                                    },
+                                                 "specifications":  {
+                                                                        "type":  "collapsible_tab",
+                                                                        "settings":  {
+                                                                                         "heading":  "Specifications",
+                                                                                         "icon":  "clipboard",
+                                                                                         "content":  "\u003cp\u003eProduct specifications, dimensions and materials can be maintained here from the Theme Editor.\u003c/p\u003e",
+                                                                                         "page":  ""
+                                                                                     }
+                                                                    },
+                                                 "product_faq":  {
+                                                                     "type":  "collapsible_tab",
+                                                                     "settings":  {
+                                                                                      "heading":  "Frequently Asked Questions",
+                                                                                      "icon":  "chat_bubble",
+                                                                                      "content":  "\u003cp\u003eAdd product-specific answers or connect a dedicated FAQ page from the Theme Editor.\u003c/p\u003e",
+                                                                                      "page":  ""
+                                                                                  }
+                                                                 }
+                                             },
+                                  "block_order":  [
+                                                      "title",
+                                                      "price",
+                                                      "variant_picker",
+                                                      "quantity_selector",
+                                                      "buy_buttons",
+                                                      "jewellery_care",
+                                                      "specifications",
+                                                      "product_faq",
+                                                      "share"
+                                                  ],
+                                  "settings":  {
+                                                   "enable_sticky_info":  true,
+                                                   "color_scheme":  "scheme-1",
+                                                   "media_size":  "large",
+                                                   "constrain_to_viewport":  true,
+                                                   "media_fit":  "contain",
+                                                   "gallery_layout":  "stacked",
+                                                   "mobile_thumbnails":  "hide",
+                                                   "media_position":  "left",
+                                                   "image_zoom":  "lightbox",
+                                                   "hide_variants":  true,
+                                                   "enable_video_looping":  false,
+                                                   "padding_top":  36,
+                                                   "padding_bottom":  12,
+                                                   "enable_offers":  false,
+                                                   "enable_trust_benefits":  false,
+                                                   "enable_sticky_atc":  false,
+                                                   "enable_faq":  true,
+                                                   "show_tax_text":  true
+                                               }
+                              },
+                     "related-products":  {
+                                              "type":  "related-products",
+                                              "settings":  {
+                                                               "heading":  "You may also like",
+                                                               "heading_size":  "h2",
+                                                               "products_to_show":  4,
+                                                               "columns_desktop":  4,
+                                                               "columns_mobile":  "2",
+                                                               "color_scheme":  "scheme-1",
+                                                               "image_ratio":  "square",
+                                                               "image_shape":  "default",
+                                                               "show_secondary_image":  true,
+                                                               "show_vendor":  false,
+                                                               "show_rating":  false,
+                                                               "padding_top":  36,
+                                                               "padding_bottom":  28
+                                                           }
+                                          },
+                     "recently_viewed":  {
+                                             "type":  "suvedh-recently-viewed",
+                                             "settings":  {
+                                                              "heading":  "Recently Viewed",
+                                                              "products_to_show":  4,
+                                                              "padding_top":  48,
+                                                              "padding_bottom":  64
+                                                          }
+                                         }
+                 },
+    "order":  [
+                  "main",
+                  "related-products",
+                  "recently_viewed"
+              ]
 }
