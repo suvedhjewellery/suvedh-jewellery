@@ -101,23 +101,51 @@
 /* SUVEDH premium collection merchandising */
 .collection .facets-wrapper{margin-bottom:2.5rem;border-block:1px solid rgba(17,17,17,.1)}.facets__form{margin-bottom:0;padding-block:1.5rem}.facets__heading,.facet-filters__label,.product-count__text{color:#555;font-size:1.1rem;letter-spacing:.08em;text-transform:uppercase}.facet-filters__sort{font-size:1.25rem}.collection .card-wrapper{transition:transform .35s cubic-bezier(.22,1,.36,1)}.collection .card__media{overflow:hidden;border-radius:1.2rem}.collection .card__heading{font-weight:400}.collection .price{letter-spacing:.01em}@media(hover:hover){.collection .card-wrapper:hover{transform:translateY(-.4rem)}}@media(max-width:749px){.collection .facets-container{padding-top:1rem}.mobile-facets__open{font-size:1.2rem;letter-spacing:.08em;text-transform:uppercase}}
 
-/* Collection grid layout. Keep this scoped to the main collection results. */
-#ProductGridContainer > .collection {
+/* SUVEDH collection layout. These rules do not affect product cards elsewhere. */
+.suvedh-collection-page__banner .collection-hero__inner {
+  padding-bottom: 4.8rem;
+}
+
+.suvedh-collection-page__banner .collection-hero__title {
+  margin: 1.2rem 0 0;
+}
+
+.suvedh-collection-page__banner .collection-hero__title + .collection-hero__description {
+  margin-top: 1.2rem;
+  margin-bottom: 0;
+}
+
+.suvedh-collection-page__products {
+  padding-top: 0;
+  padding-bottom: 6.4rem;
+}
+
+.suvedh-collection-page__products .suvedh-product-card .quick-add__submit {
+  border-color: #b08d57;
+  color: #9a7441;
+}
+
+.suvedh-collection-page__products .facets-wrapper {
+  margin-bottom: 2.8rem;
+}
+
+.suvedh-collection-page__products #ProductGridContainer > .collection {
   width: 100%;
   max-width: 1400px;
   margin-inline: auto;
 }
 
-#ProductGridContainer #product-grid.product-grid {
+.suvedh-collection-page__products .suvedh-collection-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
+  gap: 2.8rem 2.4rem;
   width: 100%;
   max-width: none;
   margin-inline: 0;
+  justify-content: start;
 }
 
-#ProductGridContainer #product-grid.product-grid > .grid__item {
+.suvedh-collection-page__products .suvedh-collection-grid > .suvedh-product-card {
   display: flex;
   width: auto;
   max-width: none;
@@ -126,50 +154,58 @@
   padding: 0;
 }
 
-#ProductGridContainer #product-grid.product-grid > .grid__item > .card-wrapper {
+.suvedh-collection-page__products .suvedh-product-card > .card-wrapper {
   width: 100%;
   height: 100%;
 }
 
-#ProductGridContainer #product-grid.product-grid .card__media .media img {
+.suvedh-collection-page__products .suvedh-product-card .card__media .media img {
   inset: 2.5%;
   width: 95%;
   height: 95%;
   object-fit: contain;
 }
 
-#ProductGridContainer #product-grid.product-grid .card__heading {
+.suvedh-collection-page__products .suvedh-product-card .card__heading {
   display: -webkit-box;
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
 }
+
+@media screen and (max-width: 749px) {
+  .suvedh-collection-page__banner .collection-hero__inner {
+    padding-bottom: 3.2rem;
+  }
+}
+
 @media screen and (max-width: 374px) {
-  #ProductGridContainer #product-grid.product-grid {
+  .suvedh-collection-page__products .suvedh-collection-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 }
 
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .suvedh-collection-page__products .suvedh-collection-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.8rem;
+  }
+}
+
 @media screen and (min-width: 990px) {
-  #ProductGridContainer #product-grid.product-grid {
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 36px;
+  .suvedh-collection-page__products .suvedh-collection-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.8rem 3.2rem;
   }
 
-  #ProductGridContainer #product-grid.product-grid.collection-product-count--1 {
-    grid-template-columns: minmax(320px, 360px);
-    justify-content: center;
+  .suvedh-collection-page__products .suvedh-collection-grid.is-single-product {
+    grid-template-columns: minmax(30rem, 34rem);
+    justify-content: start;
   }
+}
 
-  #ProductGridContainer #product-grid.product-grid.collection-product-count--2 {
-    grid-template-columns: repeat(2, minmax(320px, 360px));
-    justify-content: center;
+@media screen and (min-width: 1200px) {
+  .suvedh-collection-page__products .suvedh-collection-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
-
-  #ProductGridContainer #product-grid.product-grid.collection-product-count--3 {
-    grid-template-columns: repeat(3, minmax(320px, 360px));
-    justify-content: center;
-  }
-
-
 }
