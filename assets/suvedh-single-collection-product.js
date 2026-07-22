@@ -12,24 +12,32 @@
     const checkout = root.querySelector('[data-dynamic-checkout]');
     const mainImage = root.querySelector('.suvedh-single-collection-product__image');
     const renderData = (id) => root.querySelector(`[data-variant-render-data] [data-variant-id="${id}"]`);
+    const optionValue = (value) => String(value).trim();
     const setMedia = (src, mediaId) => {
       if (src && mainImage) mainImage.src = src;
       root.querySelectorAll('[data-media-id]').forEach((el) => el.classList.toggle('is-active', el.dataset.mediaId === String(mediaId)));
     };
     const update = () => {
-      const chosen = selects.map((select) => select.value);
-      const variant = variants.find((item) => item.options.every((value, index) => value === chosen[index]));
+      const chosen = selects.map((select) => optionValue(select.value));
+      const variant = selects.length
+        ? variants.find((item) => item.options.every((value, index) => optionValue(value) === chosen[index]))
+        : variants.find((item) => String(item.id) === idInput.value) || variants[0];
       selects.forEach((select, index) => [...select.options].forEach((option) => {
-        option.disabled = !variants.some((item) => item.available && item.options[index] === option.value);
+        const candidate = [...chosen];
+        candidate[index] = optionValue(option.value);
+        option.disabled = !variants.some((item) => item.available && item.options.every((value, optionIndex) => (
+          optionIndex > index || optionValue(value) === candidate[optionIndex]
+        )));
       }));
       if (!variant) {
         idInput.disabled = true; submit.disabled = true; submitText.textContent = window.variantStrings?.unavailable || 'Unavailable'; if (checkout) checkout.classList.add('hidden'); return;
       }
       const data = renderData(variant.id);
-      idInput.value = variant.id; idInput.disabled = !variant.available;
+      idInput.value = variant.id; idInput.disabled = false;
       submit.disabled = !variant.available; submitText.textContent = variant.available ? (window.variantStrings?.addToCart || 'Add to cart') : (window.variantStrings?.soldOut || 'Sold out');
       if (checkout) checkout.classList.toggle('hidden', !variant.available);
       const sku = root.querySelector('[data-variant-sku]'); sku.querySelector('span').textContent = variant.sku || ''; sku.classList.toggle('hidden', !variant.sku);
+      const inventory = root.querySelector('[data-variant-inventory]'); if (inventory) inventory.textContent = variant.available ? 'In stock' : 'Sold out';
       const price = root.querySelector('[data-variant-price]'); price.querySelector('.suvedh-single-collection-product__current-price').textContent = data.dataset.price;
       const compare = price.querySelector('s'); compare.textContent = data.dataset.compare; compare.classList.toggle('hidden', !data.dataset.compare);
       const discount = price.querySelector('.suvedh-single-collection-product__discount'); discount.textContent = data.dataset.saving !== '0' ? `Save ${data.dataset.saving}%` : ''; discount.classList.toggle('hidden', data.dataset.saving === '0');
