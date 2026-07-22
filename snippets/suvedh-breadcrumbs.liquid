@@ -1,0 +1,71 @@
+{% comment %}
+  Renders SUVEDH breadcrumbs for collection and product pages.
+
+  Accepts:
+  - context: {String} 'collection' or 'product'
+  - collection: {Object} The current collection, when available
+  - product: {Object} The current product, when available
+{% endcomment %}
+
+{%- liquid
+  assign breadcrumb_collection = blank
+  assign parent_handle = blank
+  assign parent_title = blank
+
+  if context == 'collection' and collection != blank
+    assign handle_prefix = collection.handle | split: '-' | first
+    if handle_prefix == 'women'
+      assign parent_handle = 'women'
+      assign parent_title = 'Women'
+    elsif handle_prefix == 'men'
+      assign parent_handle = 'men'
+      assign parent_title = 'Men'
+    elsif handle_prefix == 'kids'
+      assign parent_handle = 'kids'
+      assign parent_title = 'Kids'
+    elsif handle_prefix == 'pendants'
+      assign parent_handle = 'pendants'
+      assign parent_title = 'Pendants'
+    endif
+  elsif context == 'product' and product != blank
+    if collection != blank
+      assign breadcrumb_collection = collection
+    else
+      for product_collection in product.collections
+        unless product_collection.handle == 'all' or product_collection.handle == 'frontpage' or product_collection.handle == 'new-arrivals' or product_collection.handle == 'best-sellers'
+          assign breadcrumb_collection = product_collection
+          break
+        endunless
+      endfor
+    endif
+  endif
+-%}
+
+{%- if context == 'collection' and collection != blank or context == 'product' and product != blank -%}
+  <nav class="suvedh-breadcrumbs" aria-label="Breadcrumb">
+    <ol class="suvedh-breadcrumbs__list">
+      <li class="suvedh-breadcrumbs__item"><a class="suvedh-breadcrumbs__link" href="{{ routes.root_url }}">Home</a></li>
+      {%- if context == 'collection' -%}
+        {%- if parent_handle != blank and collections[parent_handle] != blank -%}
+          <li class="suvedh-breadcrumbs__item"><a class="suvedh-breadcrumbs__link" href="{{ collections[parent_handle].url }}">{{ parent_title | escape }}</a></li>
+        {%- endif -%}
+        <li class="suvedh-breadcrumbs__item" aria-current="page">{{ collection.title | escape }}</li>
+      {%- else -%}
+        {%- if breadcrumb_collection != blank -%}
+          <li class="suvedh-breadcrumbs__item"><a class="suvedh-breadcrumbs__link" href="{{ breadcrumb_collection.url }}">{{ breadcrumb_collection.title | escape }}</a></li>
+        {%- endif -%}
+        <li class="suvedh-breadcrumbs__item" aria-current="page">{{ product.title | escape }}</li>
+      {%- endif -%}
+    </ol>
+  </nav>
+
+  <style>
+    .suvedh-breadcrumbs { margin: 0 0 1.8rem; color: rgba(var(--color-foreground), 0.62); font-size: 1.2rem; line-height: 1.5; }
+    .suvedh-breadcrumbs__list { display: flex; flex-wrap: wrap; align-items: center; gap: 0.7rem 0.9rem; margin: 0; padding: 0; list-style: none; }
+    .suvedh-breadcrumbs__item { display: inline-flex; align-items: center; gap: 0.9rem; }
+    .suvedh-breadcrumbs__item + .suvedh-breadcrumbs__item::before { content: '/'; color: rgba(var(--color-foreground), 0.38); }
+    .suvedh-breadcrumbs__link { color: inherit; text-decoration: none; transition: color 0.2s ease; }
+    .suvedh-breadcrumbs__link:hover { color: #9a7441; }
+    @media screen and (max-width: 749px) { .suvedh-breadcrumbs { margin-bottom: 1.6rem; font-size: 1.1rem; } }
+  </style>
+{%- endif -%}

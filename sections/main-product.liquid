@@ -92,7 +92,7 @@
         >
           {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
-          <nav class="suvedh-product-page__breadcrumb" aria-label="Breadcrumb"><a href="{{ routes.root_url }}">Home</a>{%- if collection != blank -%}<span aria-hidden="true">/</span><a href="{{ collection.url }}">{{ collection.title | escape }}</a>{%- endif -%}<span aria-hidden="true">/</span><span aria-current="page">{{ product.title | escape }}</span></nav>
+          {% render 'suvedh-breadcrumbs', context: 'product', collection: collection, product: product %}
           {%- for block in section.blocks -%}
             {%- case block.type -%}
               {%- when '@app' -%}
