@@ -28,8 +28,21 @@
                                                            "enable_sorting":  false,
                                                            "columns_mobile":  "2",
                                                            "padding_top":  0,
-                                                           "padding_bottom":  64
-                                                       }
+                                                           "padding_bottom":  64,
+                                                           "enable_viewer_badge": false,
+                                                           "viewer_count": 24,
+                                                           "viewer_message": "people are viewing this product",
+                                                           "enable_offer_cards": true,
+                                                           "enable_information_tabs": true,
+                                                           "shipping_returns": "<p>Orders are normally dispatched within 12 business days. Delivery times depend on the destination and courier. Returns are subject to the SUVEDH return policy.</p>",
+                                                           "jewellery_care": "<p>Keep jewellery away from perfume, moisture and harsh chemicals. Clean gently with a soft jewellery cloth and store separately.</p>",
+                                                           "enable_secure_checkout": true,
+                                                           "secure_checkout_heading": "Secure Checkout",
+                                                           "enable_sticky_product_info": true,
+                                                           "enable_image_zoom": true
+                                                       },
+                                          "blocks": { "offer_1": { "type": "offer", "settings": { "enabled": true, "title": "Special Offer", "code": "SUVEDH10", "description": "Get 10% off on eligible orders.", "copy_button_label": "Copy code" } } },
+                                          "block_order": ["offer_1"]
                                       }
                  },
     "order":  [

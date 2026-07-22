@@ -37,6 +37,7 @@
       submit.disabled = !variant.available; submitText.textContent = variant.available ? (window.variantStrings?.addToCart || 'Add to cart') : (window.variantStrings?.soldOut || 'Sold out');
       if (checkout) checkout.classList.toggle('hidden', !variant.available);
       const sku = root.querySelector('[data-variant-sku]'); sku.querySelector('span').textContent = variant.sku || ''; sku.classList.toggle('hidden', !variant.sku);
+      const detailSku = root.querySelector('[data-product-detail-sku]'); if (detailSku) { detailSku.querySelector('dd').textContent = variant.sku || ''; detailSku.classList.toggle('hidden', !variant.sku); }
       const inventory = root.querySelector('[data-variant-inventory]'); if (inventory) inventory.textContent = variant.available ? 'In stock' : 'Sold out';
       const price = root.querySelector('[data-variant-price]'); price.querySelector('.suvedh-single-collection-product__current-price').textContent = data.dataset.price;
       const compare = price.querySelector('s'); compare.textContent = data.dataset.compare; compare.classList.toggle('hidden', !data.dataset.compare);

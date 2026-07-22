@@ -6,8 +6,10 @@
   {{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
   {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
   {{ 'suvedh-single-collection-product.css' | asset_url | stylesheet_tag }}
+  {{ 'suvedh-single-product-showcase.css' | asset_url | stylesheet_tag }}
   <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'suvedh-single-collection-product.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'suvedh-single-product-showcase.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
 
 {% if section.settings.image_shape == 'blob' %}
@@ -398,6 +400,18 @@
       "default": true,
       "label": "t:sections.main-collection-product-grid.settings.enable_sorting.label"
     },
+    { "type": "header", "content": "Single-product showcase" },
+    { "type": "checkbox", "id": "enable_viewer_badge", "label": "Enable viewer badge", "default": false },
+    { "type": "range", "id": "viewer_count", "label": "Viewer count", "min": 1, "max": 200, "step": 1, "default": 24 },
+    { "type": "text", "id": "viewer_message", "label": "Viewer message", "default": "people are viewing this product" },
+    { "type": "checkbox", "id": "enable_offer_cards", "label": "Enable offer cards", "default": true },
+    { "type": "checkbox", "id": "enable_information_tabs", "label": "Enable information tabs", "default": true },
+    { "type": "richtext", "id": "shipping_returns", "label": "Shipping & Returns", "default": "<p>Orders are normally dispatched within 12 business days. Delivery times depend on the destination and courier. Returns are subject to the SUVEDH return policy.</p>" },
+    { "type": "richtext", "id": "jewellery_care", "label": "Jewellery Care", "default": "<p>Keep jewellery away from perfume, moisture and harsh chemicals. Clean gently with a soft jewellery cloth and store separately.</p>" },
+    { "type": "checkbox", "id": "enable_secure_checkout", "label": "Enable secure checkout", "default": true },
+    { "type": "text", "id": "secure_checkout_heading", "label": "Secure checkout heading", "default": "Secure Checkout" },
+    { "type": "checkbox", "id": "enable_sticky_product_info", "label": "Enable sticky product information", "default": true },
+    { "type": "checkbox", "id": "enable_image_zoom", "label": "Enable image zoom", "default": true },
     {
       "type": "header",
       "content": "t:sections.all.padding.section_padding_heading"
@@ -422,6 +436,15 @@
       "label": "t:sections.all.padding.padding_bottom",
       "default": 36
     }
+  ],
+  "blocks": [
+    { "type": "offer", "name": "Offer", "limit": 4, "settings": [
+      { "type": "checkbox", "id": "enabled", "label": "Enable offer", "default": true },
+      { "type": "text", "id": "title", "label": "Title", "default": "Special Offer" },
+      { "type": "text", "id": "code", "label": "Code", "default": "SUVEDH10" },
+      { "type": "text", "id": "description", "label": "Description", "default": "Get 10% off on eligible orders." },
+      { "type": "text", "id": "copy_button_label", "label": "Copy button label", "default": "Copy code" }
+    ] }
   ]
 }
 {% endschema %}
