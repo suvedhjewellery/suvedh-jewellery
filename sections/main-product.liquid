@@ -114,7 +114,7 @@
                   </a>
                 </div>
                 <p class="suvedh-product-page__sku{% if product.selected_or_first_available_variant.sku == blank %} hidden{% endif %}" id="Sku-{{ section.id }}" role="status">SKU: <span>{{ product.selected_or_first_available_variant.sku | escape }}</span></p>
-                {%- if section.settings.enable_viewer_message -%}{%- assign viewer_range = section.settings.viewer_max | minus: section.settings.viewer_min | plus: 1 -%}{%- assign viewer_seed = product.id | modulo: viewer_range | plus: section.settings.viewer_min -%}<p class="suvedh-product-page__viewer">{{ section.settings.viewer_message | replace: '[count]', viewer_seed | escape }}</p>{%- endif -%}
+                {%- if section.settings.enable_viewer_message -%}<p class="suvedh-product-page__viewer">{{ section.settings.viewer_message | replace: '[count]', section.settings.viewer_count | escape }}</p>{%- endif -%}
               {%- when 'price' -%}
                 <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                   {%- render 'price',
@@ -124,6 +124,7 @@
                     price_class: 'price--large'
                   -%}
                 </div>
+                {%- if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price -%}{%- assign saving_percent = product.selected_or_first_available_variant.compare_at_price | minus: product.selected_or_first_available_variant.price | times: 100.0 | divided_by: product.selected_or_first_available_variant.compare_at_price | round -%}<p class="suvedh-product-page__saving" data-variant-saving>Save {{ saving_percent }}%</p>{%- else -%}<p class="suvedh-product-page__saving hidden" data-variant-saving></p>{%- endif -%}
                 {%- if section.settings.show_tax_text and section.settings.inclusive_tax_text != blank -%}<p class="product__tax caption">{{ section.settings.inclusive_tax_text | escape }}</p>{%- endif -%}
                 {%- if product.quantity_price_breaks_configured? -%}
                   <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">
@@ -174,7 +175,7 @@
                   <div class="suvedh-product-page__discount" data-discount-message data-discount-percentage="{{ section.settings.discount_percentage }}" style="--discount-bg:{{ section.settings.discount_background }};--discount-color:{{ section.settings.discount_text_color }}">
                     <p>{% if section.settings.discount_text != blank %}{{ section.settings.discount_text | escape }} {% endif %}<strong data-discounted-price>{{ discounted_price | money }}</strong> with {{ section.settings.discount_percentage }}% discount</p>
                     {% if section.settings.discount_minimum_quantity > 1 %}<small>Minimum quantity: {{ section.settings.discount_minimum_quantity }}</small>{% endif %}
-                    {% if section.settings.discount_coupon_code != blank %}<small>Use code <code>{{ section.settings.discount_coupon_code | escape }}</code> <button type="button" data-copy-code="{{ section.settings.discount_coupon_code | escape }}" aria-label="Copy discount code {{ section.settings.discount_coupon_code | escape }}">Copy</button></small>{% endif %}
+                    {% if section.settings.discount_coupon_code != blank %}<small>Use code <code>{{ section.settings.discount_coupon_code | escape }}</code> {% if section.settings.enable_discount_copy %}<button type="button" data-copy-code="{{ section.settings.discount_coupon_code | escape }}" aria-label="Copy discount code {{ section.settings.discount_coupon_code | escape }}">Copy</button>{% endif %}</small>{% endif %}
                   </div>
                 {%- endif -%}
               {%- when 'inventory' -%}
@@ -708,9 +709,9 @@
             {%- endcase -%}
           {%- endfor -%}
           {%- if pages.wishlist != blank -%}<div class="suvedh-product-page__wishlist"><a class="button button--secondary button--full-width" href="{{ pages.wishlist.url }}?product={{ product.handle }}">♡ Add to Wishlist</a></div>{%- endif -%}
-          {%- assign offer_blocks = section.blocks | where: 'type', 'offer' -%}{%- if section.settings.enable_offers and offer_blocks.size > 0 -%}<section class="suvedh-product-page__offers" aria-labelledby="Offers-{{ section.id }}"><h2 id="Offers-{{ section.id }}">Available offers</h2><div class="suvedh-product-page__offer-grid">{%- for block in offer_blocks limit: 4 -%}<article class="suvedh-product-page__offer" {{ block.shopify_attributes }}>{% if block.settings.icon %}{{ block.settings.icon | image_url: width: 48 | image_tag: loading: 'lazy' }}{% endif %}<h3>{{ block.settings.title | escape }}</h3>{%- if block.settings.code != blank -%}<p><code>{{ block.settings.code | escape }}</code><button type="button" data-copy-code="{{ block.settings.code | escape }}">Copy</button></p>{%- endif -%}{{ block.settings.description }}{% if block.settings.minimum_quantity > 1 %}<small>Minimum quantity: {{ block.settings.minimum_quantity }}</small>{% endif %}{% if block.settings.minimum_cart_amount != blank %}<small>Minimum cart amount: {{ block.settings.minimum_cart_amount | escape }}</small>{% endif %}<small>Subject to applicable conditions.</small></article>{%- endfor -%}</div></section>{%- endif -%}
-          <section class="suvedh-product-page__information" data-product-information>{%- assign info_labels = 'Description,Shipping & Returns,Jewellery Care,Product Details' | split: ',' -%}<div class="suvedh-product-page__tablist" role="tablist" aria-label="Product information">{%- for label in info_labels -%}<button type="button" role="tab" id="Tab-{{ section.id }}-{{ forloop.index }}" aria-controls="Panel-{{ section.id }}-{{ forloop.index }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" tabindex="{% if forloop.first %}0{% else %}-1{% endif %}">{{ label }}</button>{%- endfor -%}</div>{%- for label in info_labels -%}<div class="suvedh-product-page__panel{% unless forloop.first %} is-hidden{% endunless %}" id="Panel-{{ section.id }}-{{ forloop.index }}" role="tabpanel" aria-labelledby="Tab-{{ section.id }}-{{ forloop.index }}"><button class="suvedh-product-page__accordion-trigger" type="button" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="PanelContent-{{ section.id }}-{{ forloop.index }}">{{ label }}<span aria-hidden="true">+</span></button><div class="suvedh-product-page__panel-content rte" id="PanelContent-{{ section.id }}-{{ forloop.index }}"{% unless forloop.first %} hidden{% endunless %}>{%- case forloop.index -%}{%- when 1 -%}{{ product.description }}{%- when 2 -%}{{ section.settings.shipping_returns }}{%- when 3 -%}{{ section.settings.jewellery_care }}{%- when 4 -%}<dl class="suvedh-product-page__details">{%- if product.type != blank -%}<div><dt>Product type</dt><dd>{{ product.type | escape }}</dd></div>{%- endif -%}{%- if product.vendor != blank -%}<div><dt>Vendor</dt><dd>{{ product.vendor | escape }}</dd></div>{%- endif -%}{%- if product.selected_or_first_available_variant.sku != blank -%}<div><dt>SKU</dt><dd>{{ product.selected_or_first_available_variant.sku | escape }}</dd></div>{%- endif -%}{%- assign detail_keys = 'material,purity,silver_weight,stone_type,stone_colour,adjustable,package_contents' | split: ',' -%}{%- for key in detail_keys -%}{%- assign detail = product.metafields.custom[key] -%}{%- if detail != blank -%}<div><dt>{{ key | replace: '_', ' ' | capitalize }}</dt><dd>{{ detail | metafield_tag }}</dd></div>{%- endif -%}{%- endfor -%}</dl>{%- endcase -%}</div></div>{%- endfor -%}</section>
-          {%- assign benefit_blocks = section.blocks | where: 'type', 'trust_benefit' -%}{%- if section.settings.enable_trust_benefits and benefit_blocks.size > 0 -%}<section class="suvedh-product-page__benefits" aria-label="Shopping benefits">{%- for block in benefit_blocks limit: 4 -%}<div {{ block.shopify_attributes }}><span aria-hidden="true">{{ block.settings.icon | escape }}</span><p><strong>{{ block.settings.title | escape }}</strong><small>{{ block.settings.subtitle | escape }}</small></p></div>{%- endfor -%}</section>{%- endif -%}
+          {%- assign offer_blocks = section.blocks | where: 'type', 'offer' -%}{%- if section.settings.enable_offers and offer_blocks.size > 0 -%}<section class="suvedh-product-page__offers" aria-labelledby="Offers-{{ section.id }}"><h2 id="Offers-{{ section.id }}">Available offers</h2><div class="suvedh-product-page__offer-grid">{%- for block in offer_blocks limit: 24 -%}<article class="suvedh-product-page__offer" {{ block.shopify_attributes }}>{% if block.settings.icon %}{{ block.settings.icon | image_url: width: 48 | image_tag: loading: 'lazy' }}{% endif %}<h3>{{ block.settings.title | escape }}</h3>{%- if block.settings.code != blank -%}<p><code>{{ block.settings.code | escape }}</code>{% if block.settings.enable_copy %}<button type="button" data-copy-code="{{ block.settings.code | escape }}" aria-label="Copy offer code {{ block.settings.code | escape }}">Copy</button>{% endif %}</p>{%- endif -%}{{ block.settings.description }}{% if block.settings.minimum_quantity > 1 %}<small>Minimum quantity: {{ block.settings.minimum_quantity }}</small>{% endif %}{% if block.settings.minimum_cart_amount != blank %}<small>Minimum cart amount: {{ block.settings.minimum_cart_amount | escape }}</small>{% endif %}</article>{%- endfor -%}</div></section>{%- endif -%}
+          <section class="suvedh-product-page__information" data-product-information>{%- assign info_labels = 'Description,Shipping & Returns,Jewellery Care,Product Details' | split: ',' -%}<div class="suvedh-product-page__tablist" role="tablist" aria-label="Product information">{%- for label in info_labels -%}<button type="button" role="tab" id="Tab-{{ section.id }}-{{ forloop.index }}" aria-controls="Panel-{{ section.id }}-{{ forloop.index }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" tabindex="{% if forloop.first %}0{% else %}-1{% endif %}">{{ label }}</button>{%- endfor -%}</div>{%- for label in info_labels -%}<div class="suvedh-product-page__panel{% unless forloop.first %} is-hidden{% endunless %}" id="Panel-{{ section.id }}-{{ forloop.index }}" role="tabpanel" aria-labelledby="Tab-{{ section.id }}-{{ forloop.index }}"><button class="suvedh-product-page__accordion-trigger" type="button" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="PanelContent-{{ section.id }}-{{ forloop.index }}">{{ label }}<span aria-hidden="true">+</span></button><div class="suvedh-product-page__panel-content rte" id="PanelContent-{{ section.id }}-{{ forloop.index }}"{% unless forloop.first %} hidden{% endunless %}>{%- case forloop.index -%}{%- when 1 -%}{{ product.description }}{%- when 2 -%}{{ section.settings.shipping_returns }}{%- when 3 -%}{{ section.settings.jewellery_care }}{%- when 4 -%}<dl class="suvedh-product-page__details">{%- if product.type != blank -%}<div><dt>Product type</dt><dd>{{ product.type | escape }}</dd></div>{%- endif -%}{%- if product.vendor != blank -%}<div><dt>Vendor</dt><dd>{{ product.vendor | escape }}</dd></div>{%- endif -%}<div data-product-detail-sku{% if product.selected_or_first_available_variant.sku == blank %} class="hidden"{% endif %}><dt>SKU</dt><dd>{{ product.selected_or_first_available_variant.sku | escape }}</dd></div>{%- assign detail_keys = 'material,purity,silver_weight,stone_type,stone_colour,adjustable,package_contents,short_description' | split: ',' -%}{%- for key in detail_keys -%}{%- assign detail = product.metafields.custom[key] -%}{%- if detail != blank -%}<div><dt>{{ key | replace: '_', ' ' | capitalize }}</dt><dd>{{ detail | metafield_tag }}</dd></div>{%- endif -%}{%- endfor -%}</dl>{%- endcase -%}</div></div>{%- endfor -%}</section>
+          {%- assign benefit_blocks = section.blocks | where: 'type', 'trust_benefit' -%}{%- if section.settings.enable_trust_benefits and benefit_blocks.size > 0 -%}<section class="suvedh-product-page__benefits" aria-label="Shopping benefits">{%- for block in benefit_blocks limit: 4 -%}{%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" {{ block.shopify_attributes }}>{%- else -%}<div {{ block.shopify_attributes }}>{%- endif -%}<span aria-hidden="true">{{ block.settings.icon | escape }}</span><p><strong>{{ block.settings.title | escape }}</strong>{% if block.settings.subtitle != blank %}<small>{{ block.settings.subtitle | escape }}</small>{% endif %}</p>{%- if block.settings.link != blank -%}</a>{%- else -%}</div>{%- endif -%}{%- endfor -%}</section>{%- endif -%}
           <section class="suvedh-product-page__payments"><h2>{{ section.settings.secure_heading | escape }}</h2><div>{%- for type in shop.enabled_payment_types -%}{{ type | payment_type_svg_tag }}{%- endfor -%}</div></section>
           {%- assign faq_blocks = section.blocks | where: 'type', 'faq' -%}{%- if section.settings.enable_faq and faq_blocks.size > 0 -%}<section class="suvedh-product-page__faq" aria-labelledby="FaqHeading-{{ section.id }}"><h2 id="FaqHeading-{{ section.id }}">{{ section.settings.faq_heading | escape }}</h2>{%- for block in faq_blocks -%}{%- if block.settings.question != blank and block.settings.answer != blank -%}<details {{ block.shopify_attributes }}><summary>{{ block.settings.question | escape }}<span aria-hidden="true">+</span></summary><div class="rte">{{ block.settings.answer }}</div></details>{%- endif -%}{%- endfor -%}</section>{%- endif -%}
           <a href="{{ product.url }}" class="link product__view-details animate-arrow">
@@ -791,7 +792,7 @@
                    {
                        "type":  "offer",
                        "name":  "Offer",
-                       "limit":  4,
+                       "limit":   24,
                        "settings":  [
                                         {
                                             "type":  "image_picker",
@@ -829,6 +830,12 @@
                                             "type":  "text",
                                             "id":  "minimum_cart_amount",
                                             "label":  "Minimum cart amount"
+                                        },
+                                        {
+                                            "type":  "checkbox",
+                                            "id":  "enable_copy",
+                                            "label":  "Show copy button",
+                                            "default":  true
                                         }
                                     ]
                    },
@@ -874,27 +881,18 @@
                                         },
                                         {
                                             "type":  "range",
-                                            "id":  "viewer_min",
-                                            "label":  "Minimum viewer count",
-                                            "min":  1,
-                                            "max":  50,
-                                            "step":  1,
-                                            "default":  8
-                                        },
-                                        {
-                                            "type":  "range",
-                                            "id":  "viewer_max",
-                                            "label":  "Maximum viewer count",
-                                            "min":  2,
-                                            "max":  100,
-                                            "step":  1,
-                                            "default":  24
+                                            "id":  "viewer_count",
+                         "label":  "Viewer count",
+                         "min":  1,
+                         "max":  100,
+                         "step":  1,
+                         "default":  24
                                         },
                                         {
                                             "type":  "text",
                                             "id":  "viewer_message",
                                             "label":  "Viewer message",
-                                            "info":  "Use [count] for the simulated number.",
+                                            "info":  "Use [count] for the configured static number.",
                                             "default":  "[count] people are viewing this right now"
                                         },
                                         {
@@ -2404,6 +2402,12 @@
                          "label":  "Coupon code"
                      },
                      {
+                         "type":  "checkbox",
+                         "id":  "enable_discount_copy",
+                         "label":  "Show coupon copy button",
+                         "default":  true
+                     },
+                     {
                          "type":  "color",
                          "id":  "discount_background",
                          "label":  "Discount background",
@@ -2464,18 +2468,9 @@
                      },
                      {
                          "type":  "range",
-                         "id":  "viewer_min",
-                         "label":  "Minimum viewer count",
+                         "id":  "viewer_count",
+                         "label":  "Viewer count",
                          "min":  1,
-                         "max":  50,
-                         "step":  1,
-                         "default":  8
-                     },
-                     {
-                         "type":  "range",
-                         "id":  "viewer_max",
-                         "label":  "Maximum viewer count",
-                         "min":  2,
                          "max":  100,
                          "step":  1,
                          "default":  24
@@ -2484,7 +2479,7 @@
                          "type":  "text",
                          "id":  "viewer_message",
                          "label":  "Viewer message",
-                         "info":  "Use [count] for the simulated number.",
+                         "info":  "Use [count] for the configured static number.",
                          "default":  "[count] people are viewing this right now"
                      },
                      {
