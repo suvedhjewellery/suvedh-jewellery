@@ -1,3 +1,48 @@
-document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('.suvedh-product-page').forEach(section=>{section.querySelectorAll('[data-copy-code]').forEach(button=>button.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(button.dataset.copyCode);button.textContent='Copied';setTimeout(()=>button.textContent='Copy',1600)}catch(e){button.textContent='Select code'}}));const tabs=[...section.querySelectorAll('[role="tab"]')];tabs.forEach((tab,index)=>{tab.addEventListener('click',()=>{tabs.forEach((item,i)=>{const active=i===index;item.setAttribute('aria-selected',active);item.tabIndex=active?0:-1;section.querySelector('#'+item.getAttribute('aria-controls'))?.classList.toggle('is-hidden',!active)})});tab.addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();let next=event.key==='Home'?0:event.key==='End'?tabs.length-1:(index+(event.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;tabs[next].focus();tabs[next].click()})});section.querySelectorAll('.suvedh-product-page__accordion-trigger').forEach(button=>button.addEventListener('click',()=>{const open=button.getAttribute('aria-expanded')==='true';button.setAttribute('aria-expanded',String(!open));const panel=section.querySelector('#'+button.getAttribute('aria-controls'));if(panel)panel.hidden=open}));const bar=section.querySelector('[data-sticky-atc]'),mainButton=section.querySelector('[id^="ProductSubmitButton-"]');if(bar&&mainButton){new IntersectionObserver(([entry])=>bar.hidden=entry.isIntersecting,{threshold:.15}).observe(mainButton);bar.querySelector('[data-sticky-submit]')?.addEventListener('click',()=>mainButton.click());const sync=()=>{const price=section.querySelector('[id^="price-"] .price-item--sale,[id^="price-"] .price-item--regular');if(price)bar.querySelector('[data-sticky-price]').textContent=price.textContent.trim();bar.querySelector('button').disabled=mainButton.disabled};new MutationObserver(sync).observe(section.querySelector('[id^="ProductInfo-"]'),{subtree:true,childList:true,attributes:true});sync()}})});
-document.addEventListener('DOMContentLoaded',()=>{if(typeof subscribe!=='function'||!window.PUB_SUB_EVENTS)return;subscribe(PUB_SUB_EVENTS.variantChange,({data})=>{const root=document.querySelector(`product-info[data-section="${data.sectionId}"]`)||document.querySelector('.suvedh-product-page');const message=root?.querySelector('[data-discount-message]');if(!message||!data.variant)return;const percentage=Number(message.dataset.discountPercentage)||0;const discounted=Math.round(data.variant.price*(100-percentage)/100);const currency=window.Shopify?.currency?.active||'INR';const locale=document.documentElement.lang||'en-IN';const output=new Intl.NumberFormat(locale,{style:'currency',currency}).format(discounted/100);message.querySelector('[data-discounted-price]').textContent=output})});
-document.addEventListener('DOMContentLoaded',()=>{if(typeof subscribe!=='function'||!window.PUB_SUB_EVENTS)return;subscribe(PUB_SUB_EVENTS.variantChange,({data})=>{if(!data.variant)return;const root=document.querySelector(product-info[data-section=""]);if(!root)return;const detailSku=root.querySelector('[data-product-detail-sku]');if(detailSku){detailSku.querySelector('dd').textContent=data.variant.sku||'';detailSku.classList.toggle('hidden',!data.variant.sku)}const saving=root.querySelector('[data-variant-saving]');if(saving){const compare=Number(data.variant.compare_at_price)||0,price=Number(data.variant.price)||0,percent=compare>price?Math.round((compare-price)*100/compare):0;saving.textContent=percent?Save %:'';saving.classList.toggle('hidden',!percent)}})});
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.suvedh-product-page').forEach((section) => {
+    section.querySelectorAll('[data-copy-code]').forEach((button) => button.addEventListener('click', async () => {
+      const label = button.dataset.copyLabel || 'Copy';
+      try { await navigator.clipboard.writeText(button.dataset.copyCode); button.textContent = 'Copied'; }
+      catch (_) { button.textContent = 'Select code'; }
+      window.setTimeout(() => { button.textContent = label; }, 1600);
+    }));
+    const tabs = [...section.querySelectorAll('[role="tab"]')];
+    const activate = (index) => tabs.forEach((item, i) => {
+      const active = i === index;
+      item.setAttribute('aria-selected', String(active));
+      item.tabIndex = active ? 0 : -1;
+      section.querySelector('#' + item.getAttribute('aria-controls'))?.classList.toggle('is-hidden', !active);
+    });
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => activate(index));
+      tab.addEventListener('keydown', (event) => {
+        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+        const next = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+        tabs[next].focus(); activate(next);
+      });
+    });
+    section.querySelectorAll('.suvedh-product-page__accordion-trigger').forEach((button) => button.addEventListener('click', () => {
+      const open = button.getAttribute('aria-expanded') === 'true';
+      button.setAttribute('aria-expanded', String(!open));
+      const panel = section.querySelector('#' + button.getAttribute('aria-controls'));
+      if (panel) panel.hidden = open;
+    }));
+  });
+});
+document.addEventListener('DOMContentLoaded', () => {
+  if (typeof subscribe !== 'function' || !window.PUB_SUB_EVENTS) return;
+  subscribe(PUB_SUB_EVENTS.variantChange, ({ data }) => {
+    if (!data.variant) return;
+    const root = document.querySelector(`product-info[data-section="${data.sectionId}"]`);
+    if (!root) return;
+    const detailSku = root.querySelector('[data-product-detail-sku]');
+    if (detailSku) { detailSku.querySelector('dd').textContent = data.variant.sku || ''; detailSku.classList.toggle('hidden', !data.variant.sku); }
+    const saving = root.querySelector('[data-variant-saving]');
+    if (saving) {
+      const compare = Number(data.variant.compare_at_price) || 0, price = Number(data.variant.price) || 0;
+      const percent = compare > price ? Math.round((compare - price) * 100 / compare) : 0;
+      saving.textContent = percent ? `Save ${percent}%` : ''; saving.classList.toggle('hidden', !percent);
+    }
+  });
+});

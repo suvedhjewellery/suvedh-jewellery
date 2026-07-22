@@ -5,7 +5,7 @@
   data-product-id="{{ product.id }}"
   data-update-url="true"
   data-url="{{ product.url }}"
-  {% if section.settings.image_zoom == 'hover' %}
+  {% if section.settings.enable_image_zoom and section.settings.image_zoom == 'hover' %}
     data-zoom-on-hover
   {% endif %}
 >
@@ -31,6 +31,7 @@
     #shopify-section-{{ section.id }} .suvedh-product-page {
       --suvedh-media-bg: {{ section.settings.image_background }};
       --suvedh-mobile-spacing: {{ section.settings.mobile_spacing }}px;
+      --suvedh-desktop-spacing: {{ section.settings.desktop_spacing }}px;
     }
 
     .section-{{ section.id }}-padding {
@@ -53,7 +54,7 @@
     <script src="{{ 'price-per-item.js' | asset_url }}" defer="defer"></script>
   {%- endif -%}
 
-  {% if section.settings.image_zoom == 'hover' %}
+  {% if section.settings.enable_image_zoom and section.settings.image_zoom == 'hover' %}
     <script id="EnableZoomOnHover-main" src="{{ 'magnify.js' | asset_url }}" defer="defer"></script>
   {% endif %}
   {%- if request.design_mode -%}
@@ -88,7 +89,7 @@
       <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
         <section
           id="ProductInfo-{{ section.id }}"
-          class="product__info-container{% if section.settings.enable_sticky_info %} product__column-sticky{% endif %}"
+          class="product__info-container{% if section.settings.enable_sticky_product_info %} product__column-sticky{% endif %}"
         >
           {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
@@ -114,7 +115,7 @@
                   </a>
                 </div>
                 <p class="suvedh-product-page__sku{% if product.selected_or_first_available_variant.sku == blank %} hidden{% endif %}" id="Sku-{{ section.id }}" role="status">SKU: <span>{{ product.selected_or_first_available_variant.sku | escape }}</span></p>
-                {%- if section.settings.enable_viewer_message -%}<p class="suvedh-product-page__viewer">{{ section.settings.viewer_message | replace: '[count]', section.settings.viewer_count | escape }}</p>{%- endif -%}
+                {%- if section.settings.enable_viewer_badge -%}{%- assign viewer_span = section.settings.viewer_maximum | minus: section.settings.viewer_minimum | plus: 1 -%}{%- assign viewer_offset = product.id | modulo: viewer_span -%}{%- assign viewer_count = section.settings.viewer_minimum | plus: viewer_offset -%}<p class="suvedh-product-page__viewer" data-decorative-viewer-badge>{{ section.settings.viewer_message | replace: '[count]', viewer_count | escape }}</p>{%- endif -%}
               {%- when 'price' -%}
                 <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                   {%- render 'price',
@@ -708,11 +709,11 @@
                 {% render 'icon-with-text', block: block %}
             {%- endcase -%}
           {%- endfor -%}
-          {%- if pages.wishlist != blank -%}<div class="suvedh-product-page__wishlist"><a class="button button--secondary button--full-width" href="{{ pages.wishlist.url }}?product={{ product.handle }}">♡ Add to Wishlist</a></div>{%- endif -%}
-          {%- assign offer_blocks = section.blocks | where: 'type', 'offer' -%}{%- if section.settings.enable_offers and offer_blocks.size > 0 -%}<section class="suvedh-product-page__offers" aria-labelledby="Offers-{{ section.id }}"><h2 id="Offers-{{ section.id }}">Available offers</h2><div class="suvedh-product-page__offer-grid">{%- for block in offer_blocks limit: 24 -%}<article class="suvedh-product-page__offer" {{ block.shopify_attributes }}>{% if block.settings.icon %}{{ block.settings.icon | image_url: width: 48 | image_tag: loading: 'lazy' }}{% endif %}<h3>{{ block.settings.title | escape }}</h3>{%- if block.settings.code != blank -%}<p><code>{{ block.settings.code | escape }}</code>{% if block.settings.enable_copy %}<button type="button" data-copy-code="{{ block.settings.code | escape }}" aria-label="Copy offer code {{ block.settings.code | escape }}">Copy</button>{% endif %}</p>{%- endif -%}{{ block.settings.description }}{% if block.settings.minimum_quantity > 1 %}<small>Minimum quantity: {{ block.settings.minimum_quantity }}</small>{% endif %}{% if block.settings.minimum_cart_amount != blank %}<small>Minimum cart amount: {{ block.settings.minimum_cart_amount | escape }}</small>{% endif %}</article>{%- endfor -%}</div></section>{%- endif -%}
+          {%- comment -%}Wishlist hidden until a storage-backed app or implementation is installed.{%- endcomment -%}
+          {%- assign offer_blocks = section.blocks | where: 'type', 'offer' -%}{%- if section.settings.enable_offers and offer_blocks.size > 0 -%}<section class="suvedh-product-page__offers" aria-labelledby="Offers-{{ section.id }}"><h2 id="Offers-{{ section.id }}">Available offers</h2><div class="suvedh-product-page__offer-grid">{%- for block in offer_blocks limit: 4 -%}{%- if block.settings.enabled -%}<article class="suvedh-product-page__offer" {{ block.shopify_attributes }}>{% if block.settings.icon %}{{ block.settings.icon | image_url: width: 48 | image_tag: loading: 'lazy' }}{% endif %}<h3>{{ block.settings.title | escape }}</h3>{%- if block.settings.code != blank -%}<p><code>{{ block.settings.code | escape }}</code>{% if block.settings.enable_copy %}<button type="button" data-copy-code="{{ block.settings.code | escape }}" data-copy-label="{{ block.settings.copy_label | escape }}" aria-label="{{ block.settings.copy_label | escape }} {{ block.settings.code | escape }}">{{ block.settings.copy_label | escape }}</button>{% endif %}</p>{%- endif -%}{{ block.settings.description }}{% if block.settings.minimum_quantity > 1 %}<small>Minimum quantity: {{ block.settings.minimum_quantity }}</small>{% endif %}{% if block.settings.minimum_cart_amount != blank %}<small>Minimum cart amount: {{ block.settings.minimum_cart_amount | escape }}</small>{% endif %}<small>Terms apply.</small></article>{%- endif -%}{%- endfor -%}</div></section>{%- endif -%}
           <section class="suvedh-product-page__information" data-product-information>{%- assign info_labels = 'Description,Shipping & Returns,Jewellery Care,Product Details' | split: ',' -%}<div class="suvedh-product-page__tablist" role="tablist" aria-label="Product information">{%- for label in info_labels -%}<button type="button" role="tab" id="Tab-{{ section.id }}-{{ forloop.index }}" aria-controls="Panel-{{ section.id }}-{{ forloop.index }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" tabindex="{% if forloop.first %}0{% else %}-1{% endif %}">{{ label }}</button>{%- endfor -%}</div>{%- for label in info_labels -%}<div class="suvedh-product-page__panel{% unless forloop.first %} is-hidden{% endunless %}" id="Panel-{{ section.id }}-{{ forloop.index }}" role="tabpanel" aria-labelledby="Tab-{{ section.id }}-{{ forloop.index }}"><button class="suvedh-product-page__accordion-trigger" type="button" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="PanelContent-{{ section.id }}-{{ forloop.index }}">{{ label }}<span aria-hidden="true">+</span></button><div class="suvedh-product-page__panel-content rte" id="PanelContent-{{ section.id }}-{{ forloop.index }}"{% unless forloop.first %} hidden{% endunless %}>{%- case forloop.index -%}{%- when 1 -%}{{ product.description }}{%- when 2 -%}{{ section.settings.shipping_returns }}{%- when 3 -%}{{ section.settings.jewellery_care }}{%- when 4 -%}<dl class="suvedh-product-page__details">{%- if product.type != blank -%}<div><dt>Product type</dt><dd>{{ product.type | escape }}</dd></div>{%- endif -%}{%- if product.vendor != blank -%}<div><dt>Vendor</dt><dd>{{ product.vendor | escape }}</dd></div>{%- endif -%}<div data-product-detail-sku{% if product.selected_or_first_available_variant.sku == blank %} class="hidden"{% endif %}><dt>SKU</dt><dd>{{ product.selected_or_first_available_variant.sku | escape }}</dd></div>{%- assign detail_keys = 'material,purity,silver_weight,stone_type,stone_colour,adjustable,package_contents,short_description' | split: ',' -%}{%- for key in detail_keys -%}{%- assign detail = product.metafields.custom[key] -%}{%- if detail != blank -%}<div><dt>{{ key | replace: '_', ' ' | capitalize }}</dt><dd>{{ detail | metafield_tag }}</dd></div>{%- endif -%}{%- endfor -%}</dl>{%- endcase -%}</div></div>{%- endfor -%}</section>
-          {%- assign benefit_blocks = section.blocks | where: 'type', 'trust_benefit' -%}{%- if section.settings.enable_trust_benefits and benefit_blocks.size > 0 -%}<section class="suvedh-product-page__benefits" aria-label="Shopping benefits">{%- for block in benefit_blocks limit: 4 -%}{%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" {{ block.shopify_attributes }}>{%- else -%}<div {{ block.shopify_attributes }}>{%- endif -%}<span aria-hidden="true">{{ block.settings.icon | escape }}</span><p><strong>{{ block.settings.title | escape }}</strong>{% if block.settings.subtitle != blank %}<small>{{ block.settings.subtitle | escape }}</small>{% endif %}</p>{%- if block.settings.link != blank -%}</a>{%- else -%}</div>{%- endif -%}{%- endfor -%}</section>{%- endif -%}
-          <section class="suvedh-product-page__payments"><h2>{{ section.settings.secure_heading | escape }}</h2><div>{%- for type in shop.enabled_payment_types -%}{{ type | payment_type_svg_tag }}{%- endfor -%}</div></section>
+          {%- assign benefit_blocks = section.blocks | where: 'type', 'trust_benefit' -%}{%- if section.settings.enable_trust_benefits and benefit_blocks.size > 0 -%}<section class="suvedh-product-page__benefits" aria-label="Shopping benefits">{%- for block in benefit_blocks limit: 4 -%}{%- if block.settings.enabled -%}{%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}" {{ block.shopify_attributes }}>{%- else -%}<div {{ block.shopify_attributes }}>{%- endif -%}<span aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor"/><path d="m8 12 2.5 2.5L16 9" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></span><p><strong>{{ block.settings.title | escape }}</strong>{% if block.settings.subtitle != blank %}<small>{{ block.settings.subtitle | escape }}</small>{% endif %}</p>{%- if block.settings.link != blank -%}</a>{%- else -%}</div>{%- endif -%}{%- endif -%}{%- endfor -%}</section>{%- endif -%}
+          {%- if section.settings.enable_secure_checkout -%}<section class="suvedh-product-page__payments"><h2>{{ section.settings.secure_checkout_heading | escape }}</h2><div>{%- for type in shop.enabled_payment_types -%}{{ type | payment_type_svg_tag }}{%- endfor -%}</div></section>{%- endif -%}
           {%- assign faq_blocks = section.blocks | where: 'type', 'faq' -%}{%- if section.settings.enable_faq and faq_blocks.size > 0 -%}<section class="suvedh-product-page__faq" aria-labelledby="FaqHeading-{{ section.id }}"><h2 id="FaqHeading-{{ section.id }}">{{ section.settings.faq_heading | escape }}</h2>{%- for block in faq_blocks -%}{%- if block.settings.question != blank and block.settings.answer != blank -%}<details {{ block.shopify_attributes }}><summary>{{ block.settings.question | escape }}<span aria-hidden="true">+</span></summary><div class="rte">{{ block.settings.answer }}</div></details>{%- endif -%}{%- endfor -%}</section>{%- endif -%}
           <a href="{{ product.url }}" class="link product__view-details animate-arrow">
             {{ 'products.product.view_full_details' | t }}
@@ -726,7 +727,7 @@
       <div><strong>{{ product.title | escape }}</strong><span data-sticky-price>{{ product.selected_or_first_available_variant.price | money }}</span></div>
       <button type="button" class="button" data-sticky-submit aria-label="Add {{ product.title | escape }} to cart">{{ 'products.product.add_to_cart' | t }}</button>
     </div>{%- endif -%}
-    {% render 'product-media-modal', variant_images: variant_images %}
+    {%- if section.settings.enable_image_zoom -%}{% render 'product-media-modal', variant_images: variant_images %}{%- endif -%}
 
     {% assign popups = section.blocks | where: 'type', 'popup' %}
     {%- for block in popups -%}
@@ -792,8 +793,14 @@
                    {
                        "type":  "offer",
                        "name":  "Offer",
-                       "limit":   24,
+                       "limit":   4,
                        "settings":  [
+                                        {
+                                            "type":  "checkbox",
+                                            "id":  "enabled",
+                                            "label":  "Enable offer",
+                                            "default":  true
+                                        },
                                         {
                                             "type":  "image_picker",
                                             "id":  "icon",
@@ -836,6 +843,12 @@
                                             "id":  "enable_copy",
                                             "label":  "Show copy button",
                                             "default":  true
+                                        },
+                                        {
+                                            "type":  "text",
+                                            "id":  "copy_label",
+                                            "label":  "Copy button label",
+                                            "default":  "Copy code"
                                         }
                                     ]
                    },
@@ -844,6 +857,12 @@
                        "name":  "Trust benefit",
                        "limit":  4,
                        "settings":  [
+                                        {
+                                            "type":  "checkbox",
+                                            "id":  "enabled",
+                                            "label":  "Enable benefit",
+                                            "default":  true
+                                        },
                                         {
                                             "type":  "text",
                                             "id":  "icon",
@@ -874,15 +893,15 @@
                        "settings":  [
                                         {
                                             "type":  "checkbox",
-                                            "id":  "enable_viewer_message",
+                                            "id":  "enable_viewer_badge",
                                             "label":  "Enable simulated viewer message",
                                             "info":  "Decorative simulated value; not live analytics.",
                                             "default":  false
                                         },
                                         {
                                             "type":  "range",
-                                            "id":  "viewer_count",
-                         "label":  "Viewer count",
+                                            "id":  "viewer_minimum",
+                         "label":  "Minimum decorative viewers",
                          "min":  1,
                          "max":  100,
                          "step":  1,
@@ -927,7 +946,7 @@
                                         },
                                         {
                                             "type":  "text",
-                                            "id":  "secure_heading",
+                                            "id":  "secure_checkout_heading",
                                             "label":  "Secure checkout heading",
                                             "default":  "Secure Checkout"
                                         },
@@ -2312,6 +2331,16 @@
                      },
                      {
                          "type":  "range",
+                         "id":  "desktop_spacing",
+                         "label":  "Desktop spacing",
+                         "min":  0,
+                         "max":  80,
+                         "step":  4,
+                         "unit":  "px",
+                         "default":  24
+                     },
+                     {
+                         "type":  "range",
                          "id":  "mobile_spacing",
                          "label":  "Mobile top spacing",
                          "min":  0,
@@ -2461,19 +2490,28 @@
                      },
                      {
                          "type":  "checkbox",
-                         "id":  "enable_viewer_message",
+                         "id":  "enable_viewer_badge",
                          "label":  "Enable viewer badge",
                          "info":  "Simulated decorative value; disabled by default and not live analytics.",
                          "default":  false
                      },
                      {
                          "type":  "range",
-                         "id":  "viewer_count",
-                         "label":  "Viewer count",
+                         "id":  "viewer_minimum",
+                         "label":  "Minimum decorative viewers",
                          "min":  1,
                          "max":  100,
                          "step":  1,
                          "default":  24
+                     },
+                     {
+                         "type":  "range",
+                         "id":  "viewer_maximum",
+                         "label":  "Maximum decorative viewers",
+                         "min":  1,
+                         "max":  100,
+                         "step":  1,
+                         "default":  30
                      },
                      {
                          "type":  "text",
@@ -2481,6 +2519,25 @@
                          "label":  "Viewer message",
                          "info":  "Use [count] for the configured static number.",
                          "default":  "[count] people are viewing this right now"
+                     },
+                     {
+                         "type":  "checkbox",
+                         "id":  "enable_wishlist_block",
+                         "label":  "Enable wishlist block",
+                         "info":  "Requires a storage-backed wishlist app or implementation.",
+                         "default":  false
+                     },
+                     {
+                         "type":  "checkbox",
+                         "id":  "enable_secure_checkout",
+                         "label":  "Enable secure checkout",
+                         "default":  true
+                     },
+                     {
+                         "type":  "checkbox",
+                         "id":  "enable_image_zoom",
+                         "label":  "Enable image zoom",
+                         "default":  true
                      },
                      {
                          "type":  "checkbox",
@@ -2514,7 +2571,7 @@
                      },
                      {
                          "type":  "text",
-                         "id":  "secure_heading",
+                         "id":  "secure_checkout_heading",
                          "label":  "Secure checkout heading",
                          "default":  "Secure Checkout"
                      },
@@ -2556,9 +2613,9 @@
                      },
                      {
                          "type":  "checkbox",
-                         "id":  "enable_sticky_info",
+                         "id":  "enable_sticky_product_info",
                          "default":  true,
-                         "label":  "t:sections.main-product.settings.enable_sticky_info.label"
+                         "label":  "Enable sticky product information"
                      },
                      {
                          "type":  "color_scheme",
