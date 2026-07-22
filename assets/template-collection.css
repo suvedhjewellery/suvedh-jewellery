@@ -103,7 +103,12 @@
 
 /* SUVEDH collection layout. These rules do not affect product cards elsewhere. */
 .suvedh-collection-page__banner .collection-hero__inner {
-  padding-bottom: 4.8rem;
+  padding-top: 4rem;
+  padding-bottom: 2.4rem;
+}
+
+.suvedh-collection-page__banner .suvedh-breadcrumbs {
+  margin-bottom: 0;
 }
 
 .suvedh-collection-page__banner .collection-hero__title {
@@ -175,7 +180,8 @@
 
 @media screen and (max-width: 749px) {
   .suvedh-collection-page__banner .collection-hero__inner {
-    padding-bottom: 3.2rem;
+    padding-top: 3.2rem;
+    padding-bottom: 2.4rem;
   }
 }
 

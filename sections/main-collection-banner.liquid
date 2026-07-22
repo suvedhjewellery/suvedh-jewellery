@@ -12,9 +12,11 @@
 <div class="collection-hero suvedh-collection-page suvedh-collection-page__banner{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %} color-{{ section.settings.color_scheme }} gradient">
   <div class="collection-hero__inner page-width {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
     <div class="collection-hero__text-wrapper">
-      {%- if section.settings.eyebrow != blank -%}<p class="collection-hero__eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      {%- if section.settings.show_eyebrow and section.settings.eyebrow != blank -%}
+        <p class="collection-hero__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
       {% render 'suvedh-breadcrumbs', context: 'collection', collection: collection %}
-      <h1 class="collection-hero__title">
+      <h1 class="collection-hero__title{% unless section.settings.show_collection_title %} visually-hidden{% endunless %}">
         <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
         {{- collection.title | escape -}}
       </h1>
@@ -52,7 +54,9 @@
   "name": "t:sections.main-collection-banner.name",
   "class": "section",
   "settings": [
+    { "type": "checkbox", "id": "show_eyebrow", "label": "Show collection eyebrow", "default": true },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "SUVEDH Fine Silver" },
+    { "type": "checkbox", "id": "show_collection_title", "label": "Show collection title", "default": true },
     {
       "type": "paragraph",
       "content": "t:sections.main-collection-banner.settings.paragraph.content"
