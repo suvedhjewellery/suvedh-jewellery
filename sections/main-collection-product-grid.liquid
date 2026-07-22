@@ -2,6 +2,14 @@
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 
+{%- if collection.products_count == 1 -%}
+  {{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
+  {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
+  {{ 'suvedh-single-collection-product.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'suvedh-single-collection-product.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
 {% if section.settings.image_shape == 'blob' %}
   {{ 'mask-blobs.css' | asset_url | stylesheet_tag }}
 {%- endif -%}
@@ -39,7 +47,7 @@
 <div class="suvedh-collection-page suvedh-collection-page__products{% if collection.products_count == 1 %} is-single-product{% endif %} section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
   {%- paginate collection.products by section.settings.products_per_page -%}
     {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
-    {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
+    {%- if collection.products_count > 1 and section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
       <facet-filters-form class="facets facets-vertical-sort page-width small-hide">
         <form class="facets-vertical-form" id="FacetSortForm">
           <div class="facet-filters sorting caption">
@@ -100,7 +108,7 @@
     <div class="{% if section.settings.filter_type == 'vertical' %} facets-vertical page-width{% endif %}">
       {{ 'component-facets.css' | asset_url | stylesheet_tag }}
       <script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
-      {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
+      {%- if collection.products_count > 1 and section.settings.enable_filtering or collection.products_count > 1 and section.settings.enable_sorting -%}
         <aside
           aria-labelledby="verticalTitle"
           class="facets-wrapper{% unless section.settings.enable_filtering %} facets-wrapper--no-filters{% endunless %}{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}"
@@ -143,10 +151,10 @@
             class="collection{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}"
           >
             <div class="loading-overlay gradient"></div>
-            <div class="{% if collection.products_count == 1 %}suvedh-single-collection-layout{% endif %}">
             {%- if collection.products_count == 1 -%}
-              {% render 'suvedh-breadcrumbs', context: 'collection', collection: collection, hide_parent: true %}
-            {%- endif -%}
+              {%- assign featured_product = collection.products.first -%}
+              {% render 'suvedh-single-collection-product', featured_product: featured_product %}
+            {%- else -%}
             <ul
               id="product-grid"
               data-id="{{ section.id }}"
@@ -189,7 +197,7 @@
                 {%- assign skip_card_product_styles = true -%}
               {%- endfor -%}
             </ul>
-            </div>
+            {%- endif -%}
 
             {%- if paginate.pages > 1 -%}
               {% render 'pagination', paginate: paginate, anchor: '' %}
