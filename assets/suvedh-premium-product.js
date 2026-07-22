@@ -1,5 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.suvedh-product-page').forEach((section) => {
+  document.querySelectorAll('.suvedh-product-page').forEach((section) => {    section.querySelectorAll('[data-product-wishlist]').forEach((link) => {
+      const key = 'suvedh-wishlist-products';
+      let handles = [];
+      try { handles = JSON.parse(localStorage.getItem(key) || '[]'); } catch (_) { handles = []; }
+      const handle = link.dataset.productHandle;
+      const update = () => link.setAttribute('aria-pressed', String(handles.includes(handle)));
+      update();
+      link.addEventListener('click', () => {
+        if (!handles.includes(handle)) handles.push(handle);
+        localStorage.setItem(key, JSON.stringify(handles));
+        update();
+      });
+    });
     section.querySelectorAll('[data-copy-code]').forEach((button) => button.addEventListener('click', async () => {
       const label = button.dataset.copyLabel || 'Copy';
       try { await navigator.clipboard.writeText(button.dataset.copyCode); button.textContent = 'Copied'; }
