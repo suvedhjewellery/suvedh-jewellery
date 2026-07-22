@@ -36,7 +36,7 @@
   }
 {%- endstyle -%}
 
-<div class="suvedh-collection-page suvedh-collection-page__products section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
+<div class="suvedh-collection-page suvedh-collection-page__products{% if collection.products_count == 1 %} is-single-product{% endif %} section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
   {%- paginate collection.products by section.settings.products_per_page -%}
     {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
     {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
@@ -143,6 +143,10 @@
             class="collection{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}"
           >
             <div class="loading-overlay gradient"></div>
+            <div class="{% if collection.products_count == 1 %}suvedh-single-collection-layout{% endif %}">
+            {%- if collection.products_count == 1 -%}
+              {% render 'suvedh-breadcrumbs', context: 'collection', collection: collection, hide_parent: true %}
+            {%- endif -%}
             <ul
               id="product-grid"
               data-id="{{ section.id }}"
@@ -151,7 +155,7 @@
                 grid--{{ section.settings.columns_desktop }}-col-desktop
                 suvedh-collection-grid
                 collection-product-count--{{ collection.products_count | at_most: 4 }}
-                {% if collection.products.size == 1 %} is-single-product{% endif %}
+                {% if collection.products_count == 1 %} is-single-product{% endif %}
                 {% if section.settings.quick_add == 'bulk' %} collection-quick-add-bulk{% endif %}
               "
             >
@@ -185,6 +189,7 @@
                 {%- assign skip_card_product_styles = true -%}
               {%- endfor -%}
             </ul>
+            </div>
 
             {%- if paginate.pages > 1 -%}
               {% render 'pagination', paginate: paginate, anchor: '' %}

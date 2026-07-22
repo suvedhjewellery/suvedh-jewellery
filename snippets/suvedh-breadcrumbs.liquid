@@ -5,6 +5,7 @@
   - context: {String} 'collection' or 'product'
   - collection: {Object} The current collection, when available
   - product: {Object} The current product, when available
+  - hide_parent: {Boolean} Omit the inferred parent collection crumb (optional)
 {% endcomment %}
 
 {%- liquid
@@ -46,7 +47,7 @@
     <ol class="suvedh-breadcrumbs__list">
       <li class="suvedh-breadcrumbs__item"><a class="suvedh-breadcrumbs__link" href="{{ routes.root_url }}">Home</a></li>
       {%- if context == 'collection' -%}
-        {%- if parent_handle != blank and collections[parent_handle] != blank -%}
+        {%- if hide_parent != true and parent_handle != blank and collections[parent_handle] != blank -%}
           <li class="suvedh-breadcrumbs__item"><a class="suvedh-breadcrumbs__link" href="{{ collections[parent_handle].url }}">{{ parent_title | escape }}</a></li>
         {%- endif -%}
         <li class="suvedh-breadcrumbs__item" aria-current="page">{{ collection.title | escape }}</li>

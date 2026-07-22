@@ -215,3 +215,18 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
+
+/* Single-product collection presentation. Multi-product grids remain unchanged. */
+.suvedh-collection-page__banner.is-single-product{display:none}
+.suvedh-collection-page__products.is-single-product{padding-top:clamp(4rem,4vw,5.6rem);padding-bottom:clamp(6.4rem,7vw,8.8rem)}
+.suvedh-collection-page__products .suvedh-single-collection-layout{display:grid;grid-template-columns:minmax(0,42rem) 1fr;column-gap:7.2rem;width:100%;max-width:124rem;margin-inline:auto;padding-left:clamp(4rem,8vw,14rem);box-sizing:border-box}
+.suvedh-collection-page__products .suvedh-single-collection-layout>.suvedh-breadcrumbs,.suvedh-collection-page__products .suvedh-single-collection-layout>.suvedh-collection-grid{grid-column:1}
+.suvedh-collection-page__products .suvedh-single-collection-layout>.suvedh-breadcrumbs{margin-bottom:clamp(1.8rem,1.5vw,2.4rem)}
+.suvedh-collection-page__products .suvedh-collection-grid.is-single-product{grid-template-columns:minmax(0,42rem);width:100%;justify-content:start}
+.suvedh-collection-page__products .suvedh-collection-grid.is-single-product .card__information{padding:clamp(1.6rem,1.5vw,2rem) 0 0}
+.suvedh-collection-page__products .suvedh-collection-grid.is-single-product .card__heading{line-height:1.45}
+.suvedh-collection-page__products .suvedh-collection-grid.is-single-product .card-information>.price{margin-top:.8rem}
+.suvedh-collection-page__products .suvedh-collection-grid.is-single-product .quick-add{width:100%;margin:clamp(1.8rem,1.5vw,2.4rem) 0 0}
+.suvedh-collection-page__products .suvedh-collection-grid.is-single-product .suvedh-card-wishlist{top:1.6rem;right:1.6rem}
+@media screen and (max-width:749px){.suvedh-collection-page__products.is-single-product{padding-top:3.2rem}.suvedh-collection-page__products .suvedh-single-collection-layout{display:block;padding-left:0}.suvedh-collection-page__products .suvedh-collection-grid.is-single-product{grid-template-columns:minmax(0,1fr)}}
+@media screen and (min-width:750px) and (max-width:989px){.suvedh-collection-page__products .suvedh-single-collection-layout{grid-template-columns:minmax(0,42rem) 1fr;padding-left:clamp(2rem,6vw,6rem)}.suvedh-collection-page__products .suvedh-collection-grid.is-single-product{grid-template-columns:minmax(0,42rem)}}
