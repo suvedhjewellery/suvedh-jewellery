@@ -1,0 +1,23 @@
+{%- comment -%}Prints the live product count for a collection navigation item.{%- endcomment -%}
+{%- if section.type == 'suvedh-premium-header' -%}
+{%- liquid
+  assign collection_handle = handle | default: blank | strip
+  if collection_handle == blank and link != blank and link.type == 'collection_link'
+    assign collection_handle = link.object.handle
+  endif
+  if collection_handle == blank
+    assign clean_parent = parent | strip
+    assign clean_label = label | strip
+    if clean_parent != blank
+      assign collection_handle = clean_parent | append: '-' | append: clean_label | handleize
+      if clean_parent == 'Women' and clean_label == 'Necklace'
+        assign collection_handle = 'women-necklaces'
+      endif
+    else
+      assign collection_handle = clean_label | handleize
+    endif
+  endif
+  assign navigation_collection = collections[collection_handle]
+-%}
+{%- if navigation_collection != blank -%}<span class="suvedh-nav-count" aria-label="{{ navigation_collection.all_products_count }} products">({{ navigation_collection.all_products_count }})</span>{%- endif -%}
+{%- endif -%}

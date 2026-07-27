@@ -61,6 +61,45 @@ product-info {
 }
 
 @media screen and (min-width: 990px) {
+  /* Keep the live product page in two stable columns regardless of media count. */
+  .suvedh-product-page .product:not(.product--no-media) {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    align-items: start;
+    column-gap: clamp(3rem, 4vw, 6rem);
+  }
+
+  .suvedh-product-page .product:not(.product--no-media) > .product__media-wrapper,
+  .suvedh-product-page .product:not(.product--no-media) > .product__info-wrapper {
+    box-sizing: border-box;
+    min-width: 0;
+    width: auto;
+    max-width: none;
+  }
+
+  .suvedh-product-page .product:not(.product--no-media) > .product__info-wrapper {
+    padding-left: 0;
+  }
+
+  .suvedh-product-page .product--right:not(.product--no-media) > .product__media-wrapper { order: 2; }
+  .suvedh-product-page .product--right:not(.product--no-media) > .product__info-wrapper { order: 1; padding-right: 0; }
+
+  .suvedh-product-page .product__media-wrapper,
+  .suvedh-product-page .product__media-container,
+  .suvedh-product-page .product__media-list,
+  .suvedh-product-page .product__media-item,
+  .suvedh-product-page .product__info-wrapper,
+  .suvedh-product-page .product__info-container {
+    box-sizing: border-box;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .suvedh-product-page .product__media img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
   .product--large:not(.product--no-media) .product__media-wrapper {
     max-width: 65%;
     width: calc(65% - var(--grid-desktop-horizontal-spacing) / 2);
@@ -86,6 +125,13 @@ product-info {
   .product--small:not(.product--no-media) .product__media-wrapper {
     max-width: 45%;
     width: calc(45% - var(--grid-desktop-horizontal-spacing) / 2);
+  }
+
+  /* Override the legacy percentage rules above for the active SUVEDH page. */
+  .suvedh-product-page .product:not(.product--no-media) > .product__media-wrapper,
+  .suvedh-product-page .product:not(.product--no-media) > .product__info-wrapper {
+    width: auto;
+    max-width: none;
   }
 }
 

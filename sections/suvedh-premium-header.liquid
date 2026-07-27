@@ -20,18 +20,18 @@
       {%- for link in resolved_menu.links -%}
         {%- if link.links != blank -%}
           <details class="suvedh-nav-item suvedh-nav-item--mega">
-            <summary>{{ link.title | escape }}</summary>
+            <summary>{{ link.title | escape }}{% render 'suvedh-navigation-count', link: link, label: link.title %}</summary>
             <div class="suvedh-mega">
               <div class="suvedh-mega__links">
                 <p>Shop {{ link.title | escape }}</p>
                 {%- for child_link in link.links -%}
-                  <a href="{%- render 'suvedh-collection-link', parent: link.title, label: child_link.title, fallback: child_link.url -%}"{% if child_link.current %} aria-current="page"{% endif %}>{{ child_link.title | escape }}</a>
+                  <a href="{%- render 'suvedh-collection-link', parent: link.title, label: child_link.title, fallback: child_link.url -%}"{% if child_link.current %} aria-current="page"{% endif %}>{{ child_link.title | escape }}{% render 'suvedh-navigation-count', link: child_link, parent: link.title, label: child_link.title %}</a>
                 {%- endfor -%}
               </div>
             </div>
           </details>
         {%- else -%}
-          <a href="{%- render 'suvedh-collection-link', label: link.title, fallback: link.url -%}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
+          <a href="{%- render 'suvedh-collection-link', label: link.title, fallback: link.url -%}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}{% render 'suvedh-navigation-count', link: link, label: link.title %}</a>
         {%- endif -%}
       {%- endfor -%}
       {%- else -%}
