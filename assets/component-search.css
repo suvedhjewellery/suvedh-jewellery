@@ -108,3 +108,7 @@ input::-webkit-search-decoration {
     width:28px !important;
     height:28px !important;
 }
+.search-modal__form .reset__button {
+  left: auto;
+  right: 5.4rem;
+}

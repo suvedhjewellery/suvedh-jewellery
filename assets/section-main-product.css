@@ -1392,6 +1392,10 @@ a.product__text {
     --constrained-min-height: 500px;
   }
 
+  .product--single-media .product-media-container.constrain-height {
+    --constrained-min-height: 0px;
+  }
+
   .product-media-container.media-fit-cover,
   .product-media-container.media-fit-cover .product__modal-opener,
   .product-media-container.media-fit-cover .media {

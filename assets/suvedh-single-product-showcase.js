@@ -9,11 +9,6 @@
       root.style.setProperty('--suvedh-showcase-sticky-top', `${Math.ceil(height + 20)}px`);
     };
     setStickyOffset(); window.addEventListener('resize', setStickyOffset, { passive: true });
-    root.querySelectorAll('[data-product-wishlist]').forEach((link) => {
-      let handles = []; try { handles = JSON.parse(localStorage.getItem(key) || '[]'); } catch (_) { handles = []; }
-      const update = () => { const added = handles.includes(link.dataset.productHandle); link.setAttribute('aria-pressed', String(added)); link.querySelector('[data-wishlist-label]').textContent = added ? 'Added to Wishlist' : 'Add to Wishlist'; };
-      update(); link.addEventListener('click', (event) => { event.preventDefault(); const handle = link.dataset.productHandle; handles = handles.includes(handle) ? handles.filter((item) => item !== handle) : [...handles, handle]; localStorage.setItem(key, JSON.stringify(handles)); update(); });
-    });
     root.querySelectorAll('[data-copy-code]').forEach((button) => button.addEventListener('click', async () => { const label = button.dataset.copyLabel; try { await navigator.clipboard.writeText(button.dataset.copyCode); button.textContent = 'Copied'; } catch (_) { button.textContent = 'Select code'; } setTimeout(() => { button.textContent = label; }, 1600); }));
     const tabs = [...root.querySelectorAll('[role="tab"]')];
     const activate = (index) => tabs.forEach((tab, i) => { const active = i === index; tab.setAttribute('aria-selected', String(active)); tab.tabIndex = active ? 0 : -1; document.getElementById(tab.getAttribute('aria-controls'))?.classList.toggle('is-hidden', !active); });

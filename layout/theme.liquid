@@ -257,6 +257,7 @@
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'suvedh-luxury.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'suvedh-wishlist.js' | asset_url }}" defer="defer"></script>
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 
     {%- if settings.cart_type == 'drawer' -%}

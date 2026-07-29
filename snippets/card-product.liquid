@@ -41,7 +41,7 @@
     endif
   -%}
   <div class="card-wrapper product-card-wrapper underline-links-hover">
-    <a class="suvedh-card-wishlist" href="/pages/wishlist?product={{ card_product.handle }}" aria-label="Add {{ card_product.title | escape }} to wishlist"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.5a5.5 5.5 0 0 0 0-7.8Z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
+    <button type="button" class="suvedh-card-wishlist" data-product-wishlist data-product-handle="{{ card_product.handle | escape }}" data-product-title="{{ card_product.title | escape }}" aria-label="Add {{ card_product.title | escape }} to wishlist" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.5a5.5 5.5 0 0 0 0-7.8Z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></button>
     <div
       class="
         card card--{{ settings.card_style }}
@@ -586,7 +586,7 @@
     endif
   -%}
   <div class="card-wrapper product-card-wrapper underline-links-hover">
-    <a class="suvedh-card-wishlist" href="/pages/wishlist?product={{ card_product.handle }}" aria-label="Add {{ card_product.title | escape }} to wishlist"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.5a5.5 5.5 0 0 0 0-7.8Z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
+    <button type="button" class="suvedh-card-wishlist" data-product-wishlist data-product-handle="{{ card_product.handle | escape }}" data-product-title="{{ card_product.title | escape }}" aria-label="Add {{ card_product.title | escape }} to wishlist" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.7a5.5 5.5 0 0 0-7.8 0L12 5.8l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.5a5.5 5.5 0 0 0 0-7.8Z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></button>
     <div
       class="
         card card--{{ settings.card_style }}

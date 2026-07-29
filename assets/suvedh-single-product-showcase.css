@@ -2,7 +2,7 @@
 .suvedh-single-collection-product__zoom-trigger{display:block;width:100%;padding:0;border:0;background:transparent;color:inherit;cursor:zoom-in}
 .suvedh-single-collection-product__zoom-trigger:disabled{cursor:default}
 .suvedh-single-collection-product__viewer{display:inline-flex;align-items:center;gap:.45rem;margin:0 0 1.3rem;padding:.55rem .9rem;border:1px solid rgba(154,116,65,.35);border-radius:999px;background:rgba(154,116,65,.08);color:var(--showcase-gold);font-size:1.2rem}
-.suvedh-single-collection-product__wishlist{display:flex;align-items:center;justify-content:center;gap:.8rem;width:100%;min-height:4.8rem;margin-top:1rem;border:1px solid var(--showcase-gold);border-radius:.3rem;color:#241f1a;text-decoration:none}
+.suvedh-single-collection-product__wishlist{display:flex;align-items:center;justify-content:center;gap:.8rem;width:100%;min-height:4.8rem;margin-top:1rem;padding:0;border:1px solid var(--showcase-gold);border-radius:.3rem;background:transparent;color:#241f1a;font:inherit;cursor:pointer}
 .suvedh-single-collection-product__wishlist svg{width:2rem;height:2rem;fill:transparent;stroke:currentColor;stroke-width:1.4}
 .suvedh-single-collection-product__wishlist[aria-pressed=true]{color:var(--showcase-gold)}
 .suvedh-single-collection-product__wishlist[aria-pressed=true] svg{fill:currentColor}
