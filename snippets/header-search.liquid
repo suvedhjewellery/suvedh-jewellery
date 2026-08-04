@@ -35,20 +35,26 @@
         class="search-modal__content{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} search-modal__content-top{% else %} search-modal__content-bottom{% endif %}"
         tabindex="-1"
       >
+        <div class="suvedh-search-dialog">
+          <h2 class="suvedh-search-dialog__heading">Search</h2>
         {%- if settings.predictive_search_enabled -%}
           <predictive-search class="search-modal__form" data-loading-text="{{ 'accessibility.loading' | t }}">
         {%- else -%}
           <search-form class="search-modal__form">
         {%- endif -%}
         <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
-          <div class="field">
+          <div class="suvedh-search-field">
+            <button type="submit" class="suvedh-search-field__submit" aria-label="{{ 'general.search.search' | t }}">
+              <span class="svg-wrapper" aria-hidden="true">{{- 'icon-search.svg' | inline_asset_content -}}</span>
+            </button>
             <input
-              class="search__input field__input"
+              class="search__input suvedh-search-field__input"
               id="{{ input_id }}"
               type="search"
               name="q"
               value="{{ search.terms | escape }}"
               placeholder="Search products"
+              aria-label="Search products"
               {%- if settings.predictive_search_enabled -%}
                 role="combobox"
                 aria-expanded="false"
@@ -62,20 +68,14 @@
                 spellcheck="false"
               {%- endif -%}
             >
-            <label class="visually-hidden" for="{{ input_id }}">Search products</label>
             <input type="hidden" name="options[prefix]" value="last">
             <button
               type="reset"
-              class="reset__button field__button{% if search.terms == blank %} hidden{% endif %}"
+              class="reset__button suvedh-search-field__reset{% if search.terms == blank %} hidden{% endif %}"
               aria-label="{{ 'general.search.reset' | t }}"
             >
-              <span class="svg-wrapper">
+              <span class="svg-wrapper" aria-hidden="true">
                 {{- 'icon-reset.svg' | inline_asset_content -}}
-              </span>
-            </button>
-            <button class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
-              <span class="svg-wrapper">
-                {{- 'icon-search.svg' | inline_asset_content -}}
               </span>
             </button>
           </div>
@@ -93,6 +93,7 @@
         {%- else -%}
           </search-form>
         {%- endif -%}
+        </div>
         <button
           type="button"
           class="search-modal__close-button modal__close-button link link--text focus-inset"
