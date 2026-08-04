@@ -40,34 +40,7 @@
                                                                "settings":  {
                                                                                 "share_label":  "Share"
                                                                             }
-                                                           },
-                                                 "jewellery_care":  {
-                                                                        "type":  "collapsible_tab",
-                                                                        "settings":  {
-                                                                                         "heading":  "Jewellery Care",
-                                                                                         "icon":  "washing",
-                                                                                         "content":  "\u003cp\u003eKeep your silver jewellery dry and store it separately in a soft pouch. Gently clean with a silver polishing cloth.\u003c/p\u003e",
-                                                                                         "page":  ""
-                                                                                     }
-                                                                    },
-                                                 "specifications":  {
-                                                                        "type":  "collapsible_tab",
-                                                                        "settings":  {
-                                                                                         "heading":  "Specifications",
-                                                                                         "icon":  "clipboard",
-                                                                                         "content":  "\u003cp\u003eProduct specifications, dimensions and materials can be maintained here from the Theme Editor.\u003c/p\u003e",
-                                                                                         "page":  ""
-                                                                                     }
-                                                                    },
-                                                 "product_faq":  {
-                                                                     "type":  "collapsible_tab",
-                                                                     "settings":  {
-                                                                                      "heading":  "Frequently Asked Questions",
-                                                                                      "icon":  "chat_bubble",
-                                                                                      "content":  "\u003cp\u003eAdd product-specific answers or connect a dedicated FAQ page from the Theme Editor.\u003c/p\u003e",
-                                                                                      "page":  ""
-                                                                                  }
-                                                                 }
+                                                           }
                                              },
                                   "block_order":  [
                                                       "title",
@@ -75,9 +48,6 @@
                                                       "variant_picker",
                                                       "quantity_selector",
                                                       "buy_buttons",
-                                                      "jewellery_care",
-                                                      "specifications",
-                                                      "product_faq",
                                                       "share"
                                                   ],
                                   "settings":  {
