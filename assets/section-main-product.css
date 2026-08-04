@@ -954,6 +954,41 @@ a.product__text {
   overflow: hidden;
 }
 
+/* SUVEDH marketplace gallery: one active media item with a compact thumbnail rail. */
+.suvedh-product-page .product--thumbnail_slider media-gallery { display: block; width: 100%; }
+.suvedh-product-page .product--thumbnail_slider .product__media-list { margin-bottom: 1.2rem; }
+.suvedh-product-page .product--thumbnail_slider .product__media-item { overflow: hidden; border-radius: 1.2rem; }
+.suvedh-product-page .product--thumbnail_slider .product__media-container,
+.suvedh-product-page .product--thumbnail_slider .product__media,
+.suvedh-product-page .product--thumbnail_slider .deferred-media { width: 100%; max-width: 100%; }
+.suvedh-product-page .product--thumbnail_slider .product__media img,
+.suvedh-product-page .product--thumbnail_slider .product__media video,
+.suvedh-product-page .product--thumbnail_slider .product__media iframe,
+.suvedh-product-page .product--thumbnail_slider .product__media model-viewer { object-fit: contain; }
+.suvedh-product-page .product--thumbnail_slider .thumbnail-slider { margin-top: 0; overflow: hidden; }
+.suvedh-product-page .product--thumbnail_slider .thumbnail-list {
+  flex-wrap: nowrap; gap: 0.8rem; overflow-x: auto; overscroll-behavior-inline: contain; scrollbar-width: thin;
+}
+.suvedh-product-page .product--thumbnail_slider .thumbnail-list__item.slider__slide { flex: 0 0 6.4rem; width: 6.4rem; }
+.suvedh-product-page .product--thumbnail_slider .thumbnail { border-radius: 0.8rem; }
+.suvedh-product-page .product--thumbnail_slider .thumbnail img { object-fit: contain; }
+.suvedh-product-page .product--thumbnail_slider .thumbnail[aria-current='true'] {
+  border-color: #b08d57; box-shadow: 0 0 0 0.2rem #b08d57;
+}
+@media screen and (min-width: 750px) {
+  .suvedh-product-page .product--thumbnail_slider [id^='GalleryViewer-'],
+  .suvedh-product-page .product--thumbnail_slider .thumbnail-slider { max-width: 65rem; margin-inline: auto; }
+  .suvedh-product-page .product--thumbnail_slider .thumbnail-list__item.slider__slide {
+    flex: 0 0 calc(20% - 0.8rem);
+    width: calc(20% - 0.8rem);
+  }
+}
+@media screen and (max-width: 749px) {
+  .suvedh-product-page .product--thumbnail_slider { overflow: hidden; }
+  .suvedh-product-page .product--thumbnail_slider .product__media-list { margin-bottom: 1rem; }
+  .suvedh-product-page .product--thumbnail_slider .thumbnail-list__item.slider__slide { flex-basis: 5.6rem; width: 5.6rem; }
+}
+
 .thumbnail-list {
   flex-wrap: wrap;
   grid-gap: 1rem;
