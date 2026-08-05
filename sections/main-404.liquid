@@ -1,14 +1,5 @@
 {%- liquid
-  assign path_prefix = request.path | slice: 0, 10
-  assign is_missing_product = false
-  if path_prefix == '/products/'
-    assign is_missing_product = true
-  endif
-
-  assign contact_url = '/pages/contact'
-  if pages.contact != blank
-    assign contact_url = pages.contact.url
-  endif
+  assign current_path = request.path | downcase
 -%}
 
 <style type="text/css">
@@ -63,15 +54,23 @@
 
 <div class="template-404 page-width page-margin">
   <div class="template-404__content">
-    {%- if is_missing_product -%}
+    {%- if current_path contains '/products/' -%}
       <h1 class="template-404__title title">This product is currently unavailable.</h1>
       <p class="template-404__message">
-        The product may be temporarily out of stock or no longer available. Please explore our other jewellery collections.
+        The product may be temporarily unavailable or no longer listed. Please explore our other jewellery collections.
       </p>
       <div class="template-404__actions">
         <a href="{{ routes.all_products_collection_url }}" class="button">Continue Shopping</a>
         <a href="{{ routes.collections_url }}/new-arrivals" class="button button--secondary">View New Arrivals</a>
-        <a href="{{ contact_url }}" class="button button--secondary">Contact Us</a>
+      </div>
+    {%- elsif current_path contains '/collections/' -%}
+      <h1 class="template-404__title title">This collection is currently unavailable.</h1>
+      <p class="template-404__message">
+        The collection may be temporarily unavailable or has been moved. Please explore our available jewellery collections.
+      </p>
+      <div class="template-404__actions">
+        <a href="{{ routes.all_products_collection_url }}" class="button">View All Products</a>
+        <a href="{{ routes.collections_url }}/new-arrivals" class="button button--secondary">View New Arrivals</a>
       </div>
     {%- else -%}
       <p>{{ 'templates.404.subtext' | t }}</p>
