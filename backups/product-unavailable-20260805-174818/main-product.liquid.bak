@@ -728,7 +728,7 @@
       </div>
     </div>
 
-    {%- if section.settings.enable_sticky_atc and product.available -%}<div class="suvedh-sticky-atc" data-sticky-atc hidden>
+    {%- if section.settings.enable_sticky_atc -%}<div class="suvedh-sticky-atc" data-sticky-atc hidden>
       <div><strong>{{ product.title | escape }}</strong><span data-sticky-price>{{ product.selected_or_first_available_variant.price | money }}</span></div>
       <button type="button" class="button" data-sticky-submit aria-label="Add {{ product.title | escape }} to cart">{{ 'products.product.add_to_cart' | t }}</button>
     </div>{%- endif -%}

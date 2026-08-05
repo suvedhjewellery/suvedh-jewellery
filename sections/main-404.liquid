@@ -1,23 +1,86 @@
+{%- liquid
+  assign path_prefix = request.path | slice: 0, 10
+  assign is_missing_product = false
+  if path_prefix == '/products/'
+    assign is_missing_product = true
+  endif
+
+  assign contact_url = '/pages/contact'
+  if pages.contact != blank
+    assign contact_url = pages.contact.url
+  endif
+-%}
+
 <style type="text/css">
-  .template-404 .title + * {
-    margin-top: 1rem;
+  .template-404 {
+    padding-top: clamp(6rem, 10vw, 12rem);
+    padding-bottom: clamp(7rem, 12vw, 14rem);
   }
 
-  @media screen and (min-width: 750px) {
-    .template-404 .title + * {
-      margin-top: 2rem;
+  .template-404__content {
+    max-width: 72rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .template-404__title {
+    margin: 0;
+    font-family: var(--font-heading-family);
+    font-style: var(--font-heading-style);
+    font-weight: var(--font-heading-weight);
+    color: rgb(var(--color-foreground));
+  }
+
+  .template-404__message {
+    max-width: 58rem;
+    margin: 1.8rem auto 0;
+    color: rgba(var(--color-foreground), 0.72);
+    line-height: 1.7;
+  }
+
+  .template-404__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.2rem;
+    margin-top: 3.2rem;
+  }
+
+  @media screen and (max-width: 749px) {
+    .template-404__actions {
+      flex-direction: column;
+      align-items: stretch;
+      max-width: 36rem;
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    .template-404__actions .button {
+      width: 100%;
     }
   }
 </style>
 
-<div class="template-404 page-width page-margin center">
-  <p>
-    {{ 'templates.404.subtext' | t }}
-  </p>
-  <h1 class="title">
-    {{ 'templates.404.title' | t }}
-  </h1>
-  <a href="{{ routes.all_products_collection_url }}" class="button">
-    {{ 'general.continue_shopping' | t }}
-  </a>
+<div class="template-404 page-width page-margin">
+  <div class="template-404__content">
+    {%- if is_missing_product -%}
+      <h1 class="template-404__title title">This product is currently unavailable.</h1>
+      <p class="template-404__message">
+        The product may be temporarily out of stock or no longer available. Please explore our other jewellery collections.
+      </p>
+      <div class="template-404__actions">
+        <a href="{{ routes.all_products_collection_url }}" class="button">Continue Shopping</a>
+        <a href="{{ routes.collections_url }}/new-arrivals" class="button button--secondary">View New Arrivals</a>
+        <a href="{{ contact_url }}" class="button button--secondary">Contact Us</a>
+      </div>
+    {%- else -%}
+      <p>{{ 'templates.404.subtext' | t }}</p>
+      <h1 class="template-404__title title">{{ 'templates.404.title' | t }}</h1>
+      <div class="template-404__actions">
+        <a href="{{ routes.all_products_collection_url }}" class="button">
+          {{ 'general.continue_shopping' | t }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
 </div>
