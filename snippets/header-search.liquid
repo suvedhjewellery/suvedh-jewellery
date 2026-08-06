@@ -36,7 +36,6 @@
         tabindex="-1"
       >
         <div class="suvedh-search-dialog">
-          <h2 class="suvedh-search-dialog__heading">Search</h2>
         {%- if settings.predictive_search_enabled -%}
           <predictive-search class="search-modal__form" data-loading-text="{{ 'accessibility.loading' | t }}">
         {%- else -%}
@@ -44,6 +43,7 @@
         {%- endif -%}
         <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
           <div class="suvedh-search-field">
+            <label class="visually-hidden" for="{{ input_id }}">Search products</label>
             <button type="submit" class="suvedh-search-field__submit" aria-label="{{ 'general.search.search' | t }}">
               <span class="svg-wrapper" aria-hidden="true">{{- 'icon-search.svg' | inline_asset_content -}}</span>
             </button>
@@ -54,7 +54,6 @@
               name="q"
               value="{{ search.terms | escape }}"
               placeholder="Search products"
-              aria-label="Search products"
               {%- if settings.predictive_search_enabled -%}
                 role="combobox"
                 aria-expanded="false"
