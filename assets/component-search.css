@@ -74,61 +74,19 @@ input::-webkit-search-decoration {
 }
 
 
-/* Premium Search Bar */
-
-.search__input {
-    height: 58px !important;
-    border: 2px solid #8a8a8a !important;
-    border-radius: 50px !important;
-    padding-left: 65px !important;
-    font-size: 20px !important;
-    box-shadow: none !important;
-}
-
-.search__input::placeholder{
-    font-size:20px;
-    color:#666;
-}
-
-.search-modal__form .field:before,
-.search-modal__form .field:after{
-    display:none !important;
-}
-
-.search-modal__form .field{
-    border:none !important;
-}
-
-.search__button{
-    left:18px !important;
-    right:auto !important;
-}
-
-.search__button svg{
-    width:28px !important;
-    height:28px !important;
-}
-.search-modal__form .reset__button {
-  left: auto;
-  right: 5.4rem;
-}
-
 /* Header search modal */
 .suvedh-search-dialog { width: min(100%, 74.2rem); }
-.suvedh-search-dialog__heading { margin: 0 0 1.2rem; color: rgb(var(--color-foreground)); font-size: clamp(2rem, 2.4vw, 2.8rem); line-height: 1.2; text-align: center; }
-.suvedh-search-field { position: relative; display: flex; align-items: center; width: 100%; }
-.suvedh-search-field__input.search__input { box-sizing: border-box; width: 100%; height: 5.6rem !important; margin: 0; padding: 0 5.6rem 0 5.4rem !important; border: 0.1rem solid rgba(var(--color-foreground), 0.45) !important; border-radius: 2.8rem !important; background: rgb(var(--color-background)); color: rgb(var(--color-foreground)); font: inherit !important; font-size: 1.6rem !important; line-height: 5.4rem; box-shadow: none !important; appearance: none; }
+.suvedh-search-field { position: relative; width: 100%; }
+.suvedh-search-field__icon { position: absolute; left: 2rem; top: 50%; z-index: 2; display: flex; align-items: center; pointer-events: none; transform: translateY(-50%); }
+.suvedh-search-field__icon .svg-wrapper { width: 2rem; height: 2rem; }
+.suvedh-search-field__input.search__input { box-sizing: border-box; width: 100%; min-height: 5.6rem; margin: 0; padding: 0 5.2rem 0 5.6rem; border: 0.1rem solid rgba(var(--color-foreground), 0.45); border-radius: 2.8rem; background: rgb(var(--color-background)); color: rgb(var(--color-foreground)); font: inherit; font-size: 1.6rem; line-height: 1.4; box-shadow: none; appearance: none; }
 .suvedh-search-field__input.search__input::-webkit-search-cancel-button { display: none; }
 .suvedh-search-field__input.search__input::placeholder { color: rgba(var(--color-foreground), 0.65); font-size: 1.6rem; opacity: 1; }
-.suvedh-search-field__input.search__input:focus { border-color: rgb(var(--color-foreground)) !important; outline: 0.2rem solid rgba(var(--color-foreground), 0.2); outline-offset: 0.2rem; }
-.suvedh-search-field__submit, .suvedh-search-field__reset { position: absolute; z-index: 2; top: 50%; display: flex; align-items: center; justify-content: center; width: 4.4rem; height: 4.4rem; padding: 0; border: 0; background: transparent; color: rgb(var(--color-foreground)); cursor: pointer; transform: translateY(-50%); }
-.suvedh-search-field__submit { left: 0.6rem; }
-.suvedh-search-field__reset { right: 0.6rem !important; left: auto !important; }
-.suvedh-search-field__submit .icon, .suvedh-search-field__reset .icon { width: 2rem !important; height: 2rem !important; }
-.suvedh-search-field__submit:focus-visible, .suvedh-search-field__reset:focus-visible { border-radius: 50%; outline: 0.2rem solid currentColor; outline-offset: -0.4rem; }
+.suvedh-search-field__input.search__input:focus { border-color: rgb(var(--color-foreground)); outline: 0.2rem solid rgba(var(--color-foreground), 0.2); outline-offset: 0.2rem; }
+.suvedh-search-field__reset { position: absolute; z-index: 2; top: 50%; display: flex; align-items: center; justify-content: center; width: 4.4rem; height: 4.4rem; padding: 0; border: 0; background: transparent; color: rgb(var(--color-foreground)); cursor: pointer; transform: translateY(-50%); right: 0.6rem !important; left: auto !important; }
+.suvedh-search-field__reset .icon { width: 2rem; height: 2rem; }
+.suvedh-search-field__reset:focus-visible { border-radius: 50%; outline: 0.2rem solid currentColor; outline-offset: -0.4rem; }
 @media screen and (max-width: 749px) {
   .search-modal__content { align-items: flex-start; height: auto; min-height: 13.6rem; padding: 1.6rem 5.6rem 1.6rem 1.6rem; }
-  .suvedh-search-dialog__heading { margin-bottom: 0.8rem; text-align: left; }
-  .suvedh-search-field__input.search__input { height: 5rem !important; padding-left: 5rem !important; line-height: 4.8rem; }
   .search-modal__close-button { top: 1.4rem; right: 0.6rem; }
 }

@@ -44,9 +44,9 @@
         <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
           <div class="suvedh-search-field">
             <label class="visually-hidden" for="{{ input_id }}">Search products</label>
-            <button type="submit" class="suvedh-search-field__submit" aria-label="{{ 'general.search.search' | t }}">
+            <span class="suvedh-search-field__icon" aria-hidden="true">
               <span class="svg-wrapper" aria-hidden="true">{{- 'icon-search.svg' | inline_asset_content -}}</span>
-            </button>
+            </span>
             <input
               class="search__input suvedh-search-field__input"
               id="{{ input_id }}"
@@ -54,6 +54,7 @@
               name="q"
               value="{{ search.terms | escape }}"
               placeholder="Search products"
+              aria-label="Search products"
               {%- if settings.predictive_search_enabled -%}
                 role="combobox"
                 aria-expanded="false"
