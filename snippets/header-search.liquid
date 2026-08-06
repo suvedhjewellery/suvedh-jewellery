@@ -3,12 +3,13 @@
 
   Accepts:
   - input_id: {String} Id for the search input element (required)
+  - show_label: {Boolean} Shows a visible Search label beside the icon (optional)
 
   Usage:
   {% render 'header-search', input_id: 'My-Id'%}
 {% endcomment %}
 
-<details-modal class="header__search">
+<details-modal class="header__search{% if show_label %} suvedh-header-search{% endif %}">
   <details>
     <summary
       class="header__icon header__icon--search header__icon--summary link focus-inset modal__toggle"
@@ -23,6 +24,9 @@
           {{- 'icon-close.svg' | inline_asset_content -}}
         </span>
       </span>
+      {%- if show_label -%}
+        <span class="suvedh-header-search__label">{{ 'general.search.search' | t }}</span>
+      {%- endif -%}
     </summary>
     <div
       class="search-modal modal__content gradient"
