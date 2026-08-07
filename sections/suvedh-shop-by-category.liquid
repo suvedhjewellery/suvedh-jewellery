@@ -153,8 +153,32 @@
       {%- for block in section.blocks -%}
         {%- liquid
           assign category_collection = block.settings.collection
-          assign category_image = block.settings.custom_image | default: category_collection.featured_image
           assign category_heading = block.settings.heading | default: category_collection.title
+          assign category_key = category_heading | strip | downcase
+          assign category_asset = blank
+          case category_key
+            when 'rings'
+              assign category_asset = 'suvedh-category-rings.webp'
+            when 'earrings'
+              assign category_asset = 'suvedh-category-earrings.webp'
+            when 'studs'
+              assign category_asset = 'suvedh-category-studs.webp'
+            when 'necklaces'
+              assign category_asset = 'suvedh-category-necklaces.webp'
+            when 'pendants'
+              assign category_asset = 'suvedh-category-pendants.webp'
+            when 'bracelets'
+              assign category_asset = 'suvedh-category-bracelets.webp'
+            when 'anklets'
+              assign category_asset = 'suvedh-category-anklets.webp'
+            when 'toe rings'
+              assign category_asset = 'suvedh-category-toe-rings.webp'
+            when 'kids'
+              assign category_asset = 'suvedh-category-kids.webp'
+            when 'gifts'
+              assign category_asset = 'suvedh-category-gifts.webp'
+          endcase
+          assign category_image = block.settings.custom_image
           assign image_alt = category_image.alt | default: category_heading
           assign image_sizes = '(min-width: 1200px) calc((1200px - 100px) / ' | append: section.settings.columns_desktop | append: '), (min-width: 750px) calc((100vw - 80px) / ' | append: section.settings.columns_desktop | append: '), ' | append: section.settings.mobile_card_width | append: 'vw'
         -%}
@@ -179,8 +203,34 @@
                     sizes: image_sizes,
                     alt: image_alt
                 }}
+              {%- elsif category_asset != blank -%}
+                <img
+                  class="suvedh-category__image"
+                  src="{{ category_asset | asset_url }}"
+                  alt="{{ category_heading | escape }}"
+                  loading="lazy"
+                  width="1200"
+                  height="1200"
+                  onerror="this.hidden=true;this.nextElementSibling.hidden=false"
+                >
+                <span class="suvedh-category__placeholder placeholder-svg" hidden aria-label="Artwork asset missing: {{ category_asset | escape }}">
+                  {{- category_heading | escape -}}
+                </span>
+              {%- elsif category_collection.featured_image != blank -%}
+                {{
+                  category_collection.featured_image
+                  | image_url: width: 1200
+                  | image_tag:
+                    class: 'suvedh-category__image',
+                    loading: 'lazy',
+                    widths: '240, 360, 480, 600, 750, 900, 1200',
+                    sizes: image_sizes,
+                    alt: category_heading
+                }}
               {%- else -%}
-                {{ 'collection-1' | placeholder_svg_tag: 'suvedh-category__placeholder placeholder-svg' }}
+                <span class="suvedh-category__placeholder placeholder-svg" aria-label="Category artwork not configured">
+                  {{- category_heading | default: 'Collection' | escape -}}
+                </span>
               {%- endif -%}
             </div>
             <div class="suvedh-category__content">

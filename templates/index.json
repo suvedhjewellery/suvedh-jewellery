@@ -173,7 +173,7 @@
                      "suvedh_best_sellers":  {
                                                  "type":  "suvedh-best-sellers",
                                                  "settings":  {
-                                                                  "collection":  "",
+                                                                  "collection":  "best-sellers",
                                                                   "heading":  "SUVEDH Best Sellers",
                                                                   "subtitle":  "\u003cp\u003eOur most-loved sterling silver pieces, chosen by you.\u003c/p\u003e",
                                                                   "heading_size":  "h1",
