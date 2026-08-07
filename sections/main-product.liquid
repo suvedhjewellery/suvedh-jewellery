@@ -179,6 +179,7 @@
                     {% if section.settings.discount_coupon_code != blank %}<small>Use code <code>{{ section.settings.discount_coupon_code | escape }}</code> {% if section.settings.enable_discount_copy %}<button type="button" data-copy-code="{{ section.settings.discount_coupon_code | escape }}" aria-label="Copy discount code {{ section.settings.discount_coupon_code | escape }}">Copy</button>{% endif %}</small>{% endif %}
                   </div>
                 {%- endif -%}
+                {% render 'suvedh-product-offers', product: product, section: section %}
               {%- when 'inventory' -%}
                 <p
                   class="product__inventory{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.inventory_management != 'shopify' %} visibility-hidden{% endif %}"

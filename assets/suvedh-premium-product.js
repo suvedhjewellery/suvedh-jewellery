@@ -2,9 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.suvedh-product-page').forEach((section) => {
     section.querySelectorAll('[data-copy-code]').forEach((button) => button.addEventListener('click', async () => {
       const label = button.dataset.copyLabel || 'Copy';
-      try { await navigator.clipboard.writeText(button.dataset.copyCode); button.textContent = 'Copied'; }
+      try { await navigator.clipboard.writeText(button.dataset.copyCode); button.textContent = 'Copied!'; }
       catch (_) { button.textContent = 'Select code'; }
-      window.setTimeout(() => { button.textContent = label; }, 1600);
+      window.setTimeout(() => { button.textContent = label; }, 1520);
     }));
     const tabs = [...section.querySelectorAll('[role="tab"]')];
     const activate = (index) => tabs.forEach((item, i) => {
