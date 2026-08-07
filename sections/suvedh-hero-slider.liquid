@@ -184,6 +184,15 @@
     #SuvedhHero-{{ section.id }} .suvedh-hero__track {
       overflow: hidden;
     }
+    #shopify-section-{{ section.id }} .suvedh-hero-slider,
+    #SuvedhHero-{{ section.id }} .suvedh-hero__viewport,
+    #SuvedhHero-{{ section.id }} .suvedh-hero__track,
+    #SuvedhHero-{{ section.id }} .suvedh-hero__slide,
+    #SuvedhHero-{{ section.id }} .suvedh-hero__media,
+    #SuvedhHero-{{ section.id }} .suvedh-hero__media picture,
+    #SuvedhHero-{{ section.id }} .suvedh-hero__image {
+      height: min(460px, 70vh);
+    }
     #SuvedhHero-{{ section.id }} .suvedh-hero__image {
       object-fit: var(--hero-mobile-fit);
       object-position: var(--hero-mobile-object-position);
@@ -236,9 +245,11 @@
       {%- for block in section.blocks -%}
         {%- liquid
           assign desktop_image = block.settings.desktop_image
-          assign mobile_image_fit = block.settings.mobile_image_fit | default: 'contain'
+          assign mobile_image = block.settings.mobile_image | default: desktop_image
+          assign fallback_image = desktop_image | default: mobile_image
+          assign mobile_image_fit = block.settings.mobile_image_fit | default: 'cover'
           assign mobile_background = block.settings.mobile_background | default: '#F9E9EC'
-          assign image_alt = desktop_image.alt | default: section.settings.accessibility_label
+          assign image_alt = fallback_image.alt | default: section.settings.accessibility_label
           assign image_loading = 'lazy'
           assign image_priority = 'auto'
           if forloop.first
@@ -258,18 +269,18 @@
         >
           <div class="suvedh-hero__media">
             <picture>
-              {%- if desktop_image != blank -%}
-                <source media="(max-width: 749px)" srcset="{{ desktop_image | image_url: width: 375 }} 375w, {{ desktop_image | image_url: width: 550 }} 550w, {{ desktop_image | image_url: width: 750 }} 750w, {{ desktop_image | image_url: width: 1100 }} 1100w" sizes="100vw">
+              {%- if mobile_image != blank -%}
+                <source media="(max-width: 749px)" srcset="{{ mobile_image | image_url: width: 375 }} 375w, {{ mobile_image | image_url: width: 550 }} 550w, {{ mobile_image | image_url: width: 750 }} 750w, {{ mobile_image | image_url: width: 1100 }} 1100w" sizes="100vw">
               {%- endif -%}
-              {%- if desktop_image != blank -%}
+              {%- if fallback_image != blank -%}
                 <img
                   class="suvedh-hero__image"
-                  src="{{ desktop_image | image_url: width: 1500 }}"
-                  srcset="{{ desktop_image | image_url: width: 750 }} 750w, {{ desktop_image | image_url: width: 1100 }} 1100w, {{ desktop_image | image_url: width: 1500 }} 1500w, {{ desktop_image | image_url: width: 2000 }} 2000w, {{ desktop_image | image_url: width: 2400 }} 2400w"
+                  src="{{ fallback_image | image_url: width: 1500 }}"
+                  srcset="{{ fallback_image | image_url: width: 750 }} 750w, {{ fallback_image | image_url: width: 1100 }} 1100w, {{ fallback_image | image_url: width: 1500 }} 1500w, {{ fallback_image | image_url: width: 2000 }} 2000w, {{ fallback_image | image_url: width: 2400 }} 2400w"
                   sizes="100vw"
                   alt="{{ image_alt | escape }}"
-                  width="{{ desktop_image.width }}"
-                  height="{{ desktop_image.height }}"
+                  width="{{ fallback_image.width }}"
+                  height="{{ fallback_image.height }}"
                   loading="{{ image_loading }}"
                   fetchpriority="{{ image_priority }}"
                 >
@@ -407,7 +418,8 @@
       "name": "Slide",
       "settings": [
         { "type": "image_picker", "id": "desktop_image", "label": "Desktop image" },
-        { "type": "select", "id": "mobile_image_fit", "label": "Mobile image fit", "options": [{ "value": "contain", "label": "Contain - show complete image" }, { "value": "cover", "label": "Cover - fill banner and allow cropping" }], "default": "contain" },
+        { "type": "image_picker", "id": "mobile_image", "label": "Mobile image" },
+        { "type": "select", "id": "mobile_image_fit", "label": "Mobile image fit", "options": [{ "value": "contain", "label": "Contain - show complete image" }, { "value": "cover", "label": "Cover - fill banner and allow cropping" }], "default": "cover" },
         { "type": "color", "id": "mobile_background", "label": "Mobile banner background", "default": "#F9E9EC" },
         { "type": "select", "id": "mobile_horizontal_position", "label": "Mobile horizontal position", "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" }], "default": "center" },
         { "type": "select", "id": "mobile_vertical_position", "label": "Mobile vertical position", "options": [{ "value": "top", "label": "Top" }, { "value": "center", "label": "Center" }, { "value": "bottom", "label": "Bottom" }], "default": "center" },
