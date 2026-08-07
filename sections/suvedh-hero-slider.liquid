@@ -245,11 +245,17 @@
       {%- for block in section.blocks -%}
         {%- liquid
           assign desktop_image = block.settings.desktop_image
-          assign mobile_image = block.settings.mobile_image | default: desktop_image
-          assign fallback_image = desktop_image | default: mobile_image
+          assign mobile_image = block.settings.mobile_image
+          if forloop.index == 2
+            assign bundled_desktop_image = 'suvedh-hero-desktop-02.png'
+            assign bundled_mobile_image = 'suvedh-hero-mobile-02.png'
+          else
+            assign bundled_desktop_image = 'suvedh-hero-desktop-01.png'
+            assign bundled_mobile_image = 'suvedh-hero-mobile-01.png'
+          endif
           assign mobile_image_fit = block.settings.mobile_image_fit | default: 'cover'
           assign mobile_background = block.settings.mobile_background | default: '#F9E9EC'
-          assign image_alt = fallback_image.alt | default: section.settings.accessibility_label
+          assign image_alt = desktop_image.alt | default: mobile_image.alt | default: section.settings.accessibility_label
           assign image_loading = 'lazy'
           assign image_priority = 'auto'
           if forloop.first
@@ -271,23 +277,25 @@
             <picture>
               {%- if mobile_image != blank -%}
                 <source media="(max-width: 749px)" srcset="{{ mobile_image | image_url: width: 375 }} 375w, {{ mobile_image | image_url: width: 550 }} 550w, {{ mobile_image | image_url: width: 750 }} 750w, {{ mobile_image | image_url: width: 1100 }} 1100w" sizes="100vw">
+              {%- else -%}
+                <source media="(max-width: 749px)" srcset="{{ bundled_mobile_image | asset_url }}">
               {%- endif -%}
-              {%- if fallback_image != blank -%}
+              {%- if desktop_image != blank -%}
                 <img
                   class="suvedh-hero__image"
-                  src="{{ fallback_image | image_url: width: 1500 }}"
-                  srcset="{{ fallback_image | image_url: width: 750 }} 750w, {{ fallback_image | image_url: width: 1100 }} 1100w, {{ fallback_image | image_url: width: 1500 }} 1500w, {{ fallback_image | image_url: width: 2000 }} 2000w, {{ fallback_image | image_url: width: 2400 }} 2400w"
+                  src="{{ desktop_image | image_url: width: 1500 }}"
+                  srcset="{{ desktop_image | image_url: width: 750 }} 750w, {{ desktop_image | image_url: width: 1100 }} 1100w, {{ desktop_image | image_url: width: 1500 }} 1500w, {{ desktop_image | image_url: width: 2000 }} 2000w, {{ desktop_image | image_url: width: 2400 }} 2400w"
                   sizes="100vw"
                   alt="{{ image_alt | escape }}"
-                  width="{{ fallback_image.width }}"
-                  height="{{ fallback_image.height }}"
+                  width="{{ desktop_image.width }}"
+                  height="{{ desktop_image.height }}"
                   loading="{{ image_loading }}"
                   fetchpriority="{{ image_priority }}"
                 >
               {%- else -%}
                 <img
                   class="suvedh-hero__image"
-                  src="{{ 'suvedh-hero-desktop.png' | asset_url }}"
+                  src="{{ bundled_desktop_image | asset_url }}"
                   sizes="100vw"
                   alt="{{ image_alt | escape }}"
                   width="1536"
