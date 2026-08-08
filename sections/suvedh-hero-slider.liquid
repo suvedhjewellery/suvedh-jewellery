@@ -1,11 +1,11 @@
 {%- style -%}
   #shopify-section-{{ section.id }} .suvedh-hero-slider {
-    height: {{ section.settings.desktop_height }}px;
+    height: var(--hero-height-desktop);
   }
 
   #SuvedhHero-{{ section.id }} {
-    --hero-height-mobile: {{ section.settings.mobile_height }}px;
-    --hero-height-desktop: {{ section.settings.desktop_height }}px;
+    --hero-height-mobile: clamp(320px, 85vw, 365px);
+    --hero-height-desktop: clamp(400px, 29vw, 420px);
     --hero-mobile-position: {{ section.settings.mobile_image_position }};
     --hero-desktop-position: {{ section.settings.desktop_image_position }};
     --hero-control-background: {{ section.settings.control_background }};
@@ -156,6 +156,12 @@
     #SuvedhHero-{{ section.id }} .suvedh-hero__image {
       object-position: var(--hero-desktop-position);
     }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__slide:nth-child(1) .suvedh-hero__image {
+      object-position: center 82%;
+    }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__slide:nth-child(2) .suvedh-hero__image {
+      object-position: center 55%;
+    }
     #SuvedhHero-{{ section.id }} .suvedh-hero__content { padding: 5rem 7rem 7rem; }
   }
   @media screen and (max-width: 749px) {
@@ -194,8 +200,14 @@
       height: min(var(--hero-height-mobile), 70vh);
     }
     #SuvedhHero-{{ section.id }} .suvedh-hero__image {
-      object-fit: var(--hero-mobile-fit);
+      object-fit: cover;
       object-position: var(--hero-mobile-object-position);
+    }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__slide:nth-child(1) .suvedh-hero__image {
+      object-position: 54% center;
+    }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__slide:nth-child(2) .suvedh-hero__image {
+      object-position: 53% center;
     }
     #SuvedhHero-{{ section.id }} .suvedh-hero__media {
       background-color: var(--hero-mobile-background);
