@@ -7,6 +7,7 @@
                                                                                "type":  "slide",
                                                                                "settings":  {
                                                                                                 "content_mode":  "image_only",
+                                                                                                "mobile_image_fit":  "contain",
                                                                                                 "overlay_opacity":  20,
                                                                                                 "text_color":  "#ffffff",
                                                                                                 "eyebrow":  "SUVEDH",
@@ -26,6 +27,7 @@
                                                                                "type":  "slide",
                                                                                "settings":  {
                                                                                                 "content_mode":  "image_only",
+                                                                                                "mobile_image_fit":  "contain",
                                                                                                 "overlay_opacity":  20,
                                                                                                 "text_color":  "#ffffff",
                                                                                                 "heading":  "Everyday elegance in sterling silver",
@@ -47,8 +49,8 @@
                                                                  "accessibility_label":  "Featured promotions",
                                                                  "auto_rotate":  true,
                                                                  "rotation_speed":  5,
-                                                                 "desktop_height":  660,
-                                                                 "mobile_height":  620,
+                                                                 "desktop_height":  520,
+                                                                 "mobile_height":  420,
                                                                  "control_background":  "#ffffff",
                                                                  "control_color":  "#1a1a1a"
                                                              }
