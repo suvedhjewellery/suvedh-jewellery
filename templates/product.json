@@ -71,6 +71,36 @@
                                                    "show_tax_text":  true
                                                }
                               },
+                     "shipping_returns":  {
+                                                "type":  "collapsible-content",
+                                                "blocks":  {
+                                                               "shipping_returns_row":  {
+                                                                                              "type":  "collapsible_row",
+                                                                                              "settings":  {
+                                                                                                               "heading":  "Shipping & Returns",
+                                                                                                               "icon":  "return",
+                                                                                                               "row_content":  "\u003ch3\u003eSHIPPING\u003c/h3\u003e\u003cul\u003e\u003cli\u003eWe currently ship across India.\u003c/li\u003e\u003cli\u003eOrders are carefully inspected and securely packed before dispatch.\u003c/li\u003e\u003cli\u003eFree shipping is available on eligible orders as per the offer displayed on our website.\u003c/li\u003e\u003cli\u003eFor orders below the free-shipping threshold, the applicable shipping charge will be shown at checkout.\u003c/li\u003e\u003cli\u003eOrders are generally processed within 12 business days.\u003c/li\u003e\u003cli\u003eEstimated delivery time is typically 37 business days after dispatch, depending on the delivery location and courier serviceability.\u003c/li\u003e\u003cli\u003eDelivery timelines are estimates and may occasionally be affected by courier delays, weather, public holidays or circumstances beyond our control.\u003c/li\u003e\u003cli\u003eTracking details will be shared once your order has been dispatched.\u003c/li\u003e\u003c/ul\u003e\u003ch3\u003eIMPORTANT UNBOXING VIDEO\u003c/h3\u003e\u003cp\u003eFor your protection and ours, please record a clear, continuous, unedited video while opening the shipment.\u003c/p\u003e\u003cp\u003eThe video should begin before the outer courier package is opened and clearly show:\u003c/p\u003e\u003cul\u003e\u003cli\u003eShipping label\u003c/li\u003e\u003cli\u003eSealed outer package\u003c/li\u003e\u003cli\u003eComplete unboxing process\u003c/li\u003e\u003cli\u003eJewellery received\u003c/li\u003e\u003cli\u003eAny damage, missing item or incorrect product\u003c/li\u003e\u003c/ul\u003e\u003cp\u003eClaims for damaged, missing or incorrect products must be supported by a clear, continuous unboxing video.\u003c/p\u003e\u003ch3\u003eRETURNS \u0026 EXCHANGE\u003c/h3\u003e\u003cp\u003eWe want you to love your SUVEDH jewellery. If there is an issue with your order, please contact us within 48 hours of delivery.\u003c/p\u003e\u003cp\u003eReturns/exchanges may be accepted for:\u003c/p\u003e\u003cul\u003e\u003cli\u003eIncorrect product received\u003c/li\u003e\u003cli\u003eProduct received damaged\u003c/li\u003e\u003cli\u003eManufacturing defect\u003c/li\u003e\u003cli\u003eEligible size/variant exchange, where applicable\u003c/li\u003e\u003c/ul\u003e\u003cp\u003eTo request assistance, please provide:\u003c/p\u003e\u003cul\u003e\u003cli\u003eOrder number\u003c/li\u003e\u003cli\u003eClear photos of the product\u003c/li\u003e\u003cli\u003eContinuous unboxing video for damaged, missing or incorrect-item claims\u003c/li\u003e\u003cli\u003eReason for the return/exchange\u003c/li\u003e\u003c/ul\u003e\u003ch3\u003eRETURN / EXCHANGE CONDITIONS\u003c/h3\u003e\u003cp\u003eTo be eligible, the jewellery must:\u003c/p\u003e\u003cul\u003e\u003cli\u003eBe unused and unworn\u003c/li\u003e\u003cli\u003eBe returned in its original condition\u003c/li\u003e\u003cli\u003eHave all tags/seals intact, where supplied\u003c/li\u003e\u003cli\u003eBe returned with the original jewellery box/pouch and included accessories\u003c/li\u003e\u003cli\u003eShow no scratches, damage, alteration, perfume/chemical exposure or signs of use\u003c/li\u003e\u003c/ul\u003e\u003cp\u003eReturned products will undergo a quality inspection after reaching SUVEDH.\u003c/p\u003e\u003cp\u003eA refund or exchange will be processed only after the returned item has been received and successfully verified.\u003c/p\u003e\u003ch3\u003eNON-RETURNABLE ITEMS\u003c/h3\u003e\u003cp\u003eFor hygiene, safety and product-integrity reasons, certain products may not be eligible for return unless they arrive damaged, defective or incorrect.\u003c/p\u003e\u003cp\u003eThese may include:\u003c/p\u003e\u003cul\u003e\u003cli\u003eEarrings and other hygiene-sensitive jewellery\u003c/li\u003e\u003cli\u003ePersonalised/custom-made jewellery\u003c/li\u003e\u003cli\u003eProducts altered or resized on customer request\u003c/li\u003e\u003cli\u003eGift cards\u003c/li\u003e\u003cli\u003eProducts specifically marked &quot;Final Sale&quot; or &quot;Non-Returnable&quot;\u003c/li\u003e\u003c/ul\u003e\u003cp\u003eThis does not affect remedies available for products received damaged, defective or incorrect.\u003c/p\u003e\u003ch3\u003eCHANGE OF MIND / CUSTOMER-INITIATED RETURNS\u003c/h3\u003e\u003cp\u003eIf an eligible return or exchange is requested for reasons other than receiving a damaged, defective or incorrect product, return shipping charges may be borne by the customer.\u003c/p\u003e\u003cp\u003eOriginal shipping charges, where applicable, are non-refundable.\u003c/p\u003e\u003cp\u003eAny applicable return logistics charges will be communicated before the return is arranged.\u003c/p\u003e\u003ch3\u003eRETURN SHIPMENT\u003c/h3\u003e\u003cp\u003ePlease pack return items securely in the original packaging wherever possible.\u003c/p\u003e\u003cp\u003eCustomers are responsible for ensuring the product is safely packed before handover to the return courier.\u003c/p\u003e\u003cp\u003eSUVEDH reserves the right to decline a refund/exchange if the returned product:\u003c/p\u003e\u003cul\u003e\u003cli\u003eIs different from the product originally shipped\u003c/li\u003e\u003cli\u003eIs missing parts, accessories, tags or packaging\u003c/li\u003e\u003cli\u003eShows signs of wear, alteration or customer-caused damage\u003c/li\u003e\u003cli\u003eFails our return quality inspection\u003c/li\u003e\u003c/ul\u003e\u003cp\u003eAll returned products are verified against our order and dispatch records before approval.\u003c/p\u003e\u003ch3\u003eREFUNDS\u003c/h3\u003e\u003cp\u003eOnce the returned product is received and passes our quality inspection, the approved refund will be initiated to the original payment method.\u003c/p\u003e"
+                                                                                                           }
+                                                                                          }
+                                                           },
+                                                "block_order":  [
+                                                                    "shipping_returns_row"
+                                                                ],
+                                                "settings":  {
+                                                                 "caption":  "",
+                                                                 "heading":  "",
+                                                                 "heading_size":  "h2",
+                                                                 "heading_alignment":  "left",
+                                                                 "layout":  "none",
+                                                                 "container_color_scheme":  "scheme-1",
+                                                                 "color_scheme":  "scheme-1",
+                                                                 "open_first_collapsible_row":  false,
+                                                                 "image_ratio":  "adapt",
+                                                                 "desktop_layout":  "image_second",
+                                                                 "padding_top":  24,
+                                                                 "padding_bottom":  24
+                                                             }
+                                            },
                      "related-products":  {
                                               "type":  "related-products",
                                               "settings":  {
@@ -101,6 +131,7 @@
                  },
     "order":  [
                   "main",
+                  "shipping_returns",
                   "related-products",
                   "recently_viewed"
               ]
