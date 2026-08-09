@@ -88,16 +88,7 @@
                                                                     "category_4":  {
                                                                                        "type":  "category",
                                                                                        "settings":  {
-                                                                                                        "heading":  "Necklaces",
-                                                                                                        "subtitle":  "",
-                                                                                                        "image_ratio":  "square",
-                                                                                                        "hover_animation":  "zoom"
-                                                                                                    }
-                                                                                   },
-                                                                    "category_5":  {
-                                                                                       "type":  "category",
-                                                                                       "settings":  {
-                                                                                                        "heading":  "Pendants",
+                                                                                                        "heading":  "Divine Pendants",
                                                                                                         "subtitle":  "",
                                                                                                         "image_ratio":  "square",
                                                                                                         "hover_animation":  "zoom"
@@ -129,37 +120,16 @@
                                                                                                         "image_ratio":  "square",
                                                                                                         "hover_animation":  "zoom"
                                                                                                     }
-                                                                                   },
-                                                                    "category_9":  {
-                                                                                       "type":  "category",
-                                                                                       "settings":  {
-                                                                                                        "heading":  "Kids",
-                                                                                                        "subtitle":  "",
-                                                                                                        "image_ratio":  "square",
-                                                                                                        "hover_animation":  "zoom"
-                                                                                                    }
-                                                                                   },
-                                                                    "category_10":  {
-                                                                                        "type":  "category",
-                                                                                        "settings":  {
-                                                                                                         "heading":  "Gifts",
-                                                                                                         "subtitle":  "",
-                                                                                                         "image_ratio":  "square",
-                                                                                                         "hover_animation":  "zoom"
-                                                                                                     }
-                                                                                    }
+                                                                                   }
                                                                 },
                                                      "block_order":  [
                                                                          "category_1",
                                                                          "category_2",
                                                                          "category_3",
                                                                          "category_4",
-                                                                         "category_5",
                                                                          "category_6",
                                                                          "category_7",
-                                                                         "category_8",
-                                                                         "category_9",
-                                                                         "category_10"
+                                                                         "category_8"
                                                                      ],
                                                      "settings":  {
                                                                       "heading":  "Shop by Category",
