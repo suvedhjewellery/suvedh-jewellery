@@ -68,7 +68,8 @@
                                                    "enable_trust_benefits":  false,
                                                    "enable_sticky_atc":  false,
                                                    "enable_faq":  true,
-                                                   "show_tax_text":  true
+                                                   "show_tax_text":  true,
+                                                   "shipping_returns":  "\u003cp\u003eWe currently ship across India. Orders are carefully inspected and securely packed before dispatch. Tracking details will be shared once your order has been dispatched.\u003c/p\u003e\u003cp\u003eIf your order arrives damaged, defective or incorrect, contact SUVEDH within 48 hours of delivery with your order number, clear photos and a continuous unboxing video. Eligible items must be unused, unworn and returned with their original packaging, tags and accessories. Approved refunds are issued to the original payment method after the returned item passes inspection.\u003c/p\u003e"
                                                }
                               },
                      "shipping_returns":  {
@@ -131,7 +132,6 @@
                  },
     "order":  [
                   "main",
-                  "shipping_returns",
                   "related-products",
                   "recently_viewed"
               ]
