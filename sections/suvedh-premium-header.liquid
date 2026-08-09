@@ -65,21 +65,6 @@
   const header = document.querySelector('[data-suvedh-header]');
   if (!header) return;
 
-  const comingSoonCategories = {
-    'women-pendants': "Women's Pendants",
-    'women-necklaces': "Women's Necklace",
-    'kids-pendants': "Kids' Pendants",
-    'men-rings': "Men's Rings",
-    'men-bracelets': "Men's Bracelets",
-    'men-chains': "Men's Chains"
-  };
-  header.querySelectorAll('a[href]').forEach((anchor) => {
-    const handle = new URL(anchor.href, location.origin).pathname.split('/').filter(Boolean).pop();
-    if (comingSoonCategories[handle]) {
-      anchor.href = '/collections/all?view=coming-soon&category=' + encodeURIComponent(comingSoonCategories[handle]);
-    }
-  });
-
   const setScrolled = () => header.classList.toggle('is-scrolled', scrollY > 24);
   setScrolled();
   addEventListener('scroll', setScrolled, { passive: true });

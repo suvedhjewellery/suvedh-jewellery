@@ -49,8 +49,8 @@
                                                                  "accessibility_label":  "Featured promotions",
                                                                  "auto_rotate":  true,
                                                                  "rotation_speed":  5,
-                                                                 "desktop_height":  520,
-                                                                 "mobile_height":  420,
+                                                                 "desktop_height":  410,
+                                                                 "mobile_height":  340,
                                                                  "control_background":  "#ffffff",
                                                                  "control_color":  "#1a1a1a"
                                                              }

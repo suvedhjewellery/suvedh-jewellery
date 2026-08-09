@@ -196,10 +196,9 @@
               assign category_handle = 'gifts'
           endcase
           assign coming_soon_label = blank
-          if category_key == 'necklaces'
-            assign coming_soon_label = "Women's Necklace"
-          elsif category_key == 'pendants'
-            assign coming_soon_label = "Women's Pendants"
+          assign resolved_category_collection = category_collection | default: collections[category_handle]
+          if resolved_category_collection == blank or resolved_category_collection.all_products_count == 0
+            assign coming_soon_label = category_heading
           endif
           assign category_image = block.settings.custom_image
           assign image_alt = category_image.alt | default: category_heading
@@ -210,8 +209,8 @@
             class="suvedh-category__link"
             {% if coming_soon_label != blank %}
               href="{{ routes.all_products_collection_url }}?view=coming-soon&amp;category={{ coming_soon_label | url_encode }}"
-            {% elsif category_collection != blank %}
-              href="{{ category_collection.url }}"
+            {% elsif resolved_category_collection != blank %}
+              href="{{ resolved_category_collection.url }}"
             {% else %}
               href="{{ routes.collections_url }}/{{ category_handle }}"
             {% endif %}
