@@ -66,7 +66,7 @@
   }
   #SuvedhHero-{{ section.id }} .suvedh-hero__image {
     object-fit: cover;
-    object-position: var(--hero-desktop-position);
+    object-position: center 65%;
   }
   #SuvedhHero-{{ section.id }} .suvedh-hero__placeholder { background: rgb(var(--color-background)); }
   #SuvedhHero-{{ section.id }} .suvedh-hero__overlay {
@@ -139,7 +139,11 @@
     justify-content: center;
     width: 4.4rem;
     height: 4.4rem;
-    border-radius: 50%;
+    border: 0;
+    border-radius: 0;
+    background: transparent !important;
+    box-shadow: none;
+    backdrop-filter: none;
     font-size: 2rem;
   }
   #SuvedhHero-{{ section.id }} .suvedh-hero__arrow {
@@ -200,8 +204,8 @@
       overflow: hidden;
     }
     #SuvedhHero-{{ section.id }} .suvedh-hero__image {
-      object-fit: var(--hero-mobile-fit);
-      object-position: var(--hero-mobile-object-position, var(--hero-mobile-position));
+      object-fit: cover;
+      object-position: center 65%;
     }
     #SuvedhHero-{{ section.id }} .suvedh-hero__media {
       background-color: var(--hero-mobile-background);
