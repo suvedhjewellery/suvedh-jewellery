@@ -185,11 +185,14 @@
     #SuvedhHero-{{ section.id }} .suvedh-hero__media picture,
     #SuvedhHero-{{ section.id }} .suvedh-hero__image,
     #SuvedhHero-{{ section.id }} .suvedh-hero__placeholder {
+      width: 100%;
+      max-width: none;
       height: 100%;
     }
     #SuvedhHero-{{ section.id }} .suvedh-hero__image {
-      object-fit: contain;
+      object-fit: cover;
       object-position: center center;
+      display: block;
     }
     #SuvedhHero-{{ section.id }} .suvedh-hero__content { padding: 5rem 7rem 7rem; }
   }
