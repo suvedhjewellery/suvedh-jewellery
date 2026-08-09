@@ -26,7 +26,13 @@
               <div class="suvedh-mega__links">
                 <p>Shop {{ link.title | escape }}</p>
                 {%- for child_link in link.links -%}
-                  <a href="{{ child_link.url }}"{% if child_link.current %} aria-current="page"{% endif %}>{{ child_link.title | escape }}{% render 'suvedh-navigation-count', link: child_link, parent: link.title, label: child_link.title %}</a>
+                  {%- assign child_parent = link.title | strip | downcase -%}
+                  {%- assign child_title = child_link.title | strip | downcase -%}
+                  {%- assign child_url = child_link.url -%}
+                  {%- if child_parent == 'women' and child_title == 'necklace' or child_parent == 'men' and child_title == 'rings' or child_parent == 'men' and child_title == 'chains' or child_parent == 'men' and child_title == 'bracelets' -%}
+                    {%- assign child_url = routes.all_products_collection_url | append: '?view=coming-soon' -%}
+                  {%- endif -%}
+                  <a href="{{ child_url }}"{% if child_link.current %} aria-current="page"{% endif %}>{{ child_link.title | escape }}{% render 'suvedh-navigation-count', link: child_link, parent: link.title, label: child_link.title %}</a>
                 {%- endfor -%}
               </div>
             </div>
