@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "about": {
+      "type": "suvedh-about",
+      "settings": {}
+    }
+  },
+  "order": ["about"]
+}

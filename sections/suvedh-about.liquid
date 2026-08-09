@@ -1,0 +1,76 @@
+{{ 'suvedh-about.css' | asset_url | stylesheet_tag }}
+
+<section id="SuvedhAbout-{{ section.id }}" class="suvedh-about">
+  <header class="suvedh-about__intro">
+    {%- if section.settings.story_label != blank -%}<p class="suvedh-about__eyebrow">{{ section.settings.story_label | escape }}</p>{%- endif -%}
+    {%- if section.settings.main_heading != blank -%}<h1 class="suvedh-about__title">{{ section.settings.main_heading | escape | newline_to_br }}</h1>{%- endif -%}
+    <div class="suvedh-about__divider" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M8 1.5 14.5 8 8 14.5 1.5 8 8 1.5Z"/></svg></div>
+  </header>
+
+  <div class="suvedh-about__story page-width">
+    <div class="suvedh-about__media">
+      <div class="suvedh-about__image-wrap">
+        {%- if section.settings.story_photo != blank -%}
+          {{ section.settings.story_photo | image_url: width: 1400 | image_tag: class: 'suvedh-about__image', loading: 'eager', widths: '360, 540, 720, 960, 1200, 1400', sizes: '(min-width: 990px) 44vw, (min-width: 750px) 46vw, 92vw', alt: section.settings.story_photo.alt | default: 'Supriya and Vedha' }}
+        {%- else -%}
+          <div class="suvedh-about__placeholder" aria-label="SUVEDH story photo placeholder"><span class="suvedh-about__placeholder-mark" aria-hidden="true">S + V</span>{% if request.design_mode %}<p class="suvedh-about__placeholder-note">Choose the Supriya + Vedha photo in this section's settings</p>{% endif %}</div>
+        {%- endif -%}
+      </div>
+    </div>
+    <div class="suvedh-about__story-copy">
+      <p class="suvedh-about__names">Supriya + Vedha</p>
+      {%- if section.settings.story_text != blank -%}<div class="rte">{{ section.settings.story_text }}</div>{%- endif -%}
+    </div>
+  </div>
+
+  <div class="suvedh-about__jewellery">
+    <div class="suvedh-about__jewellery-inner page-width">
+      {%- if section.settings.jewellery_heading != blank -%}<h2 class="suvedh-about__heading">{{ section.settings.jewellery_heading | escape }}</h2>{%- endif -%}
+      {%- if section.settings.jewellery_text != blank -%}<div class="rte">{{ section.settings.jewellery_text }}</div>{%- endif -%}
+    </div>
+  </div>
+
+  <div class="suvedh-about__promise page-width">
+    {%- if section.settings.promise_heading != blank -%}<h2 class="suvedh-about__heading">{{ section.settings.promise_heading | escape }}</h2>{%- endif -%}
+    <ul class="suvedh-about__promise-grid" role="list">
+      <li class="suvedh-about__promise-card"><span class="suvedh-about__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4 9 4-5h8l4 5-8 11L4 9Z"/><path d="M4 9h16M8 4l4 5 4-5M8 9l4 11 4-11"/></svg></span><p class="suvedh-about__promise-label">Authentic</p><p class="suvedh-about__promise-text">92.5 Sterling Silver</p></li>
+      <li class="suvedh-about__promise-card"><span class="suvedh-about__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 .8 3.2A6.5 6.5 0 0 0 17.5 11l3.2.8-3.2.8a6.5 6.5 0 0 0-4.7 4.7L12 20.5l-.8-3.2a6.5 6.5 0 0 0-4.7-4.7l-3.2-.8 3.2-.8a6.5 6.5 0 0 0 4.7-4.7L12 3Z"/></svg></span><p class="suvedh-about__promise-label">Thoughtfully Selected</p><p class="suvedh-about__promise-text">Elegant Designs</p></li>
+      <li class="suvedh-about__promise-card"><span class="suvedh-about__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.6 2.7 8.1 7 10 4.3-1.9 7-5.4 7-10V6l-7-3Z"/><path d="m8.5 12 2.2 2.2 4.8-5"/></svg></span><p class="suvedh-about__promise-label">Quality</p><p class="suvedh-about__promise-text">Carefully Checked</p></li>
+      <li class="suvedh-about__promise-card"><span class="suvedh-about__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v16M6 7h12M6 7l-3 6h6L6 7Zm12 0-3 6h6l-3-6ZM8 20h8"/></svg></span><p class="suvedh-about__promise-label">Fair Value</p><p class="suvedh-about__promise-text">Premium Feel at Thoughtful Prices</p></li>
+      <li class="suvedh-about__promise-card"><span class="suvedh-about__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 8.5 12 4l8 4.5v9L12 22l-8-4.5v-9Z"/><path d="m4 8.5 8 4.5 8-4.5M12 13v9M9.5 7.3l5 2.8"/></svg></span><p class="suvedh-about__promise-label">Carefully Packed</p><p class="suvedh-about__promise-text">Prepared with Care</p></li>
+    </ul>
+  </div>
+
+  <footer class="suvedh-about__closing">
+    <div class="suvedh-about__closing-inner">
+      {%- if section.settings.closing_heading != blank -%}<h2 class="suvedh-about__heading">{{ section.settings.closing_heading | escape }}</h2>{%- endif -%}
+      {%- if section.settings.closing_text != blank -%}<p class="suvedh-about__closing-text">{{ section.settings.closing_text | escape }}</p>{%- endif -%}
+      <p class="suvedh-about__brand">SUVEDH</p><p class="suvedh-about__brand-subtitle">Fine Silver Jewellery</p><p class="suvedh-about__tagline">Made for Every You.</p>
+    </div>
+  </footer>
+</section>
+
+{% schema %}
+{
+  "name": "SUVEDH About story",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "header", "content": "Introduction" },
+    { "type": "text", "id": "story_label", "label": "Story label", "default": "OUR STORY" },
+    { "type": "textarea", "id": "main_heading", "label": "Main heading", "default": "A Name Born from a Bond.\nJewellery Made with Love." },
+    { "type": "header", "content": "Founder story" },
+    { "type": "image_picker", "id": "story_photo", "label": "Supriya + Vedha photo" },
+    { "type": "richtext", "id": "story_text", "label": "Story paragraphs", "default": "<p>SUVEDH is more than a jewellery brand. Its name carries a story close to our hearts — SUVEDH is born from the names Supriya and Vedha, a mother and daughter.</p><p>Inspired by the timeless bond between a mother and daughter and a shared love for beautiful jewellery, SUVEDH was created with a simple vision: to make elegant, premium-looking silver jewellery accessible at thoughtful prices.</p><p>We believe jewellery is more than an accessory. It can hold a memory, celebrate a relationship, express your individuality, or simply make an everyday moment feel a little more special.</p>" },
+    { "type": "header", "content": "Our jewellery" },
+    { "type": "text", "id": "jewellery_heading", "label": "Jewellery section heading", "default": "Jewellery for Every You" },
+    { "type": "richtext", "id": "jewellery_text", "label": "Jewellery description", "default": "<p>At SUVEDH, we bring together authentic 92.5 sterling silver jewellery for women, men and kids — from elegant everyday styles and contemporary designs to traditional and divine collections.</p><p>Every piece is thoughtfully selected with attention to design, quality, craftsmanship and wearability, so you can find jewellery that feels special without making luxury feel out of reach.</p>" },
+    { "type": "header", "content": "Promise and closing" },
+    { "type": "text", "id": "promise_heading", "label": "Promise section heading", "default": "The SUVEDH Promise" },
+    { "type": "text", "id": "closing_heading", "label": "Closing heading", "default": "From Our Story to Yours" },
+    { "type": "textarea", "id": "closing_text", "label": "Closing text", "default": "From our story to yours, we hope every SUVEDH piece becomes part of a memory worth keeping." }
+  ],
+  "presets": [{ "name": "SUVEDH About story" }]
+}
+{% endschema %}
