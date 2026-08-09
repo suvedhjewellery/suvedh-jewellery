@@ -174,6 +174,23 @@
   #SuvedhHero-{{ section.id }} a:focus-visible { outline: .2rem solid currentColor; outline-offset: .3rem; }
 
   @media screen and (min-width: 750px) {
+    #SuvedhHero-{{ section.id }} .suvedh-hero__viewport,
+    #SuvedhHero-{{ section.id }} .suvedh-hero__slide {
+      aspect-ratio: 1920 / 576;
+    }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__slide {
+      height: auto;
+    }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__media,
+    #SuvedhHero-{{ section.id }} .suvedh-hero__media picture,
+    #SuvedhHero-{{ section.id }} .suvedh-hero__image,
+    #SuvedhHero-{{ section.id }} .suvedh-hero__placeholder {
+      height: 100%;
+    }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__image {
+      object-fit: contain;
+      object-position: center center;
+    }
     #SuvedhHero-{{ section.id }} .suvedh-hero__content { padding: 5rem 7rem 7rem; }
   }
   @media screen and (max-width: 749px) {
