@@ -1,4 +1,11 @@
 {%- style -%}
+  #shopify-section-{{ section.id }} {
+    width: 100vw;
+    max-width: none;
+    margin-right: calc(50% - 50vw);
+    margin-left: calc(50% - 50vw);
+  }
+
   #SuvedhHero-{{ section.id }} {
     --hero-mobile-position: {{ section.settings.mobile_image_position }};
     --hero-desktop-position: {{ section.settings.desktop_image_position }};
@@ -32,6 +39,7 @@
   }
   #SuvedhHero-{{ section.id }} .suvedh-hero__track {
     display: flex;
+    min-width: 100%;
     align-items: flex-start;
     margin: 0;
     padding: 0;
@@ -42,6 +50,7 @@
   #SuvedhHero-{{ section.id }} .suvedh-hero__slide {
     position: relative;
     flex: 0 0 100%;
+    width: 100%;
     min-width: 0;
     height: var(--hero-height);
     overflow: hidden;
