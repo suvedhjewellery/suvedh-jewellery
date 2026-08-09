@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="suvedh-about__story-copy">
-      <p class="suvedh-about__names">Supriya + Vedha</p>
+      <p class="suvedh-about__names">SUPRIYA + VEDHA</p>
       {%- if section.settings.story_text != blank -%}<div class="rte">{{ section.settings.story_text }}</div>{%- endif -%}
     </div>
   </div>
@@ -37,15 +37,16 @@
       <li class="suvedh-about__promise-card"><span class="suvedh-about__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 .8 3.2A6.5 6.5 0 0 0 17.5 11l3.2.8-3.2.8a6.5 6.5 0 0 0-4.7 4.7L12 20.5l-.8-3.2a6.5 6.5 0 0 0-4.7-4.7l-3.2-.8 3.2-.8a6.5 6.5 0 0 0 4.7-4.7L12 3Z"/></svg></span><p class="suvedh-about__promise-label">Thoughtfully Selected</p><p class="suvedh-about__promise-text">Elegant Designs</p></li>
       <li class="suvedh-about__promise-card"><span class="suvedh-about__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.6 2.7 8.1 7 10 4.3-1.9 7-5.4 7-10V6l-7-3Z"/><path d="m8.5 12 2.2 2.2 4.8-5"/></svg></span><p class="suvedh-about__promise-label">Quality</p><p class="suvedh-about__promise-text">Carefully Checked</p></li>
       <li class="suvedh-about__promise-card"><span class="suvedh-about__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v16M6 7h12M6 7l-3 6h6L6 7Zm12 0-3 6h6l-3-6ZM8 20h8"/></svg></span><p class="suvedh-about__promise-label">Fair Value</p><p class="suvedh-about__promise-text">Premium Feel at Thoughtful Prices</p></li>
-      <li class="suvedh-about__promise-card"><span class="suvedh-about__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 8.5 12 4l8 4.5v9L12 22l-8-4.5v-9Z"/><path d="m4 8.5 8 4.5 8-4.5M12 13v9M9.5 7.3l5 2.8"/></svg></span><p class="suvedh-about__promise-label">Carefully Packed</p><p class="suvedh-about__promise-text">Prepared with Care</p></li>
+      <li class="suvedh-about__promise-card"><span class="suvedh-about__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 8.5 12 4l8 4.5v9L12 22l-8-4.5v-9Z"/><path d="m4 8.5 8 4.5 8-4.5M12 13v9M9.5 7.3l5 2.8"/></svg></span><p class="suvedh-about__promise-label">Secure Packaging</p><p class="suvedh-about__promise-text">Packed Carefully</p></li>
+      <li class="suvedh-about__promise-card"><span class="suvedh-about__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 20v-2a5 5 0 0 1 10 0v2M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4 20v-1a4 4 0 0 1 4-4M20 20v-1a4 4 0 0 0-4-4"/></svg></span><p class="suvedh-about__promise-label">For Everyone</p><p class="suvedh-about__promise-text">Jewellery for Women, Men &amp; Kids</p></li>
     </ul>
   </div>
 
   <footer class="suvedh-about__closing">
     <div class="suvedh-about__closing-inner">
       {%- if section.settings.closing_heading != blank -%}<h2 class="suvedh-about__heading">{{ section.settings.closing_heading | escape }}</h2>{%- endif -%}
-      {%- if section.settings.closing_text != blank -%}<p class="suvedh-about__closing-text">{{ section.settings.closing_text | escape }}</p>{%- endif -%}
-      <p class="suvedh-about__brand">SUVEDH</p><p class="suvedh-about__brand-subtitle">Fine Silver Jewellery</p><p class="suvedh-about__tagline">Made for Every You.</p>
+      {%- if section.settings.closing_text != blank -%}<div class="suvedh-about__closing-text rte">{{ section.settings.closing_text }}</div>{%- endif -%}
+      <p class="suvedh-about__brand">SUVEDH</p><p class="suvedh-about__brand-subtitle">Fine Silver Jewellery</p><p class="suvedh-about__tagline">Pure. Elegant. Eternally You.</p>
     </div>
   </footer>
 </section>
@@ -58,18 +59,18 @@
   "disabled_on": { "groups": ["header", "footer"] },
   "settings": [
     { "type": "header", "content": "Introduction" },
-    { "type": "text", "id": "story_label", "label": "Story label", "default": "OUR STORY" },
-    { "type": "textarea", "id": "main_heading", "label": "Main heading", "default": "A Name Born from a Bond.\nJewellery Made with Love." },
+    { "type": "text", "id": "story_label", "label": "Story label", "default": "ABOUT SUVEDH" },
+    { "type": "textarea", "id": "main_heading", "label": "Main heading", "default": "Where Elegance Meets Emotion" },
     { "type": "header", "content": "Founder story" },
-    { "type": "image_picker", "id": "story_photo", "label": "Supriya + Vedha photo" },
-    { "type": "richtext", "id": "story_text", "label": "Story paragraphs", "default": "<p>SUVEDH is more than a jewellery brand. Its name carries a story close to our hearts — SUVEDH is born from the names Supriya and Vedha, a mother and daughter.</p><p>Inspired by the timeless bond between a mother and daughter and a shared love for beautiful jewellery, SUVEDH was created with a simple vision: to make elegant, premium-looking silver jewellery accessible at thoughtful prices.</p><p>We believe jewellery is more than an accessory. It can hold a memory, celebrate a relationship, express your individuality, or simply make an everyday moment feel a little more special.</p>" },
+    { "type": "image_picker", "id": "story_photo", "label": "Founder / Brand Photo" },
+    { "type": "richtext", "id": "story_text", "label": "Brand story", "default": "\u003cp\u003eSUVEDH was born from a love for jewellery and the desire to make beautiful, premium-looking silver jewellery accessible at thoughtful prices.\u003c/p\u003e\u003cp\u003eThe name SUVEDH carries a very special meaning.\u003c/p\u003e\u003cp\u003eSUVEDH is created from two names: \u003cstrong\u003eSUPRIYA + VEDHA\u003c/strong\u003e — a mother and daughter whose names came together to become the identity of the brand.\u003c/p\u003e\u003cp\u003eMore than just a name, SUVEDH represents a bond between generations — a celebration of love, elegance and timeless memories.\u003c/p\u003e" },
     { "type": "header", "content": "Our jewellery" },
-    { "type": "text", "id": "jewellery_heading", "label": "Jewellery section heading", "default": "Jewellery for Every You" },
-    { "type": "richtext", "id": "jewellery_text", "label": "Jewellery description", "default": "<p>At SUVEDH, we bring together authentic 92.5 sterling silver jewellery for women, men and kids — from elegant everyday styles and contemporary designs to traditional and divine collections.</p><p>Every piece is thoughtfully selected with attention to design, quality, craftsmanship and wearability, so you can find jewellery that feels special without making luxury feel out of reach.</p>" },
+    { "type": "text", "id": "jewellery_heading", "label": "Jewellery section heading", "default": "Jewellery for Every Moment" },
+    { "type": "richtext", "id": "jewellery_text", "label": "Jewellery description", "default": "\u003cp\u003eAt SUVEDH, we believe jewellery is more than an accessory. It becomes part of life\u0026rsquo;s special moments, celebrations and everyday memories.\u003c/p\u003e\u003cp\u003eOur collections are thoughtfully selected to bring together elegant designs, authentic 92.5 sterling silver and styles that can be enjoyed by women, men and children.\u003c/p\u003e" },
     { "type": "header", "content": "Promise and closing" },
-    { "type": "text", "id": "promise_heading", "label": "Promise section heading", "default": "The SUVEDH Promise" },
-    { "type": "text", "id": "closing_heading", "label": "Closing heading", "default": "From Our Story to Yours" },
-    { "type": "textarea", "id": "closing_text", "label": "Closing text", "default": "From our story to yours, we hope every SUVEDH piece becomes part of a memory worth keeping." }
+    { "type": "text", "id": "promise_heading", "label": "Promise section heading", "default": "OUR PROMISE" },
+    { "type": "text", "id": "closing_heading", "label": "Closing heading", "default": "OUR STORY" },
+    { "type": "richtext", "id": "closing_text", "label": "Closing text", "default": "\u003cp\u003eSUVEDH began with a simple passion for jewellery and a vision to create a trusted fine silver jewellery destination where beautiful designs, quality and affordability come together.\u003c/p\u003e\u003cp\u003eFrom everyday elegance to meaningful gifts and divine jewellery, SUVEDH aims to offer pieces that become part of your story.\u003c/p\u003e\u003cp\u003eBecause jewellery isn\u0026rsquo;t simply something you wear.\u003c/p\u003e\u003cp\u003e\u003cstrong\u003eIt is something you remember.\u003c/strong\u003e\u003c/p\u003e" }
   ],
   "presets": [{ "name": "SUVEDH About story" }]
 }

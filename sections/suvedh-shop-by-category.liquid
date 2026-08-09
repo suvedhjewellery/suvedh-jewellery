@@ -167,6 +167,9 @@
             when 'studs'
               assign category_asset = 'suvedh-category-studs.webp.png'
               assign category_handle = 'studs'
+            when 'kids earrings'
+              assign category_asset = 'suvedh-category-kids.webp.png'
+              assign category_handle = 'kids-earrings'
             when 'divine pendants'
               assign category_asset = 'suvedh-category-divine-pendants.webp.png'
               assign category_handle = 'divine-pendants'
@@ -201,7 +204,7 @@
           assign coming_soon_label = blank
           assign resolved_category_collection = category_collection | default: collections[category_handle]
           assign is_available_category = false
-          if category_key == 'studs' or category_key == 'divine pendants' or category_key == 'anklets' or category_key == 'ankelets'
+          if category_key == 'kids earrings' or category_key == 'studs' or category_key == 'divine pendants' or category_key == 'anklets' or category_key == 'ankelets'
             assign is_available_category = true
           endif
           if is_available_category == false and resolved_category_collection == blank or is_available_category == false and resolved_category_collection.all_products_count == 0
@@ -344,7 +347,7 @@
       "blocks": [
         { "type": "category", "settings": { "heading": "Rings" } },
         { "type": "category", "settings": { "heading": "Earrings" } },
-        { "type": "category", "settings": { "heading": "Studs" } },
+        { "type": "category", "settings": { "heading": "Kids Earrings" } },
         { "type": "category", "settings": { "heading": "Divine Pendants" } },
         { "type": "category", "settings": { "heading": "Bracelets" } },
         { "type": "category", "settings": { "heading": "Anklets" } },
