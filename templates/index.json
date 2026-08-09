@@ -172,27 +172,6 @@
                                                                       "padding_bottom":  64
                                                                   }
                                                  },
-                     "suvedh_best_sellers":  {
-                                                 "type":  "suvedh-best-sellers",
-                                                 "settings":  {
-                                                                  "collection":  "best-sellers",
-                                                                  "heading":  "SUVEDH Best Sellers",
-                                                                  "subtitle":  "\u003cp\u003eOur most-loved sterling silver pieces, chosen by you.\u003c/p\u003e",
-                                                                  "heading_size":  "h1",
-                                                                  "products_to_show":  8,
-                                                                  "columns_desktop":  4,
-                                                                  "image_ratio":  "square",
-                                                                  "show_secondary_image":  true,
-                                                                  "show_rating":  true,
-                                                                  "quick_add":  "standard",
-                                                                  "show_view_all":  true,
-                                                                  "view_all_label":  "View all best sellers",
-                                                                  "view_all_style":  "outline",
-                                                                  "color_scheme":  "scheme-1",
-                                                                  "padding_top":  64,
-                                                                  "padding_bottom":  64
-                                                              }
-                                             },
                      "suvedh_benefits":  {
                                              "type":  "suvedh-benefits",
                                              "blocks":  {
@@ -311,28 +290,7 @@
                                                          "padding_top":  64,
                                                          "padding_bottom":  64
                                                      }
-                                    },
-                     "suvedh_trending":  {
-                                             "type":  "suvedh-best-sellers",
-                                             "settings":  {
-                                                              "collection":  "trending",
-                                                              "heading":  "Trending Collection",
-                                                              "subtitle":  "\u003cp\u003eThe silver pieces everyone is loving right now.\u003c/p\u003e",
-                                                              "heading_size":  "h1",
-                                                              "products_to_show":  10,
-                                                              "columns_desktop":  4,
-                                                              "image_ratio":  "square",
-                                                              "show_secondary_image":  true,
-                                                              "show_rating":  true,
-                                                              "quick_add":  "standard",
-                                                              "show_view_all":  true,
-                                                              "view_all_label":  "View all best sellers",
-                                                              "view_all_style":  "outline",
-                                                              "color_scheme":  "scheme-1",
-                                                              "padding_top":  64,
-                                                              "padding_bottom":  64
-                                                          }
-                                         }
+                                    }
                  },
     "order":  [
                   "suvedh_hero_slider",
