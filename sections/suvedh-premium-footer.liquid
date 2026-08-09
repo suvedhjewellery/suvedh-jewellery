@@ -1,4 +1,4 @@
-{%- assign about_page = pages['about-suvedh'] -%}
+{%- assign about_page = pages['about-suvedh'] | default: pages['about'] -%}
 {%- assign tracking_page = pages['track-your-order'] -%}
 <footer class="suvedh-premium-footer" style="--footer-background:{{ section.settings.footer_background }};--footer-text:{{ section.settings.footer_text }};--footer-link:{{ section.settings.footer_link }};--footer-link-hover:{{ section.settings.footer_link_hover }};--footer-border:{{ section.settings.footer_border }}">
   <div class="page-width">
@@ -6,7 +6,7 @@
       <details class="suvedh-premium-footer__column" open>
         <summary><h2>Quick Links</h2><span aria-hidden="true"></span></summary>
         <ul class="list-unstyled" role="list">
-          <li>{% if about_page != blank %}<a href="{{ about_page.url }}">About Us</a>{% else %}<span class="footer__link footer__link--disabled">About Us</span>{% endif %}</li>
+          <li><a href="{% if about_page != blank %}{{ about_page.url }}{% else %}/pages/about-suvedh{% endif %}">About SUVEDH</a></li>
           {% if shop.privacy_policy != blank %}<li><a href="{{ shop.privacy_policy.url }}">Privacy Policy</a></li>{% endif %}
           <li>{% if tracking_page != blank %}<a href="{{ tracking_page.url }}">Track Your Order</a>{% else %}<span class="footer__link footer__link--disabled">Track Your Order</span>{% endif %}</li>
         </ul>

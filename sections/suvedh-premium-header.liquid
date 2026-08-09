@@ -29,10 +29,15 @@
                   {%- assign child_parent = link.title | strip | downcase -%}
                   {%- assign child_title = child_link.title | strip | downcase -%}
                   {%- assign child_url = child_link.url -%}
+                  {%- assign child_label = child_link.title -%}
+                  {%- if child_parent == 'kids' and child_title == 'studs' -%}
+                    {%- assign child_label = 'Earrings' -%}
+                    {%- assign child_url = routes.collections_url | append: '/kids-earrings' -%}
+                  {%- endif -%}
                   {%- if child_parent == 'women' and child_title == 'necklace' or child_parent == 'men' and child_title == 'rings' or child_parent == 'men' and child_title == 'chains' or child_parent == 'men' and child_title == 'bracelets' -%}
                     {%- assign child_url = routes.all_products_collection_url | append: '?view=coming-soon' -%}
                   {%- endif -%}
-                  <a href="{{ child_url }}"{% if child_link.current %} aria-current="page"{% endif %}>{{ child_link.title | escape }}{% render 'suvedh-navigation-count', link: child_link, parent: link.title, label: child_link.title %}</a>
+                  <a href="{{ child_url }}"{% if child_link.current %} aria-current="page"{% endif %}>{{ child_label | escape }}{% render 'suvedh-navigation-count', link: child_link, parent: link.title, label: child_label %}</a>
                 {%- endfor -%}
               </div>
             </div>

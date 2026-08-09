@@ -55,17 +55,27 @@
                           </button>
                           <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
                             {%- for childlink in link.links -%}
+                              {%- assign drawer_parent = link.title | strip | downcase -%}
+                              {%- assign drawer_title = childlink.title | strip | downcase -%}
+                              {%- assign drawer_url = childlink.url -%}
+                              {%- assign drawer_label = childlink.title -%}
+                              {%- if drawer_parent == 'kids' and drawer_title == 'studs' -%}
+                                {%- assign drawer_url = routes.collections_url | append: '/kids-earrings' -%}
+                                {%- assign drawer_label = 'Earrings' -%}
+                              {%- elsif drawer_parent == 'women' and drawer_title == 'necklace' or drawer_parent == 'men' and drawer_title == 'rings' or drawer_parent == 'men' and drawer_title == 'chains' or drawer_parent == 'men' and drawer_title == 'bracelets' -%}
+                                {%- assign drawer_url = routes.all_products_collection_url | append: '?view=coming-soon' -%}
+                              {%- endif -%}
                               <li>
                                 {%- if childlink.links == blank -%}
                                   <a
                                     id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}"
-                                    href="{% assign drawer_parent = link.title | strip | downcase %}{% assign drawer_title = childlink.title | strip | downcase %}{% if drawer_parent == 'women' and drawer_title == 'necklace' or drawer_parent == 'men' and drawer_title == 'rings' or drawer_parent == 'men' and drawer_title == 'chains' or drawer_parent == 'men' and drawer_title == 'bracelets' %}{{ routes.all_products_collection_url }}?view=coming-soon{% else %}{{ childlink.url }}{% endif %}"
+                                    href="{{ drawer_url }}"
                                     class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"
                                     {% if childlink.current %}
                                       aria-current="page"
                                     {% endif %}
                                   >
-                                    {{ childlink.title | escape }}{% render 'suvedh-navigation-count', link: childlink, parent: link.title, label: childlink.title %}
+                                    {{ drawer_label | escape }}{% render 'suvedh-navigation-count', link: childlink, parent: link.title, label: drawer_label %}
                                   </a>
                                 {%- else -%}
                                   <details id="Details-menu-drawer-{{ link.handle }}-{{ childlink.handle }}">
@@ -73,7 +83,7 @@
                                       id="HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}"
                                       class="menu-drawer__menu-item link link--text list-menu__item focus-inset"
                                     >
-                                      {{ childlink.title | escape }}{% render 'suvedh-navigation-count', link: childlink, parent: link.title, label: childlink.title %}
+                                      {{ drawer_label | escape }}{% render 'suvedh-navigation-count', link: childlink, parent: link.title, label: drawer_label %}
                                       <span class="svg-wrapper">
                                         {{- 'icon-arrow.svg' | inline_asset_content -}}
                                       </span>
