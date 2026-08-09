@@ -1,0 +1,25 @@
+<style>
+  .suvedh-coming-soon { padding: clamp(7rem, 12vw, 14rem) 2rem; background: #fff; text-align: center; }
+  .suvedh-coming-soon__inner { max-width: 68rem; margin: 0 auto; }
+  .suvedh-coming-soon__eyebrow { margin: 0 0 1.4rem; color: #8e6b3d; font-size: 1.1rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; }
+  .suvedh-coming-soon__title { margin: 0; font-family: var(--font-heading-family); font-weight: var(--font-heading-weight); font-size: clamp(3.4rem, 6vw, 6rem); line-height: 1.08; }
+  .suvedh-coming-soon__message { max-width: 56rem; margin: 2rem auto 3.2rem; color: rgba(var(--color-foreground), .72); font-size: 1.6rem; line-height: 1.75; }
+</style>
+<section class="suvedh-coming-soon" data-coming-soon>
+  <div class="suvedh-coming-soon__inner">
+    <p class="suvedh-coming-soon__eyebrow">SUVEDH Fine Silver</p>
+    <h1 class="suvedh-coming-soon__title" data-coming-soon-title>Coming Soon</h1>
+    <p class="suvedh-coming-soon__message">We're currently adding beautiful new designs to this collection. Please check back soon.</p>
+    <a class="button" href="{{ routes.all_products_collection_url }}">Continue Shopping</a>
+  </div>
+</section>
+<script>
+  (() => {
+    const title = document.querySelector('[data-coming-soon-title]');
+    const category = new URLSearchParams(location.search).get('category');
+    if (title && category) title.textContent = category + `" - Coming Soon`";
+  })();
+</script>
+{% schema %}
+{"name":"SUVEDH Coming Soon","settings":[],"presets":[{"name":"SUVEDH Coming Soon"}]}
+{% endschema %}

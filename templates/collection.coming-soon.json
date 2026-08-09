@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "coming_soon": {
+      "type": "suvedh-coming-soon",
+      "settings": {}
+    }
+  },
+  "order": ["coming_soon"]
+}

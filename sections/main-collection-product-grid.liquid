@@ -46,7 +46,21 @@
   }
 {%- endstyle -%}
 
+{%- liquid
+  assign is_rakhi_collection = false
+  if collection.handle contains 'rakhi'
+    assign is_rakhi_collection = true
+  endif
+-%}
 <div class="suvedh-collection-page suvedh-collection-page__products{% if collection.products_count == 1 %} is-single-product{% endif %} section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
+  {%- if is_rakhi_collection -%}
+    <div class="collection collection--empty page-width" id="product-grid" data-id="{{ section.id }}">
+      <div class="title-wrapper center">
+        <h2 class="title title--primary">New Rakhi Collection Coming Soon</h2>
+        <p>Beautiful new designs are on the way. Stay tuned!</p>
+      </div>
+    </div>
+  {%- else -%}
   {%- paginate collection.products by section.settings.products_per_page -%}
     {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
     {%- if collection.products_count > 1 and section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
@@ -209,6 +223,7 @@
       </div>
     </div>
   {%- endpaginate -%}
+  {%- endif -%}
   {% if section.settings.image_shape == 'arch' %}
     {{ 'mask-arch.svg' | inline_asset_content }}
   {%- endif -%}

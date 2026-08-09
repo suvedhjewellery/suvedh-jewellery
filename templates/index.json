@@ -337,9 +337,7 @@
     "order":  [
                   "suvedh_hero_slider",
                   "suvedh_shop_by_category",
-                  "suvedh_best_sellers",
                   "suvedh_benefits",
-                  "suvedh_trending",
                   "suvedh_faq"
               ]
 }

@@ -195,6 +195,12 @@
               assign category_asset = 'suvedh-category-gifts.webp.png'
               assign category_handle = 'gifts'
           endcase
+          assign coming_soon_label = blank
+          if category_key == 'necklaces'
+            assign coming_soon_label = "Women's Necklace"
+          elsif category_key == 'pendants'
+            assign coming_soon_label = "Women's Pendants"
+          endif
           assign category_image = block.settings.custom_image
           assign image_alt = category_image.alt | default: category_heading
           assign image_sizes = '(min-width: 1200px) calc((1200px - 100px) / ' | append: section.settings.columns_desktop | append: '), (min-width: 750px) calc((100vw - 80px) / ' | append: section.settings.columns_desktop | append: '), ' | append: section.settings.mobile_card_width | append: 'vw'
@@ -202,7 +208,9 @@
         <li class="suvedh-category suvedh-category--{{ block.settings.hover_animation }}" {{ block.shopify_attributes }}>
           <a
             class="suvedh-category__link"
-            {% if category_collection != blank %}
+            {% if coming_soon_label != blank %}
+              href="{{ routes.all_products_collection_url }}?view=coming-soon&amp;category={{ coming_soon_label | url_encode }}"
+            {% elsif category_collection != blank %}
               href="{{ category_collection.url }}"
             {% else %}
               href="{{ routes.collections_url }}/{{ category_handle }}"
