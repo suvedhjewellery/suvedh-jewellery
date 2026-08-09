@@ -7,7 +7,7 @@
                                                                                "type":  "slide",
                                                                                "settings":  {
                                                                                                 "content_mode":  "image_only",
-                                                                                                "mobile_image_fit":  "contain",
+                                                                                                "mobile_image_fit":  "cover",
                                                                                                 "overlay_opacity":  20,
                                                                                                 "text_color":  "#ffffff",
                                                                                                 "eyebrow":  "SUVEDH",
@@ -27,7 +27,7 @@
                                                                                "type":  "slide",
                                                                                "settings":  {
                                                                                                 "content_mode":  "image_only",
-                                                                                                "mobile_image_fit":  "contain",
+                                                                                                "mobile_image_fit":  "cover",
                                                                                                 "overlay_opacity":  20,
                                                                                                 "text_color":  "#ffffff",
                                                                                                 "heading":  "Everyday elegance in sterling silver",
