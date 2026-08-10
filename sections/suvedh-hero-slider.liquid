@@ -65,6 +65,7 @@
     height: auto;
     object-fit: contain;
   }
+  #SuvedhHero-{{ section.id }} .suvedh-hero__image--mobile { display: none; }
   #SuvedhHero-{{ section.id }} .suvedh-hero__placeholder { background: rgb(var(--color-background)); }
   #SuvedhHero-{{ section.id }} .suvedh-hero__overlay {
     position: absolute;
@@ -202,6 +203,8 @@
       height: auto;
       object-fit: contain;
     }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__image--desktop { display: none; }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__image--mobile { display: block; }
     #SuvedhHero-{{ section.id }} .suvedh-hero__media {
       background-color: var(--hero-mobile-background);
     }
@@ -258,16 +261,6 @@
             assign bundled_desktop_image = 'suvedh-hero-desktop-01.png'
             assign bundled_mobile_image = 'suvedh-hero-mobile-01.png'
           endif
-          if mobile_image != blank
-            assign mobile_source = mobile_image | image_url: width: 1100
-          else
-            assign mobile_source = bundled_mobile_image | asset_url
-          endif
-          if desktop_image != blank
-            assign desktop_fallback_source = desktop_image | image_url: width: 1500
-          else
-            assign desktop_fallback_source = bundled_desktop_image | asset_url
-          endif
           assign mobile_image_fit = block.settings.mobile_image_fit | default: 'cover'
           assign mobile_background = block.settings.mobile_background | default: '#F9E9EC'
           assign image_alt = desktop_image.alt | default: mobile_image.alt | default: section.settings.accessibility_label
@@ -285,37 +278,12 @@
           {{ block.shopify_attributes }}
         >
           <div class="suvedh-hero__media">
-            <picture data-mobile-source="{{ mobile_source }}" data-desktop-fallback="{{ desktop_fallback_source }}">
-              {%- if mobile_image != blank -%}
-                <source media="(max-width: 749px)" srcset="{{ mobile_image | image_url: width: 375 }} 375w, {{ mobile_image | image_url: width: 550 }} 550w, {{ mobile_image | image_url: width: 750 }} 750w, {{ mobile_image | image_url: width: 1100 }} 1100w" sizes="100vw">
-              {%- else -%}
-                <source media="(max-width: 749px)" srcset="{{ bundled_mobile_image | asset_url }}">
-              {%- endif -%}
-              {%- if desktop_image != blank -%}
-                <img
-                  class="suvedh-hero__image"
-                  src="{{ desktop_image | image_url: width: 1500 }}"
-                  srcset="{{ desktop_image | image_url: width: 750 }} 750w, {{ desktop_image | image_url: width: 1100 }} 1100w, {{ desktop_image | image_url: width: 1500 }} 1500w, {{ desktop_image | image_url: width: 2000 }} 2000w, {{ desktop_image | image_url: width: 2400 }} 2400w"
-                  sizes="100vw"
-                  alt="{{ image_alt | escape }}"
-                  width="{{ desktop_image.width }}"
-                  height="{{ desktop_image.height }}"
-                  loading="{{ image_loading }}"
-                  fetchpriority="{{ image_priority }}"
-                >
-              {%- else -%}
-                <img
-                  class="suvedh-hero__image"
-                  src="{{ bundled_desktop_image | asset_url }}"
-                  sizes="100vw"
-                  alt="{{ image_alt | escape }}"
-                  width="1536"
-                  height="1024"
-                  loading="{{ image_loading }}"
-                  fetchpriority="{{ image_priority }}"
-                >
-              {%- endif -%}
-            </picture>
+            {%- if desktop_image != blank -%}
+              {{ desktop_image | image_url: width: 2400 | image_tag: class: 'suvedh-hero__image suvedh-hero__image--desktop', loading: image_loading, fetchpriority: image_priority, sizes: '100vw', widths: '750, 1100, 1500, 2000, 2400', alt: image_alt }}
+            {%- else -%}
+              <img class="suvedh-hero__image suvedh-hero__image--desktop" src="{{ bundled_desktop_image | asset_url }}" alt="{{ image_alt | escape }}" width="1536" height="1024" loading="{{ image_loading }}" fetchpriority="{{ image_priority }}">
+            {%- endif -%}
+            <img class="suvedh-hero__image suvedh-hero__image--mobile" src="{{ bundled_mobile_image | asset_url }}" alt="{{ image_alt | escape }}" width="1536" height="1024" loading="{{ image_loading }}" fetchpriority="{{ image_priority }}">
           </div>
           {%- if block.settings.content_mode == 'overlay' -%}
             {%- if block.settings.show_overlay_logo and block.settings.overlay_logo != blank -%}
@@ -359,7 +327,6 @@
         this.track = this.querySelector('.suvedh-hero__track');
         this.slides = [...this.querySelectorAll('.suvedh-hero__slide')];
         this.dots = [...this.querySelectorAll('.suvedh-hero__dot')];
-        this.preloadMobileImages();
         if (this.slides.length < 2) return;
         this.index = 0;
         this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -381,26 +348,6 @@
         });
         this.reducedMotion.addEventListener('change', () => this.play());
         this.play();
-      }
-      preloadMobileImages() {
-        if (!window.matchMedia('(max-width: 749px)').matches) return;
-        this.slides.slice(1, 2).forEach((slide) => {
-          const picture = slide.querySelector('picture[data-mobile-source]');
-          if (!picture) return;
-          const image = picture.querySelector('img');
-          const source = picture.querySelector('source[media="(max-width: 749px)"]');
-          const mobileSource = picture.dataset.mobileSource;
-          const desktopFallback = picture.dataset.desktopFallback;
-          if (!image || !source || !mobileSource || !desktopFallback) return;
-
-          image.loading = 'eager';
-          const preloader = new Image();
-          preloader.addEventListener('error', () => {
-            source.srcset = desktopFallback;
-            image.src = desktopFallback;
-          }, { once: true });
-          preloader.src = mobileSource;
-        });
       }
       show(index, userInitiated = false) {
         this.index = (index + this.slides.length) % this.slides.length;
