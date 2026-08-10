@@ -22,28 +22,10 @@
                                                                                                 "text_alignment":  "center",
                                                                                                 "text_position":  "middle-center"
                                                                                             }
-                                                                           },
-                                                               "slide_2":  {
-                                                                               "type":  "slide",
-                                                                               "settings":  {
-                                                                                                "content_mode":  "image_only",
-                                                                                                "mobile_image_fit":  "cover",
-                                                                                                "overlay_opacity":  20,
-                                                                                                "text_color":  "#ffffff",
-                                                                                                "heading":  "Everyday elegance in sterling silver",
-                                                                                                "heading_size":  "h0",
-                                                                                                "subheading":  "\u003cp\u003eThoughtful pieces designed to be worn and loved every day.\u003c/p\u003e",
-                                                                                                "button_label":  "Explore the collection",
-                                                                                                "button_link":  "shopify://collections/all",
-                                                                                                "button_style":  "secondary",
-                                                                                                "text_alignment":  "center",
-                                                                                                "text_position":  "middle-center"
-                                                                                            }
                                                                            }
                                                            },
                                                 "block_order":  [
-                                                                    "slide_1",
-                                                                    "slide_2"
+                                                                    "slide_1"
                                                                 ],
                                                 "settings":  {
                                                                  "accessibility_label":  "Featured promotions",
