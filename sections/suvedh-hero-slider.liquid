@@ -271,12 +271,8 @@
           assign mobile_image_fit = block.settings.mobile_image_fit | default: 'cover'
           assign mobile_background = block.settings.mobile_background | default: '#F9E9EC'
           assign image_alt = desktop_image.alt | default: mobile_image.alt | default: section.settings.accessibility_label
-          assign image_loading = 'lazy'
-          assign image_priority = 'auto'
-          if forloop.first
-            assign image_loading = 'eager'
-            assign image_priority = 'high'
-          endif
+          assign image_loading = 'eager'
+          assign image_priority = 'high'
         -%}
         <article
           class="suvedh-hero__slide suvedh-hero__slide--mobile-{{ mobile_image_fit }}"
