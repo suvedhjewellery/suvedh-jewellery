@@ -731,64 +731,44 @@
                     {%- when 1 -%}
                       {{ product.description }}
                     {%- when 2 -%}
-                      <h3>SHIPPING</h3>
-                      <ul>
-                        <li>We currently ship across India.</li>
-                        <li>Orders are carefully quality-checked and securely packed before dispatch.</li>
-                        <li>Free shipping is available on orders above ₹1,899 across India.</li>
-                        <li>Orders are generally processed within 13 business days.</li>
-                        <li>Estimated delivery is typically 37 business days after dispatch, depending on location and courier serviceability.</li>
-                        <li>Tracking details will be shared once the order has been dispatched.</li>
-                      </ul>
-                      <h3>UNBOXING VIDEO</h3>
-                      <p>For the protection of both the customer and SUVEDH, please record a clear, continuous and unedited video while opening the shipment.</p>
-                      <p>The video should begin before the outer courier package is opened and clearly show:</p>
-                      <ul>
-                        <li>Shipping label</li>
-                        <li>Sealed outer package</li>
-                        <li>Complete unboxing process</li>
-                        <li>Jewellery received</li>
-                        <li>Any damage, missing item or incorrect product</li>
-                      </ul>
-                      <p>Claims for damaged, missing or incorrect products must be supported by a clear continuous unboxing video.</p>
-                      <h3>RETURNS &amp; EXCHANGES</h3>
-                      <p>If there is an issue with your order, please contact SUVEDH within 48 hours of delivery.</p>
-                      <p>Returns/exchanges may be accepted for:</p>
-                      <ul>
-                        <li>Incorrect product received</li>
-                        <li>Product received damaged</li>
-                        <li>Manufacturing defect</li>
-                        <li>Eligible size/variant exchange, where applicable</li>
-                      </ul>
-                      <h3>RETURN CONDITIONS</h3>
-                      <p>Returned jewellery must:</p>
-                      <ul>
-                        <li>Be unused and unworn</li>
-                        <li>Be in original condition</li>
-                        <li>Have tags/seals intact where supplied</li>
-                        <li>Include original box, pouch and accessories</li>
-                        <li>Show no scratches, alteration, perfume/chemical exposure or signs of use</li>
-                      </ul>
-                      <p>All returned products will be inspected before a refund or exchange is approved.</p>
-                      <h3>NON-RETURNABLE PRODUCTS</h3>
-                      <p>For hygiene and product-integrity reasons, certain products may not be eligible for return unless received damaged, defective or incorrect.</p>
-                      <p>These may include:</p>
-                      <ul>
-                        <li>Earrings and hygiene-sensitive jewellery</li>
-                        <li>Personalised/custom products</li>
-                        <li>Altered or resized products</li>
-                        <li>Gift cards</li>
-                        <li>Products marked Final Sale or Non-Returnable</li>
-                      </ul>
-                      <h3>CHANGE OF MIND</h3>
-                      <p>For eligible customer-initiated returns that are not due to a damaged, defective or incorrect item, return shipping charges may be borne by the customer.</p>
-                      <p>Original shipping charges, where applicable, are non-refundable.</p>
-                      <h3>REFUNDS</h3>
-                      <p>After the returned product reaches SUVEDH and passes quality inspection, the approved refund will be initiated to the original payment method.</p>
-                      <p>Refund processing is generally initiated within 45 business days after approval.</p>
-                      <h3>ORDER CANCELLATION</h3>
-                      <p>Orders may be cancelled before dispatch by contacting SUVEDH as soon as possible.</p>
-                      <p>Once dispatched, cancellation may not be possible and the applicable return policy will apply.</p>
+                      {%- assign configured_shipping_returns_content = section.settings.shipping_returns -%}
+                      {%- if configured_shipping_returns_content != blank -%}
+                        {{ configured_shipping_returns_content }}
+                      {%- else -%}
+                        <h3>SHIPPING</h3>
+                        <p>We currently ship across India.</p>
+                        <p>Orders are carefully quality-checked and securely packed before dispatch.</p>
+                        <p>Free shipping is available on orders above ₹1,899 across India.</p>
+                        <p>Orders are generally processed within 13 business days.</p>
+                        <p>Estimated delivery is typically 37 business days after dispatch, depending on the delivery location and courier serviceability.</p>
+                        <p>Tracking information will be shared once the order has been dispatched.</p>
+                        <h3>UNBOXING VIDEO</h3>
+                        <p>For the protection of both the customer and SUVEDH, please record a clear, continuous and unedited video while opening the shipment.</p>
+                        <p>The video should begin before opening the outer courier package and clearly show:</p>
+                        <ul><li>Shipping label</li><li>Sealed outer package</li><li>Complete unboxing process</li><li>Jewellery received</li><li>Any damage, missing item or incorrect product</li></ul>
+                        <p>Claims relating to damaged, missing or incorrect products must be supported by a clear continuous unboxing video.</p>
+                        <h3>RETURNS &amp; EXCHANGES</h3>
+                        <p>If there is an issue with your order, please contact SUVEDH within 48 hours of delivery.</p>
+                        <p>Returns/exchanges may be accepted for:</p>
+                        <ul><li>Incorrect product received</li><li>Product received damaged</li><li>Manufacturing defect</li><li>Eligible size/variant exchange, where applicable</li></ul>
+                        <h3>RETURN CONDITIONS</h3>
+                        <p>Returned jewellery must:</p>
+                        <ul><li>Be unused and unworn</li><li>Be in original condition</li><li>Have tags/seals intact where supplied</li><li>Include original jewellery box/pouch and accessories</li><li>Have no scratches, alterations, perfume/chemical exposure or signs of use</li></ul>
+                        <p>All returned products will undergo quality inspection before a refund or exchange is approved.</p>
+                        <h3>NON-RETURNABLE PRODUCTS</h3>
+                        <p>For hygiene and product-integrity reasons, certain items may not be eligible for return unless received damaged, defective or incorrect.</p>
+                        <p>These may include:</p>
+                        <ul><li>Earrings and hygiene-sensitive jewellery</li><li>Personalised/custom products</li><li>Altered or resized products</li><li>Gift cards</li><li>Products marked Final Sale or Non-Returnable</li></ul>
+                        <h3>CHANGE OF MIND</h3>
+                        <p>For eligible customer-initiated returns that are not due to a damaged, defective or incorrect item, return shipping charges may be borne by the customer.</p>
+                        <p>Original shipping charges, where applicable, are non-refundable.</p>
+                        <h3>REFUNDS</h3>
+                        <p>Once the returned product reaches SUVEDH and passes quality inspection, the approved refund will be initiated to the original payment method.</p>
+                        <p>Refund processing is generally initiated within 45 business days after approval.</p>
+                        <h3>ORDER CANCELLATION</h3>
+                        <p>Orders may be cancelled before dispatch by contacting SUVEDH as soon as possible.</p>
+                        <p>Once dispatched, cancellation may not be possible and the applicable return policy will apply.</p>
+                      {%- endif -%}
                     {%- when 3 -%}
                       {%- assign detail_keys = 'material|purity|product_weight|size_dimensions|colour|plating|stone_enamel|package_contents|care_instructions' | split: '|' -%}
                       {%- assign detail_labels = 'Material|Purity|Weight|Size / Dimensions|Colour|Plating|Stone / Enamel|Package Contents|Care Instructions' | split: '|' -%}

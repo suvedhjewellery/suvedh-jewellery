@@ -212,7 +212,7 @@
           endif
           assign category_image = block.settings.custom_image
           if category_image == blank and category_key == 'kids earrings' or category_image == blank and category_key == 'divine pendants'
-            assign category_image = resolved_category_collection.image
+            assign category_image = resolved_category_collection.products.first.featured_image
           endif
           assign image_alt = category_image.alt | default: category_heading
           assign image_sizes = '(min-width: 1200px) calc((1200px - 100px) / ' | append: section.settings.columns_desktop | append: '), (min-width: 750px) calc((100vw - 80px) / ' | append: section.settings.columns_desktop | append: '), ' | append: section.settings.mobile_card_width | append: 'vw'
