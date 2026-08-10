@@ -204,7 +204,7 @@
           assign coming_soon_label = blank
           assign resolved_category_collection = category_collection | default: collections[category_handle]
           assign is_available_category = false
-          if category_key == 'kids earrings' or category_key == 'studs' or category_key == 'divine pendants' or category_key == 'anklets' or category_key == 'ankelets'
+          if category_key == 'kids earrings' or category_key == 'studs' or category_key == 'divine pendants' or category_key == 'anklets' or category_key == 'ankelets' or category_key == 'kids kadas' or category_key == "men's rakhis" or category_key == 'kids rakhis'
             assign is_available_category = true
           endif
           if is_available_category == false and resolved_category_collection == blank or is_available_category == false and resolved_category_collection.all_products_count == 0
