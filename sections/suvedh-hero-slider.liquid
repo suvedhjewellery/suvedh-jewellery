@@ -258,6 +258,16 @@
             assign bundled_desktop_image = 'suvedh-hero-desktop-01.png'
             assign bundled_mobile_image = 'suvedh-hero-mobile-01.png'
           endif
+          if mobile_image != blank
+            assign mobile_source = mobile_image | image_url: width: 1100
+          else
+            assign mobile_source = bundled_mobile_image | asset_url
+          endif
+          if desktop_image != blank
+            assign desktop_fallback_source = desktop_image | image_url: width: 1500
+          else
+            assign desktop_fallback_source = bundled_desktop_image | asset_url
+          endif
           assign mobile_image_fit = block.settings.mobile_image_fit | default: 'cover'
           assign mobile_background = block.settings.mobile_background | default: '#F9E9EC'
           assign image_alt = desktop_image.alt | default: mobile_image.alt | default: section.settings.accessibility_label
@@ -279,7 +289,7 @@
           {{ block.shopify_attributes }}
         >
           <div class="suvedh-hero__media">
-            <picture>
+            <picture data-mobile-source="{{ mobile_source }}" data-desktop-fallback="{{ desktop_fallback_source }}">
               {%- if mobile_image != blank -%}
                 <source media="(max-width: 749px)" srcset="{{ mobile_image | image_url: width: 375 }} 375w, {{ mobile_image | image_url: width: 550 }} 550w, {{ mobile_image | image_url: width: 750 }} 750w, {{ mobile_image | image_url: width: 1100 }} 1100w" sizes="100vw">
               {%- else -%}
@@ -353,6 +363,7 @@
         this.track = this.querySelector('.suvedh-hero__track');
         this.slides = [...this.querySelectorAll('.suvedh-hero__slide')];
         this.dots = [...this.querySelectorAll('.suvedh-hero__dot')];
+        this.preloadMobileImages();
         if (this.slides.length < 2) return;
         this.index = 0;
         this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -374,6 +385,23 @@
         });
         this.reducedMotion.addEventListener('change', () => this.play());
         this.play();
+      }
+      preloadMobileImages() {
+        if (!window.matchMedia('(max-width: 749px)').matches) return;
+        this.querySelectorAll('picture[data-mobile-source]').forEach((picture) => {
+          const image = picture.querySelector('img');
+          const source = picture.querySelector('source[media="(max-width: 749px)"]');
+          const mobileSource = picture.dataset.mobileSource;
+          const desktopFallback = picture.dataset.desktopFallback;
+          if (!image || !source || !mobileSource || !desktopFallback) return;
+
+          const preloader = new Image();
+          preloader.addEventListener('error', () => {
+            source.srcset = desktopFallback;
+            image.src = desktopFallback;
+          }, { once: true });
+          preloader.src = mobileSource;
+        });
       }
       show(index, userInitiated = false) {
         this.index = (index + this.slides.length) % this.slides.length;
