@@ -388,13 +388,16 @@
       }
       preloadMobileImages() {
         if (!window.matchMedia('(max-width: 749px)').matches) return;
-        this.querySelectorAll('picture[data-mobile-source]').forEach((picture) => {
+        this.slides.slice(1, 2).forEach((slide) => {
+          const picture = slide.querySelector('picture[data-mobile-source]');
+          if (!picture) return;
           const image = picture.querySelector('img');
           const source = picture.querySelector('source[media="(max-width: 749px)"]');
           const mobileSource = picture.dataset.mobileSource;
           const desktopFallback = picture.dataset.desktopFallback;
           if (!image || !source || !mobileSource || !desktopFallback) return;
 
+          image.loading = 'eager';
           const preloader = new Image();
           preloader.addEventListener('error', () => {
             source.srcset = desktopFallback;
