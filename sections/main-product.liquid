@@ -782,8 +782,11 @@
                       <dl class="suvedh-product-page__details">
                         {%- if material != blank -%}<div><dt>Material</dt><dd>{{ material }}</dd></div>{%- endif -%}
                         {%- if purity != blank -%}<div><dt>Purity</dt><dd>{{ purity }}</dd></div>{%- endif -%}
-                        {%- if weight != blank -%}<div><dt>Weight</dt><dd>{{ weight }}</dd></div>{%- endif -%}
-                        {%- if product_weight != blank and product_weight != weight -%}<div><dt>Product Weight</dt><dd>{{ product_weight }}</dd></div>{%- endif -%}
+                        {%- if weight != blank -%}
+                          <div><dt>Weight</dt><dd>{{ weight }}</dd></div>
+                        {%- elsif product_weight != blank -%}
+                          <div><dt>Weight</dt><dd>{{ product_weight }}</dd></div>
+                        {%- endif -%}
                         {%- if length != blank -%}<div><dt>Length</dt><dd>{{ length }}</dd></div>{%- endif -%}
                         {%- if anklet_length != blank -%}<div><dt>Anklet Length</dt><dd>{{ anklet_length }}</dd></div>{%- endif -%}
                         {%- if total_length != blank -%}<div><dt>Total Length</dt><dd>{{ total_length }}</dd></div>{%- endif -%}

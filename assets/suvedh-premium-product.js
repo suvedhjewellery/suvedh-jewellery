@@ -11,7 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const active = i === index;
       item.setAttribute('aria-selected', String(active));
       item.tabIndex = active ? 0 : -1;
-      section.querySelector('#' + item.getAttribute('aria-controls'))?.classList.toggle('is-hidden', !active);
+      const panel = section.querySelector('#' + item.getAttribute('aria-controls'));
+      panel?.classList.toggle('is-hidden', !active);
+      const panelContent = panel?.querySelector('.suvedh-product-page__panel-content');
+      if (panelContent) panelContent.hidden = !active;
     });
     tabs.forEach((tab, index) => {
       tab.addEventListener('click', () => activate(index));
