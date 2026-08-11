@@ -770,18 +770,25 @@
                         <p>Once dispatched, cancellation may not be possible and the applicable return policy will apply.</p>
                       {%- endif -%}
                     {%- when 3 -%}
-                      {%- assign detail_keys = 'material|purity|product_weight|size_dimensions|colour|plating|stone_enamel|package_contents|care_instructions' | split: '|' -%}
-                      {%- assign detail_labels = 'Material|Purity|Weight|Size / Dimensions|Colour|Plating|Stone / Enamel|Package Contents|Care Instructions' | split: '|' -%}
+                      {%- assign material = product.metafields.custom.material.value -%}
+                      {%- assign purity = product.metafields.custom.purity.value -%}
+                      {%- assign weight = product.metafields.custom.weight.value -%}
+                      {%- assign product_weight = product.metafields.custom.product_weight.value -%}
+                      {%- assign length = product.metafields.custom.length.value -%}
+                      {%- assign anklet_length = product.metafields.custom.anklet_length.value -%}
+                      {%- assign total_length = product.metafields.custom.total_length.value -%}
+                      {%- assign colour = product.metafields.custom.colour.value -%}
+                      {%- assign plating = product.metafields.custom.plating.value -%}
                       <dl class="suvedh-product-page__details">
-                        {%- for key in detail_keys -%}
-                          {%- assign detail = product.metafields.custom[key] -%}
-                          {%- if detail != blank -%}
-                            <div>
-                              <dt>{{ detail_labels[forloop.index0] }}</dt>
-                              <dd>{{ detail | metafield_tag }}</dd>
-                            </div>
-                          {%- endif -%}
-                        {%- endfor -%}
+                        {%- if material != blank -%}<div><dt>Material</dt><dd>{{ material }}</dd></div>{%- endif -%}
+                        {%- if purity != blank -%}<div><dt>Purity</dt><dd>{{ purity }}</dd></div>{%- endif -%}
+                        {%- if weight != blank -%}<div><dt>Weight</dt><dd>{{ weight }}</dd></div>{%- endif -%}
+                        {%- if product_weight != blank and product_weight != weight -%}<div><dt>Product Weight</dt><dd>{{ product_weight }}</dd></div>{%- endif -%}
+                        {%- if length != blank -%}<div><dt>Length</dt><dd>{{ length }}</dd></div>{%- endif -%}
+                        {%- if anklet_length != blank -%}<div><dt>Anklet Length</dt><dd>{{ anklet_length }}</dd></div>{%- endif -%}
+                        {%- if total_length != blank -%}<div><dt>Total Length</dt><dd>{{ total_length }}</dd></div>{%- endif -%}
+                        {%- if colour != blank -%}<div><dt>Colour</dt><dd>{{ colour }}</dd></div>{%- endif -%}
+                        {%- if plating != blank -%}<div><dt>Plating</dt><dd>{{ plating }}</dd></div>{%- endif -%}
                       </dl>
                   {%- endcase -%}
                 </div>
