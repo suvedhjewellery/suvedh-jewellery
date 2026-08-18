@@ -28,11 +28,13 @@
 <section class="suvedh-product-offers" aria-labelledby="SuvedhOffers-{{ section.id }}">
   <h2 id="SuvedhOffers-{{ section.id }}" class="suvedh-product-offers__heading">Available Offers</h2>
   <div class="suvedh-product-offers__list">
-    <div class="suvedh-product-offers__item"><div class="suvedh-product-offers__copy"><strong>SUVEDH10</strong><span>10% OFF on orders above ₹1,599</span></div><button type="button" class="suvedh-product-offers__button" data-copy-code="SUVEDH10" data-copy-label="Copy Code" aria-label="Copy coupon code SUVEDH10">Copy Code</button></div>
-    <div class="suvedh-product-offers__item"><div class="suvedh-product-offers__copy"><strong>SUVEDH15</strong><span>15% OFF on orders above ₹2,999</span></div><button type="button" class="suvedh-product-offers__button" data-copy-code="SUVEDH15" data-copy-label="Copy Code" aria-label="Copy coupon code SUVEDH15">Copy Code</button></div>
-    <div class="suvedh-product-offers__item"><div class="suvedh-product-offers__copy"><strong>Free Shipping</strong><span>On orders above ₹1,899</span></div></div>
     {%- if is_rakhi -%}
-      <div class="suvedh-product-offers__item"><div class="suvedh-product-offers__copy"><strong>RAKHI10</strong><span>10% OFF on Rakhi products</span></div><button type="button" class="suvedh-product-offers__button" data-copy-code="RAKHI10" data-copy-label="Copy Code" aria-label="Copy coupon code RAKHI10">Copy Code</button></div>
+      <div class="suvedh-product-offers__item"><div class="suvedh-product-offers__copy"><strong>RAKHI15</strong><span>15% OFF on Rakhi products</span></div><button type="button" class="suvedh-product-offers__button" data-copy-code="RAKHI15" data-copy-label="Copy Code" aria-label="Copy coupon code RAKHI15">Copy Code</button></div>
+      <div class="suvedh-product-offers__item"><div class="suvedh-product-offers__copy"><strong>Free Shipping</strong><span>On orders above ₹1,899</span></div></div>
+    {%- else -%}
+      <div class="suvedh-product-offers__item"><div class="suvedh-product-offers__copy"><strong>SUVEDH10</strong><span>10% OFF on orders above ₹1,599</span></div><button type="button" class="suvedh-product-offers__button" data-copy-code="SUVEDH10" data-copy-label="Copy Code" aria-label="Copy coupon code SUVEDH10">Copy Code</button></div>
+      <div class="suvedh-product-offers__item"><div class="suvedh-product-offers__copy"><strong>SUVEDH15</strong><span>15% OFF on orders above ₹2,999</span></div><button type="button" class="suvedh-product-offers__button" data-copy-code="SUVEDH15" data-copy-label="Copy Code" aria-label="Copy coupon code SUVEDH15">Copy Code</button></div>
+      <div class="suvedh-product-offers__item"><div class="suvedh-product-offers__copy"><strong>Free Shipping</strong><span>On orders above ₹1,899</span></div></div>
     {%- endif -%}
   </div>
 </section>
