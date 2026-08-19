@@ -22,10 +22,31 @@
                                                                                                 "text_alignment":  "center",
                                                                                                 "text_position":  "middle-center"
                                                                                             }
+                                                                           },
+                                                               "slide_2":  {
+                                                                               "type":  "slide",
+                                                                               "settings":  {
+                                                                                                "content_mode":  "image_only",
+                                                                                                "mobile_image_fit":  "cover",
+                                                                                                "overlay_opacity":  20,
+                                                                                                "text_color":  "#ffffff",
+                                                                                                "eyebrow":  "SUVEDH",
+                                                                                                "heading":  "Crafted for Every Moment",
+                                                                                                "heading_size":  "h0",
+                                                                                                "subheading":  "\u003cp\u003ePremium Fine Silver Jewellery\u003c/p\u003e",
+                                                                                                "button_label":  "Shop Women",
+                                                                                                "button_link":  "shopify://collections/women",
+                                                                                                "second_button_label":  "Explore Collection",
+                                                                                                "second_button_link":  "shopify://collections/all",
+                                                                                                "button_style":  "primary",
+                                                                                                "text_alignment":  "center",
+                                                                                                "text_position":  "middle-center"
+                                                                                            }
                                                                            }
                                                            },
                                                 "block_order":  [
-                                                                    "slide_1"
+                                                                    "slide_1",
+                                                                    "slide_2"
                                                                 ],
                                                 "settings":  {
                                                                  "accessibility_label":  "Featured promotions",

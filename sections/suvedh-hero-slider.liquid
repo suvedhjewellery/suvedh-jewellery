@@ -23,7 +23,7 @@
   #SuvedhHero-{{ section.id }} .suvedh-hero__track,
   #SuvedhHero-{{ section.id }} .suvedh-hero__slide,
   #SuvedhHero-{{ section.id }} .suvedh-hero__media,
-  #SuvedhHero-{{ section.id }} .suvedh-hero__media picture,
+  #SuvedhHero-{{ section.id }} .suvedh-hero-picture,
   #SuvedhHero-{{ section.id }} .suvedh-hero__image,
   #SuvedhHero-{{ section.id }} .suvedh-hero__placeholder {
     width: 100%;
@@ -33,7 +33,7 @@
   #SuvedhHero-{{ section.id }} .suvedh-hero__viewport,
   #SuvedhHero-{{ section.id }} .suvedh-hero__slide,
   #SuvedhHero-{{ section.id }} .suvedh-hero__media,
-  #SuvedhHero-{{ section.id }} .suvedh-hero__media picture {
+  #SuvedhHero-{{ section.id }} .suvedh-hero-picture {
     overflow: hidden;
   }
   #SuvedhHero-{{ section.id }} .suvedh-hero__track {
@@ -55,17 +55,18 @@
     background: rgb(var(--color-background));
   }
   #SuvedhHero-{{ section.id }} .suvedh-hero__media,
-  #SuvedhHero-{{ section.id }} .suvedh-hero__media picture,
+  #SuvedhHero-{{ section.id }} .suvedh-hero-picture,
   #SuvedhHero-{{ section.id }} .suvedh-hero__image,
   #SuvedhHero-{{ section.id }} .suvedh-hero__placeholder {
     display: block;
     width: 100%;
   }
+  #SuvedhHero-{{ section.id }} .suvedh-hero-picture {
+    height: 100%;
+  }
   #SuvedhHero-{{ section.id }} .suvedh-hero__image {
     height: auto;
-    object-fit: contain;
   }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__image--mobile { display: none; }
   #SuvedhHero-{{ section.id }} .suvedh-hero__placeholder { background: rgb(var(--color-background)); }
   #SuvedhHero-{{ section.id }} .suvedh-hero__overlay {
     position: absolute;
@@ -182,7 +183,7 @@
     #SuvedhHero-{{ section.id }} .suvedh-hero__track,
     #SuvedhHero-{{ section.id }} .suvedh-hero__slide,
     #SuvedhHero-{{ section.id }} .suvedh-hero__media,
-    #SuvedhHero-{{ section.id }} .suvedh-hero__media picture,
+    #SuvedhHero-{{ section.id }} .suvedh-hero-picture,
     #SuvedhHero-{{ section.id }} .suvedh-hero__image {
       width: 100%;
       max-width: 100%;
@@ -199,12 +200,19 @@
     #SuvedhHero-{{ section.id }} .suvedh-hero__track {
       overflow: hidden;
     }
-    #SuvedhHero-{{ section.id }} .suvedh-hero__image {
-      height: auto;
-      object-fit: contain;
+    #SuvedhHero-{{ section.id }} .suvedh-hero__media {
+      aspect-ratio: 3 / 2;
     }
-    #SuvedhHero-{{ section.id }} .suvedh-hero__image--desktop { display: none; }
-    #SuvedhHero-{{ section.id }} .suvedh-hero__image--mobile { display: block; }
+    #SuvedhHero-{{ section.id }} .suvedh-hero-picture,
+    #SuvedhHero-{{ section.id }} .suvedh-hero__image {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    #SuvedhHero-{{ section.id }} .suvedh-hero__image {
+      object-fit: var(--hero-mobile-fit);
+      object-position: var(--hero-mobile-object-position);
+    }
     #SuvedhHero-{{ section.id }} .suvedh-hero__media {
       background-color: var(--hero-mobile-background);
     }
@@ -252,8 +260,6 @@
     <div class="suvedh-hero__track" id="SuvedhHeroTrack-{{ section.id }}" aria-live="polite">
       {%- for block in section.blocks -%}
         {%- liquid
-          assign desktop_image = block.settings.desktop_image
-          assign mobile_image = block.settings.mobile_image
           if forloop.index == 2
             assign bundled_desktop_image = 'suvedh-hero-desktop-02.png'
             assign bundled_mobile_image = 'suvedh-hero-mobile-02.png'
@@ -263,7 +269,7 @@
           endif
           assign mobile_image_fit = block.settings.mobile_image_fit | default: 'cover'
           assign mobile_background = block.settings.mobile_background | default: '#F9E9EC'
-          assign image_alt = desktop_image.alt | default: mobile_image.alt | default: section.settings.accessibility_label
+          assign image_alt = section.settings.accessibility_label
           assign image_loading = 'eager'
           assign image_priority = 'high'
         -%}
@@ -278,12 +284,10 @@
           {{ block.shopify_attributes }}
         >
           <div class="suvedh-hero__media">
-            {%- if desktop_image != blank -%}
-              {{ desktop_image | image_url: width: 2400 | image_tag: class: 'suvedh-hero__image suvedh-hero__image--desktop', loading: image_loading, fetchpriority: image_priority, sizes: '100vw', widths: '750, 1100, 1500, 2000, 2400', alt: image_alt }}
-            {%- else -%}
-              <img class="suvedh-hero__image suvedh-hero__image--desktop" src="{{ bundled_desktop_image | asset_url }}" alt="{{ image_alt | escape }}" width="1536" height="1024" loading="{{ image_loading }}" fetchpriority="{{ image_priority }}">
-            {%- endif -%}
-            <img class="suvedh-hero__image suvedh-hero__image--mobile" src="{{ bundled_mobile_image | asset_url }}" alt="{{ image_alt | escape }}" width="1536" height="1024" loading="{{ image_loading }}" fetchpriority="{{ image_priority }}">
+            <picture class="suvedh-hero-picture">
+              <source media="(max-width: 749px)" srcset="{{ bundled_mobile_image | asset_url }}">
+              <img class="suvedh-hero__image" src="{{ bundled_desktop_image | asset_url }}" alt="{{ image_alt | escape }}" width="1350" height="505" loading="{{ image_loading }}" fetchpriority="{{ image_priority }}">
+            </picture>
           </div>
           {%- if block.settings.content_mode == 'overlay' -%}
             {%- if block.settings.show_overlay_logo and block.settings.overlay_logo != blank -%}
@@ -335,10 +339,6 @@
         this.querySelector('[data-previous]').addEventListener('click', () => this.show(this.index - 1, true));
         this.querySelector('[data-next]').addEventListener('click', () => this.show(this.index + 1, true));
         this.dots.forEach((dot) => dot.addEventListener('click', () => this.show(Number(dot.dataset.slide), true)));
-        this.addEventListener('mouseenter', () => this.pause());
-        this.addEventListener('mouseleave', () => this.play());
-        this.addEventListener('focusin', () => this.pause());
-        this.addEventListener('focusout', (event) => { if (!this.contains(event.relatedTarget)) this.play(); });
         this.addEventListener('pointerdown', (event) => { if (event.pointerType === 'touch') this.touchStart = event.clientX; });
         this.addEventListener('pointerup', (event) => {
           if (this.touchStart == null || event.pointerType !== 'touch') return;
@@ -346,7 +346,10 @@
           if (Math.abs(distance) > 50) this.show(this.index + (distance < 0 ? 1 : -1), true);
           this.touchStart = null;
         });
-        this.reducedMotion.addEventListener('change', () => this.play());
+        this.handleMotionChange = () => this.play();
+        this.handleVisibilityChange = () => document.hidden ? this.pause() : this.play();
+        this.reducedMotion.addEventListener('change', this.handleMotionChange);
+        document.addEventListener('visibilitychange', this.handleVisibilityChange);
         this.play();
       }
       show(index, userInitiated = false) {
@@ -368,7 +371,7 @@
       }
       play() {
         this.pause();
-        if (!this.autoplay || this.reducedMotion.matches || this.matches(':hover') || this.contains(document.activeElement)) return;
+        if (!this.autoplay || this.reducedMotion.matches || document.hidden) return;
         this.track.setAttribute('aria-live', 'off');
         this.timer = setInterval(() => this.show(this.index + 1), this.speed);
       }
@@ -376,7 +379,11 @@
         clearInterval(this.timer);
         if (this.track) this.track.setAttribute('aria-live', 'polite');
       }
-      disconnectedCallback() { this.pause(); }
+      disconnectedCallback() {
+        this.pause();
+        this.reducedMotion?.removeEventListener('change', this.handleMotionChange);
+        document.removeEventListener('visibilitychange', this.handleVisibilityChange);
+      }
     });
   }
 </script>
