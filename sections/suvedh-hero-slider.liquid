@@ -1,393 +1,97 @@
 {%- style -%}
-  #shopify-section-{{ section.id }} {
-    width: 100vw;
-    max-width: none;
-    margin-right: calc(50% - 50vw);
-    margin-left: calc(50% - 50vw);
-  }
-
-  #SuvedhHero-{{ section.id }} {
-    --hero-mobile-position: {{ section.settings.mobile_image_position }};
-    --hero-desktop-position: {{ section.settings.desktop_image_position }};
-    --hero-control-background: {{ section.settings.control_background }};
-    --hero-control-color: {{ section.settings.control_color }};
-    position: relative;
-    display: block;
-    width: 100%;
-    max-width: 100%;
-    overflow: hidden;
-    box-sizing: border-box;
-  }
-
-  #SuvedhHero-{{ section.id }} .suvedh-hero__viewport,
-  #SuvedhHero-{{ section.id }} .suvedh-hero__track,
-  #SuvedhHero-{{ section.id }} .suvedh-hero__slide,
-  #SuvedhHero-{{ section.id }} .suvedh-hero__media,
-  #SuvedhHero-{{ section.id }} .suvedh-hero-picture,
-  #SuvedhHero-{{ section.id }} .suvedh-hero__image,
-  #SuvedhHero-{{ section.id }} .suvedh-hero__placeholder {
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-  }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__viewport,
-  #SuvedhHero-{{ section.id }} .suvedh-hero__slide,
-  #SuvedhHero-{{ section.id }} .suvedh-hero__media,
-  #SuvedhHero-{{ section.id }} .suvedh-hero-picture {
-    overflow: hidden;
-  }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__track {
-    display: flex;
-    min-width: 100%;
-    align-items: flex-start;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    transition: transform 500ms ease;
-    touch-action: pan-y;
-  }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__slide {
-    position: relative;
-    flex: 0 0 100%;
-    width: 100%;
-    min-width: 0;
-    overflow: hidden;
-    background: rgb(var(--color-background));
-  }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__media,
-  #SuvedhHero-{{ section.id }} .suvedh-hero-picture,
-  #SuvedhHero-{{ section.id }} .suvedh-hero__image,
-  #SuvedhHero-{{ section.id }} .suvedh-hero__placeholder {
-    display: block;
-    width: 100%;
-  }
-  #SuvedhHero-{{ section.id }} .suvedh-hero-picture {
-    height: 100%;
-  }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__image {
-    height: auto;
-  }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__placeholder { background: rgb(var(--color-background)); }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__overlay {
-    position: absolute;
-    inset: 0;
-    background: #000;
-    pointer-events: none;
-  }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__content {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    display: flex;
-    padding: 3rem 2rem 6rem;
-    color: var(--slide-text-color);
-    overflow: hidden;
-    overflow-wrap: anywhere;
-  }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__content--top-left { align-items: flex-start; justify-content: flex-start; }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__content--top-center { align-items: flex-start; justify-content: center; }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__content--top-right { align-items: flex-start; justify-content: flex-end; }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__content--middle-left { align-items: center; justify-content: flex-start; }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__content--middle-center { align-items: center; justify-content: center; }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__content--middle-right { align-items: center; justify-content: flex-end; }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__content--bottom-left { align-items: flex-end; justify-content: flex-start; }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__content--bottom-center { align-items: flex-end; justify-content: center; }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__content--bottom-right { align-items: flex-end; justify-content: flex-end; }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__box { width: min(100%, 60rem); }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__box--left { text-align: left; }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__box--center { text-align: center; }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__box--right { text-align: right; }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__heading {
-    max-width: 90%;
-    margin: 0 0 1rem;
-    color: inherit;
-  }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__subheading { margin: 0 0 2rem; font-size: 1.6rem; }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__logo {
-    position: absolute;
-    z-index: 2;
-    top: 2rem;
-    left: 50%;
-    width: min(38vw, 18rem);
-    height: auto;
-    transform: translateX(-50%);
-  }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__controls {
-    position: absolute;
-    z-index: 2;
-    right: 1.5rem;
-    bottom: 1.5rem;
-    left: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    pointer-events: none;
-  }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__arrow,
-  #SuvedhHero-{{ section.id }} .suvedh-hero__dot {
-    border: 0;
-    background: var(--hero-control-background);
-    color: var(--hero-control-color);
-    cursor: pointer;
-    pointer-events: auto;
-  }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__arrow {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 4.4rem;
-    height: 4.4rem;
-    border: 0;
-    border-radius: 0;
-    background: transparent !important;
-    box-shadow: none;
-    backdrop-filter: none;
-    font-size: 2rem;
-  }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__arrow[data-previous] { left: 1.5rem; }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__arrow[data-next] { right: 1.5rem; }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__dots {
-    position: absolute;
-    bottom: 1.5rem;
-    left: 50%;
-    display: flex;
-    gap: .8rem;
-    transform: translateX(-50%);
-    pointer-events: auto;
-  }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__dot {
-    width: 1rem;
-    height: 1rem;
-    padding: 0;
-    border-radius: 50%;
-    opacity: .55;
-  }
-  #SuvedhHero-{{ section.id }} .suvedh-hero__dot[aria-current='true'] { opacity: 1; transform: scale(1.25); }
-  #SuvedhHero-{{ section.id }} button:focus-visible,
-  #SuvedhHero-{{ section.id }} a:focus-visible { outline: .2rem solid currentColor; outline-offset: .3rem; }
-
-  @media screen and (min-width: 750px) {
-    #SuvedhHero-{{ section.id }} .suvedh-hero__content { padding: 5rem 7rem 7rem; }
-  }
-  @media screen and (max-width: 749px) {
-    #shopify-section-{{ section.id }},
-    #shopify-section-{{ section.id }} .suvedh-hero-slider,
-    #SuvedhHero-{{ section.id }},
-    #SuvedhHero-{{ section.id }} .suvedh-hero__viewport,
-    #SuvedhHero-{{ section.id }} .suvedh-hero__track,
-    #SuvedhHero-{{ section.id }} .suvedh-hero__slide,
-    #SuvedhHero-{{ section.id }} .suvedh-hero__media,
-    #SuvedhHero-{{ section.id }} .suvedh-hero-picture,
-    #SuvedhHero-{{ section.id }} .suvedh-hero__image {
-      width: 100%;
-      max-width: 100%;
-      min-height: 0;
-      margin-top: 0;
-      margin-bottom: 0;
-      padding-top: 0;
-      padding-bottom: 0;
-    }
-    #shopify-section-{{ section.id }} + .section {
-      margin-top: 0;
-    }
-    #SuvedhHero-{{ section.id }} .suvedh-hero__viewport,
-    #SuvedhHero-{{ section.id }} .suvedh-hero__track {
-      overflow: hidden;
-    }
-    #SuvedhHero-{{ section.id }} .suvedh-hero__media {
-      aspect-ratio: 3 / 2;
-    }
-    #SuvedhHero-{{ section.id }} .suvedh-hero-picture,
-    #SuvedhHero-{{ section.id }} .suvedh-hero__image {
-      display: block;
-      width: 100%;
-      height: 100%;
-    }
-    #SuvedhHero-{{ section.id }} .suvedh-hero__image {
-      object-fit: var(--hero-mobile-fit);
-      object-position: var(--hero-mobile-object-position);
-    }
-    #SuvedhHero-{{ section.id }} .suvedh-hero__media {
-      background-color: var(--hero-mobile-background);
-    }
-    #SuvedhHero-{{ section.id }} .suvedh-hero__content {
-      box-sizing: border-box;
-      max-height: 100%;
-      min-height: 0;
-      padding: 3.2rem 2rem 4.8rem;
-      overflow: hidden;
-    }
-    #SuvedhHero-{{ section.id }} .suvedh-hero__box {
-      max-height: 100%;
-      min-height: 0;
-      overflow-y: auto;
-    }
-    #SuvedhHero-{{ section.id }} .suvedh-hero__heading { font-size: clamp(28px, 8vw, 44px) !important; }
-    #SuvedhHero-{{ section.id }} .suvedh-hero__subheading { font-size: clamp(14px, 3.8vw, 17px) !important; }
-    #SuvedhHero-{{ section.id }} .suvedh-hero__box--mobile-left { text-align: left; }
-    #SuvedhHero-{{ section.id }} .suvedh-hero__box--mobile-center { text-align: center; }
-    #SuvedhHero-{{ section.id }} .suvedh-hero__box--mobile-right { text-align: right; }
-    #SuvedhHero-{{ section.id }} .suvedh-hero__box--mobile-left .suvedh-hero__buttons { align-items: flex-start; }
-    #SuvedhHero-{{ section.id }} .suvedh-hero__box--mobile-center .suvedh-hero__buttons { align-items: center; }
-    #SuvedhHero-{{ section.id }} .suvedh-hero__box--mobile-right .suvedh-hero__buttons { align-items: flex-end; }
-    #SuvedhHero-{{ section.id }} .suvedh-hero__box--mobile-center .suvedh-hero__heading { margin-inline: auto; }
-    #SuvedhHero-{{ section.id }} .suvedh-hero__box--mobile-right .suvedh-hero__heading { margin-left: auto; }
-    #SuvedhHero-{{ section.id }} .suvedh-hero__buttons { flex-direction: column; align-items: inherit; gap: 12px; }
-    #SuvedhHero-{{ section.id }} .suvedh-hero__buttons .button { width: auto; max-width: 90%; min-width: 0; }
-    #SuvedhHero-{{ section.id }} .suvedh-hero__controls { position: absolute; min-height: 0; padding: 0; }
-    #SuvedhHero-{{ section.id }} .suvedh-hero__arrow { display: inline-flex !important; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    #SuvedhHero-{{ section.id }} .suvedh-hero__track { transition: none; }
-  }
+#shopify-section-{{ section.id }}{width:100vw;max-width:none;margin-right:calc(50% - 50vw);margin-left:calc(50% - 50vw)}
+#SuvedhHero-{{ section.id }}{--hero-control-background:{{ section.settings.control_background }};--hero-control-color:{{ section.settings.control_color }};position:relative;width:100%;height:{{ section.settings.desktop_height }}px;overflow:hidden}
+#SuvedhHero-{{ section.id }} .suvedh-hero__slide{position:absolute;inset:0;opacity:0;visibility:hidden;pointer-events:none;transition:opacity 500ms ease}
+#SuvedhHero-{{ section.id }} .suvedh-hero__slide.is-active{opacity:1;visibility:visible;pointer-events:auto}
+#SuvedhHero-{{ section.id }} picture,#SuvedhHero-{{ section.id }} .suvedh-hero__image{display:block;width:100%;height:100%}
+#SuvedhHero-{{ section.id }} .suvedh-hero__image{object-fit:cover;object-position:{{ section.settings.desktop_image_position }}}
+#SuvedhHero-{{ section.id }} .suvedh-hero__controls{position:absolute;z-index:2;inset:0;pointer-events:none}
+#SuvedhHero-{{ section.id }} .suvedh-hero__arrow,#SuvedhHero-{{ section.id }} .suvedh-hero__dot{border:0;color:var(--hero-control-color);cursor:pointer;pointer-events:auto}
+#SuvedhHero-{{ section.id }} .suvedh-hero__arrow{position:absolute;top:50%;display:inline-flex;align-items:center;justify-content:center;width:4.4rem;height:4.4rem;padding:0;background:transparent;box-shadow:none;font-size:2rem;transform:translateY(-50%)}
+#SuvedhHero-{{ section.id }} [data-previous]{left:1.5rem}#SuvedhHero-{{ section.id }} [data-next]{right:1.5rem}
+#SuvedhHero-{{ section.id }} .suvedh-hero__dots{position:absolute;bottom:1.5rem;left:50%;display:flex;gap:.8rem;transform:translateX(-50%);pointer-events:auto}
+#SuvedhHero-{{ section.id }} .suvedh-hero__dot{width:1rem;height:1rem;padding:0;border-radius:50%;background:var(--hero-control-background);opacity:.55}
+#SuvedhHero-{{ section.id }} .suvedh-hero__dot[aria-current=true]{opacity:1;transform:scale(1.25)}
+#SuvedhHero-{{ section.id }} button:focus-visible{outline:.2rem solid currentColor;outline-offset:.3rem}
+@media(max-width:749px){#SuvedhHero-{{ section.id }}{height:{{ section.settings.mobile_height }}px}#SuvedhHero-{{ section.id }} .suvedh-hero__image{object-position:{{ section.settings.mobile_image_position }}}}
+@media(prefers-reduced-motion:reduce){#SuvedhHero-{{ section.id }} .suvedh-hero__slide{transition:none}}
 {%- endstyle -%}
-
-<suvedh-hero-slider
-  id="SuvedhHero-{{ section.id }}"
-  role="region"
-  aria-roledescription="carousel"
-  aria-label="{{ section.settings.accessibility_label | escape }}"
-  data-autoplay="{{ section.settings.auto_rotate }}"
-  data-speed="{{ section.settings.rotation_speed | times: 1000 }}"
->
-  <div class="suvedh-hero-slider suvedh-hero__viewport">
-    <div class="suvedh-hero__track" id="SuvedhHeroTrack-{{ section.id }}" aria-live="polite">
-      {%- for block in section.blocks -%}
-        {%- liquid
-          if forloop.index == 2
-            assign bundled_desktop_image = 'suvedh-hero-desktop-02.png'
-            assign bundled_mobile_image = 'suvedh-hero-mobile-02.png'
-          else
-            assign bundled_desktop_image = 'suvedh-hero-desktop-01.png'
-            assign bundled_mobile_image = 'suvedh-hero-mobile-01.png'
-          endif
-          assign mobile_image_fit = block.settings.mobile_image_fit | default: 'cover'
-          assign mobile_background = block.settings.mobile_background | default: '#F9E9EC'
-          assign image_alt = section.settings.accessibility_label
-          assign image_loading = 'eager'
-          assign image_priority = 'high'
-        -%}
-        <article
-          class="suvedh-hero__slide suvedh-hero__slide--mobile-{{ mobile_image_fit }}"
-          id="SuvedhHeroSlide-{{ section.id }}-{{ forloop.index }}"
-          role="group"
-          aria-roledescription="slide"
-          aria-label="{{ forloop.index }} of {{ forloop.length }}"
-          aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"
-          style="--hero-mobile-fit: {{ mobile_image_fit }}; --hero-mobile-background: {{ mobile_background }}; --hero-mobile-object-position: {% if mobile_image_fit == 'cover' %}{{ block.settings.mobile_horizontal_position | default: 'center' }} {{ block.settings.mobile_vertical_position | default: 'center' }}{% else %}center center{% endif %};"
-          {{ block.shopify_attributes }}
-        >
-          <div class="suvedh-hero__media">
-            <picture class="suvedh-hero-picture">
-              <source media="(max-width: 749px)" srcset="{{ bundled_mobile_image | asset_url }}">
-              <img class="suvedh-hero__image" src="{{ bundled_desktop_image | asset_url }}" alt="{{ image_alt | escape }}" width="1350" height="505" loading="{{ image_loading }}" fetchpriority="{{ image_priority }}">
-            </picture>
-          </div>
-          {%- if block.settings.content_mode == 'overlay' -%}
-            {%- if block.settings.show_overlay_logo and block.settings.overlay_logo != blank -%}
-              {{ block.settings.overlay_logo | image_url: width: 360 | image_tag: class: 'suvedh-hero__logo', loading: image_loading, widths: '120, 180, 240, 360', alt: block.settings.overlay_logo.alt }}
-            {%- endif -%}
-            <div class="suvedh-hero__overlay" style="opacity: {{ block.settings.overlay_opacity | divided_by: 100.0 }};"></div>
-            <div class="suvedh-hero__content suvedh-hero__content--{{ block.settings.text_position }}" style="--slide-text-color: {{ block.settings.text_color }};">
-              <div class="suvedh-hero__box suvedh-hero__box--{{ block.settings.text_alignment }} suvedh-hero__box--mobile-{{ block.settings.mobile_text_alignment }}">
-              {%- if block.settings.eyebrow != blank -%}<p class="suvedh-hero__eyebrow">{{ block.settings.eyebrow | escape }}</p>{%- endif -%}
-              {%- if block.settings.heading != blank -%}<h2 class="suvedh-hero__heading {{ block.settings.heading_size }}">{{ block.settings.heading }}</h2>{%- endif -%}
-              {%- if block.settings.subheading != blank -%}<div class="suvedh-hero__subheading rte">{{ block.settings.subheading }}</div>{%- endif -%}
-              <div class="suvedh-hero__buttons">
-                {%- if block.settings.button_label != blank -%}<a class="button button--{{ block.settings.button_style }}" {% if block.settings.button_link != blank %}href="{{ block.settings.button_link }}"{% else %}role="link" aria-disabled="true"{% endif %}>{{ block.settings.button_label | escape }}</a>{%- endif -%}
-                {%- if block.settings.second_button_label != blank -%}<a class="button button--secondary" {% if block.settings.second_button_link != blank %}href="{{ block.settings.second_button_link }}"{% else %}role="link" aria-disabled="true"{% endif %}>{{ block.settings.second_button_label | escape }}</a>{%- endif -%}
-                </div>
-              </div>
-            </div>
-          {%- endif -%}
-        </article>
-      {%- endfor -%}
-    </div>
+<div id="SuvedhHero-{{ section.id }}" class="suvedh-hero-slider" role="region" aria-roledescription="carousel" aria-label="{{ section.settings.accessibility_label | escape }}" data-suvedh-hero>
+  <div class="suvedh-hero__slide is-active" role="group" aria-roledescription="slide" aria-label="1 of 2" aria-hidden="false">
+    <picture>
+      <source media="(max-width: 749px)" srcset="{{ 'suvedh-hero-mobile-01.png' | asset_url }}">
+      <img class="suvedh-hero__image" src="{{ 'suvedh-hero-desktop-01.png' | asset_url }}" alt="" width="1350" height="505" loading="eager" fetchpriority="high">
+    </picture>
   </div>
-
-  {%- if section.blocks.size > 1 -%}
-    <div class="suvedh-hero__controls">
-      <button class="suvedh-hero__arrow" type="button" data-previous aria-label="Previous slide" aria-controls="SuvedhHeroTrack-{{ section.id }}">&#8249;</button>
-      <div class="suvedh-hero__dots" role="group" aria-label="Choose slide">
-        {%- for block in section.blocks -%}
-          <button class="suvedh-hero__dot" type="button" data-slide="{{ forloop.index0 }}" aria-label="Show slide {{ forloop.index }} of {{ forloop.length }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}"></button>
-        {%- endfor -%}
-      </div>
-      <button class="suvedh-hero__arrow" type="button" data-next aria-label="Next slide" aria-controls="SuvedhHeroTrack-{{ section.id }}">&#8250;</button>
+  <div class="suvedh-hero__slide" role="group" aria-roledescription="slide" aria-label="2 of 2" aria-hidden="true">
+    <picture>
+      <source media="(max-width: 749px)" srcset="{{ 'suvedh-hero-mobile-02.png' | asset_url }}">
+      <img class="suvedh-hero__image" src="{{ 'suvedh-hero-desktop-02.png' | asset_url }}" alt="" width="1350" height="505" loading="eager">
+    </picture>
+  </div>
+  <div class="suvedh-hero__controls">
+    <button class="suvedh-hero__arrow" type="button" data-previous aria-label="Previous slide">&#8249;</button>
+    <div class="suvedh-hero__dots" role="group" aria-label="Choose slide">
+      <button class="suvedh-hero__dot" type="button" data-slide="0" aria-label="Show slide 1 of 2" aria-current="true"></button>
+      <button class="suvedh-hero__dot" type="button" data-slide="1" aria-label="Show slide 2 of 2" aria-current="false"></button>
     </div>
-  {%- endif -%}
-</suvedh-hero-slider>
-
+    <button class="suvedh-hero__arrow" type="button" data-next aria-label="Next slide">&#8250;</button>
+  </div>
+</div>
 <script>
-  if (!customElements.get('suvedh-hero-slider')) {
-    customElements.define('suvedh-hero-slider', class extends HTMLElement {
-      connectedCallback() {
-        this.track = this.querySelector('.suvedh-hero__track');
-        this.slides = [...this.querySelectorAll('.suvedh-hero__slide')];
-        this.dots = [...this.querySelectorAll('.suvedh-hero__dot')];
-        if (this.slides.length < 2) return;
-        this.index = 0;
-        this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-        this.autoplay = this.dataset.autoplay === 'true';
-        this.speed = Number(this.dataset.speed) || 5000;
-        this.querySelector('[data-previous]').addEventListener('click', () => this.show(this.index - 1, true));
-        this.querySelector('[data-next]').addEventListener('click', () => this.show(this.index + 1, true));
-        this.dots.forEach((dot) => dot.addEventListener('click', () => this.show(Number(dot.dataset.slide), true)));
-        this.addEventListener('pointerdown', (event) => { if (event.pointerType === 'touch') this.touchStart = event.clientX; });
-        this.addEventListener('pointerup', (event) => {
-          if (this.touchStart == null || event.pointerType !== 'touch') return;
-          const distance = event.clientX - this.touchStart;
-          if (Math.abs(distance) > 50) this.show(this.index + (distance < 0 ? 1 : -1), true);
-          this.touchStart = null;
-        });
-        this.handleMotionChange = () => this.play();
-        this.handleVisibilityChange = () => document.hidden ? this.pause() : this.play();
-        this.reducedMotion.addEventListener('change', this.handleMotionChange);
-        document.addEventListener('visibilitychange', this.handleVisibilityChange);
-        this.play();
-      }
-      show(index, userInitiated = false) {
-        this.index = (index + this.slides.length) % this.slides.length;
-        this.track.style.transform = `translateX(-${this.index * 100}%)`;
-        this.slides.forEach((slide, i) => {
-          const active = i === this.index;
-          slide.setAttribute('aria-hidden', String(!active));
-          slide.querySelectorAll('a, button').forEach((element) => {
-            if (active) {
-              element.removeAttribute('tabindex');
-            } else {
-              element.setAttribute('tabindex', '-1');
-            }
-          });
-        });
-        this.dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === this.index)));
-        if (userInitiated) { this.pause(); this.play(); }
-      }
-      play() {
-        this.pause();
-        if (!this.autoplay || this.reducedMotion.matches || document.hidden) return;
-        this.track.setAttribute('aria-live', 'off');
-        this.timer = setInterval(() => this.show(this.index + 1), this.speed);
-      }
-      pause() {
-        clearInterval(this.timer);
-        if (this.track) this.track.setAttribute('aria-live', 'polite');
-      }
-      disconnectedCallback() {
-        this.pause();
-        this.reducedMotion?.removeEventListener('change', this.handleMotionChange);
-        document.removeEventListener('visibilitychange', this.handleVisibilityChange);
-      }
-    });
+(()=>{
+  const init=hero=>{
+    if(!hero)return;
+    if(typeof hero.suvedhHeroCleanup==='function')hero.suvedhHeroCleanup();
+    const slides=[...hero.querySelectorAll('.suvedh-hero__slide')];
+    const dots=[...hero.querySelectorAll('.suvedh-hero__dot')];
+    const previous=hero.querySelector('[data-previous]');
+    const next=hero.querySelector('[data-next]');
+    let index=0,timer=null,touchStartX=null;
+    const show=newIndex=>{
+      index=(newIndex+slides.length)%slides.length;
+      slides.forEach((slide,i)=>{const active=i===index;slide.classList.toggle('is-active',active);slide.setAttribute('aria-hidden',String(!active))});
+      dots.forEach((dot,i)=>dot.setAttribute('aria-current',String(i===index)));
+    };
+    const stop=()=>{if(timer!==null)window.clearInterval(timer);timer=null};
+    const start=()=>{stop();timer=window.setInterval(()=>show(index+1),5000)};
+    const navigate=newIndex=>{show(newIndex);start()};
+    const onPrevious=()=>navigate(index-1);
+    const onNext=()=>navigate(index+1);
+    const onTouchStart=event=>{touchStartX=event.touches[0].clientX};
+    const onTouchEnd=event=>{
+      if(touchStartX===null||!event.changedTouches.length)return;
+      const distance=event.changedTouches[0].clientX-touchStartX;
+      touchStartX=null;
+      if(Math.abs(distance)>=50)navigate(index+(distance<0?1:-1));
+    };
+    previous.addEventListener('click',onPrevious);
+    next.addEventListener('click',onNext);
+    dots.forEach(dot=>{dot.suvedhHeroClick=()=>navigate(Number(dot.dataset.slide));dot.addEventListener('click',dot.suvedhHeroClick)});
+    hero.addEventListener('touchstart',onTouchStart,{passive:true});
+    hero.addEventListener('touchend',onTouchEnd,{passive:true});
+    hero.suvedhHeroCleanup=()=>{
+      stop();
+      previous.removeEventListener('click',onPrevious);
+      next.removeEventListener('click',onNext);
+      dots.forEach(dot=>dot.removeEventListener('click',dot.suvedhHeroClick));
+      hero.removeEventListener('touchstart',onTouchStart);
+      hero.removeEventListener('touchend',onTouchEnd);
+    };
+    show(0);start();
+  };
+  const initWithin=container=>{
+    if(container.matches&&container.matches('[data-suvedh-hero]'))init(container);
+    container.querySelectorAll('[data-suvedh-hero]').forEach(init);
+  };
+  if(!window.suvedhHeroSectionLoadHandler){
+    window.suvedhHeroSectionLoadHandler=event=>initWithin(event.target);
+    document.addEventListener('shopify:section:load',window.suvedhHeroSectionLoadHandler);
   }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>initWithin(document),{once:true});
+  else initWithin(document);
+})();
 </script>
-
 {% schema %}
 {
   "name": "SUVEDH Hero Slider",
@@ -411,8 +115,6 @@
       "type": "slide",
       "name": "Slide",
       "settings": [
-        { "type": "image_picker", "id": "desktop_image", "label": "Desktop image" },
-        { "type": "image_picker", "id": "mobile_image", "label": "Mobile image" },
         { "type": "select", "id": "mobile_image_fit", "label": "Mobile image fit", "options": [{ "value": "contain", "label": "Contain - show complete image" }, { "value": "cover", "label": "Cover - fill banner and allow cropping" }], "default": "cover" },
         { "type": "color", "id": "mobile_background", "label": "Mobile banner background", "default": "#F9E9EC" },
         { "type": "select", "id": "mobile_horizontal_position", "label": "Mobile horizontal position", "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }, { "value": "right", "label": "Right" }], "default": "center" },
