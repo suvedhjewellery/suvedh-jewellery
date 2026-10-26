@@ -26,8 +26,17 @@
               {%- else -%}
               {%- assign drawer_menu = menu | default: section.settings.menu -%}
               {%- for link in drawer_menu.links -%}
+                {%- assign top_level_key = link.title | strip | downcase -%}
                 <li>
-                  {%- if link.links != blank -%}
+                  {%- if top_level_key == 'rakhi' -%}
+                    <a
+                      id="HeaderDrawer-god-frames"
+                      href="{{ collections['god-frames'].url | default: '/collections/god-frames' }}"
+                      class="menu-drawer__menu-item list-menu__item link link--text focus-inset"
+                    >
+                      God Frames
+                    </a>
+                  {%- elsif link.links != blank -%}
                     <details id="Details-menu-drawer-menu-item-{{ forloop.index }}">
                       <summary
                         id="HeaderDrawer-{{ link.handle }}"

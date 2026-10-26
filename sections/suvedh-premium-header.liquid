@@ -19,7 +19,10 @@
     <nav class="suvedh-header__nav" aria-label="Primary navigation">
       {%- unless use_suvedh_fallback_menu -%}
       {%- for link in resolved_menu.links -%}
-        {%- if link.links != blank -%}
+        {%- assign top_level_key = link.title | strip | downcase -%}
+        {%- if top_level_key == 'rakhi' -%}
+          <a href="{{ collections['god-frames'].url | default: '/collections/god-frames' }}">God Frames</a>
+        {%- elsif link.links != blank -%}
           <details class="suvedh-nav-item suvedh-nav-item--mega">
             <summary>{{ link.title | escape }}{% render 'suvedh-navigation-count', link: link, label: link.title %}</summary>
             <div class="suvedh-mega">

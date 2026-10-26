@@ -133,27 +133,7 @@
                                                                                                         "image_ratio":  "square",
                                                                                                         "hover_animation":  "zoom"
                                                                                                     }
-                                                                                   },
-                                                                    "category_10":  {
-                                                                                        "type":  "category",
-                                                                                        "settings":  {
-                                                                                                         "collection":  "mens-rakhis",
-                                                                                                         "heading":  "Men\u0027s Rakhis",
-                                                                                                         "subtitle":  "",
-                                                                                                         "image_ratio":  "square",
-                                                                                                         "hover_animation":  "zoom"
-                                                                                                     }
-                                                                                    },
-                                                                    "category_11":  {
-                                                                                        "type":  "category",
-                                                                                        "settings":  {
-                                                                                                         "collection":  "kids-rakhis",
-                                                                                                         "heading":  "Kids Rakhis",
-                                                                                                         "subtitle":  "",
-                                                                                                         "image_ratio":  "square",
-                                                                                                         "hover_animation":  "zoom"
-                                                                                                     }
-                                                                                    }
+                                                                                   }
                                                                 },
                                                      "block_order":  [
                                                                          "category_1",
@@ -163,9 +143,7 @@
                                                                          "category_6",
                                                                          "category_7",
                                                                          "category_8",
-                                                                         "category_9",
-                                                                         "category_10",
-                                                                         "category_11"
+                                                                         "category_9"
                                                                      ],
                                                      "settings":  {
                                                                       "heading":  "Shop by Category",

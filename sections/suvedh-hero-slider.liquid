@@ -17,23 +17,16 @@
 @media(prefers-reduced-motion:reduce){#SuvedhHero-{{ section.id }} .suvedh-hero__slide{transition:none}}
 {%- endstyle -%}
 <div id="SuvedhHero-{{ section.id }}" class="suvedh-hero-slider" role="region" aria-roledescription="carousel" aria-label="{{ section.settings.accessibility_label | escape }}" data-suvedh-hero>
-  <div class="suvedh-hero__slide is-active" role="group" aria-roledescription="slide" aria-label="1 of 2" aria-hidden="false">
-    <picture>
-      <source media="(max-width: 749px)" srcset="{{ 'suvedh-hero-mobile-01.png' | asset_url }}">
-      <img class="suvedh-hero__image" src="{{ 'suvedh-hero-desktop-01.png' | asset_url }}" alt="" width="1350" height="505" loading="eager" fetchpriority="high">
-    </picture>
-  </div>
-  <div class="suvedh-hero__slide" role="group" aria-roledescription="slide" aria-label="2 of 2" aria-hidden="true">
+  <div class="suvedh-hero__slide is-active" role="group" aria-roledescription="slide" aria-label="1 of 1" aria-hidden="false">
     <picture>
       <source media="(max-width: 749px)" srcset="{{ 'suvedh-hero-mobile-02.png' | asset_url }}">
-      <img class="suvedh-hero__image" src="{{ 'suvedh-hero-desktop-02.png' | asset_url }}" alt="" width="1350" height="505" loading="eager">
+      <img class="suvedh-hero__image" src="{{ 'suvedh-hero-desktop-02.png' | asset_url }}" alt="" width="1350" height="505" loading="eager" fetchpriority="high">
     </picture>
   </div>
   <div class="suvedh-hero__controls">
     <button class="suvedh-hero__arrow" type="button" data-previous aria-label="Previous slide">&#8249;</button>
     <div class="suvedh-hero__dots" role="group" aria-label="Choose slide">
-      <button class="suvedh-hero__dot" type="button" data-slide="0" aria-label="Show slide 1 of 2" aria-current="true"></button>
-      <button class="suvedh-hero__dot" type="button" data-slide="1" aria-label="Show slide 2 of 2" aria-current="false"></button>
+      <button class="suvedh-hero__dot" type="button" data-slide="0" aria-label="Show slide 1 of 1" aria-current="true"></button>
     </div>
     <button class="suvedh-hero__arrow" type="button" data-next aria-label="Next slide">&#8250;</button>
   </div>
